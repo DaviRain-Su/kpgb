@@ -1,0 +1,15 @@
+{
+  "id": "54b36b57-2f96-4b7c-a747-898922500fd0",
+  "title": "My First Decentralized Post",
+  "slug": "my-first-decentralized-post",
+  "content": "# My First Decentralized Blog Post\n\nWelcome to my decentralized blog! This is the first post stored across multiple backends.\n\n## Why Decentralized?\n\n- **No single point of failure**: Content can be stored on IPFS, GitHub, or locally\n- **Content integrity**: Every post has a unique hash\n- **Ownership**: You control your content\n\n## Features\n\n1. Multiple storage backends\n2. Content deduplication\n3. Fast local indexing\n4. Search functionality\n\nThis is just the beginning!",
+  "excerpt": null,
+  "author": "Alice",
+  "created_at": "2025-07-20T23:02:26.030333Z",
+  "updated_at": "2025-07-20T23:02:26.030333Z",
+  "published": false,
+  "tags": [],
+  "category": null,
+  "storage_id": null,
+  "content_hash": "781944bdbb4afe46a1527e2fd0e3d1a139eec42c51c4d279b0ccfd926e0f191c"
+}

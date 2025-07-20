@@ -1,0 +1,15 @@
+{
+  "id": "b94eb47b-8468-4b2b-a6ff-b0849aa90ed1",
+  "title": "My First IPFS Post",
+  "slug": "my-first-ipfs-post",
+  "content": "# Testing IPFS Storage\n\nThis is a test post for the IPFS-based decentralized blog system.\n\n## Features Tested\n\n- Content storage on IPFS\n- SQLite indexing\n- Content deduplication\n- Full-text search\n\nThe content is stored immutably on IPFS!",
+  "excerpt": null,
+  "author": "Alice",
+  "created_at": "2025-07-20T23:18:54.515022Z",
+  "updated_at": "2025-07-20T23:18:54.515022Z",
+  "published": false,
+  "tags": [],
+  "category": null,
+  "storage_id": null,
+  "content_hash": "b4954d4c32093fa16e469318a7c5d57c6feb0cad19e075883cf40018e61d34ca"
+}
