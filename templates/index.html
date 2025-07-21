@@ -38,7 +38,7 @@
             {% if current_page == 2 %}
                 <a href="{{ site.base_path | default(value="") }}/" class="pagination-link pagination-prev">← Previous</a>
             {% else %}
-                <a href="{{ site.base_path | default(value="") }}/?page={{ current_page - 1 }}" class="pagination-link pagination-prev">← Previous</a>
+                <a href="{{ site.base_path | default(value="") }}/page/{{ current_page - 1 }}/" class="pagination-link pagination-prev">← Previous</a>
             {% endif %}
         {% else %}
             <span class="pagination-link pagination-prev pagination-disabled">← Previous</span>
@@ -52,14 +52,14 @@
                     {% if page == 1 %}
                         <a href="{{ site.base_path | default(value="") }}/" class="pagination-number">{{ page }}</a>
                     {% else %}
-                        <a href="{{ site.base_path | default(value="") }}/?page={{ page }}" class="pagination-number">{{ page }}</a>
+                        <a href="{{ site.base_path | default(value="") }}/page/{{ page }}/" class="pagination-number">{{ page }}</a>
                     {% endif %}
                 {% endif %}
             {% endfor %}
         </div>
         
         {% if has_next %}
-            <a href="{{ site.base_path | default(value="") }}/?page={{ current_page + 1 }}" class="pagination-link pagination-next">Next →</a>
+            <a href="{{ site.base_path | default(value="") }}/page/{{ current_page + 1 }}/" class="pagination-link pagination-next">Next →</a>
         {% else %}
             <span class="pagination-link pagination-next pagination-disabled">Next →</span>
         {% endif %}
