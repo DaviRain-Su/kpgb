@@ -92,7 +92,11 @@ impl SiteGenerator {
         for page in 1..=total_pages.max(1) {
             let mut context = Context::new();
             context.insert("site", &self.config);
-            let page_title = if page == 1 { "Home".to_string() } else { format!("Page {}", page) };
+            let page_title = if page == 1 {
+                "Home".to_string()
+            } else {
+                format!("Page {}", page)
+            };
             context.insert("page_title", &page_title);
 
             // Calculate post range for this page
@@ -104,8 +108,10 @@ impl SiteGenerator {
                 .map(|(id, post)| {
                     let mut post_context = serde_json::to_value(post).unwrap();
                     let base_path = self.config.base_path.as_deref().unwrap_or("");
-                    post_context["url"] =
-                        serde_json::Value::String(format!("{}/posts/{}.html", base_path, post.slug));
+                    post_context["url"] = serde_json::Value::String(format!(
+                        "{}/posts/{}.html",
+                        base_path, post.slug
+                    ));
                     post_context["content_html"] =
                         serde_json::Value::String(markdown_to_html(&post.content));
                     post_context["storage_id"] = serde_json::Value::String(id.clone());
@@ -114,7 +120,7 @@ impl SiteGenerator {
                 .collect();
 
             context.insert("posts", &page_posts);
-            
+
             // Pagination context
             context.insert("current_page", &page);
             context.insert("total_pages", &total_pages);
@@ -122,7 +128,7 @@ impl SiteGenerator {
             context.insert("has_next", &(page < total_pages));
 
             let rendered = self.tera.render("index.html", &context)?;
-            
+
             // Determine output path
             let output_path = if page == 1 {
                 self.output_dir.join("index.html")
@@ -131,7 +137,7 @@ impl SiteGenerator {
                 fs::create_dir_all(&page_dir)?;
                 page_dir.join("index.html")
             };
-            
+
             fs::write(output_path, rendered)?;
         }
 
@@ -332,8 +338,10 @@ impl SiteGenerator {
                 .map(|(id, post)| {
                     let mut post_context = serde_json::to_value(post).unwrap();
                     let base_path = self.config.base_path.as_deref().unwrap_or("");
-                    post_context["url"] =
-                        serde_json::Value::String(format!("{}/posts/{}.html", base_path, post.slug));
+                    post_context["url"] = serde_json::Value::String(format!(
+                        "{}/posts/{}.html",
+                        base_path, post.slug
+                    ));
                     post_context["content_html"] =
                         serde_json::Value::String(markdown_to_html(&post.content));
                     post_context["storage_id"] = serde_json::Value::String(id.clone());
@@ -346,7 +354,7 @@ impl SiteGenerator {
             context.insert("posts", &posts_data);
             context.insert("tag", tag);
             context.insert("title", &format!("Posts tagged '{}'", tag));
-            
+
             // Pagination context
             context.insert("current_page", &page);
             context.insert("total_pages", &total_pages);
@@ -359,7 +367,12 @@ impl SiteGenerator {
                 fs::create_dir_all(&tag_dir)?;
                 tag_dir.join("index.html")
             } else {
-                let page_dir = self.output_dir.join("tags").join(tag).join("page").join(page.to_string());
+                let page_dir = self
+                    .output_dir
+                    .join("tags")
+                    .join(tag)
+                    .join("page")
+                    .join(page.to_string());
                 fs::create_dir_all(&page_dir)?;
                 page_dir.join("index.html")
             };

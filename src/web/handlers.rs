@@ -316,7 +316,7 @@ pub async fn tag_posts(
 ) -> Result<Html<String>, StatusCode> {
     let page = params.page.unwrap_or(1);
     let posts_per_page = state.site_config.posts_per_page;
-    
+
     let all_posts = state
         .blog_manager
         .get_posts_by_tag(&tag, true)
@@ -347,7 +347,7 @@ pub async fn tag_posts(
     context.insert("posts", &posts_data);
     context.insert("tag", &tag);
     context.insert("title", &format!("Posts tagged '{}'", tag));
-    
+
     // Pagination context
     context.insert("current_page", &page);
     context.insert("total_pages", &total_pages);
