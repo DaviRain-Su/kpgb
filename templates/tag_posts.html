@@ -34,6 +34,45 @@
         {% endfor %}
     </div>
     
+    {% if total_pages and total_pages > 1 %}
+    <nav class="pagination">
+        <div class="pagination-info">
+            Page {{ current_page | default(value=1) }} of {{ total_pages }}
+        </div>
+        <div class="pagination-controls">
+            {% if has_prev %}
+                {% if current_page == 2 %}
+                    <a href="{{ site.base_path | default(value="") }}/tags/{{ tag }}" class="pagination-link pagination-prev">← Previous</a>
+                {% else %}
+                    <a href="{{ site.base_path | default(value="") }}/tags/{{ tag }}?page={{ current_page - 1 }}" class="pagination-link pagination-prev">← Previous</a>
+                {% endif %}
+            {% else %}
+                <span class="pagination-link pagination-prev pagination-disabled">← Previous</span>
+            {% endif %}
+            
+            <div class="pagination-numbers">
+                {% for page in range(start=1, end=total_pages + 1) %}
+                    {% if page == current_page %}
+                        <span class="pagination-number pagination-current">{{ page }}</span>
+                    {% else %}
+                        {% if page == 1 %}
+                            <a href="{{ site.base_path | default(value="") }}/tags/{{ tag }}" class="pagination-number">{{ page }}</a>
+                        {% else %}
+                            <a href="{{ site.base_path | default(value="") }}/tags/{{ tag }}?page={{ page }}" class="pagination-number">{{ page }}</a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            
+            {% if has_next %}
+                <a href="{{ site.base_path | default(value="") }}/tags/{{ tag }}?page={{ current_page + 1 }}" class="pagination-link pagination-next">Next →</a>
+            {% else %}
+                <span class="pagination-link pagination-next pagination-disabled">Next →</span>
+            {% endif %}
+        </div>
+    </nav>
+    {% endif %}
+    
     <nav class="back-nav">
         <a href="{{ site.base_path | default(value="") }}/tags">← Back to all tags</a>
     </nav>

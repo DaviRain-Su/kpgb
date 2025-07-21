@@ -312,14 +312,22 @@ pub async fn tags(State(state): State<Arc<AppState>>) -> Result<Html<String>, St
 pub async fn tag_posts(
     State(state): State<Arc<AppState>>,
     Path(tag): Path<String>,
+    Query(params): Query<PageQuery>,
 ) -> Result<Html<String>, StatusCode> {
-    let posts = state
+    let page = params.page.unwrap_or(1);
+    let posts_per_page = state.site_config.posts_per_page;
+    
+    let all_posts = state
         .blog_manager
         .get_posts_by_tag(&tag, true)
         .await
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
-    let posts_data: Vec<_> = posts
+    let total_pages = all_posts.len().div_ceil(posts_per_page);
+    let start = (page - 1) * posts_per_page;
+    let end = (start + posts_per_page).min(all_posts.len());
+
+    let posts_data: Vec<_> = all_posts[start..end]
         .iter()
         .map(|(id, post)| {
             let mut post_context = serde_json::to_value(post).unwrap();
@@ -339,6 +347,12 @@ pub async fn tag_posts(
     context.insert("posts", &posts_data);
     context.insert("tag", &tag);
     context.insert("title", &format!("Posts tagged '{}'", tag));
+    
+    // Pagination context
+    context.insert("current_page", &page);
+    context.insert("total_pages", &total_pages);
+    context.insert("has_prev", &(page > 1));
+    context.insert("has_next", &(page < total_pages));
 
     let html = render_template("tag_posts.html", &context)?;
 

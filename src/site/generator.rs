@@ -85,31 +85,55 @@ impl SiteGenerator {
     }
 
     async fn generate_index(&self, posts: &[(String, BlogPost)]) -> Result<()> {
-        let mut context = Context::new();
-        context.insert("site", &self.config);
-        context.insert("page_title", "Home");
+        let posts_per_page = self.config.posts_per_page;
+        let total_pages = posts.len().div_ceil(posts_per_page);
 
-        // Take the latest posts for the index
-        let latest_posts: Vec<_> = posts
-            .iter()
-            .take(self.config.posts_per_page)
-            .map(|(id, post)| {
-                let mut post_context = serde_json::to_value(post).unwrap();
-                let base_path = self.config.base_path.as_deref().unwrap_or("");
-                post_context["url"] =
-                    serde_json::Value::String(format!("{}/posts/{}.html", base_path, post.slug));
-                post_context["content_html"] =
-                    serde_json::Value::String(markdown_to_html(&post.content));
-                post_context["storage_id"] = serde_json::Value::String(id.clone());
-                post_context
-            })
-            .collect();
+        // Generate each page
+        for page in 1..=total_pages.max(1) {
+            let mut context = Context::new();
+            context.insert("site", &self.config);
+            let page_title = if page == 1 { "Home".to_string() } else { format!("Page {}", page) };
+            context.insert("page_title", &page_title);
 
-        context.insert("posts", &latest_posts);
+            // Calculate post range for this page
+            let start = (page - 1) * posts_per_page;
+            let end = (start + posts_per_page).min(posts.len());
 
-        let rendered = self.tera.render("index.html", &context)?;
-        let output_path = self.output_dir.join("index.html");
-        fs::write(output_path, rendered)?;
+            let page_posts: Vec<_> = posts[start..end]
+                .iter()
+                .map(|(id, post)| {
+                    let mut post_context = serde_json::to_value(post).unwrap();
+                    let base_path = self.config.base_path.as_deref().unwrap_or("");
+                    post_context["url"] =
+                        serde_json::Value::String(format!("{}/posts/{}.html", base_path, post.slug));
+                    post_context["content_html"] =
+                        serde_json::Value::String(markdown_to_html(&post.content));
+                    post_context["storage_id"] = serde_json::Value::String(id.clone());
+                    post_context
+                })
+                .collect();
+
+            context.insert("posts", &page_posts);
+            
+            // Pagination context
+            context.insert("current_page", &page);
+            context.insert("total_pages", &total_pages);
+            context.insert("has_prev", &(page > 1));
+            context.insert("has_next", &(page < total_pages));
+
+            let rendered = self.tera.render("index.html", &context)?;
+            
+            // Determine output path
+            let output_path = if page == 1 {
+                self.output_dir.join("index.html")
+            } else {
+                let page_dir = self.output_dir.join("page").join(page.to_string());
+                fs::create_dir_all(&page_dir)?;
+                page_dir.join("index.html")
+            };
+            
+            fs::write(output_path, rendered)?;
+        }
 
         Ok(())
     }
@@ -294,33 +318,55 @@ impl SiteGenerator {
             .filter(|(_, post)| post.tags.contains(&tag.to_string()))
             .collect();
 
-        let posts_data: Vec<_> = tag_posts
-            .iter()
-            .map(|(id, post)| {
-                let mut post_context = serde_json::to_value(post).unwrap();
-                let base_path = self.config.base_path.as_deref().unwrap_or("");
-                post_context["url"] =
-                    serde_json::Value::String(format!("{}/posts/{}.html", base_path, post.slug));
-                post_context["content_html"] =
-                    serde_json::Value::String(markdown_to_html(&post.content));
-                post_context["storage_id"] = serde_json::Value::String(id.clone());
-                post_context
-            })
-            .collect();
+        let posts_per_page = self.config.posts_per_page;
+        let total_pages = tag_posts.len().div_ceil(posts_per_page);
 
-        let mut context = Context::new();
-        context.insert("site", &self.config);
-        context.insert("posts", &posts_data);
-        context.insert("tag", tag);
-        context.insert("title", &format!("Posts tagged '{}'", tag));
+        // Generate each page for this tag
+        for page in 1..=total_pages.max(1) {
+            // Calculate post range for this page
+            let start = (page - 1) * posts_per_page;
+            let end = (start + posts_per_page).min(tag_posts.len());
 
-        // Create tag directory with index.html for clean URLs
-        let tag_dir = self.output_dir.join("tags").join(tag);
-        fs::create_dir_all(&tag_dir)?;
+            let posts_data: Vec<_> = tag_posts[start..end]
+                .iter()
+                .map(|(id, post)| {
+                    let mut post_context = serde_json::to_value(post).unwrap();
+                    let base_path = self.config.base_path.as_deref().unwrap_or("");
+                    post_context["url"] =
+                        serde_json::Value::String(format!("{}/posts/{}.html", base_path, post.slug));
+                    post_context["content_html"] =
+                        serde_json::Value::String(markdown_to_html(&post.content));
+                    post_context["storage_id"] = serde_json::Value::String(id.clone());
+                    post_context
+                })
+                .collect();
 
-        let rendered = self.tera.render("tag_posts.html", &context)?;
-        let output_path = tag_dir.join("index.html");
-        fs::write(output_path, rendered)?;
+            let mut context = Context::new();
+            context.insert("site", &self.config);
+            context.insert("posts", &posts_data);
+            context.insert("tag", tag);
+            context.insert("title", &format!("Posts tagged '{}'", tag));
+            
+            // Pagination context
+            context.insert("current_page", &page);
+            context.insert("total_pages", &total_pages);
+            context.insert("has_prev", &(page > 1));
+            context.insert("has_next", &(page < total_pages));
+
+            // Create output directory
+            let output_path = if page == 1 {
+                let tag_dir = self.output_dir.join("tags").join(tag);
+                fs::create_dir_all(&tag_dir)?;
+                tag_dir.join("index.html")
+            } else {
+                let page_dir = self.output_dir.join("tags").join(tag).join("page").join(page.to_string());
+                fs::create_dir_all(&page_dir)?;
+                page_dir.join("index.html")
+            };
+
+            let rendered = self.tera.render("tag_posts.html", &context)?;
+            fs::write(output_path, rendered)?;
+        }
 
         Ok(())
     }
