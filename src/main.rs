@@ -75,7 +75,7 @@ enum Commands {
         /// Output directory
         #[arg(short, long, default_value = "./public")]
         output: String,
-        
+
         /// Configuration file to use
         #[arg(short, long, default_value = "site.toml")]
         config: String,
