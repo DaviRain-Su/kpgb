@@ -1,5 +1,6 @@
 #![allow(dead_code)]
 #![allow(clippy::uninlined_format_args)]
+#![allow(clippy::iter_kv_map)]
 
 mod blog;
 mod database;
