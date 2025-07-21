@@ -85,6 +85,10 @@ enum Commands {
         /// Port to listen on
         #[arg(short, long, default_value = "3000")]
         port: u16,
+        
+        /// Configuration file to use
+        #[arg(short, long, default_value = "site.toml")]
+        config: String,
     },
 }
 
@@ -257,9 +261,9 @@ async fn main() -> Result<()> {
             println!("📝 Edit site.toml to customize your blog settings");
         }
 
-        Commands::Serve { port } => {
-            let config = site::SiteConfig::load().unwrap_or_default();
-            let server = web::server::WebServer::new(blog_manager, config, port);
+        Commands::Serve { port, config } => {
+            let site_config = site::SiteConfig::load_from(&config).unwrap_or_default();
+            let server = web::server::WebServer::new(blog_manager, site_config, port);
 
             println!("🌐 Starting web server...");
             println!("🔗 Visit http://localhost:{port}");

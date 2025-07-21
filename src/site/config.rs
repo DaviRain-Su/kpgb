@@ -4,8 +4,12 @@ use std::path::Path;
 
 impl SiteConfig {
     pub fn load() -> Result<Self> {
-        // Try to load from site.toml, otherwise use defaults
-        let config_path = Path::new("site.toml");
+        Self::load_from("site.toml")
+    }
+    
+    pub fn load_from(path: &str) -> Result<Self> {
+        // Try to load from specified path, otherwise use defaults
+        let config_path = Path::new(path);
         if config_path.exists() {
             let config_str = std::fs::read_to_string(config_path)?;
             let config: SiteConfig = toml::from_str(&config_str)?;

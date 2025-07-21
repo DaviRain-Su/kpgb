@@ -1,6 +1,29 @@
-# KPGB - Kaspa-Powered Genesis Blog
+# KPGB - IPFS-Based Decentralized Personal Blog System
 
-A decentralized personal blog system with content stored on IPFS and local indexing for performance.
+A fully decentralized personal blog system where all content is stored on IPFS.
+
+## Quick Start
+
+### Development Server (Local)
+```bash
+# Use development configuration (no base_path)
+./serve-dev.sh
+# Or manually:
+cargo run -- serve --port 9000 --config site.dev.toml
+```
+
+### Production Build (GitHub Pages)
+```bash
+# Use production configuration (with base_path)
+cargo run -- generate --output ./public
+./scripts/deploy.sh
+```
+
+## Configuration Files
+
+- `site.dev.toml` - Development configuration (no base_path, localhost URLs)
+- `site.toml` - Default configuration 
+- `site.prod.toml` - Production configuration (GitHub Pages with base_path)
 
 ## Features
 
@@ -12,10 +35,10 @@ A decentralized personal blog system with content stored on IPFS and local index
 - **Dynamic Web Interface**: Real-time web UI with search
 - **RSS Feed**: Automatic RSS feed generation
 - **CLI Management**: Complete command-line interface
+- **GitHub Pages Deployment**: Automated deployment with GitHub Actions
+- **External Website Integration**: Embeddable widget and API
 
-## Quick Start
-
-### Installation
+## Installation
 
 ```bash
 # Clone the repository
@@ -24,13 +47,20 @@ cd kpgb
 
 # Build the project
 cargo build --release
+
+# Install IPFS (optional but recommended)
+# macOS
+brew install ipfs
+# Start IPFS daemon
+ipfs daemon
 ```
 
-### Configuration
+## Configuration
 
-1. Set up IPFS (optional):
+1. Set up environment variables:
 ```bash
-export IPFS_API_URL=http://localhost:5001
+cp .env.example .env
+# Edit .env with your settings
 ```
 
 2. Initialize site configuration:
@@ -38,7 +68,7 @@ export IPFS_API_URL=http://localhost:5001
 cargo run -- init
 ```
 
-### Basic Usage
+## Basic Usage
 
 ```bash
 # Create a new post
@@ -56,17 +86,25 @@ cargo run -- search "keyword"
 # Generate static site
 cargo run -- generate
 
-# Start web server
-cargo run -- serve --port 3001
+# Start development server
+./serve-dev.sh
 ```
 
 ## Web Interface
 
-Access the web interface at `http://localhost:3001`:
-- Home: `/`
-- Search: `/search`
-- Archive: `/archive`
-- API: `/api/posts`
+### Local Development Server
+Access at `http://localhost:9000` (NO `/kpgb` prefix):
+- Home: `http://localhost:9000/`
+- Archive: `http://localhost:9000/archive`
+- Search: `http://localhost:9000/search`
+- RSS Feed: `http://localhost:9000/feed.xml`
+- API: `http://localhost:9000/api/posts`
+
+### GitHub Pages (Production)
+Access at `https://username.github.io/kpgb` (WITH `/kpgb` prefix):
+- Home: `https://username.github.io/kpgb/`
+- Archive: `https://username.github.io/kpgb/archive`
+- RSS Feed: `https://username.github.io/kpgb/feed.xml`
 
 ## Storage Backends
 
@@ -77,11 +115,28 @@ Access the web interface at `http://localhost:3001`:
 
 ### GitHub
 - Set `GITHUB_TOKEN`, `GITHUB_OWNER`, and `GITHUB_REPO`
-- Content stored as GitHub Gist or repository files
+- Content stored as GitHub repository files
 
 ### Local
 - Default fallback storage
 - Files stored in `./storage/local`
+
+## Deployment
+
+### GitHub Pages
+```bash
+# Generate static site
+cargo run -- generate
+
+# Deploy to GitHub Pages
+./scripts/deploy.sh
+```
+
+### Self-Hosted Server
+```bash
+# Run production server
+cargo run --release -- serve --port 80
+```
 
 ## Architecture
 
@@ -95,8 +150,10 @@ src/
 └── web/         # Web server and API
 
 templates/       # HTML templates
-static/          # CSS and assets
+public/          # Generated static site
 migrations/      # Database migrations
+scripts/         # Deployment scripts
+.github/         # GitHub Actions workflows
 ```
 
 ## API Endpoints
@@ -120,6 +177,10 @@ cargo fmt
 # Watch for changes
 cargo watch -x run
 ```
+
+## Documentation
+
+See [CLAUDE.md](CLAUDE.md) for detailed documentation, architecture, and roadmap.
 
 ## License
 

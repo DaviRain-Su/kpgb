@@ -1,7 +1,7 @@
 use axum::{
     extract::{Path, Query, State},
     http::StatusCode,
-    response::{Html, IntoResponse},
+    response::{Html, IntoResponse, Redirect},
 };
 use pulldown_cmark::{html, Options, Parser};
 use serde::Deserialize;
@@ -50,7 +50,10 @@ pub async fn index(
         .collect();
 
     let mut context = Context::new();
-    context.insert("site", &state.site_config);
+    // For web server, always use empty base_path
+    let mut site_config = state.site_config.clone();
+    site_config.base_path = None;
+    context.insert("site", &site_config);
     context.insert("page_title", "Home");
     context.insert("posts", &posts);
     context.insert("current_page", &page);
@@ -80,7 +83,10 @@ pub async fn post(
     let (storage_id, post) = post_data;
 
     let mut context = Context::new();
-    context.insert("site", &state.site_config);
+    // For web server, always use empty base_path
+    let mut site_config = state.site_config.clone();
+    site_config.base_path = None;
+    context.insert("site", &site_config);
     context.insert("page_title", &post.title);
     context.insert("post", post);
     context.insert("content_html", &markdown_to_html(&post.content));
@@ -123,7 +129,10 @@ pub async fn archive(State(state): State<Arc<AppState>>) -> Result<Html<String>,
     years.sort_by(|a, b| b.0.cmp(&a.0));
 
     let mut context = Context::new();
-    context.insert("site", &state.site_config);
+    // For web server, always use empty base_path
+    let mut site_config = state.site_config.clone();
+    site_config.base_path = None;
+    context.insert("site", &site_config);
     context.insert("page_title", "Archive");
     context.insert("years", &years);
 
@@ -158,7 +167,10 @@ pub async fn search(
         .collect();
 
     let mut context = Context::new();
-    context.insert("site", &state.site_config);
+    // For web server, always use empty base_path
+    let mut site_config = state.site_config.clone();
+    site_config.base_path = None;
+    context.insert("site", &site_config);
     context.insert("page_title", "Search");
     context.insert("query", &query);
     context.insert("posts", &posts);
@@ -251,4 +263,9 @@ pub async fn rss_feed(State(state): State<Arc<AppState>>) -> Result<impl IntoRes
         [("content-type", "application/rss+xml")],
         channel.to_string(),
     ))
+}
+
+// Redirect handlers for backward compatibility
+pub async fn redirect_archive() -> impl IntoResponse {
+    Redirect::permanent("/archive")
 }

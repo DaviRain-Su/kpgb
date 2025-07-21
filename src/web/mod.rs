@@ -30,6 +30,8 @@ pub fn create_app(state: Arc<AppState>) -> Router {
         // Static files
         .route("/css/style.css", get(handlers::style_css))
         .route("/feed.xml", get(handlers::rss_feed))
+        // Redirects for backward compatibility
+        .route("/archive.html", get(handlers::redirect_archive))
         // CORS for API access
         .layer(CorsLayer::permissive())
         // State

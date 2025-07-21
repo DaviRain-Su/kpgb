@@ -394,6 +394,12 @@ curl --noproxy '*' http://localhost:9000
 - SQLite FTS5 for fast searches
 - Client-side search for static deployments
 
+### URL Path Handling
+- Static sites use `base_path` from configuration for GitHub Pages
+- Dynamic web server automatically removes `base_path` from all templates
+- This ensures local development doesn't include `/kpgb` prefix in links
+- Both systems use same URL patterns: `/archive`, `/feed.xml`, etc.
+
 ## Project Structure
 ```
 kpgb/
