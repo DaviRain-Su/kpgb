@@ -201,7 +201,10 @@ fn render_template(name: &str, context: &Context) -> Result<String, StatusCode> 
         ("archive.html", include_str!("../../templates/archive.html")),
         ("search.html", include_str!("../../templates/search.html")),
         ("tags.html", include_str!("../../templates/tags.html")),
-        ("tag_posts.html", include_str!("../../templates/tag_posts.html")),
+        (
+            "tag_posts.html",
+            include_str!("../../templates/tag_posts.html"),
+        ),
     ])
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
@@ -283,18 +286,21 @@ pub async fn tags(State(state): State<Arc<AppState>>) -> Result<Html<String>, St
     let mut site_config = state.site_config.clone();
     site_config.base_path = None;
     context.insert("site", &site_config);
-    
+
     let tag_data: Vec<_> = tags
         .into_iter()
         .map(|(name, count)| {
             let mut tag_map = serde_json::Map::new();
             tag_map.insert("name".to_string(), serde_json::Value::String(name.clone()));
             tag_map.insert("count".to_string(), serde_json::Value::Number(count.into()));
-            tag_map.insert("url".to_string(), serde_json::Value::String(format!("/tags/{}", name)));
+            tag_map.insert(
+                "url".to_string(),
+                serde_json::Value::String(format!("/tags/{}", name)),
+            );
             serde_json::Value::Object(tag_map)
         })
         .collect();
-    
+
     context.insert("tags", &tag_data);
     context.insert("title", "Tags");
 

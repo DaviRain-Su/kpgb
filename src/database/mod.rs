@@ -284,7 +284,11 @@ impl Database {
         Ok(results)
     }
 
-    pub async fn get_posts_by_tag(&self, tag: &str, published_only: bool) -> Result<Vec<(String, BlogPost)>> {
+    pub async fn get_posts_by_tag(
+        &self,
+        tag: &str,
+        published_only: bool,
+    ) -> Result<Vec<(String, BlogPost)>> {
         let query = if published_only {
             r#"
             SELECT p.id, p.title, p.slug, p.content, p.excerpt, p.author,

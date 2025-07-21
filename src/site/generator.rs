@@ -35,7 +35,10 @@ impl SiteGenerator {
             ("post.html", include_str!("../../templates/post.html")),
             ("archive.html", include_str!("../../templates/archive.html")),
             ("tags.html", include_str!("../../templates/tags.html")),
-            ("tag_posts.html", include_str!("../../templates/tag_posts.html")),
+            (
+                "tag_posts.html",
+                include_str!("../../templates/tag_posts.html"),
+            ),
         ])?;
 
         Ok(Self {
@@ -247,25 +250,31 @@ impl SiteGenerator {
         let mut context = Context::new();
         context.insert("site", &self.config);
         context.insert("title", "Tags");
-        
+
         let tag_data: Vec<_> = all_tags
             .iter()
             .map(|(name, count)| {
                 let mut tag_map = serde_json::Map::new();
                 tag_map.insert("name".to_string(), serde_json::Value::String(name.clone()));
-                tag_map.insert("count".to_string(), serde_json::Value::Number((*count).into()));
+                tag_map.insert(
+                    "count".to_string(),
+                    serde_json::Value::Number((*count).into()),
+                );
                 let base_path = self.config.base_path.as_deref().unwrap_or("");
-                tag_map.insert("url".to_string(), serde_json::Value::String(format!("{}/tags/{}", base_path, name)));
+                tag_map.insert(
+                    "url".to_string(),
+                    serde_json::Value::String(format!("{}/tags/{}", base_path, name)),
+                );
                 serde_json::Value::Object(tag_map)
             })
             .collect();
-        
+
         context.insert("tags", &tag_data);
 
         // Create tags directory with index.html for clean URLs
         let tags_dir = self.output_dir.join("tags");
         fs::create_dir_all(&tags_dir)?;
-        
+
         let rendered = self.tera.render("tags.html", &context)?;
         let output_path = tags_dir.join("index.html");
         fs::write(output_path, rendered)?;
@@ -290,8 +299,10 @@ impl SiteGenerator {
             .map(|(id, post)| {
                 let mut post_context = serde_json::to_value(post).unwrap();
                 let base_path = self.config.base_path.as_deref().unwrap_or("");
-                post_context["url"] = serde_json::Value::String(format!("{}/posts/{}.html", base_path, post.slug));
-                post_context["content_html"] = serde_json::Value::String(markdown_to_html(&post.content));
+                post_context["url"] =
+                    serde_json::Value::String(format!("{}/posts/{}.html", base_path, post.slug));
+                post_context["content_html"] =
+                    serde_json::Value::String(markdown_to_html(&post.content));
                 post_context["storage_id"] = serde_json::Value::String(id.clone());
                 post_context
             })
@@ -306,7 +317,7 @@ impl SiteGenerator {
         // Create tag directory with index.html for clean URLs
         let tag_dir = self.output_dir.join("tags").join(tag);
         fs::create_dir_all(&tag_dir)?;
-        
+
         let rendered = self.tera.render("tag_posts.html", &context)?;
         let output_path = tag_dir.join("index.html");
         fs::write(output_path, rendered)?;

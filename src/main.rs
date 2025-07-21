@@ -2,6 +2,7 @@
 
 mod blog;
 mod database;
+mod frontmatter;
 mod models;
 mod site;
 mod storage;
@@ -28,11 +29,11 @@ enum Commands {
     /// Create a new blog post
     New {
         /// Post title
-        #[arg(short, long)]
+        #[arg(short, long, default_value = "Untitled")]
         title: String,
 
         /// Author name
-        #[arg(short, long)]
+        #[arg(short, long, default_value = "Anonymous")]
         author: String,
 
         /// Content file path (markdown)
@@ -153,12 +154,38 @@ async fn main() -> Result<()> {
                 }
             };
 
-            let post = BlogPost::new(title.clone(), content_text, author);
+            // Parse frontmatter if present
+            let (frontmatter, clean_content) = frontmatter::parse_frontmatter(&content_text)?;
+
+            let post = if let Some(fm) = frontmatter {
+                // Use frontmatter data, CLI args override frontmatter
+                let final_title = if title != "Untitled" {
+                    title.clone()
+                } else {
+                    fm.title
+                };
+                let final_author = if author != "Anonymous" {
+                    author
+                } else {
+                    fm.author
+                };
+
+                let mut post =
+                    BlogPost::new(final_title.clone(), clean_content, final_author.clone());
+                post.tags = fm.tags;
+                post.category = fm.category;
+                post.excerpt = fm.excerpt;
+
+                post
+            } else {
+                // No frontmatter, use CLI args and full content
+                BlogPost::new(title.clone(), content_text, author)
+            };
+
             let storage_id = blog_manager.create_post(post).await?;
 
             println!("✅ Post created successfully!");
             println!("Storage ID: {storage_id}");
-            println!("Title: {title}");
         }
 
         Commands::List { published } => {
