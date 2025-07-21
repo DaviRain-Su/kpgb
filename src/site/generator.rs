@@ -57,14 +57,18 @@ impl SiteGenerator {
 
         // Get all published posts
         let mut posts = self.blog_manager.list_posts(true).await?;
-        
+
         // Deduplicate posts by slug, keeping the one with more tags or newer
-        let mut seen_slugs: std::collections::HashMap<String, (String, BlogPost)> = std::collections::HashMap::new();
+        let mut seen_slugs: std::collections::HashMap<String, (String, BlogPost)> =
+            std::collections::HashMap::new();
         for (id, post) in posts.iter() {
-            let entry = seen_slugs.entry(post.slug.clone()).or_insert_with(|| (id.clone(), post.clone()));
+            let entry = seen_slugs
+                .entry(post.slug.clone())
+                .or_insert_with(|| (id.clone(), post.clone()));
             // Replace if current post has more tags or is newer
-            if post.tags.len() > entry.1.tags.len() || 
-               (post.tags.len() == entry.1.tags.len() && post.created_at > entry.1.created_at) {
+            if post.tags.len() > entry.1.tags.len()
+                || (post.tags.len() == entry.1.tags.len() && post.created_at > entry.1.created_at)
+            {
                 *entry = (id.clone(), post.clone());
             }
         }
