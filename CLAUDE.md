@@ -1,7 +1,7 @@
-# KPGB - Kaspa-Powered Genesis Blog
+# KPGB - IPFS-Based Decentralized Personal Blog System
 
 ## Project Overview
-A decentralized personal blog system where all content is stored on IPFS (InterPlanetary File System). The system supports local content indexing for enhanced functionality while maintaining full decentralization. Features both static site generation and dynamic web interface.
+A fully decentralized personal blog system where all content is stored on IPFS (InterPlanetary File System). The system supports local content indexing for enhanced functionality while maintaining full decentralization. Features both static site generation for GitHub Pages deployment and dynamic web server with API endpoints.
 
 ## Current Implementation Status
 
@@ -43,6 +43,8 @@ A decentralized personal blog system where all content is stored on IPFS (InterP
 - RSS 2.0 feed generation
 - Archive pages grouped by year
 - Mobile-friendly design
+- GitHub Pages support with base_path configuration
+- Production-ready deployment scripts
 
 #### 6. **Dynamic Web Interface**
 - Axum web server with async support
@@ -50,8 +52,23 @@ A decentralized personal blog system where all content is stored on IPFS (InterP
 - RESTful API endpoints
 - Dynamic routing for posts
 - CORS support for API access
+- Embeddable widget support
 
-#### 7. **Complete CLI Interface**
+#### 7. **GitHub Pages Deployment**
+- Automated deployment scripts
+- GitHub Actions CI/CD workflows
+- Base path configuration for subdirectory deployment
+- Static asset optimization
+- SEO-friendly URLs
+
+#### 8. **External Website Integration**
+- Embeddable JavaScript widget
+- CORS-enabled API endpoints
+- Client-side search functionality
+- Customizable themes
+- Demo page for testing integration
+
+#### 9. **Complete CLI Interface**
 ```bash
 # Create new post
 cargo run -- new --title "Title" --author "Author" [--content file.md]
@@ -79,6 +96,9 @@ cargo run -- generate [--output ./public]
 
 # Start web server
 cargo run -- serve [--port 9000]
+
+# Deploy to GitHub Pages
+./scripts/deploy.sh
 ```
 
 ## Technical Architecture
@@ -138,7 +158,7 @@ CREATE TABLE post_tags (
 # Web UI Routes
 GET  /                    # Home page with paginated posts
 GET  /posts/:slug         # Individual post page
-GET  /archive             # Archive page grouped by year
+GET  /archive.html        # Archive page grouped by year
 GET  /search?q=query      # Search results page
 GET  /feed.xml            # RSS feed
 GET  /css/style.css       # Stylesheet
@@ -148,6 +168,22 @@ GET  /api/posts           # JSON API: List posts
 GET  /api/posts/:id       # JSON API: Get post
 POST /api/search          # JSON API: Search posts
 ```
+
+### Deployment Architecture
+
+#### Static Deployment (GitHub Pages)
+- Generate static HTML files
+- Deploy to GitHub Pages at `/username/kpgb/`
+- Base path configuration for subdirectory
+- No server required
+- Ideal for personal blogs
+
+#### Dynamic Deployment (Server)
+- Run Axum web server
+- Real-time content updates
+- API access for external sites
+- Search functionality
+- Ideal for multi-user scenarios
 
 ### Content Flow
 1. User creates post via CLI
@@ -179,9 +215,25 @@ GITHUB_TOKEN=your-token
 title = "My IPFS Blog"
 description = "A decentralized blog powered by IPFS"
 author = "Your Name"
-base_url = "http://localhost:8080"
-posts_per_page = 10
+base_url = "https://username.github.io/kpgb"
+base_path = "/kpgb"  # For GitHub Pages subdirectory
 ipfs_gateway = "https://ipfs.io/ipfs/"
+posts_per_page = 10
+enable_rss = true
+theme = "default"
+```
+
+### Production Configuration (site.prod.toml)
+```toml
+title = "My IPFS Blog"
+description = "A decentralized blog powered by IPFS"
+author = "Your Name"
+base_url = "https://username.github.io/kpgb"
+base_path = "/kpgb"
+ipfs_gateway = "https://ipfs.io/ipfs/"
+posts_per_page = 10
+enable_rss = true
+theme = "default"
 ```
 
 ## Getting Started
@@ -227,9 +279,79 @@ cargo run -- new --title "My First Post" --author "Alice" --content first-post.m
 # Publish it
 cargo run -- publish <storage-id>
 
-# Start web server
+# Generate static site
+cargo run -- generate
+
+# Or start web server
 cargo run -- serve --port 9000
 # Visit http://localhost:9000
+```
+
+### 4. Deploy to GitHub Pages
+```bash
+# Configure git
+git config user.name "Your Name"
+git config user.email "your-email@example.com"
+
+# Option 1: Using Personal Access Token
+export GITHUB_TOKEN="your-token-here"
+./scripts/deploy.sh
+
+# Option 2: Using SSH
+git remote set-url origin git@github.com:username/kpgb.git
+./scripts/deploy.sh
+```
+
+## GitHub Actions CI/CD
+
+The project includes two GitHub Actions workflows:
+
+### 1. CI Workflow (.github/workflows/ci.yml)
+- Runs on every push and pull request
+- Runs `cargo clippy` with strict warnings
+- Runs `cargo test`
+- Ensures code quality
+
+### 2. Deploy Workflow (.github/workflows/deploy.yml)
+- Manually triggered or on push to main
+- Generates static site with production config
+- Deploys to GitHub Pages
+- Accessible at `https://username.github.io/kpgb/`
+
+## External Website Integration
+
+### Embedding the Blog Widget
+```html
+<!-- Add to your website -->
+<div id="kpgb-widget"></div>
+<script src="https://username.github.io/kpgb/widget.js"></script>
+<script>
+  KPGBWidget.init({
+    container: '#kpgb-widget',
+    apiUrl: 'https://your-server.com',
+    postsPerPage: 5,
+    theme: 'light',
+    showSearch: true,
+    showTags: true
+  });
+</script>
+```
+
+### Using the API
+```javascript
+// Fetch posts
+fetch('https://your-server.com/api/posts')
+  .then(res => res.json())
+  .then(posts => console.log(posts));
+
+// Search posts
+fetch('https://your-server.com/api/search', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ query: 'IPFS' })
+})
+  .then(res => res.json())
+  .then(results => console.log(results));
 ```
 
 ## Important Implementation Notes
@@ -262,6 +384,7 @@ curl --noproxy '*' http://localhost:9000
 - Templates compiled into binary for easy distribution
 - Responsive design with mobile support
 - Dark mode ready CSS structure
+- Base path support for subdirectory deployment
 
 ### Performance Optimizations
 - Content deduplication saves storage and bandwidth
@@ -269,6 +392,7 @@ curl --noproxy '*' http://localhost:9000
 - Paginated post listings
 - Lazy loading of content
 - SQLite FTS5 for fast searches
+- Client-side search for static deployments
 
 ## Project Structure
 ```
@@ -297,11 +421,28 @@ kpgb/
 │   ├── post.html        # Post page
 │   ├── archive.html     # Archive page
 │   ├── search.html      # Search page
-│   └── style.css        # Styles
+│   ├── style.css        # Styles
+│   ├── widget.js        # Embeddable widget
+│   └── widget-demo.html # Widget demo page
+├── scripts/
+│   └── deploy.sh        # GitHub Pages deployment
+├── .github/workflows/
+│   ├── ci.yml           # CI workflow
+│   └── deploy.yml       # Deploy workflow
 ├── migrations/          # Database migrations
+├── public/              # Generated static site
 ├── Cargo.toml           # Dependencies
+├── site.toml            # Development config
+├── site.prod.toml       # Production config
 └── CLAUDE.md            # This file
 ```
+
+## Code Quality
+- All clippy warnings fixed
+- Proper error handling throughout
+- Async/await patterns correctly implemented
+- No unsafe code
+- Comprehensive type safety
 
 ## Security Considerations
 - All content on IPFS is public and immutable
@@ -309,6 +450,7 @@ kpgb/
 - GitHub storage requires access token
 - SQLite database is local only
 - No authentication in current version
+- CORS configured for API access
 - Consider encryption for private content (future)
 
 ## Testing
@@ -352,30 +494,31 @@ curl https://ipfs.io/ipfs/<CID>
 - Duplicate content reuses existing storage ID
 - Metadata can differ for same content
 
-## Future Enhancements (Roadmap)
+## Architecture Documents
 
-### Phase 1: Core Improvements
-- [ ] IPNS support for mutable references
-- [ ] Content encryption for private posts
-- [ ] Media management (images, videos)
-- [ ] Theme system with multiple themes
-- [ ] Plugin architecture
+### ARCHITECTURE.md
+Comprehensive system architecture covering:
+- Dual deployment modes (static vs dynamic)
+- Component interaction diagrams
+- Data flow documentation
+- API specifications
+- Security model
 
-### Phase 2: Kaspa Integration
-- [ ] Wallet-based authentication
-- [ ] Token-gated content
-- [ ] KAS payment for premium posts
-- [ ] Author tips/donations
-- [ ] Content monetization
+### ROADMAP.md
+Detailed development roadmap with:
+- Phase 1: Index Sharing Protocol
+- Phase 2: Public Aggregation Platform
+- Phase 3: Advanced Features
+- Phase 4: Ecosystem Development
 
-### Phase 3: Advanced Features
-- [ ] P2P comment system
-- [ ] Distributed search across nodes
-- [ ] Multi-author support
-- [ ] Content versioning
-- [ ] Mobile app
-- [ ] Analytics without tracking
-- [ ] Federation support
+## Future Vision
+
+This system is designed to be the foundation for a decentralized content aggregation network where:
+- Each person maintains their own blog with data on IPFS
+- Indexes can be shared between nodes
+- Public aggregation sites can display trending content
+- Content remains under individual control
+- No central authority controls the network
 
 ## Dependencies
 
@@ -391,6 +534,9 @@ curl https://ipfs.io/ipfs/<CID>
 - **uuid**: Unique identifiers
 - **rss**: RSS feed generation
 - **pulldown-cmark**: Markdown parsing
+- **base64**: Encoding for GitHub API
+- **hex**: Hash encoding
+- **dotenv**: Environment management
 
 ## Important Reminders
 
@@ -402,3 +548,5 @@ curl https://ipfs.io/ipfs/<CID>
 - Use appropriate ports to avoid conflicts
 - Remember to set environment variables
 - Backup your SQLite database regularly
+- Configure base_path for GitHub Pages deployment
+- Run clippy before committing code
