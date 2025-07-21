@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="archive">
+    <h1>Archive</h1>
+    
+    {% for year_data in years %}
+    <section class="year-section">
+        <h2>{{ year_data.0 }}</h2>
+        <ul class="post-list">
+            {% for post in year_data.1 %}
+            <li>
+                <span class="date">{{ post.created_at | date(format="%m-%d") }}</span>
+                <a href="{{ post.url }}">{{ post.title }}</a>
+                <span class="author">by {{ post.author }}</span>
+                {% if post.storage_id is starting_with("Qm") %}
+                <span class="ipfs-badge">IPFS</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% endfor %}
+</div>
+{% endblock content %}

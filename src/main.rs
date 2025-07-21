@@ -2,6 +2,8 @@ mod models;
 mod storage;
 mod blog;
 mod database;
+mod site;
+mod web;
 
 use anyhow::Result;
 use clap::{Parser, Subcommand};
@@ -67,6 +69,23 @@ enum Commands {
         /// Backend type: ipfs, github, local
         #[arg(short, long, default_value = "local")]
         backend: String,
+    },
+    
+    /// Generate static site
+    Generate {
+        /// Output directory
+        #[arg(short, long, default_value = "./public")]
+        output: String,
+    },
+    
+    /// Initialize site configuration
+    Init,
+    
+    /// Start web server
+    Serve {
+        /// Port to listen on
+        #[arg(short, long, default_value = "3000")]
+        port: u16,
     },
 }
 
@@ -213,6 +232,38 @@ async fn main() -> Result<()> {
             
             let exists = storage.exists(&result.id).await?;
             println!("✅ Exists check: {}", exists);
+        }
+        
+        Commands::Generate { output } => {
+            let config = site::SiteConfig::load().unwrap_or_default();
+            let generator = site::generator::SiteGenerator::new(
+                blog_manager,
+                config,
+                &output
+            ).await?;
+            
+            generator.generate().await?;
+        }
+        
+        Commands::Init => {
+            let config = site::SiteConfig::default();
+            config.save()?;
+            println!("✅ Site configuration initialized: site.toml");
+            println!("📝 Edit site.toml to customize your blog settings");
+        }
+        
+        Commands::Serve { port } => {
+            let config = site::SiteConfig::load().unwrap_or_default();
+            let server = web::server::WebServer::new(blog_manager, config, port);
+            
+            println!("🌐 Starting web server...");
+            println!("🔗 Visit http://localhost:{}", port);
+            println!("🔍 Search: http://localhost:{}/search", port);
+            println!("📚 Archive: http://localhost:{}/archive", port);
+            println!("📡 API: http://localhost:{}/api/posts", port);
+            println!("❌ Press Ctrl+C to stop");
+            
+            server.run().await?;
         }
     }
     
