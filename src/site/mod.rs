@@ -17,6 +17,7 @@ pub struct SiteConfig {
 }
 
 impl SiteConfig {
+    #[allow(dead_code)]
     pub fn path(&self, path: &str) -> String {
         if let Some(base_path) = &self.base_path {
             if path.starts_with('/') {

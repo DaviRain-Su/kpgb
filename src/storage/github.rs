@@ -69,7 +69,7 @@ impl Storage for GitHubStorage {
         let github_content = GitHubContent {
             message: metadata
                 .get("message")
-                .unwrap_or(&format!("Add content to {}", path))
+                .unwrap_or(&format!("Add content to {path}"))
                 .clone(),
             content: encoded_content,
             sha: None,
