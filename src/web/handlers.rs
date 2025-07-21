@@ -1,6 +1,6 @@
 use axum::{
     extract::{Path, Query, State},
-    response::{Html, IntoResponse, Response},
+    response::{Html, IntoResponse},
     http::StatusCode,
 };
 use std::sync::Arc;
