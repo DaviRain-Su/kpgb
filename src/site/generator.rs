@@ -147,7 +147,8 @@ impl SiteGenerator {
             let year = post.created_at.year();
             let mut post_context = serde_json::to_value(post).unwrap();
             let base_path = self.config.base_path.as_deref().unwrap_or("");
-            post_context["url"] = serde_json::Value::String(format!("{}/posts/{}.html", base_path, post.slug));
+            post_context["url"] =
+                serde_json::Value::String(format!("{}/posts/{}.html", base_path, post.slug));
             post_context["storage_id"] = serde_json::Value::String(id.clone());
 
             posts_by_year
