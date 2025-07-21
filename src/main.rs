@@ -75,6 +75,10 @@ enum Commands {
         /// Output directory
         #[arg(short, long, default_value = "./public")]
         output: String,
+        
+        /// Configuration file to use
+        #[arg(short, long, default_value = "site.toml")]
+        config: String,
     },
 
     /// Initialize site configuration
@@ -246,10 +250,10 @@ async fn main() -> Result<()> {
             println!("✅ Exists check: {exists}");
         }
 
-        Commands::Generate { output } => {
-            let config = site::SiteConfig::load().unwrap_or_default();
+        Commands::Generate { output, config } => {
+            let site_config = site::SiteConfig::load_from(&config).unwrap_or_default();
             let generator =
-                site::generator::SiteGenerator::new(blog_manager, config, &output).await?;
+                site::generator::SiteGenerator::new(blog_manager, site_config, &output).await?;
 
             generator.generate().await?;
         }

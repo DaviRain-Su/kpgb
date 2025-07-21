@@ -25,6 +25,23 @@ cargo run -- generate --output ./public
 - `site.toml` - Default configuration 
 - `site.prod.toml` - Production configuration (GitHub Pages with base_path)
 
+## Theme Selection
+
+Change theme by editing the `theme` field in your config file:
+```toml
+theme = "hacker"  # Options: default, hacker, minimal, dark, cyberpunk
+```
+
+Or use the theme switcher:
+```bash
+./change-theme.sh
+```
+
+Preview themes locally:
+```bash
+./preview.sh  # Opens http://localhost:8888
+```
+
 ## Features
 
 - **Decentralized Storage**: All content stored on IPFS with unique CIDs

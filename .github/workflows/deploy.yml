@@ -39,9 +39,14 @@ jobs:
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           
-      - name: Create production config
+      - name: Setup production config
         run: |
-          cat > site.production.toml << EOL
+          # Check if site.prod.toml exists, otherwise create default
+          if [ -f site.prod.toml ]; then
+            echo "Using existing site.prod.toml"
+          else
+            echo "Creating default production config"
+            cat > site.prod.toml << EOL
           title = "My IPFS Blog"
           description = "A decentralized blog powered by IPFS"
           author = "${{ github.repository_owner }}"
@@ -52,20 +57,19 @@ jobs:
           enable_rss = true
           theme = "default"
           EOL
+          fi
+          
+          # Update base_url and base_path in production config to match GitHub Pages
+          sed -i "s|base_url = .*|base_url = \"https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}\"|" site.prod.toml
+          sed -i "s|base_path = .*|base_path = \"/${{ github.event.repository.name }}\"|" site.prod.toml
           
       - name: Build project
         run: cargo build --release
         
       - name: Generate static site
         run: |
-          # 备份配置
-          cp site.toml site.toml.backup || true
-          # 使用生产配置
-          cp site.production.toml site.toml
-          # 生成静态网站
-          cargo run -- generate
-          # 恢复配置
-          mv site.toml.backup site.toml || true
+          # 使用生产配置生成静态网站
+          cargo run -- generate --config site.prod.toml
           
       - name: Add .nojekyll
         run: touch public/.nojekyll
