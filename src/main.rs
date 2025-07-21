@@ -1,3 +1,4 @@
+#[allow(clippy::uninlined_format_args)]
 mod blog;
 mod database;
 mod models;
