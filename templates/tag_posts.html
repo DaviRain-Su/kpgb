@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - {{ site.title }}{% endblock %}
+
+{% block content %}
+<div class="tag-posts">
+    <h1>Posts tagged "{{ tag }}"</h1>
+    <p class="tag-posts-description">Found {{ posts | length }} post{% if posts | length != 1 %}s{% endif %} with this tag.</p>
+    
+    <div class="posts">
+        {% for post in posts %}
+        <article class="post-preview">
+            <h2><a href="{{ site.base_path | default(value="") }}/posts/{{ post.slug }}">{{ post.title }}</a></h2>
+            <div class="post-meta">
+                <span class="author">{{ post.author }}</span>
+                <span class="date">{{ post.created_at | date(format="%Y-%m-%d") }}</span>
+                {% if post.tags %}
+                <span class="tags">
+                    {% for tag in post.tags %}
+                    <a href="{{ site.base_path | default(value="") }}/tags/{{ tag }}" class="tag">{{ tag }}</a>
+                    {% endfor %}
+                </span>
+                {% endif %}
+            </div>
+            <div class="post-content">
+                {% if post.excerpt %}
+                    {{ post.excerpt }}
+                {% else %}
+                    {{ post.content_html | truncate(length=300) | safe }}
+                {% endif %}
+            </div>
+            <a href="{{ site.base_path | default(value="") }}/posts/{{ post.slug }}" class="read-more">Read more →</a>
+        </article>
+        {% endfor %}
+    </div>
+    
+    <nav class="back-nav">
+        <a href="{{ site.base_path | default(value="") }}/tags">← Back to all tags</a>
+    </nav>
+</div>
+{% endblock content %}

@@ -34,6 +34,8 @@ impl SiteGenerator {
             ("index.html", include_str!("../../templates/index.html")),
             ("post.html", include_str!("../../templates/post.html")),
             ("archive.html", include_str!("../../templates/archive.html")),
+            ("tags.html", include_str!("../../templates/tags.html")),
+            ("tag_posts.html", include_str!("../../templates/tag_posts.html")),
         ])?;
 
         Ok(Self {
@@ -68,6 +70,9 @@ impl SiteGenerator {
         if self.config.enable_rss {
             self.generate_rss(&posts).await?;
         }
+
+        // Generate tag pages
+        self.generate_tag_pages(&posts).await?;
 
         println!(
             "✅ Site generated successfully in: {}",
@@ -230,6 +235,81 @@ impl SiteGenerator {
         };
 
         fs::write(css_dir.join("style.css"), css_content)?;
+
+        Ok(())
+    }
+
+    async fn generate_tag_pages(&self, posts: &[(String, BlogPost)]) -> Result<()> {
+        // Get all tags
+        let all_tags = self.blog_manager.get_all_tags().await?;
+
+        // Generate main tags page
+        let mut context = Context::new();
+        context.insert("site", &self.config);
+        context.insert("title", "Tags");
+        
+        let tag_data: Vec<_> = all_tags
+            .iter()
+            .map(|(name, count)| {
+                let mut tag_map = serde_json::Map::new();
+                tag_map.insert("name".to_string(), serde_json::Value::String(name.clone()));
+                tag_map.insert("count".to_string(), serde_json::Value::Number((*count).into()));
+                let base_path = self.config.base_path.as_deref().unwrap_or("");
+                tag_map.insert("url".to_string(), serde_json::Value::String(format!("{}/tags/{}", base_path, name)));
+                serde_json::Value::Object(tag_map)
+            })
+            .collect();
+        
+        context.insert("tags", &tag_data);
+
+        // Create tags directory with index.html for clean URLs
+        let tags_dir = self.output_dir.join("tags");
+        fs::create_dir_all(&tags_dir)?;
+        
+        let rendered = self.tera.render("tags.html", &context)?;
+        let output_path = tags_dir.join("index.html");
+        fs::write(output_path, rendered)?;
+
+        // Generate individual tag pages
+        for (tag_name, _count) in all_tags {
+            self.generate_tag_page(&tag_name, posts).await?;
+        }
+
+        Ok(())
+    }
+
+    async fn generate_tag_page(&self, tag: &str, all_posts: &[(String, BlogPost)]) -> Result<()> {
+        // Filter posts by tag
+        let tag_posts: Vec<_> = all_posts
+            .iter()
+            .filter(|(_, post)| post.tags.contains(&tag.to_string()))
+            .collect();
+
+        let posts_data: Vec<_> = tag_posts
+            .iter()
+            .map(|(id, post)| {
+                let mut post_context = serde_json::to_value(post).unwrap();
+                let base_path = self.config.base_path.as_deref().unwrap_or("");
+                post_context["url"] = serde_json::Value::String(format!("{}/posts/{}.html", base_path, post.slug));
+                post_context["content_html"] = serde_json::Value::String(markdown_to_html(&post.content));
+                post_context["storage_id"] = serde_json::Value::String(id.clone());
+                post_context
+            })
+            .collect();
+
+        let mut context = Context::new();
+        context.insert("site", &self.config);
+        context.insert("posts", &posts_data);
+        context.insert("tag", tag);
+        context.insert("title", &format!("Posts tagged '{}'", tag));
+
+        // Create tag directory with index.html for clean URLs
+        let tag_dir = self.output_dir.join("tags").join(tag);
+        fs::create_dir_all(&tag_dir)?;
+        
+        let rendered = self.tera.render("tag_posts.html", &context)?;
+        let output_path = tag_dir.join("index.html");
+        fs::write(output_path, rendered)?;
 
         Ok(())
     }

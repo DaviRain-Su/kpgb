@@ -200,6 +200,8 @@ fn render_template(name: &str, context: &Context) -> Result<String, StatusCode> 
         ("post.html", include_str!("../../templates/post.html")),
         ("archive.html", include_str!("../../templates/archive.html")),
         ("search.html", include_str!("../../templates/search.html")),
+        ("tags.html", include_str!("../../templates/tags.html")),
+        ("tag_posts.html", include_str!("../../templates/tag_posts.html")),
     ])
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
@@ -267,6 +269,74 @@ pub async fn rss_feed(State(state): State<Arc<AppState>>) -> Result<impl IntoRes
         [("content-type", "application/rss+xml")],
         channel.to_string(),
     ))
+}
+
+pub async fn tags(State(state): State<Arc<AppState>>) -> Result<Html<String>, StatusCode> {
+    let tags = state
+        .blog_manager
+        .get_all_tags()
+        .await
+        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+
+    let mut context = Context::new();
+    // Strip base_path for web server templates
+    let mut site_config = state.site_config.clone();
+    site_config.base_path = None;
+    context.insert("site", &site_config);
+    
+    let tag_data: Vec<_> = tags
+        .into_iter()
+        .map(|(name, count)| {
+            let mut tag_map = serde_json::Map::new();
+            tag_map.insert("name".to_string(), serde_json::Value::String(name.clone()));
+            tag_map.insert("count".to_string(), serde_json::Value::Number(count.into()));
+            tag_map.insert("url".to_string(), serde_json::Value::String(format!("/tags/{}", name)));
+            serde_json::Value::Object(tag_map)
+        })
+        .collect();
+    
+    context.insert("tags", &tag_data);
+    context.insert("title", "Tags");
+
+    let html = render_template("tags.html", &context)?;
+
+    Ok(Html(html))
+}
+
+pub async fn tag_posts(
+    State(state): State<Arc<AppState>>,
+    Path(tag): Path<String>,
+) -> Result<Html<String>, StatusCode> {
+    let posts = state
+        .blog_manager
+        .get_posts_by_tag(&tag, true)
+        .await
+        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+
+    let posts_data: Vec<_> = posts
+        .iter()
+        .map(|(id, post)| {
+            let mut post_context = serde_json::to_value(post).unwrap();
+            post_context["url"] = serde_json::Value::String(format!("/posts/{}", post.slug));
+            post_context["content_html"] =
+                serde_json::Value::String(markdown_to_html(&post.content));
+            post_context["storage_id"] = serde_json::Value::String(id.clone());
+            post_context
+        })
+        .collect();
+
+    let mut context = Context::new();
+    // Strip base_path for web server templates
+    let mut site_config = state.site_config.clone();
+    site_config.base_path = None;
+    context.insert("site", &site_config);
+    context.insert("posts", &posts_data);
+    context.insert("tag", &tag);
+    context.insert("title", &format!("Posts tagged '{}'", tag));
+
+    let html = render_template("tag_posts.html", &context)?;
+
+    Ok(Html(html))
 }
 
 // Redirect handlers for backward compatibility

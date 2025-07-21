@@ -88,4 +88,12 @@ impl BlogManager {
     pub async fn search_posts(&self, query: &str) -> Result<Vec<(String, BlogPost)>> {
         self.database.search_posts(query).await
     }
+
+    pub async fn get_all_tags(&self) -> Result<Vec<(String, i64)>> {
+        self.database.get_all_tags().await
+    }
+
+    pub async fn get_posts_by_tag(&self, tag: &str, published_only: bool) -> Result<Vec<(String, BlogPost)>> {
+        self.database.get_posts_by_tag(tag, published_only).await
+    }
 }

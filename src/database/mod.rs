@@ -258,4 +258,94 @@ impl Database {
 
         Ok(results)
     }
+
+    pub async fn get_all_tags(&self) -> Result<Vec<(String, i64)>> {
+        let rows = sqlx::query(
+            r#"
+            SELECT t.name, COUNT(pt.post_id) as post_count
+            FROM tags t
+            LEFT JOIN post_tags pt ON t.id = pt.tag_id
+            LEFT JOIN posts p ON pt.post_id = p.id
+            WHERE p.published = 1 OR p.published IS NULL
+            GROUP BY t.id, t.name
+            ORDER BY post_count DESC, t.name ASC
+            "#,
+        )
+        .fetch_all(&self.pool)
+        .await?;
+
+        let mut results = Vec::new();
+        for row in rows {
+            let name: String = row.get("name");
+            let count: i64 = row.get("post_count");
+            results.push((name, count));
+        }
+
+        Ok(results)
+    }
+
+    pub async fn get_posts_by_tag(&self, tag: &str, published_only: bool) -> Result<Vec<(String, BlogPost)>> {
+        let query = if published_only {
+            r#"
+            SELECT p.id, p.title, p.slug, p.content, p.excerpt, p.author,
+                   p.created_at, p.updated_at, p.published, p.category, p.storage_id, p.content_hash
+            FROM posts p
+            JOIN post_tags pt ON p.id = pt.post_id
+            JOIN tags t ON pt.tag_id = t.id
+            WHERE t.name = ?1 AND p.published = 1
+            ORDER BY p.created_at DESC
+            "#
+        } else {
+            r#"
+            SELECT p.id, p.title, p.slug, p.content, p.excerpt, p.author,
+                   p.created_at, p.updated_at, p.published, p.category, p.storage_id, p.content_hash
+            FROM posts p
+            JOIN post_tags pt ON p.id = pt.post_id
+            JOIN tags t ON pt.tag_id = t.id
+            WHERE t.name = ?1
+            ORDER BY p.created_at DESC
+            "#
+        };
+
+        let rows = sqlx::query(query).bind(tag).fetch_all(&self.pool).await?;
+
+        let mut results = Vec::new();
+        for row in rows {
+            let mut post = BlogPost {
+                id: row.get("id"),
+                title: row.get("title"),
+                slug: row.get("slug"),
+                content: row.get("content"),
+                excerpt: row.get("excerpt"),
+                author: row.get("author"),
+                created_at: row.get("created_at"),
+                updated_at: row.get("updated_at"),
+                published: row.get("published"),
+                tags: Vec::new(),
+                category: row.get("category"),
+                storage_id: Some(row.get("storage_id")),
+                content_hash: row.get("content_hash"),
+            };
+
+            let storage_id = post.storage_id.clone().unwrap_or_default();
+
+            // Load all tags for this post
+            let tags: Vec<String> = sqlx::query_scalar(
+                r#"
+                SELECT t.name
+                FROM tags t
+                JOIN post_tags pt ON t.id = pt.tag_id
+                WHERE pt.post_id = ?1
+                "#,
+            )
+            .bind(&post.id)
+            .fetch_all(&self.pool)
+            .await?;
+
+            post.tags = tags;
+            results.push((storage_id, post));
+        }
+
+        Ok(results)
+    }
 }

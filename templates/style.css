@@ -217,6 +217,79 @@ main {
     text-decoration: underline;
 }
 
+/* Tag Pages */
+.tags-page h1,
+.tag-posts h1 {
+    margin-bottom: 1rem;
+}
+
+.tags-description,
+.tag-posts-description {
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.tag-item {
+    display: inline-block;
+}
+
+.tag-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #ecf0f1;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #34495e;
+    transition: all 0.3s ease;
+}
+
+.tag-link:hover {
+    background-color: #3498db;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tag-name {
+    font-weight: 500;
+}
+
+.tag-count {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.tag {
+    text-decoration: none;
+}
+
+.tag:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.back-nav {
+    margin-top: 3rem;
+}
+
+.back-nav a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.back-nav a:hover {
+    text-decoration: underline;
+}
+
 /* Archive */
 .archive h1 {
     margin-bottom: 2rem;

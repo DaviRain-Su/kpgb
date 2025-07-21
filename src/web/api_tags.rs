@@ -1,40 +1,57 @@
 use crate::web::AppState;
 use axum::{
-    extract::{Path, State},
+    extract::{Path, Query, State},
     http::StatusCode,
     response::Json,
 };
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 
-#[derive(Serialize)]
-pub struct ApiResponse<T> {
-    pub(crate) success: bool,
-    pub(crate) data: Option<T>,
-    pub(crate) error: Option<String>,
-}
+use crate::web::api::{ApiResponse, PostSummary};
 
 #[derive(Serialize)]
-pub struct PostSummary {
-    pub(crate) id: String,
-    pub(crate) storage_id: String,
-    pub(crate) title: String,
-    pub(crate) author: String,
-    pub(crate) created_at: String,
-    pub(crate) published: bool,
-    pub(crate) tags: Vec<String>,
-    pub(crate) excerpt: Option<String>,
+pub struct TagInfo {
+    name: String,
+    post_count: i64,
 }
 
 #[derive(Deserialize)]
-pub struct SearchRequest {
-    query: String,
+pub struct TagQuery {
+    tag: Option<String>,
 }
 
-pub async fn list_posts(
+pub async fn list_tags(
     State(state): State<Arc<AppState>>,
+) -> Result<Json<ApiResponse<Vec<TagInfo>>>, StatusCode> {
+    match state.blog_manager.get_all_tags().await {
+        Ok(tags) => {
+            let tag_infos: Vec<TagInfo> = tags
+                .into_iter()
+                .map(|(name, count)| TagInfo {
+                    name,
+                    post_count: count,
+                })
+                .collect();
+
+            Ok(Json(ApiResponse {
+                success: true,
+                data: Some(tag_infos),
+                error: None,
+            }))
+        }
+        Err(e) => Ok(Json(ApiResponse {
+            success: false,
+            data: None,
+            error: Some(e.to_string()),
+        })),
+    }
+}
+
+pub async fn get_posts_by_tag(
+    State(state): State<Arc<AppState>>,
+    Path(tag): Path<String>,
 ) -> Result<Json<ApiResponse<Vec<PostSummary>>>, StatusCode> {
-    match state.blog_manager.list_posts(true).await {
+    match state.blog_manager.get_posts_by_tag(&tag, true).await {
         Ok(posts) => {
             let summaries: Vec<PostSummary> = posts
                 .into_iter()
@@ -64,36 +81,19 @@ pub async fn list_posts(
     }
 }
 
-pub async fn get_post(
+pub async fn list_posts_with_tag_filter(
     State(state): State<Arc<AppState>>,
-    Path(id): Path<String>,
-) -> Result<Json<ApiResponse<serde_json::Value>>, StatusCode> {
-    match state.blog_manager.get_post(&id).await {
-        Ok(post) => {
-            let mut post_json = serde_json::to_value(&post).unwrap();
-            post_json["storage_id"] = serde_json::Value::String(id);
-
-            Ok(Json(ApiResponse {
-                success: true,
-                data: Some(post_json),
-                error: None,
-            }))
-        }
-        Err(e) => Ok(Json(ApiResponse {
-            success: false,
-            data: None,
-            error: Some(e.to_string()),
-        })),
-    }
-}
-
-pub async fn search_posts(
-    State(state): State<Arc<AppState>>,
-    Json(req): Json<SearchRequest>,
+    Query(params): Query<TagQuery>,
 ) -> Result<Json<ApiResponse<Vec<PostSummary>>>, StatusCode> {
-    match state.blog_manager.search_posts(&req.query).await {
-        Ok(results) => {
-            let summaries: Vec<PostSummary> = results
+    let posts = if let Some(tag) = params.tag {
+        state.blog_manager.get_posts_by_tag(&tag, true).await
+    } else {
+        state.blog_manager.list_posts(true).await
+    };
+
+    match posts {
+        Ok(posts) => {
+            let summaries: Vec<PostSummary> = posts
                 .into_iter()
                 .map(|(storage_id, post)| PostSummary {
                     id: post.id,
