@@ -5,6 +5,7 @@
 
 mod blog;
 mod database;
+mod docs;
 mod frontmatter;
 mod models;
 mod site;

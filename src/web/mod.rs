@@ -26,6 +26,7 @@ pub fn create_app(state: Arc<AppState>) -> Router {
         .route("/search", get(handlers::search))
         .route("/tags", get(handlers::tags))
         .route("/tags/:tag", get(handlers::tag_posts))
+        .route("/docs", get(handlers::docs))
         // API routes
         .route("/api/posts", get(api::list_posts))
         .route("/api/posts/:id", get(api::get_post))

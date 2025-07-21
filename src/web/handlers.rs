@@ -205,6 +205,15 @@ pub async fn style_css(State(state): State<Arc<AppState>>) -> impl IntoResponse 
     (StatusCode::OK, [("content-type", "text/css")], css_content)
 }
 
+pub async fn docs(State(state): State<Arc<AppState>>) -> Result<Html<String>, StatusCode> {
+    let mut context = Context::new();
+    context.insert("site", &state.site_config);
+    context.insert("page_title", "技术文档中心");
+
+    let rendered = render_template("docs.html", &context)?;
+    Ok(Html(rendered))
+}
+
 fn render_template(name: &str, context: &Context) -> Result<String, StatusCode> {
     let mut tera = tera::Tera::default();
     tera.add_raw_templates(vec![
@@ -218,6 +227,7 @@ fn render_template(name: &str, context: &Context) -> Result<String, StatusCode> 
             "tag_posts.html",
             include_str!("../../templates/tag_posts.html"),
         ),
+        ("docs.html", include_str!("../../templates/docs.html")),
     ])
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 

@@ -39,6 +39,7 @@ impl SiteGenerator {
                 "tag_posts.html",
                 include_str!("../../templates/tag_posts.html"),
             ),
+            ("docs.html", include_str!("../../templates/docs.html")),
         ])?;
 
         Ok(Self {
@@ -95,6 +96,9 @@ impl SiteGenerator {
 
         // Generate tag pages
         self.generate_tag_pages(&posts).await?;
+
+        // Generate docs page
+        self.generate_docs_page().await?;
 
         println!(
             "✅ Site generated successfully in: {}",
@@ -473,5 +477,25 @@ fn sanitize_slug(slug: &str) -> String {
         format!("post-{}", chrono::Utc::now().timestamp())
     } else {
         sanitized
+    }
+}
+
+impl SiteGenerator {
+    async fn generate_docs_page(&self) -> Result<()> {
+        let mut context = Context::new();
+        context.insert("site", &self.config);
+        context.insert("page_title", "技术文档中心");
+
+        let html = self.tera.render("docs.html", &context)?;
+
+        let docs_path = self.output_dir.join("docs");
+        fs::create_dir_all(&docs_path)?;
+        fs::write(docs_path.join("index.html"), html)?;
+
+        // Also create docs.html for compatibility
+        let html = self.tera.render("docs.html", &context)?;
+        fs::write(self.output_dir.join("docs.html"), html)?;
+
+        Ok(())
     }
 }

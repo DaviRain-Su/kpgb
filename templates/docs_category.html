@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="docs-layout">
+    <aside class="docs-sidebar">
+        <h3>文档分类</h3>
+        <ul class="docs-nav">
+            {% for cat in categories %}
+            <li class="{% if cat.id == category.id %}active{% endif %}">
+                <a href="{{ site.base_path | default(value="") }}/docs/{{ cat.slug }}">
+                    {{ cat.name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </aside>
+
+    <main class="docs-content">
+        <div class="category-header">
+            <h1>{{ category.name }}</h1>
+            <p>{{ category.description }}</p>
+        </div>
+
+        <div class="sections-list">
+            {% for section in sections %}
+            <article class="section-item">
+                <h2>
+                    <a href="{{ site.base_path | default(value="") }}/docs/detail/{{ section.slug }}">
+                        {{ section.title }}
+                    </a>
+                </h2>
+                {% if section.is_translated %}
+                <span class="translation-badge">已翻译</span>
+                {% else %}
+                <span class="translation-badge pending">待翻译</span>
+                {% endif %}
+                
+                {% if section.source_url %}
+                <a href="{{ section.source_url }}" target="_blank" class="source-link">
+                    查看原文
+                </a>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+    </main>
+</div>
+
+<style>
+.docs-layout {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.docs-sidebar {
+    width: 250px;
+    flex-shrink: 0;
+}
+
+.docs-sidebar h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.docs-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.docs-nav li {
+    margin-bottom: 0.5rem;
+}
+
+.docs-nav li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #666;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.docs-nav li a:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.docs-nav li.active a {
+    background-color: #0066cc;
+    color: white;
+}
+
+.docs-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.category-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.category-header h1 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.category-header p {
+    color: #666;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.sections-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.section-item {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    position: relative;
+}
+
+.section-item h2 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+.section-item h2 a {
+    color: #333;
+    text-decoration: none;
+}
+
+.section-item h2 a:hover {
+    color: #0066cc;
+    text-decoration: underline;
+}
+
+.translation-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 20px;
+    background: #4caf50;
+    color: white;
+    margin-right: 1rem;
+}
+
+.translation-badge.pending {
+    background: #ff9800;
+}
+
+.source-link {
+    color: #0066cc;
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.source-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .docs-layout {
+        flex-direction: column;
+    }
+    
+    .docs-sidebar {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+}
+</style>
+{% endblock %}

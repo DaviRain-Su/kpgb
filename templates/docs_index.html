@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="docs-container">
+    <h1>技术文档中心</h1>
+    <p class="docs-description">
+        这里收集了各种优秀开源项目的中文文档，帮助中文开发者更好地学习和使用这些工具。
+    </p>
+
+    <div class="docs-grid">
+        {% for category in categories %}
+        <div class="doc-card">
+            {% if category.icon %}
+            <div class="doc-icon">{{ category.icon }}</div>
+            {% endif %}
+            <h2><a href="{{ site.base_path | default(value="") }}/docs/{{ category.slug }}">{{ category.name }}</a></h2>
+            <p>{{ category.description }}</p>
+            <a href="{{ site.base_path | default(value="") }}/docs/{{ category.slug }}" class="doc-link">
+                查看文档 →
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="docs-contribute">
+        <h3>贡献文档</h3>
+        <p>
+            如果你想要添加新的项目文档或改进现有翻译，请使用 
+            <code>cargo run -- translate &lt;url&gt;</code> 命令来翻译文档。
+        </p>
+    </div>
+</div>
+
+<style>
+.docs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.docs-description {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+.docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.doc-card {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.doc-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.doc-card h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.doc-card h2 a {
+    color: #333;
+    text-decoration: none;
+}
+
+.doc-card h2 a:hover {
+    color: #0066cc;
+}
+
+.doc-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.doc-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.doc-link:hover {
+    text-decoration: underline;
+}
+
+.docs-contribute {
+    background: #e8f4f8;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.docs-contribute code {
+    background: #333;
+    color: #fff;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: monospace;
+}
+</style>
+{% endblock %}
