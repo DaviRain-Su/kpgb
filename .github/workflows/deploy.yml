@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   workflow_dispatch: # 允许手动触发
 
 # 设置 GITHUB_TOKEN 的权限
@@ -14,7 +14,7 @@ permissions:
 # 只允许一个并发部署
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   # 构建任务
@@ -23,13 +23,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Setup Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           override: true
-          
+
       - name: Cache Rust dependencies
         uses: actions/cache@v3
         with:
@@ -38,7 +38,7 @@ jobs:
             ~/.cargo/git
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          
+
       - name: Setup production config
         run: |
           # Check if site.prod.toml exists, otherwise create default
@@ -58,25 +58,25 @@ jobs:
           theme = "default"
           EOL
           fi
-          
+
           # Update base_url and base_path in production config to match GitHub Pages
           sed -i "s|base_url = .*|base_url = \"https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}\"|" site.prod.toml
           sed -i "s|base_path = .*|base_path = \"/${{ github.event.repository.name }}\"|" site.prod.toml
-          
+
       - name: Build project
         run: cargo build --release
-        
+
       - name: Generate static site
         run: |
           # 使用生产配置生成静态网站
           cargo run -- generate --config site.prod.toml
-          
+
       - name: Add .nojekyll
         run: touch public/.nojekyll
-        
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
