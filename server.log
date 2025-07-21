@@ -1,0 +1,52 @@
+   Compiling kpgb v0.1.0 (/Users/davirian/dev/kpgb)
+warning: unused import: `Response`
+ --> src/web/handlers.rs:3:36
+  |
+3 |     response::{Html, IntoResponse, Response},
+  |                                    ^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: method `update_content` is never used
+  --> src/models/mod.rs:61:12
+   |
+21 | impl BlogPost {
+   | ------------- method in this implementation
+...
+61 |     pub fn update_content(&mut self, new_content: String) {
+   |            ^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: methods `delete` and `list` are never used
+  --> src/storage/mod.rs:35:14
+   |
+28 | pub trait Storage: Send + Sync {
+   |           ------- methods in this trait
+...
+35 |     async fn delete(&self, id: &str) -> Result<()>;
+   |              ^^^^^^
+36 |     
+37 |     async fn list(&self, prefix: Option<&str>) -> Result<Vec<StorageMetadata>>;
+   |              ^^^^
+
+warning: method `update_post` is never used
+  --> src/blog/mod.rs:57:18
+   |
+12 | impl BlogManager {
+   | ---------------- method in this implementation
+...
+57 |     pub async fn update_post(&mut self, _storage_id: &str, mut post: BlogPost) -> Result<String> {
+   |                  ^^^^^^^^^^^
+
+warning: `kpgb` (bin "kpgb") generated 4 warnings (run `cargo fix --bin "kpgb"` to apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.33s
+     Running `/Users/davirian/.target/debug/kpgb serve --port 4001`
+[2m2025-07-21T01:08:31.431059Z[0m [32m INFO[0m [2mkpgb[0m[2m:[0m IPFS storage backend configured
+🌐 Starting web server...
+🔗 Visit http://localhost:4001
+🔍 Search: http://localhost:4001/search
+📚 Archive: http://localhost:4001/archive
+📡 API: http://localhost:4001/api/posts
+❌ Press Ctrl+C to stop
+[2m2025-07-21T01:08:31.439520Z[0m [32m INFO[0m [2mkpgb::web::server[0m[2m:[0m 🚀 Web server starting on http://127.0.0.1:4001

@@ -184,3 +184,48 @@ fn markdown_to_html(markdown: &str) -> String {
 }
 
 use chrono::Datelike;
+use rss::{ChannelBuilder, ItemBuilder};
+
+pub async fn rss_feed(
+    State(state): State<Arc<AppState>>,
+) -> Result<impl IntoResponse, StatusCode> {
+    let posts = state.blog_manager.list_posts(true).await
+        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+    
+    let mut items = Vec::new();
+    
+    // Take the 20 most recent posts
+    let recent_posts: Vec<_> = posts.into_iter().take(20).collect();
+    
+    for (storage_id, post) in recent_posts {
+        let link = format!("{}/posts/{}", state.site_config.base_url, post.slug);
+        let content_html = markdown_to_html(&post.content);
+        
+        let item = ItemBuilder::default()
+            .title(Some(post.title))
+            .link(Some(link))
+            .description(Some(content_html))
+            .author(Some(post.author))
+            .pub_date(Some(post.created_at.to_rfc2822()))
+            .guid(Some(rss::Guid {
+                value: storage_id,
+                permalink: false,
+            }))
+            .build();
+        
+        items.push(item);
+    }
+    
+    let channel = ChannelBuilder::default()
+        .title(&state.site_config.title)
+        .link(&state.site_config.base_url)
+        .description(&state.site_config.description)
+        .items(items)
+        .build();
+    
+    Ok((
+        StatusCode::OK,
+        [("content-type", "application/rss+xml")],
+        channel.to_string(),
+    ))
+}
