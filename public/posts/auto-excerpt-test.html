@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Excerpt Test - Anonymous IPFS Blog</title>
+    <meta name="description" content="A decentralized blog powered by IPFS">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="/feed.xml">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1><a href="/">Anonymous IPFS Blog</a></h1>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/archive">Archive</a></li>
+                    <li><a href="/tags">Tags</a></li>
+                    <li><a href="/feed.xml">RSS</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            
+<article class="post">
+    <header>
+        <h1>Auto Excerpt Test</h1>
+        <div class="post-meta">
+            <span class="author">By Developer</span>
+            <span class="date">2025-07-21 08:45</span>
+            
+            <span class="category">Development</span>
+            
+        </div>
+        
+        <div class="tags">
+            
+            <a href="/tags/features" class="tag">features</a>
+            
+            <a href="/tags/test" class="tag">test</a>
+            
+        </div>
+        
+    </header>
+
+    <div class="post-content">
+        <h1>Introduction to Auto Excerpts</h1>
+<p>This post demonstrates the new automatic excerpt generation feature in KPGB. The excerpt should be generated from the first paragraph of the content, stripping markdown formatting while preserving readability.</p>
+<h2>How It Works</h2>
+<p>The system now automatically generates excerpts when:</p>
+<ol>
+<li>No excerpt is provided in the frontmatter</li>
+<li>The content needs to be summarized for list views</li>
+<li>Clean, readable text is needed without HTML</li>
+</ol>
+<h3>Technical Details</h3>
+<p>The excerpt generator uses <strong>pulldown-cmark</strong> to parse markdown and extract plain text. It handles:</p>
+<ul>
+<li><strong>Bold</strong> and <em>italic</em> text</li>
+<li>Lists and nested structures</li>
+<li>Code blocks (which are excluded from excerpts)</li>
+<li>Links and other formatting</li>
+</ul>
+<pre><code class="language-rust">// This code block won't appear in the excerpt
+fn generate_excerpt(markdown: &amp;str) -&gt; String {
+    // Implementation details...
+}
+</code></pre>
+<h2>Benefits</h2>
+<p>The automatic excerpt generation provides several benefits:</p>
+<ul>
+<li>Consistent formatting across all posts</li>
+<li>Better readability in list views</li>
+<li>Reduced manual work for authors</li>
+<li>SEO-friendly summaries</li>
+</ul>
+<p>This feature enhances the overall user experience by providing clear, concise previews of each post without requiring authors to manually write excerpts.</p>
+
+    </div>
+
+    <footer class="post-footer">
+        <div class="post-info">
+            <p><strong>Storage ID:</strong> <code>Qmf29xVBTuy2eUFHHtZQecxBdQDNxLEkWZeQULFS9QArst</code></p>
+            
+            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;Qmf29xVBTuy2eUFHHtZQecxBdQDNxLEkWZeQULFS9QArst" target="_blank">View on IPFS</a></p>
+            
+            <p><strong>Content Hash:</strong> <code>b70d1a038bd4c4a40537f4c5ce052452d072c6f87de625a59e4e14ce2dd7f37e</code></p>
+        </div>
+        <nav class="post-nav">
+            <a href="/archive.html">← Back to Archive</a>
+        </nav>
+    </footer>
+</article>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Anonymous. Powered by IPFS & KPGB.</p>
+            <p>A decentralized blog powered by IPFS</p>
+        </div>
+    </footer>
+</body>
+</html>

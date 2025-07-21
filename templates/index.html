@@ -17,7 +17,9 @@
             {% endif %}
         </div>
         <div class="post-content">
-            {% if post.excerpt %}
+            {% if post.excerpt_html %}
+                {{ post.excerpt_html | safe }}
+            {% elif post.excerpt %}
                 {{ post.excerpt }}
             {% else %}
                 {{ post.content_html | truncate(length=300) | safe }}

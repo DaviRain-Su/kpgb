@@ -8,6 +8,7 @@ mod frontmatter;
 mod models;
 mod site;
 mod storage;
+mod utils;
 mod web;
 
 use anyhow::Result;
@@ -173,15 +174,19 @@ async fn main() -> Result<()> {
                 };
 
                 let mut post =
-                    BlogPost::new(final_title.clone(), clean_content, final_author.clone());
+                    BlogPost::new(final_title.clone(), clean_content.clone(), final_author.clone());
                 post.tags = fm.tags;
                 post.category = fm.category;
-                post.excerpt = fm.excerpt;
+                post.excerpt = fm.excerpt.or_else(|| {
+                    Some(crate::utils::generate_excerpt(&clean_content, 50))
+                });
 
                 post
             } else {
                 // No frontmatter, use CLI args and full content
-                BlogPost::new(title.clone(), content_text, author)
+                let mut post = BlogPost::new(title.clone(), content_text.clone(), author);
+                post.excerpt = Some(crate::utils::generate_excerpt(&content_text, 50));
+                post
             };
 
             let storage_id = blog_manager.create_post(post).await?;
