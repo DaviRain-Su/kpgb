@@ -96,7 +96,7 @@ impl Storage for IpfsStorage {
 
         Ok(StorageResult {
             id: cid.clone(),
-            url: Some(format!("ipfs://{}", cid)),
+            url: Some(format!("ipfs://{cid}")),
             metadata: StorageMetadata {
                 id: cid,
                 hash: hash_str,

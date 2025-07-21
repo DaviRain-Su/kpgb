@@ -1,4 +1,3 @@
-#[allow(clippy::uninlined_format_args)]
 mod blog;
 mod database;
 mod models;
@@ -148,8 +147,8 @@ async fn main() -> Result<()> {
             let storage_id = blog_manager.create_post(post).await?;
 
             println!("✅ Post created successfully!");
-            println!("Storage ID: {}", storage_id);
-            println!("Title: {}", title);
+            println!("Storage ID: {storage_id}");
+            println!("Title: {title}");
         }
 
         Commands::List { published } => {
@@ -161,7 +160,7 @@ async fn main() -> Result<()> {
                 println!("📝 Blog Posts:");
                 println!("{:-<80}", "");
                 for (storage_id, post) in posts {
-                    println!("ID: {}", storage_id);
+                    println!("ID: {storage_id}");
                     println!("Title: {}", post.title);
                     println!("Author: {}", post.author);
                     println!("Created: {}", post.created_at.format("%Y-%m-%d %H:%M"));
@@ -197,12 +196,12 @@ async fn main() -> Result<()> {
             let results = blog_manager.search_posts(&query).await?;
 
             if results.is_empty() {
-                println!("No posts found matching '{}'", query);
+                println!("No posts found matching '{query}'");
             } else {
-                println!("🔍 Search results for '{}':", query);
+                println!("🔍 Search results for '{query}':");
                 println!("{:-<80}", "");
                 for (storage_id, post) in results {
-                    println!("ID: {}", storage_id);
+                    println!("ID: {storage_id}");
                     println!("Title: {}", post.title);
                     println!("Author: {}", post.author);
                     println!("{:-<80}", "");
@@ -232,7 +231,7 @@ async fn main() -> Result<()> {
             println!("✅ Stored successfully!");
             println!("ID: {}", result.id);
             if let Some(url) = result.url {
-                println!("URL: {}", url);
+                println!("URL: {url}");
             }
 
             let retrieved = storage.retrieve(&result.id).await?;
@@ -240,7 +239,7 @@ async fn main() -> Result<()> {
             println!("Content: {}", String::from_utf8_lossy(&retrieved));
 
             let exists = storage.exists(&result.id).await?;
-            println!("✅ Exists check: {}", exists);
+            println!("✅ Exists check: {exists}");
         }
 
         Commands::Generate { output } => {
@@ -263,10 +262,10 @@ async fn main() -> Result<()> {
             let server = web::server::WebServer::new(blog_manager, config, port);
 
             println!("🌐 Starting web server...");
-            println!("🔗 Visit http://localhost:{}", port);
-            println!("🔍 Search: http://localhost:{}/search", port);
-            println!("📚 Archive: http://localhost:{}/archive", port);
-            println!("📡 API: http://localhost:{}/api/posts", port);
+            println!("🔗 Visit http://localhost:{port}");
+            println!("🔍 Search: http://localhost:{port}/search");
+            println!("📚 Archive: http://localhost:{port}/archive");
+            println!("📡 API: http://localhost:{port}/api/posts");
             println!("❌ Press Ctrl+C to stop");
 
             server.run().await?;
