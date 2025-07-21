@@ -75,9 +75,11 @@ pub async fn post(
         .await
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
+    // Find post by slug, preferring ones with tags if there are duplicates
     let post_data = posts
         .iter()
-        .find(|(_, p)| p.slug == slug)
+        .filter(|(_, p)| p.slug == slug)
+        .max_by_key(|(_, p)| (p.tags.len(), p.created_at))
         .ok_or(StatusCode::NOT_FOUND)?;
 
     let (storage_id, post) = post_data;
