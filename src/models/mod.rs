@@ -62,7 +62,7 @@ impl BlogPost {
             .filter(|s| !s.is_empty())
             .collect::<Vec<_>>()
             .join("-");
-        
+
         // If slug is empty (e.g., all Chinese title), generate a timestamp-based slug
         if slug.is_empty() {
             format!("post-{}", chrono::Utc::now().timestamp())

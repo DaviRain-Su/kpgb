@@ -129,22 +129,25 @@ impl SiteGenerator {
                     let base_path = self.config.base_path.as_deref().unwrap_or("");
                     post_context["url"] = serde_json::Value::String(format!(
                         "{}/posts/{}.html",
-                        base_path, sanitize_slug(&post.slug)
+                        base_path,
+                        sanitize_slug(&post.slug)
                     ));
                     post_context["content_html"] =
                         serde_json::Value::String(markdown_to_html(&post.content));
                     post_context["storage_id"] = serde_json::Value::String(id.clone());
-                    
+
                     // Generate excerpt HTML if not provided
                     if post.excerpt.is_none() {
-                        let excerpt_text = crate::utils::generate_formatted_excerpt(&post.content, 300);
-                        post_context["excerpt_html"] = 
+                        let excerpt_text =
+                            crate::utils::generate_formatted_excerpt(&post.content, 300);
+                        post_context["excerpt_html"] =
                             serde_json::Value::String(markdown_to_html(&excerpt_text));
                     } else {
-                        post_context["excerpt_html"] = 
-                            serde_json::Value::String(markdown_to_html(post.excerpt.as_ref().unwrap()));
+                        post_context["excerpt_html"] = serde_json::Value::String(markdown_to_html(
+                            post.excerpt.as_ref().unwrap(),
+                        ));
                     }
-                    
+
                     post_context
                 })
                 .collect();
@@ -217,8 +220,11 @@ impl SiteGenerator {
             let year = post.created_at.year();
             let mut post_context = serde_json::to_value(post).unwrap();
             let base_path = self.config.base_path.as_deref().unwrap_or("");
-            post_context["url"] =
-                serde_json::Value::String(format!("{}/posts/{}.html", base_path, sanitize_slug(&post.slug)));
+            post_context["url"] = serde_json::Value::String(format!(
+                "{}/posts/{}.html",
+                base_path,
+                sanitize_slug(&post.slug)
+            ));
             post_context["storage_id"] = serde_json::Value::String(id.clone());
 
             posts_by_year
@@ -372,22 +378,25 @@ impl SiteGenerator {
                     let base_path = self.config.base_path.as_deref().unwrap_or("");
                     post_context["url"] = serde_json::Value::String(format!(
                         "{}/posts/{}.html",
-                        base_path, sanitize_slug(&post.slug)
+                        base_path,
+                        sanitize_slug(&post.slug)
                     ));
                     post_context["content_html"] =
                         serde_json::Value::String(markdown_to_html(&post.content));
                     post_context["storage_id"] = serde_json::Value::String(id.clone());
-                    
+
                     // Generate excerpt HTML if not provided
                     if post.excerpt.is_none() {
-                        let excerpt_text = crate::utils::generate_formatted_excerpt(&post.content, 300);
-                        post_context["excerpt_html"] = 
+                        let excerpt_text =
+                            crate::utils::generate_formatted_excerpt(&post.content, 300);
+                        post_context["excerpt_html"] =
                             serde_json::Value::String(markdown_to_html(&excerpt_text));
                     } else {
-                        post_context["excerpt_html"] = 
-                            serde_json::Value::String(markdown_to_html(post.excerpt.as_ref().unwrap()));
+                        post_context["excerpt_html"] = serde_json::Value::String(markdown_to_html(
+                            post.excerpt.as_ref().unwrap(),
+                        ));
                     }
-                    
+
                     post_context
                 })
                 .collect();
@@ -458,7 +467,7 @@ fn sanitize_slug(slug: &str) -> String {
         .filter(|s| !s.is_empty())
         .collect::<Vec<_>>()
         .join("-");
-    
+
     // If empty after sanitization, use a default
     if sanitized.is_empty() {
         format!("post-{}", chrono::Utc::now().timestamp())

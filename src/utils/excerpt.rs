@@ -1,7 +1,7 @@
 use pulldown_cmark::{Event, Parser, Tag, TagEnd};
 
 /// Generate an excerpt from markdown content
-/// 
+///
 /// This function:
 /// 1. Strips markdown formatting
 /// 2. Extracts first paragraph or up to word limit
@@ -11,9 +11,9 @@ pub fn generate_excerpt(markdown: &str, word_limit: usize) -> String {
     let mut word_count = 0;
     let mut in_code_block = false;
     let mut in_heading = false;
-    
+
     let parser = Parser::new(markdown);
-    
+
     for event in parser {
         match event {
             Event::Start(tag) => match tag {
@@ -62,25 +62,29 @@ pub fn generate_excerpt(markdown: &str, word_limit: usize) -> String {
             _ => {}
         }
     }
-    
+
     clean_excerpt(&plain_text)
 }
 
 /// Clean up the excerpt text
 fn clean_excerpt(text: &str) -> String {
     let mut result = text.trim().to_string();
-    
+
     // Remove multiple consecutive spaces
     while result.contains("  ") {
         result = result.replace("  ", " ");
     }
-    
+
     // Ensure it ends with proper punctuation or ellipsis
-    if !result.is_empty() && !result.ends_with('.') && !result.ends_with('!') 
-        && !result.ends_with('?') && !result.ends_with("...") {
+    if !result.is_empty()
+        && !result.ends_with('.')
+        && !result.ends_with('!')
+        && !result.ends_with('?')
+        && !result.ends_with("...")
+    {
         result.push_str("...");
     }
-    
+
     result
 }
 
@@ -90,9 +94,9 @@ pub fn generate_formatted_excerpt(markdown: &str, char_limit: usize) -> String {
     let mut char_count = 0;
     let mut in_code_block = false;
     let mut list_level = 0;
-    
+
     let parser = Parser::new(markdown);
-    
+
     for event in parser {
         match event {
             Event::Start(tag) => match tag {
@@ -171,7 +175,7 @@ pub fn generate_formatted_excerpt(markdown: &str, char_limit: usize) -> String {
                         result.push_str("...");
                         break;
                     }
-                    
+
                     if text.len() <= remaining {
                         result.push_str(&text);
                         char_count += text.len();
@@ -196,7 +200,7 @@ pub fn generate_formatted_excerpt(markdown: &str, char_limit: usize) -> String {
             }
             _ => {}
         }
-        
+
         if char_count >= char_limit {
             if !result.ends_with("...") {
                 result.push_str("...");
@@ -204,7 +208,7 @@ pub fn generate_formatted_excerpt(markdown: &str, char_limit: usize) -> String {
             break;
         }
     }
-    
+
     result.trim().to_string()
 }
 
@@ -213,25 +217,29 @@ fn truncate_at_word_boundary(text: &str, max_len: usize) -> String {
     if text.len() <= max_len {
         return text.to_string();
     }
-    
+
     // Work with char indices to avoid UTF-8 boundary issues
     let chars: Vec<char> = text.chars().collect();
     if chars.len() <= max_len {
         return text.to_string();
     }
-    
+
     // Find last space before limit
     let mut boundary = max_len.min(chars.len());
     while boundary > 0 && !chars[boundary - 1].is_whitespace() {
         boundary -= 1;
     }
-    
+
     // If no space found, just truncate at character boundary
     if boundary == 0 {
         boundary = max_len.min(chars.len());
     }
-    
-    chars[..boundary].iter().collect::<String>().trim().to_string()
+
+    chars[..boundary]
+        .iter()
+        .collect::<String>()
+        .trim()
+        .to_string()
 }
 
 #[cfg(test)]

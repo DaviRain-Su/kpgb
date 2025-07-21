@@ -45,17 +45,17 @@ pub async fn index(
             post_context["content_html"] =
                 serde_json::Value::String(markdown_to_html(&post.content));
             post_context["storage_id"] = serde_json::Value::String(id.clone());
-            
+
             // Generate excerpt HTML if not provided
             if post.excerpt.is_none() {
                 let excerpt_text = crate::utils::generate_formatted_excerpt(&post.content, 300);
-                post_context["excerpt_html"] = 
+                post_context["excerpt_html"] =
                     serde_json::Value::String(markdown_to_html(&excerpt_text));
             } else {
-                post_context["excerpt_html"] = 
+                post_context["excerpt_html"] =
                     serde_json::Value::String(markdown_to_html(post.excerpt.as_ref().unwrap()));
             }
-            
+
             post_context
         })
         .collect();
@@ -348,17 +348,17 @@ pub async fn tag_posts(
             post_context["content_html"] =
                 serde_json::Value::String(markdown_to_html(&post.content));
             post_context["storage_id"] = serde_json::Value::String(id.clone());
-            
+
             // Generate excerpt HTML if not provided
             if post.excerpt.is_none() {
                 let excerpt_text = crate::utils::generate_formatted_excerpt(&post.content, 300);
-                post_context["excerpt_html"] = 
+                post_context["excerpt_html"] =
                     serde_json::Value::String(markdown_to_html(&excerpt_text));
             } else {
-                post_context["excerpt_html"] = 
+                post_context["excerpt_html"] =
                     serde_json::Value::String(markdown_to_html(post.excerpt.as_ref().unwrap()));
             }
-            
+
             post_context
         })
         .collect();

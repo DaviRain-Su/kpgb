@@ -1,6 +1,7 @@
 #![allow(dead_code)]
 #![allow(clippy::uninlined_format_args)]
 #![allow(clippy::iter_kv_map)]
+#![allow(unused_variables)]
 
 mod blog;
 mod database;
@@ -173,13 +174,16 @@ async fn main() -> Result<()> {
                     fm.author
                 };
 
-                let mut post =
-                    BlogPost::new(final_title.clone(), clean_content.clone(), final_author.clone());
+                let mut post = BlogPost::new(
+                    final_title.clone(),
+                    clean_content.clone(),
+                    final_author.clone(),
+                );
                 post.tags = fm.tags;
                 post.category = fm.category;
-                post.excerpt = fm.excerpt.or_else(|| {
-                    Some(crate::utils::generate_excerpt(&clean_content, 50))
-                });
+                post.excerpt = fm
+                    .excerpt
+                    .or_else(|| Some(crate::utils::generate_excerpt(&clean_content, 50)));
 
                 post
             } else {
