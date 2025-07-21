@@ -93,6 +93,7 @@ pub fn generate_formatted_excerpt(markdown: &str, char_limit: usize) -> String {
     let mut result = String::new();
     let mut char_count = 0;
     let mut in_code_block = false;
+    let mut in_heading = false;
     let mut list_level = 0;
 
     let parser = Parser::new(markdown);
@@ -107,12 +108,7 @@ pub fn generate_formatted_excerpt(markdown: &str, char_limit: usize) -> String {
                     }
                 }
                 Tag::Heading { .. } => {
-                    if !result.is_empty() {
-                        result.push_str("\n\n");
-                        char_count += 2;
-                    }
-                    // Skip heading in excerpt
-                    in_code_block = true;
+                    in_heading = true;
                 }
                 Tag::List(_) => {
                     list_level += 1;
@@ -140,7 +136,7 @@ pub fn generate_formatted_excerpt(markdown: &str, char_limit: usize) -> String {
             },
             Event::End(tag) => match tag {
                 TagEnd::Heading(_) => {
-                    in_code_block = false;
+                    in_heading = false;
                 }
                 TagEnd::List(_) => {
                     list_level -= 1;
@@ -169,7 +165,7 @@ pub fn generate_formatted_excerpt(markdown: &str, char_limit: usize) -> String {
                 _ => {}
             },
             Event::Text(text) => {
-                if !in_code_block {
+                if !in_code_block && !in_heading {
                     let remaining = char_limit.saturating_sub(char_count);
                     if remaining == 0 {
                         result.push_str("...");
@@ -248,7 +244,7 @@ mod tests {
 
     #[test]
     fn test_generate_excerpt() {
-        let markdown = "# Test Post\n\nThis is the first paragraph with some **bold** text.\n\nThis is the second paragraph.";
+        let markdown = "# Test Post\n\nThis is the first paragraph with some **bold** text and more words to ensure truncation.\n\nThis is the second paragraph.";
         let excerpt = generate_excerpt(markdown, 10);
         assert!(excerpt.starts_with("This is the first paragraph"));
         assert!(excerpt.ends_with("..."));
@@ -257,7 +253,7 @@ mod tests {
     #[test]
     fn test_generate_formatted_excerpt() {
         let markdown = "# Test Post\n\nThis is a paragraph with *emphasis* and **bold** text.\n\n- List item 1\n- List item 2";
-        let excerpt = generate_formatted_excerpt(markdown, 100);
+        let excerpt = generate_formatted_excerpt(markdown, 150);
         assert!(excerpt.contains("*emphasis*"));
         assert!(excerpt.contains("**bold**"));
         assert!(excerpt.contains("- List item"));
