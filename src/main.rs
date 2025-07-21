@@ -85,7 +85,7 @@ enum Commands {
         /// Port to listen on
         #[arg(short, long, default_value = "3000")]
         port: u16,
-        
+
         /// Configuration file to use
         #[arg(short, long, default_value = "site.toml")]
         config: String,

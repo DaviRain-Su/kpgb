@@ -163,13 +163,13 @@ impl SiteGenerator {
         context.insert("years", &years);
 
         let rendered = self.tera.render("archive.html", &context)?;
-        
+
         // Create archive directory for clean URLs
         let archive_dir = self.output_dir.join("archive");
         fs::create_dir_all(&archive_dir)?;
         let output_path = archive_dir.join("index.html");
         fs::write(&output_path, &rendered)?;
-        
+
         // Also create archive.html for backward compatibility
         let archive_html_path = self.output_dir.join("archive.html");
         fs::write(archive_html_path, rendered)?;

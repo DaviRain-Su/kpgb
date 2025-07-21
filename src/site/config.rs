@@ -6,7 +6,7 @@ impl SiteConfig {
     pub fn load() -> Result<Self> {
         Self::load_from("site.toml")
     }
-    
+
     pub fn load_from(path: &str) -> Result<Self> {
         // Try to load from specified path, otherwise use defaults
         let config_path = Path::new(path);
