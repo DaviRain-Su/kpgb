@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss version="2.0"><channel><title>Anonymous IPFS Blog</title><link>https://Anonymous.github.io/kpgb</link><description>A decentralized blog powered by IPFS</description><item><title>静态网站生成器完成</title><link>https://Anonymous.github.io/kpgb/posts/静态网站生成器完成.html</link><description><![CDATA[<h1>静态网站生成器完成！</h1>
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0"><channel><title>Anonymous IPFS Blog</title><link>https://DaviRain-Su.github.io/kpgb</link><description>A decentralized blog powered by IPFS</description><item><title>静态网站生成器完成</title><link>https://DaviRain-Su.github.io/kpgb/posts/静态网站生成器完成.html</link><description><![CDATA[<h1>静态网站生成器完成！</h1>
 <p>今天我们成功实现了KPGB的静态网站生成功能。</p>
 <h2>新增功能</h2>
 <h3>1. 模板引擎</h3>
@@ -43,7 +43,7 @@ cargo run -- generate
 <li><strong>RSS</strong> - 订阅源生成</li>
 </ul>
 <p>现在你的博客可以被任何人通过浏览器访问了！</p>
-]]></description><author>Developer</author><guid isPermaLink="false">QmcBX5fvT3v6KjjKUmD2DK7NX81G4EKito1rNNEFs2papD</guid><pubDate>Mon, 21 Jul 2025 00:14:28 +0000</pubDate></item><item><title>Real IPFS Storage Test</title><link>https://Anonymous.github.io/kpgb/posts/real-ipfs-storage-test.html</link><description><![CDATA[<h1>真正的IPFS存储测试</h1>
+]]></description><author>Developer</author><guid isPermaLink="false">QmcBX5fvT3v6KjjKUmD2DK7NX81G4EKito1rNNEFs2papD</guid><pubDate>Mon, 21 Jul 2025 00:14:28 +0000</pubDate></item><item><title>Real IPFS Storage Test</title><link>https://DaviRain-Su.github.io/kpgb/posts/real-ipfs-storage-test.html</link><description><![CDATA[<h1>真正的IPFS存储测试</h1>
 <p>这篇文章将被存储在IPFS网络上！</p>
 <h2>IPFS的优势</h2>
 <ul>
