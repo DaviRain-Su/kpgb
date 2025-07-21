@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 mod blog;
 mod database;
 mod models;
