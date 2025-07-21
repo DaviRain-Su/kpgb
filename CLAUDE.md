@@ -3,9 +3,16 @@
 ## Project Overview
 A fully decentralized personal blog system where all content is stored on IPFS (InterPlanetary File System). The system supports local content indexing for enhanced functionality while maintaining full decentralization. Features both static site generation for GitHub Pages deployment and dynamic web server with API endpoints.
 
+## Recent Updates (2025-07-21)
+- ✅ **Tag System**: Complete tag management with cloud view and filtering
+- ✅ **Pagination**: Clean URL pagination for better navigation
+- ✅ **Auto Excerpts**: Automatic excerpt generation from content
+- ✅ **URL Translation**: English to Chinese translation using Claude API
+- ✅ **ASCII-only Slugs**: Fixed GitHub Pages compatibility issues
+
 ## Current Implementation Status
 
-### ✅ Completed Features (100%)
+### ✅ Completed Features
 
 #### 1. **Pure IPFS Decentralized Blog System**
 - Full IPFS integration using HTTP API
@@ -31,9 +38,9 @@ A fully decentralized personal blog system where all content is stored on IPFS (
 #### 4. **Content Management**
 - Create, publish, and search blog posts
 - Markdown content support with pulldown-cmark
-- Automatic slug generation
+- Automatic slug generation (ASCII-only for GitHub Pages compatibility)
 - Tag and category support
-- Excerpt generation
+- **Automatic excerpt generation** from content
 - Draft/published status management
 
 #### 5. **Static Site Generation**
@@ -69,7 +76,47 @@ A fully decentralized personal blog system where all content is stored on IPFS (
 - Customizable themes
 - Demo page for testing integration
 
-#### 9. **Complete CLI Interface**
+#### 9. **Tag System**
+- Complete tag management with SQLite backend
+- Tag cloud page showing all tags with post counts
+- Tag-filtered post listings
+- API endpoints for tag queries (`/api/tags`, `/api/tags/:tag`)
+- Static generation of tag pages
+- Clean URL structure for tag navigation
+
+#### 10. **Pagination System**
+- Paginated post listings (configurable posts per page)
+- Clean URL structure (`/page/2/`, `/page/3/`)
+- Pagination navigation UI with page numbers
+- Support for both dynamic and static site generation
+- Efficient database queries with LIMIT/OFFSET
+
+#### 11. **URL Content Translation**
+- Fetch and translate web content from English to Chinese
+- Uses Claude API for high-quality translations
+- HTML to text conversion
+- Option to save translations as blog posts
+- Preserves both original and translated content
+- Custom title and author support
+
+### 🚧 Pending Features
+
+#### 1. **Site Search Page Optimization** (功能4)
+- Enhanced search UI/UX
+- Search result highlighting
+- Advanced search filters
+
+#### 2. **Reading Time Estimation** (功能5)
+- Calculate estimated reading time for articles
+- Display reading time in post metadata
+- Support for different reading speeds
+
+#### 3. **Related Articles Recommendation** (功能6)
+- Content-based article recommendations
+- Tag-based similarity matching
+- Display related posts at the end of articles
+
+#### 12. **Complete CLI Interface**
 ```bash
 # Create new post
 cargo run -- new --title "Title" --author "Author" [--content file.md]
@@ -97,6 +144,9 @@ cargo run -- generate [--output ./public]
 
 # Start web server
 cargo run -- serve [--port 9000]
+
+# Translate URL content (English to Chinese)
+cargo run -- translate <url> [--save] [--title "Custom Title"] [--author "Name"]
 
 # Deploy to GitHub Pages
 ./scripts/deploy.sh
@@ -209,6 +259,9 @@ GITHUB_OWNER=your-username
 GITHUB_REPO=your-repo
 GITHUB_BRANCH=main
 GITHUB_TOKEN=your-token
+
+# Claude API Configuration (for translate command)
+ANTHROPIC_API_KEY=your-claude-api-key
 ```
 
 ### Site Configuration (site.toml)
@@ -286,6 +339,18 @@ cargo run -- generate
 # Or start web server
 cargo run -- serve --port 9000
 # Visit http://localhost:9000
+```
+
+### 3.1 Translate web content to Chinese
+```bash
+# Set API key
+export ANTHROPIC_API_KEY="your-api-key"
+
+# Translate and display in console
+cargo run -- translate https://example.com/article
+
+# Translate and save as blog post
+cargo run -- translate https://example.com/article --save --title "翻译文章标题"
 ```
 
 ### 4. Deploy to GitHub Pages
@@ -544,6 +609,7 @@ This system is designed to be the foundation for a decentralized content aggrega
 - **base64**: Encoding for GitHub API
 - **hex**: Hash encoding
 - **dotenv**: Environment management
+- **html2text**: HTML to text conversion for translate command
 
 ## Important Reminders
 
