@@ -9,7 +9,6 @@ use anyhow::Result;
 use clap::{Parser, Subcommand};
 use std::collections::HashMap;
 use tracing::info;
-use tracing_subscriber;
 
 use crate::blog::BlogManager;
 use crate::models::BlogPost;

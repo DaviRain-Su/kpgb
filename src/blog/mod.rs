@@ -58,6 +58,7 @@ impl BlogManager {
         Ok(post)
     }
 
+    #[allow(dead_code)]
     pub async fn update_post(&mut self, _storage_id: &str, mut post: BlogPost) -> Result<String> {
         post.updated_at = chrono::Utc::now();
 

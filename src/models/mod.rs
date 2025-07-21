@@ -59,6 +59,7 @@ impl BlogPost {
         hex::encode(hash)
     }
 
+    #[allow(dead_code)]
     pub fn update_content(&mut self, new_content: String) {
         self.content = new_content;
         self.content_hash = Self::calculate_hash(&self.content);

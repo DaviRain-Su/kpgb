@@ -77,7 +77,7 @@ impl Storage for GitHubStorage {
 
         let response = self
             .client
-            .put(&self.api_url(path))
+            .put(self.api_url(path))
             .header("Authorization", format!("token {}", self.token))
             .header("Accept", "application/vnd.github.v3+json")
             .json(&github_content)
@@ -116,7 +116,7 @@ impl Storage for GitHubStorage {
     async fn retrieve(&self, id: &str) -> Result<Vec<u8>> {
         let response = self
             .client
-            .get(&self.api_url(id))
+            .get(self.api_url(id))
             .header("Authorization", format!("token {}", self.token))
             .header("Accept", "application/vnd.github.v3.raw")
             .send()
@@ -133,7 +133,7 @@ impl Storage for GitHubStorage {
     async fn exists(&self, id: &str) -> Result<bool> {
         let response = self
             .client
-            .head(&self.api_url(id))
+            .head(self.api_url(id))
             .header("Authorization", format!("token {}", self.token))
             .send()
             .await?;
@@ -149,7 +149,7 @@ impl Storage for GitHubStorage {
         let path = prefix.unwrap_or("");
         let response = self
             .client
-            .get(&self.api_url(path))
+            .get(self.api_url(path))
             .header("Authorization", format!("token {}", self.token))
             .header("Accept", "application/vnd.github.v3+json")
             .send()

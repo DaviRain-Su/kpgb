@@ -33,7 +33,7 @@ pub async fn index(
         .await
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
-    let total_pages = (all_posts.len() + posts_per_page - 1) / posts_per_page;
+    let total_pages = all_posts.len().div_ceil(posts_per_page);
     let start = (page - 1) * posts_per_page;
     let end = (start + posts_per_page).min(all_posts.len());
 

@@ -29,7 +29,7 @@ impl IpfsStorage {
             reqwest::multipart::Form::new().part("file", reqwest::multipart::Part::bytes(content));
 
         let response = client
-            .post(&format!("{}/api/v0/add", self.api_url))
+            .post(format!("{}/api/v0/add", self.api_url))
             .multipart(form)
             .send()
             .await?;
@@ -50,7 +50,7 @@ impl IpfsStorage {
         let client = reqwest::Client::builder().no_proxy().build()?;
 
         let response = client
-            .post(&format!("{}/api/v0/cat?arg={}", self.api_url, cid))
+            .post(format!("{}/api/v0/cat?arg={}", self.api_url, cid))
             .send()
             .await?;
 
@@ -65,7 +65,7 @@ impl IpfsStorage {
         let client = reqwest::Client::builder().no_proxy().build()?;
 
         let response = client
-            .post(&format!("{}/api/v0/pin/add?arg={}", self.api_url, cid))
+            .post(format!("{}/api/v0/pin/add?arg={}", self.api_url, cid))
             .send()
             .await?;
 
@@ -119,7 +119,7 @@ impl Storage for IpfsStorage {
         let client = reqwest::Client::builder().no_proxy().build()?;
 
         let response = client
-            .post(&format!("{}/api/v0/object/stat?arg={}", self.api_url, id))
+            .post(format!("{}/api/v0/object/stat?arg={}", self.api_url, id))
             .send()
             .await?;
 
@@ -137,7 +137,7 @@ impl Storage for IpfsStorage {
         let client = reqwest::Client::builder().no_proxy().build()?;
 
         let response = client
-            .post(&format!("{}/api/v0/pin/ls", self.api_url))
+            .post(format!("{}/api/v0/pin/ls", self.api_url))
             .send()
             .await?;
 

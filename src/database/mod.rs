@@ -40,9 +40,9 @@ impl Database {
         .bind(&post.excerpt)
         .bind(&post.author)
         .bind(&post.content_hash)
-        .bind(&post.created_at)
-        .bind(&post.updated_at)
-        .bind(&post.published)
+        .bind(post.created_at)
+        .bind(post.updated_at)
+        .bind(post.published)
         .bind(&post.category)
         .execute(&mut *tx)
         .await?;

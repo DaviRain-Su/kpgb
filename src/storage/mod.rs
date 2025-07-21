@@ -36,8 +36,10 @@ pub trait Storage: Send + Sync {
 
     async fn exists(&self, id: &str) -> Result<bool>;
 
+    #[allow(dead_code)]
     async fn delete(&self, id: &str) -> Result<()>;
 
+    #[allow(dead_code)]
     async fn list(&self, prefix: Option<&str>) -> Result<Vec<StorageMetadata>>;
 
     fn storage_type(&self) -> &'static str;
