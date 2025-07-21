@@ -129,7 +129,7 @@ impl SiteGenerator {
                     let base_path = self.config.base_path.as_deref().unwrap_or("");
                     post_context["url"] = serde_json::Value::String(format!(
                         "{}/posts/{}.html",
-                        base_path, post.slug
+                        base_path, sanitize_slug(&post.slug)
                     ));
                     post_context["content_html"] =
                         serde_json::Value::String(markdown_to_html(&post.content));
@@ -196,7 +196,9 @@ impl SiteGenerator {
         let posts_dir = self.output_dir.join("posts");
         fs::create_dir_all(&posts_dir)?;
 
-        let output_path = posts_dir.join(format!("{}.html", post.slug));
+        // Sanitize slug for file name (remove non-ASCII characters)
+        let safe_slug = sanitize_slug(&post.slug);
+        let output_path = posts_dir.join(format!("{}.html", safe_slug));
         fs::write(output_path, rendered)?;
 
         Ok(())
@@ -216,7 +218,7 @@ impl SiteGenerator {
             let mut post_context = serde_json::to_value(post).unwrap();
             let base_path = self.config.base_path.as_deref().unwrap_or("");
             post_context["url"] =
-                serde_json::Value::String(format!("{}/posts/{}.html", base_path, post.slug));
+                serde_json::Value::String(format!("{}/posts/{}.html", base_path, sanitize_slug(&post.slug)));
             post_context["storage_id"] = serde_json::Value::String(id.clone());
 
             posts_by_year
@@ -370,7 +372,7 @@ impl SiteGenerator {
                     let base_path = self.config.base_path.as_deref().unwrap_or("");
                     post_context["url"] = serde_json::Value::String(format!(
                         "{}/posts/{}.html",
-                        base_path, post.slug
+                        base_path, sanitize_slug(&post.slug)
                     ));
                     post_context["content_html"] =
                         serde_json::Value::String(markdown_to_html(&post.content));
@@ -438,4 +440,29 @@ fn markdown_to_html(markdown: &str) -> String {
     html::push_html(&mut html_output, parser);
 
     html_output
+}
+
+/// Sanitize slug to only contain ASCII characters for file names
+fn sanitize_slug(slug: &str) -> String {
+    let sanitized = slug
+        .chars()
+        .map(|c| {
+            if c.is_ascii_alphanumeric() || c == '-' || c == '_' {
+                c
+            } else {
+                '-'
+            }
+        })
+        .collect::<String>()
+        .split('-')
+        .filter(|s| !s.is_empty())
+        .collect::<Vec<_>>()
+        .join("-");
+    
+    // If empty after sanitization, use a default
+    if sanitized.is_empty() {
+        format!("post-{}", chrono::Utc::now().timestamp())
+    } else {
+        sanitized
+    }
 }

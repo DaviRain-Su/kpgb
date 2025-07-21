@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss version="2.0"><channel><title>Anonymous IPFS Blog</title><link>http://localhost:9000</link><description>A decentralized blog powered by IPFS</description><item><title>Auto Excerpt Test</title><link>http://localhost:9000/posts/auto-excerpt-test.html</link><description><![CDATA[<h1>Introduction to Auto Excerpts</h1>
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0"><channel><title>Anonymous IPFS Blog</title><link>https://Anonymous.github.io/kpgb</link><description>A decentralized blog powered by IPFS</description><item><title>Auto Excerpt Test</title><link>https://Anonymous.github.io/kpgb/posts/auto-excerpt-test.html</link><description><![CDATA[<h1>Introduction to Auto Excerpts</h1>
 <p>This post demonstrates the new automatic excerpt generation feature in KPGB. The excerpt should be generated from the first paragraph of the content, stripping markdown formatting while preserving readability.</p>
 <h2>How It Works</h2>
 <p>The system now automatically generates excerpts when:</p>
@@ -29,16 +29,16 @@ fn generate_excerpt(markdown: &amp;str) -&gt; String {
 <li>SEO-friendly summaries</li>
 </ul>
 <p>This feature enhances the overall user experience by providing clear, concise previews of each post without requiring authors to manually write excerpts.</p>
-]]></description><author>Developer</author><guid isPermaLink="false">Qmf29xVBTuy2eUFHHtZQecxBdQDNxLEkWZeQULFS9QArst</guid><pubDate>Mon, 21 Jul 2025 08:45:31 +0000</pubDate></item><item><title>Pagination Test Post 3</title><link>http://localhost:9000/posts/pagination-test-post-3.html</link><description><![CDATA[<h1>Pagination Test Post 3</h1>
+]]></description><author>Developer</author><guid isPermaLink="false">Qmf29xVBTuy2eUFHHtZQecxBdQDNxLEkWZeQULFS9QArst</guid><pubDate>Mon, 21 Jul 2025 08:45:31 +0000</pubDate></item><item><title>Pagination Test Post 3</title><link>https://Anonymous.github.io/kpgb/posts/pagination-test-post-3.html</link><description><![CDATA[<h1>Pagination Test Post 3</h1>
 <p>This is test post 3 for testing pagination functionality.</p>
 <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-]]></description><author>Developer</author><guid isPermaLink="false">QmVY3Aqhj94jdJLj4ituS8yNZ6WSx4hoA4NRpmivGeVx6w</guid><pubDate>Mon, 21 Jul 2025 07:49:08 +0000</pubDate></item><item><title>Pagination Test Post 2</title><link>http://localhost:9000/posts/pagination-test-post-2.html</link><description><![CDATA[<h1>Pagination Test Post 2</h1>
+]]></description><author>Developer</author><guid isPermaLink="false">QmVY3Aqhj94jdJLj4ituS8yNZ6WSx4hoA4NRpmivGeVx6w</guid><pubDate>Mon, 21 Jul 2025 07:49:08 +0000</pubDate></item><item><title>Pagination Test Post 2</title><link>https://Anonymous.github.io/kpgb/posts/pagination-test-post-2.html</link><description><![CDATA[<h1>Pagination Test Post 2</h1>
 <p>This is test post 2 for testing pagination functionality.</p>
 <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-]]></description><author>Developer</author><guid isPermaLink="false">QmfMbK2SSPchbyhHz5pPYbdJZXgZJrkUpsE4ysEymDbruo</guid><pubDate>Mon, 21 Jul 2025 07:49:07 +0000</pubDate></item><item><title>Pagination Test Post 1</title><link>http://localhost:9000/posts/pagination-test-post-1.html</link><description><![CDATA[<h1>Pagination Test Post 1</h1>
+]]></description><author>Developer</author><guid isPermaLink="false">QmfMbK2SSPchbyhHz5pPYbdJZXgZJrkUpsE4ysEymDbruo</guid><pubDate>Mon, 21 Jul 2025 07:49:07 +0000</pubDate></item><item><title>Pagination Test Post 1</title><link>https://Anonymous.github.io/kpgb/posts/pagination-test-post-1.html</link><description><![CDATA[<h1>Pagination Test Post 1</h1>
 <p>This is test post 1 for testing pagination functionality.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-]]></description><author>Developer</author><guid isPermaLink="false">QmWU4cL9EKYxzt5ds8uWsFS2btzRZ8GtE5SN5Q9GauktJe</guid><pubDate>Mon, 21 Jul 2025 07:49:05 +0000</pubDate></item><item><title>Tag System Demo Post</title><link>http://localhost:9000/posts/tag-system-demo-post.html</link><description><![CDATA[<h1>Tag System Demo Post</h1>
+]]></description><author>Developer</author><guid isPermaLink="false">QmWU4cL9EKYxzt5ds8uWsFS2btzRZ8GtE5SN5Q9GauktJe</guid><pubDate>Mon, 21 Jul 2025 07:49:05 +0000</pubDate></item><item><title>Tag System Demo Post</title><link>https://Anonymous.github.io/kpgb/posts/tag-system-demo-post.html</link><description><![CDATA[<h1>Tag System Demo Post</h1>
 <p>This post demonstrates the new tag system implementation in KPGB.</p>
 <h2>Features Added</h2>
 <p>The tag system now includes:</p>
@@ -58,7 +58,7 @@ fn generate_excerpt(markdown: &amp;str) -&gt; String {
 <li>CSS styling: Enhanced tag presentation</li>
 </ul>
 <p>Try clicking on the tags below to explore posts by topic!</p>
-]]></description><author>Developer</author><guid isPermaLink="false">QmfTnU8jYJTL2da8YDQjSX9iJYE3LEQNtnRzDAwJaTPtWC</guid><pubDate>Mon, 21 Jul 2025 07:05:24 +0000</pubDate></item><item><title>静态网站生成器完成</title><link>http://localhost:9000/posts/静态网站生成器完成.html</link><description><![CDATA[<h1>静态网站生成器完成！</h1>
+]]></description><author>Developer</author><guid isPermaLink="false">QmfTnU8jYJTL2da8YDQjSX9iJYE3LEQNtnRzDAwJaTPtWC</guid><pubDate>Mon, 21 Jul 2025 07:05:24 +0000</pubDate></item><item><title>静态网站生成器完成</title><link>https://Anonymous.github.io/kpgb/posts/静态网站生成器完成.html</link><description><![CDATA[<h1>静态网站生成器完成！</h1>
 <p>今天我们成功实现了KPGB的静态网站生成功能。</p>
 <h2>新增功能</h2>
 <h3>1. 模板引擎</h3>
@@ -103,7 +103,7 @@ cargo run -- generate
 <li><strong>RSS</strong> - 订阅源生成</li>
 </ul>
 <p>现在你的博客可以被任何人通过浏览器访问了！</p>
-]]></description><author>Developer</author><guid isPermaLink="false">QmcBX5fvT3v6KjjKUmD2DK7NX81G4EKito1rNNEFs2papD</guid><pubDate>Mon, 21 Jul 2025 00:14:28 +0000</pubDate></item><item><title>Real IPFS Storage Test</title><link>http://localhost:9000/posts/real-ipfs-storage-test.html</link><description><![CDATA[<h1>真正的IPFS存储测试</h1>
+]]></description><author>Developer</author><guid isPermaLink="false">QmcBX5fvT3v6KjjKUmD2DK7NX81G4EKito1rNNEFs2papD</guid><pubDate>Mon, 21 Jul 2025 00:14:28 +0000</pubDate></item><item><title>Real IPFS Storage Test</title><link>https://Anonymous.github.io/kpgb/posts/real-ipfs-storage-test.html</link><description><![CDATA[<h1>真正的IPFS存储测试</h1>
 <p>这篇文章将被存储在IPFS网络上！</p>
 <h2>IPFS的优势</h2>
 <ul>

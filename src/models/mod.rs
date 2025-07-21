@@ -42,15 +42,33 @@ impl BlogPost {
     }
 
     pub fn generate_slug(title: &str) -> String {
-        title
+        // Only keep ASCII alphanumeric characters to avoid issues with GitHub Pages
+        let slug = title
             .to_lowercase()
             .chars()
-            .map(|c| if c.is_alphanumeric() { c } else { '-' })
+            .map(|c| {
+                if c.is_ascii_alphanumeric() {
+                    c
+                } else if c.is_whitespace() || c == '-' || c == '_' {
+                    '-'
+                } else {
+                    // Skip non-ASCII characters
+                    '\0'
+                }
+            })
+            .filter(|&c| c != '\0')
             .collect::<String>()
             .split('-')
             .filter(|s| !s.is_empty())
             .collect::<Vec<_>>()
-            .join("-")
+            .join("-");
+        
+        // If slug is empty (e.g., all Chinese title), generate a timestamp-based slug
+        if slug.is_empty() {
+            format!("post-{}", chrono::Utc::now().timestamp())
+        } else {
+            slug
+        }
     }
 
     pub fn calculate_hash(content: &str) -> String {
