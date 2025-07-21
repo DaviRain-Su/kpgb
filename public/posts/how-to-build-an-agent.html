@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><rss version="2.0"><channel><title>Anonymous IPFS Blog</title><link>http://localhost:9000</link><description>A decentralized blog powered by IPFS</description><item><title>How to build an agent</title><link>http://localhost:9000/posts/how-to-build-an-agent.html</link><description><![CDATA[<h1>如何构建一个代理程序</h1>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to build an agent - Anonymous IPFS Blog</title>
+    <meta name="description" content="A decentralized blog powered by IPFS">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="/feed.xml">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1><a href="/">Anonymous IPFS Blog</a></h1>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/archive">Archive</a></li>
+                    <li><a href="/tags">Tags</a></li>
+                    <li><a href="/feed.xml">RSS</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            
+<article class="post">
+    <header>
+        <h1>How to build an agent</h1>
+        <div class="post-meta">
+            <span class="author">By DaviRain-Su</span>
+            <span class="date">2025-07-21 10:16</span>
+            
+            <span class="category">Development</span>
+            
+        </div>
+        
+        <div class="tags">
+            
+            <a href="/tags/agent" class="tag">agent</a>
+            
+            <a href="/tags/go" class="tag">go</a>
+            
+        </div>
+        
+    </header>
+
+    <div class="post-content">
+        <h1>如何构建一个代理程序</h1>
 <h2>或者：皇帝的新衣</h2>
 <p><strong>Thorsten Ball，2025年4月15日</strong></p>
 <p>构建一个功能完整的代码编辑代理程序其实并不难。</p>
@@ -583,118 +633,31 @@ Congratulations on building a code-editing agent!
 <p>这本质上就是代码编辑代理程序内部循环的全部内容。当然，将其集成到你的编辑器中，调整系统提示，在适当的时间给它适当的反馈，围绕它的漂亮UI，围绕工具的更好工具，对多个代理程序的支持等等——我们在Amp中构建了所有这些，但它不需要天才的时刻。所需要的只是实用的工程和苦工。</p>
 <p>这些模型现在非常强大。300行代码和三个工具，现在你可以与编辑你代码的外星智能对话。如果你认为“好吧，但我们没有真正…“——去试试吧！去看看你能用这个走多远。我打赌比你想象的要远得多。</p>
 <p>这就是为什么我们认为一切都在改变。</p>
-]]></description><author>DaviRain-Su</author><guid isPermaLink="false">QmZx8psFhFU9imDvGaMJTfMiiDoWohBEdVYwSvNhQqDHDW</guid><pubDate>Mon, 21 Jul 2025 10:16:15 +0000</pubDate></item><item><title>Auto Excerpt Test</title><link>http://localhost:9000/posts/auto-excerpt-test.html</link><description><![CDATA[<h1>Introduction to Auto Excerpts</h1>
-<p>This post demonstrates the new automatic excerpt generation feature in KPGB. The excerpt should be generated from the first paragraph of the content, stripping markdown formatting while preserving readability.</p>
-<h2>How It Works</h2>
-<p>The system now automatically generates excerpts when:</p>
-<ol>
-<li>No excerpt is provided in the frontmatter</li>
-<li>The content needs to be summarized for list views</li>
-<li>Clean, readable text is needed without HTML</li>
-</ol>
-<h3>Technical Details</h3>
-<p>The excerpt generator uses <strong>pulldown-cmark</strong> to parse markdown and extract plain text. It handles:</p>
-<ul>
-<li><strong>Bold</strong> and <em>italic</em> text</li>
-<li>Lists and nested structures</li>
-<li>Code blocks (which are excluded from excerpts)</li>
-<li>Links and other formatting</li>
-</ul>
-<pre><code class="language-rust">// This code block won't appear in the excerpt
-fn generate_excerpt(markdown: &amp;str) -&gt; String {
-    // Implementation details...
-}
-</code></pre>
-<h2>Benefits</h2>
-<p>The automatic excerpt generation provides several benefits:</p>
-<ul>
-<li>Consistent formatting across all posts</li>
-<li>Better readability in list views</li>
-<li>Reduced manual work for authors</li>
-<li>SEO-friendly summaries</li>
-</ul>
-<p>This feature enhances the overall user experience by providing clear, concise previews of each post without requiring authors to manually write excerpts.</p>
-]]></description><author>Developer</author><guid isPermaLink="false">Qmf29xVBTuy2eUFHHtZQecxBdQDNxLEkWZeQULFS9QArst</guid><pubDate>Mon, 21 Jul 2025 08:45:31 +0000</pubDate></item><item><title>Pagination Test Post 3</title><link>http://localhost:9000/posts/pagination-test-post-3.html</link><description><![CDATA[<h1>Pagination Test Post 3</h1>
-<p>This is test post 3 for testing pagination functionality.</p>
-<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-]]></description><author>Developer</author><guid isPermaLink="false">QmVY3Aqhj94jdJLj4ituS8yNZ6WSx4hoA4NRpmivGeVx6w</guid><pubDate>Mon, 21 Jul 2025 07:49:08 +0000</pubDate></item><item><title>Pagination Test Post 2</title><link>http://localhost:9000/posts/pagination-test-post-2.html</link><description><![CDATA[<h1>Pagination Test Post 2</h1>
-<p>This is test post 2 for testing pagination functionality.</p>
-<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-]]></description><author>Developer</author><guid isPermaLink="false">QmfMbK2SSPchbyhHz5pPYbdJZXgZJrkUpsE4ysEymDbruo</guid><pubDate>Mon, 21 Jul 2025 07:49:07 +0000</pubDate></item><item><title>Pagination Test Post 1</title><link>http://localhost:9000/posts/pagination-test-post-1.html</link><description><![CDATA[<h1>Pagination Test Post 1</h1>
-<p>This is test post 1 for testing pagination functionality.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-]]></description><author>Developer</author><guid isPermaLink="false">QmWU4cL9EKYxzt5ds8uWsFS2btzRZ8GtE5SN5Q9GauktJe</guid><pubDate>Mon, 21 Jul 2025 07:49:05 +0000</pubDate></item><item><title>Tag System Demo Post</title><link>http://localhost:9000/posts/tag-system-demo-post.html</link><description><![CDATA[<h1>Tag System Demo Post</h1>
-<p>This post demonstrates the new tag system implementation in KPGB.</p>
-<h2>Features Added</h2>
-<p>The tag system now includes:</p>
-<ol>
-<li><strong>Tag Browsing</strong>: Click on any tag to see all posts with that tag</li>
-<li><strong>Tag Cloud</strong>: A dedicated tags page showing all tags with post counts</li>
-<li><strong>API Support</strong>: New endpoints for tag-related queries</li>
-<li><strong>Static Generation</strong>: Tag pages are generated for static sites</li>
-<li><strong>Clean URLs</strong>: Tag pages use clean URL structure</li>
-</ol>
-<h2>Technical Implementation</h2>
-<ul>
-<li>Database layer: Tag queries with post counts</li>
-<li>API endpoints: <code>/api/tags</code> and <code>/api/tags/:tag</code></li>
-<li>Web handlers: Tag listing and filtered post views</li>
-<li>Templates: New tag cloud and tag posts pages</li>
-<li>CSS styling: Enhanced tag presentation</li>
-</ul>
-<p>Try clicking on the tags below to explore posts by topic!</p>
-]]></description><author>Developer</author><guid isPermaLink="false">QmfTnU8jYJTL2da8YDQjSX9iJYE3LEQNtnRzDAwJaTPtWC</guid><pubDate>Mon, 21 Jul 2025 07:05:24 +0000</pubDate></item><item><title>静态网站生成器完成</title><link>http://localhost:9000/posts/静态网站生成器完成.html</link><description><![CDATA[<h1>静态网站生成器完成！</h1>
-<p>今天我们成功实现了KPGB的静态网站生成功能。</p>
-<h2>新增功能</h2>
-<h3>1. 模板引擎</h3>
-<ul>
-<li>使用Tera作为模板引擎</li>
-<li>支持继承和包含</li>
-<li>灵活的模板系统</li>
-</ul>
-<h3>2. 静态网站生成</h3>
-<ul>
-<li>自动生成HTML文件</li>
-<li>响应式设计</li>
-<li>美观的CSS样式</li>
-</ul>
-<h3>3. RSS订阅</h3>
-<ul>
-<li>标准RSS 2.0格式</li>
-<li>自动更新</li>
-<li>包含完整文章内容</li>
-</ul>
-<h3>4. 站点配置</h3>
-<ul>
-<li><code>site.toml</code>配置文件</li>
-<li>自定义标题、描述、作者</li>
-<li>IPFS网关配置</li>
-</ul>
-<h2>使用方法</h2>
-<pre><code class="language-bash"># 初始化配置
-cargo run -- init
 
-# 生成网站
-cargo run -- generate
+    </div>
 
-# 启动服务器
-./serve.sh
-</code></pre>
-<h2>技术栈</h2>
-<ul>
-<li><strong>Rust</strong> - 主程序</li>
-<li><strong>Tera</strong> - 模板引擎</li>
-<li><strong>pulldown-cmark</strong> - Markdown解析</li>
-<li><strong>RSS</strong> - 订阅源生成</li>
-</ul>
-<p>现在你的博客可以被任何人通过浏览器访问了！</p>
-]]></description><author>Developer</author><guid isPermaLink="false">QmcBX5fvT3v6KjjKUmD2DK7NX81G4EKito1rNNEFs2papD</guid><pubDate>Mon, 21 Jul 2025 00:14:28 +0000</pubDate></item><item><title>Real IPFS Storage Test</title><link>http://localhost:9000/posts/real-ipfs-storage-test.html</link><description><![CDATA[<h1>真正的IPFS存储测试</h1>
-<p>这篇文章将被存储在IPFS网络上！</p>
-<h2>IPFS的优势</h2>
-<ul>
-<li><strong>去中心化</strong>: 内容分布在整个网络</li>
-<li><strong>不可篡改</strong>: 内容通过哈希验证</li>
-<li><strong>永久性</strong>: 只要有节点pin住内容，就永远存在</li>
-</ul>
-<p>创建时间: 2025-01-20</p>
-]]></description><author>Bob</author><guid isPermaLink="false">QmQmWyC1JXi269pT6J6Jnip9mP5aWHcquDfd7DFCjAYFo2</guid><pubDate>Sun, 20 Jul 2025 23:51:27 +0000</pubDate></item></channel></rss>
+    <footer class="post-footer">
+        <div class="post-info">
+            <p><strong>Storage ID:</strong> <code>QmZx8psFhFU9imDvGaMJTfMiiDoWohBEdVYwSvNhQqDHDW</code></p>
+            
+            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;QmZx8psFhFU9imDvGaMJTfMiiDoWohBEdVYwSvNhQqDHDW" target="_blank">View on IPFS</a></p>
+            
+            <p><strong>Content Hash:</strong> <code>6fdf7af424d11c25f0d8b11b7a5a87bc1152e90346f508fcb7d89816ad8a727a</code></p>
+        </div>
+        <nav class="post-nav">
+            <a href="/archive.html">← Back to Archive</a>
+        </nav>
+    </footer>
+</article>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Anonymous. Powered by IPFS & KPGB.</p>
+            <p>A decentralized blog powered by IPFS</p>
+        </div>
+    </footer>
+</body>
+</html>
