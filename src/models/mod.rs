@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BlogPost {
@@ -23,7 +23,7 @@ impl BlogPost {
         let slug = Self::generate_slug(&title);
         let now = Utc::now();
         let content_hash = Self::calculate_hash(&content);
-        
+
         Self {
             id: uuid::Uuid::new_v4().to_string(),
             title,
@@ -40,9 +40,10 @@ impl BlogPost {
             content_hash,
         }
     }
-    
+
     pub fn generate_slug(title: &str) -> String {
-        title.to_lowercase()
+        title
+            .to_lowercase()
             .chars()
             .map(|c| if c.is_alphanumeric() { c } else { '-' })
             .collect::<String>()
@@ -51,13 +52,13 @@ impl BlogPost {
             .collect::<Vec<_>>()
             .join("-")
     }
-    
+
     pub fn calculate_hash(content: &str) -> String {
-        use sha2::{Sha256, Digest};
+        use sha2::{Digest, Sha256};
         let hash = Sha256::digest(content.as_bytes());
         hex::encode(hash)
     }
-    
+
     pub fn update_content(&mut self, new_content: String) {
         self.content = new_content;
         self.content_hash = Self::calculate_hash(&self.content);

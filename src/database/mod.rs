@@ -1,7 +1,7 @@
-use anyhow::Result;
-use sqlx::{SqlitePool, sqlite::SqlitePoolOptions, Row};
-use std::time::Duration;
 use crate::models::BlogPost;
+use anyhow::Result;
+use sqlx::{sqlite::SqlitePoolOptions, Row, SqlitePool};
+use std::time::Duration;
 
 pub struct Database {
     pool: SqlitePool,
@@ -14,40 +14,39 @@ impl Database {
             .acquire_timeout(Duration::from_secs(3))
             .connect(database_url)
             .await?;
-        
+
         // Run migrations
-        sqlx::migrate!("./migrations")
-            .run(&pool)
-            .await?;
-        
+        sqlx::migrate!("./migrations").run(&pool).await?;
+
         Ok(Self { pool })
     }
-    
+
     pub async fn insert_post(&self, post: &BlogPost, storage_id: &str) -> Result<()> {
         let mut tx = self.pool.begin().await?;
-        
+
         // Insert post
         sqlx::query(
             r#"
             INSERT INTO posts (id, storage_id, title, slug, content, excerpt, author, 
                              content_hash, created_at, updated_at, published, category)
             VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12)
-            "#)
-            .bind(&post.id)
-            .bind(storage_id)
-            .bind(&post.title)
-            .bind(&post.slug)
-            .bind(&post.content)
-            .bind(&post.excerpt)
-            .bind(&post.author)
-            .bind(&post.content_hash)
-            .bind(&post.created_at)
-            .bind(&post.updated_at)
-            .bind(&post.published)
-            .bind(&post.category)
+            "#,
+        )
+        .bind(&post.id)
+        .bind(storage_id)
+        .bind(&post.title)
+        .bind(&post.slug)
+        .bind(&post.content)
+        .bind(&post.excerpt)
+        .bind(&post.author)
+        .bind(&post.content_hash)
+        .bind(&post.created_at)
+        .bind(&post.updated_at)
+        .bind(&post.published)
+        .bind(&post.category)
         .execute(&mut *tx)
         .await?;
-        
+
         // Insert tags
         for tag in &post.tags {
             // Insert tag if not exists
@@ -55,13 +54,13 @@ impl Database {
                 .bind(tag)
                 .execute(&mut *tx)
                 .await?;
-            
+
             // Get tag id
             let tag_id: i64 = sqlx::query_scalar("SELECT id FROM tags WHERE name = ?1")
                 .bind(tag)
                 .fetch_one(&mut *tx)
                 .await?;
-            
+
             // Link post and tag
             sqlx::query("INSERT INTO post_tags (post_id, tag_id) VALUES (?1, ?2)")
                 .bind(&post.id)
@@ -69,11 +68,11 @@ impl Database {
                 .execute(&mut *tx)
                 .await?;
         }
-        
+
         tx.commit().await?;
         Ok(())
     }
-    
+
     pub async fn get_post_by_storage_id(&self, storage_id: &str) -> Result<Option<BlogPost>> {
         let row = sqlx::query(
             r#"
@@ -81,11 +80,12 @@ impl Database {
                    created_at, updated_at, published, category, storage_id, content_hash
             FROM posts
             WHERE storage_id = ?1
-            "#)
-            .bind(storage_id)
-            .fetch_optional(&self.pool)
-            .await?;
-        
+            "#,
+        )
+        .bind(storage_id)
+        .fetch_optional(&self.pool)
+        .await?;
+
         if let Some(row) = row {
             let mut post = BlogPost {
                 id: row.get("id"),
@@ -102,7 +102,7 @@ impl Database {
                 storage_id: row.get("storage_id"),
                 content_hash: row.get("content_hash"),
             };
-            
+
             // Load tags
             let tags: Vec<String> = sqlx::query_scalar(
                 r#"
@@ -110,40 +110,39 @@ impl Database {
                 FROM tags t
                 JOIN post_tags pt ON t.id = pt.tag_id
                 WHERE pt.post_id = ?1
-                "#)
-                .bind(&post.id)
-                .fetch_all(&self.pool)
-                .await?;
-            
+                "#,
+            )
+            .bind(&post.id)
+            .fetch_all(&self.pool)
+            .await?;
+
             post.tags = tags;
             Ok(Some(post))
         } else {
             Ok(None)
         }
     }
-    
+
     pub async fn get_post_by_content_hash(&self, content_hash: &str) -> Result<Option<String>> {
-        let storage_id = sqlx::query_scalar(
-            "SELECT storage_id FROM posts WHERE content_hash = ?1")
+        let storage_id = sqlx::query_scalar("SELECT storage_id FROM posts WHERE content_hash = ?1")
             .bind(content_hash)
             .fetch_optional(&self.pool)
             .await?;
-        
+
         Ok(storage_id)
     }
-    
+
     pub async fn update_post_published(&self, storage_id: &str, published: bool) -> Result<()> {
-        sqlx::query(
-            "UPDATE posts SET published = ?1, updated_at = ?2 WHERE storage_id = ?3")
+        sqlx::query("UPDATE posts SET published = ?1, updated_at = ?2 WHERE storage_id = ?3")
             .bind(published)
             .bind(chrono::Utc::now())
             .bind(storage_id)
             .execute(&self.pool)
             .await?;
-        
+
         Ok(())
     }
-    
+
     pub async fn list_posts(&self, published_only: bool) -> Result<Vec<(String, BlogPost)>> {
         let query = if published_only {
             r#"
@@ -161,11 +160,9 @@ impl Database {
             ORDER BY created_at DESC
             "#
         };
-        
-        let rows = sqlx::query(query)
-            .fetch_all(&self.pool)
-            .await?;
-        
+
+        let rows = sqlx::query(query).fetch_all(&self.pool).await?;
+
         let mut results = Vec::new();
         for row in rows {
             let mut post = BlogPost {
@@ -183,9 +180,9 @@ impl Database {
                 storage_id: Some(row.get("storage_id")),
                 content_hash: row.get("content_hash"),
             };
-            
+
             let storage_id = post.storage_id.clone().unwrap_or_default();
-            
+
             // Load tags
             let tags: Vec<String> = sqlx::query_scalar(
                 r#"
@@ -193,18 +190,19 @@ impl Database {
                 FROM tags t
                 JOIN post_tags pt ON t.id = pt.tag_id
                 WHERE pt.post_id = ?1
-                "#)
-                .bind(&post.id)
-                .fetch_all(&self.pool)
-                .await?;
-            
+                "#,
+            )
+            .bind(&post.id)
+            .fetch_all(&self.pool)
+            .await?;
+
             post.tags = tags;
             results.push((storage_id, post));
         }
-        
+
         Ok(results)
     }
-    
+
     pub async fn search_posts(&self, query: &str) -> Result<Vec<(String, BlogPost)>> {
         // Use FTS5 for full-text search
         let rows = sqlx::query(
@@ -215,11 +213,12 @@ impl Database {
             JOIN posts_fts ON p.rowid = posts_fts.rowid
             WHERE posts_fts MATCH ?1
             ORDER BY rank
-            "#)
-            .bind(query)
-            .fetch_all(&self.pool)
-            .await?;
-        
+            "#,
+        )
+        .bind(query)
+        .fetch_all(&self.pool)
+        .await?;
+
         let mut results = Vec::new();
         for row in rows {
             let mut post = BlogPost {
@@ -237,9 +236,9 @@ impl Database {
                 storage_id: Some(row.get("storage_id")),
                 content_hash: row.get("content_hash"),
             };
-            
+
             let storage_id = post.storage_id.clone().unwrap_or_default();
-            
+
             // Load tags
             let tags: Vec<String> = sqlx::query_scalar(
                 r#"
@@ -247,15 +246,16 @@ impl Database {
                 FROM tags t
                 JOIN post_tags pt ON t.id = pt.tag_id
                 WHERE pt.post_id = ?1
-                "#)
-                .bind(&post.id)
-                .fetch_all(&self.pool)
-                .await?;
-            
+                "#,
+            )
+            .bind(&post.id)
+            .fetch_all(&self.pool)
+            .await?;
+
             post.tags = tags;
             results.push((storage_id, post));
         }
-        
+
         Ok(results)
     }
 }

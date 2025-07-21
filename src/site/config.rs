@@ -1,5 +1,5 @@
-use anyhow::Result;
 use super::SiteConfig;
+use anyhow::Result;
 use std::path::Path;
 
 impl SiteConfig {
@@ -14,7 +14,7 @@ impl SiteConfig {
             Ok(Self::default())
         }
     }
-    
+
     pub fn save(&self) -> Result<()> {
         let config_str = toml::to_string_pretty(self)?;
         std::fs::write("site.toml", config_str)?;

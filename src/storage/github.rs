@@ -1,6 +1,6 @@
 use anyhow::Result;
 use async_trait::async_trait;
-use base64::{Engine as _, engine::general_purpose};
+use base64::{engine::general_purpose, Engine as _};
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
@@ -32,7 +32,7 @@ impl GitHubStorage {
             token,
         }
     }
-    
+
     pub fn from_env() -> Result<Self> {
         Ok(Self::new(
             std::env::var("GITHUB_OWNER")?,
@@ -41,7 +41,7 @@ impl GitHubStorage {
             std::env::var("GITHUB_TOKEN")?,
         ))
     }
-    
+
     fn api_url(&self, path: &str) -> String {
         format!(
             "https://api.github.com/repos/{}/{}/contents/{}",
@@ -52,39 +52,47 @@ impl GitHubStorage {
 
 #[async_trait]
 impl Storage for GitHubStorage {
-    async fn store(&self, content: &[u8], metadata: HashMap<String, String>) -> Result<StorageResult> {
-        let path = metadata.get("path")
+    async fn store(
+        &self,
+        content: &[u8],
+        metadata: HashMap<String, String>,
+    ) -> Result<StorageResult> {
+        let path = metadata
+            .get("path")
             .ok_or_else(|| anyhow::anyhow!("GitHub storage requires 'path' in metadata"))?;
-        
+
         let encoded_content = general_purpose::STANDARD.encode(content);
-        use sha2::{Sha256, Digest};
+        use sha2::{Digest, Sha256};
         let hash = Sha256::digest(content);
         let hash_str = hex::encode(hash);
-        
+
         let github_content = GitHubContent {
-            message: metadata.get("message")
+            message: metadata
+                .get("message")
                 .unwrap_or(&format!("Add content to {}", path))
                 .clone(),
             content: encoded_content,
             sha: None,
         };
-        
-        let response = self.client
+
+        let response = self
+            .client
             .put(&self.api_url(path))
             .header("Authorization", format!("token {}", self.token))
             .header("Accept", "application/vnd.github.v3+json")
             .json(&github_content)
             .send()
             .await?;
-        
+
         if !response.status().is_success() {
             return Err(anyhow::anyhow!("GitHub API error: {}", response.status()));
         }
-        
+
         let result: serde_json::Value = response.json().await?;
-        let sha = result["commit"]["sha"].as_str()
+        let sha = result["commit"]["sha"]
+            .as_str()
             .ok_or_else(|| anyhow::anyhow!("No SHA in GitHub response"))?;
-        
+
         Ok(StorageResult {
             id: sha.to_string(),
             url: Some(format!(
@@ -96,60 +104,64 @@ impl Storage for GitHubStorage {
                 hash: hash_str,
                 size: content.len(),
                 created_at: chrono::Utc::now(),
-                content_type: metadata.get("content_type")
+                content_type: metadata
+                    .get("content_type")
                     .unwrap_or(&"application/octet-stream".to_string())
                     .clone(),
                 extra: metadata,
             },
         })
     }
-    
+
     async fn retrieve(&self, id: &str) -> Result<Vec<u8>> {
-        let response = self.client
+        let response = self
+            .client
             .get(&self.api_url(id))
             .header("Authorization", format!("token {}", self.token))
             .header("Accept", "application/vnd.github.v3.raw")
             .send()
             .await?;
-        
+
         if !response.status().is_success() {
             return Err(anyhow::anyhow!("GitHub API error: {}", response.status()));
         }
-        
+
         let content = response.bytes().await?;
         Ok(content.to_vec())
     }
-    
+
     async fn exists(&self, id: &str) -> Result<bool> {
-        let response = self.client
+        let response = self
+            .client
             .head(&self.api_url(id))
             .header("Authorization", format!("token {}", self.token))
             .send()
             .await?;
-        
+
         Ok(response.status().is_success())
     }
-    
+
     async fn delete(&self, _id: &str) -> Result<()> {
         Err(anyhow::anyhow!("GitHub storage deletion not implemented"))
     }
-    
+
     async fn list(&self, prefix: Option<&str>) -> Result<Vec<StorageMetadata>> {
         let path = prefix.unwrap_or("");
-        let response = self.client
+        let response = self
+            .client
             .get(&self.api_url(path))
             .header("Authorization", format!("token {}", self.token))
             .header("Accept", "application/vnd.github.v3+json")
             .send()
             .await?;
-        
+
         if !response.status().is_success() {
             return Err(anyhow::anyhow!("GitHub API error: {}", response.status()));
         }
-        
+
         Ok(Vec::new())
     }
-    
+
     fn storage_type(&self) -> &'static str {
         "github"
     }

@@ -1,11 +1,11 @@
+use crate::web::AppState;
 use axum::{
     extract::{Path, State},
-    response::Json,
     http::StatusCode,
+    response::Json,
 };
-use std::sync::Arc;
 use serde::{Deserialize, Serialize};
-use crate::web::AppState;
+use std::sync::Arc;
 
 #[derive(Serialize)]
 pub struct ApiResponse<T> {
@@ -36,7 +36,8 @@ pub async fn list_posts(
 ) -> Result<Json<ApiResponse<Vec<PostSummary>>>, StatusCode> {
     match state.blog_manager.list_posts(true).await {
         Ok(posts) => {
-            let summaries: Vec<PostSummary> = posts.into_iter()
+            let summaries: Vec<PostSummary> = posts
+                .into_iter()
                 .map(|(storage_id, post)| PostSummary {
                     id: post.id,
                     storage_id,
@@ -48,20 +49,18 @@ pub async fn list_posts(
                     excerpt: post.excerpt,
                 })
                 .collect();
-            
+
             Ok(Json(ApiResponse {
                 success: true,
                 data: Some(summaries),
                 error: None,
             }))
         }
-        Err(e) => {
-            Ok(Json(ApiResponse {
-                success: false,
-                data: None,
-                error: Some(e.to_string()),
-            }))
-        }
+        Err(e) => Ok(Json(ApiResponse {
+            success: false,
+            data: None,
+            error: Some(e.to_string()),
+        })),
     }
 }
 
@@ -73,20 +72,18 @@ pub async fn get_post(
         Ok(post) => {
             let mut post_json = serde_json::to_value(&post).unwrap();
             post_json["storage_id"] = serde_json::Value::String(id);
-            
+
             Ok(Json(ApiResponse {
                 success: true,
                 data: Some(post_json),
                 error: None,
             }))
         }
-        Err(e) => {
-            Ok(Json(ApiResponse {
-                success: false,
-                data: None,
-                error: Some(e.to_string()),
-            }))
-        }
+        Err(e) => Ok(Json(ApiResponse {
+            success: false,
+            data: None,
+            error: Some(e.to_string()),
+        })),
     }
 }
 
@@ -96,7 +93,8 @@ pub async fn search_posts(
 ) -> Result<Json<ApiResponse<Vec<PostSummary>>>, StatusCode> {
     match state.blog_manager.search_posts(&req.query).await {
         Ok(results) => {
-            let summaries: Vec<PostSummary> = results.into_iter()
+            let summaries: Vec<PostSummary> = results
+                .into_iter()
                 .map(|(storage_id, post)| PostSummary {
                     id: post.id,
                     storage_id,
@@ -108,19 +106,17 @@ pub async fn search_posts(
                     excerpt: post.excerpt,
                 })
                 .collect();
-            
+
             Ok(Json(ApiResponse {
                 success: true,
                 data: Some(summaries),
                 error: None,
             }))
         }
-        Err(e) => {
-            Ok(Json(ApiResponse {
-                success: false,
-                data: None,
-                error: Some(e.to_string()),
-            }))
-        }
+        Err(e) => Ok(Json(ApiResponse {
+            success: false,
+            data: None,
+            error: Some(e.to_string()),
+        })),
     }
 }
