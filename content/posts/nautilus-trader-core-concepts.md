@@ -3,7 +3,7 @@ title: "NautilusTrader 核心概念详解"
 date: 2025-07-21T16:45:00+08:00
 author: Developer
 category: 技术文档
-tags: ["nautilus-trader文档", "核心概念", "架构设计"]
+tags: ["nautilus-trader", "核心概念", "架构设计"]
 excerpt: "深入理解 NautilusTrader 的核心概念，包括事件驱动架构、Actor 模型、数据流处理等关键设计理念。"
 ---
 

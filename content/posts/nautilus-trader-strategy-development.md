@@ -3,7 +3,7 @@ title: "NautilusTrader 策略开发指南"
 date: 2025-07-21T17:00:00+08:00
 author: Developer
 category: 技术文档
-tags: ["nautilus-trader文档", "策略开发", "量化交易"]
+tags: ["nautilus-trader", "策略开发", "量化交易"]
 excerpt: "从零开始学习如何在 NautilusTrader 平台上开发交易策略，包括策略结构、信号生成、订单管理等。"
 ---
 

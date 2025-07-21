@@ -3,7 +3,7 @@ title: "NautilusTrader 安装指南"
 date: 2025-07-21T16:30:00+08:00
 author: Developer
 category: 技术文档
-tags: ["nautilus-trader文档", "安装教程", "量化交易"]
+tags: ["nautilus-trader", "安装教程", "量化交易"]
 excerpt: "详细介绍 NautilusTrader 的安装方法，包括系统要求、依赖项配置、常见问题解决等。"
 ---
 

@@ -10,7 +10,7 @@
     <div class="tag-cloud">
         {% for tag in tags %}
         <div class="tag-item">
-            <a href="{{ site.base_path | default(value="") }}/tags/{{ tag.name }}" class="tag-link">
+            <a href="{{ site.base_path | default(value="") }}/tags/{{ tag.name | url_safe_tag }}" class="tag-link">
                 <span class="tag-name">{{ tag.name }}</span>
                 <span class="tag-count">({{ tag.count }})</span>
             </a>

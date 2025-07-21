@@ -42,6 +42,17 @@ impl SiteGenerator {
             ("docs.html", include_str!("../../templates/docs.html")),
         ])?;
 
+        // Add custom filter for URL-safe tags
+        tera.register_filter(
+            "url_safe_tag",
+            |value: &tera::Value, _: &std::collections::HashMap<String, tera::Value>| match value
+                .as_str()
+            {
+                Some(tag) => Ok(tera::Value::String(sanitize_tag_for_url(tag))),
+                None => Err(tera::Error::msg("url_safe_tag filter expects a string")),
+            },
+        );
+
         Ok(Self {
             blog_manager,
             config,
@@ -353,6 +364,7 @@ impl SiteGenerator {
 
         // Generate individual tag pages
         for (tag_name, _count) in all_tags {
+            println!("Generating tag page for: {}", tag_name);
             self.generate_tag_page(&tag_name, posts).await?;
         }
 
@@ -418,15 +430,16 @@ impl SiteGenerator {
             context.insert("has_next", &(page < total_pages));
 
             // Create output directory
+            let tag_url_safe = sanitize_tag_for_url(tag);
             let output_path = if page == 1 {
-                let tag_dir = self.output_dir.join("tags").join(tag);
+                let tag_dir = self.output_dir.join("tags").join(&tag_url_safe);
                 fs::create_dir_all(&tag_dir)?;
                 tag_dir.join("index.html")
             } else {
                 let page_dir = self
                     .output_dir
                     .join("tags")
-                    .join(tag)
+                    .join(&tag_url_safe)
                     .join("page")
                     .join(page.to_string());
                 fs::create_dir_all(&page_dir)?;
@@ -478,6 +491,12 @@ fn sanitize_slug(slug: &str) -> String {
     } else {
         sanitized
     }
+}
+
+fn sanitize_tag_for_url(tag: &str) -> String {
+    // For tags, we'll use a simple approach: convert to lowercase and replace spaces with hyphens
+    // Chinese characters and other non-ASCII will be preserved
+    tag.to_lowercase().replace(' ', "-")
 }
 
 impl SiteGenerator {
