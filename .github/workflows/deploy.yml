@@ -44,12 +44,12 @@ jobs:
           cat > site.production.toml << EOL
           title = "My IPFS Blog"
           description = "A decentralized blog powered by IPFS"
-          author = "Your Name"
+          author = "${{ github.repository_owner }}"
           base_url = "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
+          base_path = "/${{ github.event.repository.name }}"
           ipfs_gateway = "https://ipfs.io/ipfs/"
           posts_per_page = 10
           enable_rss = true
-          enable_search = true
           theme = "default"
           EOL
           
