@@ -37,6 +37,7 @@ cargo run -- generate --output ./public
 - **CLI Management**: Complete command-line interface
 - **GitHub Pages Deployment**: Automated deployment with GitHub Actions
 - **External Website Integration**: Embeddable widget and API
+- **Multiple Themes**: Choose from hacker, minimal, dark, cyberpunk, or default themes
 
 ## Installation
 

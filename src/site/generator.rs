@@ -220,7 +220,15 @@ impl SiteGenerator {
         let css_dir = self.output_dir.join("css");
         fs::create_dir_all(&css_dir)?;
 
-        let css_content = include_str!("../../templates/style.css");
+        // Load theme-specific CSS
+        let css_content = match self.config.theme.as_str() {
+            "hacker" => include_str!("../../templates/themes/hacker.css"),
+            "minimal" => include_str!("../../templates/themes/minimal.css"),
+            "dark" => include_str!("../../templates/themes/dark.css"),
+            "cyberpunk" => include_str!("../../templates/themes/cyberpunk.css"),
+            _ => include_str!("../../templates/style.css"), // default theme
+        };
+
         fs::write(css_dir.join("style.css"), css_content)?;
 
         Ok(())

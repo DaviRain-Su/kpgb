@@ -180,12 +180,16 @@ pub async fn search(
     Ok(Html(rendered))
 }
 
-pub async fn style_css() -> impl IntoResponse {
-    (
-        StatusCode::OK,
-        [("content-type", "text/css")],
-        include_str!("../../templates/style.css"),
-    )
+pub async fn style_css(State(state): State<Arc<AppState>>) -> impl IntoResponse {
+    let css_content = match state.site_config.theme.as_str() {
+        "hacker" => include_str!("../../templates/themes/hacker.css"),
+        "minimal" => include_str!("../../templates/themes/minimal.css"),
+        "dark" => include_str!("../../templates/themes/dark.css"),
+        "cyberpunk" => include_str!("../../templates/themes/cyberpunk.css"),
+        _ => include_str!("../../templates/style.css"), // default theme
+    };
+
+    (StatusCode::OK, [("content-type", "text/css")], css_content)
 }
 
 fn render_template(name: &str, context: &Context) -> Result<String, StatusCode> {

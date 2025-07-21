@@ -45,6 +45,7 @@ A fully decentralized personal blog system where all content is stored on IPFS (
 - Mobile-friendly design
 - GitHub Pages support with base_path configuration
 - Production-ready deployment scripts
+- **Multiple themes**: default, hacker, minimal, dark, cyberpunk
 
 #### 6. **Dynamic Web Interface**
 - Axum web server with async support
