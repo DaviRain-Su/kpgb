@@ -1,5 +1,6 @@
 ---
 title: "NautilusTrader 完整快速入门指南"
+slug: "nautilus-trader-quickstart-complete"
 author: "Developer"
 excerpt: "包含数据获取的完整 NautilusTrader 入门教程，从环境设置到回测分析的全流程指南"
 category: "Trading"

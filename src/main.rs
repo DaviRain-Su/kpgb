@@ -180,6 +180,10 @@ async fn main() -> Result<()> {
                     clean_content.clone(),
                     final_author.clone(),
                 );
+                // Use slug from frontmatter if provided
+                if let Some(slug) = fm.slug {
+                    post.slug = slug;
+                }
                 post.tags = fm.tags;
                 post.category = fm.category;
                 post.excerpt = fm

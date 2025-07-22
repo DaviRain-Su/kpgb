@@ -6,6 +6,8 @@ pub struct FrontMatter {
     pub title: String,
     pub author: String,
     #[serde(default)]
+    pub slug: Option<String>,
+    #[serde(default)]
     pub date: Option<String>,
     #[serde(default, deserialize_with = "deserialize_tags")]
     pub tags: Vec<String>,

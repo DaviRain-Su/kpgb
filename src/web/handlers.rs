@@ -231,8 +231,25 @@ fn render_template(name: &str, context: &Context) -> Result<String, StatusCode> 
     ])
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
+    // Add custom filter for URL-safe tags
+    tera.register_filter(
+        "url_safe_tag",
+        |value: &tera::Value, _: &std::collections::HashMap<String, tera::Value>| match value
+            .as_str()
+        {
+            Some(tag) => Ok(tera::Value::String(sanitize_tag_for_url(tag))),
+            None => Err(tera::Error::msg("url_safe_tag filter expects a string")),
+        },
+    );
+
     tera.render(name, context)
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)
+}
+
+fn sanitize_tag_for_url(tag: &str) -> String {
+    // For tags, we'll use a simple approach: convert to lowercase and replace spaces with hyphens
+    // Chinese characters and other non-ASCII will be preserved
+    tag.to_lowercase().replace(' ', "-")
 }
 
 fn markdown_to_html(markdown: &str) -> String {

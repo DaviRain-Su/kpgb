@@ -1,5 +1,6 @@
 ---
 title: "NautilusTrader 安装指南"
+slug: "nautilus-trader-installation-guide"
 date: 2025-07-21T16:30:00+08:00
 author: Developer
 category: 技术文档

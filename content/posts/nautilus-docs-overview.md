@@ -1,5 +1,6 @@
 ---
 title: "NautilusTrader 中文文档 - 概述"
+slug: "nautilus-trader-docs-overview"
 author: "Documentation"
 excerpt: "NautilusTrader 是一个开源、高性能、生产级的算法交易平台"
 category: "NautilusTrader文档"

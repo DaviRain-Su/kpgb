@@ -1,5 +1,6 @@
 ---
 title: "NautilusTrader 核心概念详解"
+slug: "nautilus-trader-core-concepts"
 date: 2025-07-21T16:45:00+08:00
 author: Developer
 category: 技术文档

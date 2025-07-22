@@ -1,5 +1,6 @@
 ---
 title: "NautilusTrader 策略开发指南"
+slug: "nautilus-trader-strategy-development"
 date: 2025-07-21T17:00:00+08:00
 author: Developer
 category: 技术文档
