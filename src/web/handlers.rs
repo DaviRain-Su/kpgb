@@ -207,7 +207,10 @@ pub async fn style_css(State(state): State<Arc<AppState>>) -> impl IntoResponse 
 
 pub async fn docs(State(state): State<Arc<AppState>>) -> Result<Html<String>, StatusCode> {
     let mut context = Context::new();
-    context.insert("site", &state.site_config);
+    // For web server, always use empty base_path
+    let mut site_config = state.site_config.clone();
+    site_config.base_path = None;
+    context.insert("site", &site_config);
     context.insert("page_title", "技术文档中心");
 
     let rendered = render_template("docs.html", &context)?;
