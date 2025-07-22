@@ -58,20 +58,16 @@ impl BlogManager {
         Ok(post)
     }
 
-    #[allow(dead_code)]
-    pub async fn update_post(&mut self, _storage_id: &str, mut post: BlogPost) -> Result<String> {
-        post.updated_at = chrono::Utc::now();
+    pub async fn update_post(&mut self, post: &BlogPost) -> Result<()> {
+        // Update the post in database
+        self.database.update_post(post).await?;
+        Ok(())
+    }
 
-        // Check for duplicate content
-        if let Some(existing_storage_id) = self
-            .database
-            .get_post_by_content_hash(&post.content_hash)
-            .await?
-        {
-            return Ok(existing_storage_id);
-        }
-
-        self.create_post(post).await
+    pub async fn delete_post(&mut self, post_id: &str) -> Result<()> {
+        // Delete from database
+        self.database.delete_post(post_id).await?;
+        Ok(())
     }
 
     pub async fn publish_post(&mut self, storage_id: &str) -> Result<()> {

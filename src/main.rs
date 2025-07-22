@@ -102,6 +102,46 @@ enum Commands {
         #[arg(short, long, default_value = "site.toml")]
         config: String,
     },
+
+    /// Edit an existing post
+    Edit {
+        /// Storage ID of the post to edit
+        id: String,
+
+        /// New title (optional)
+        #[arg(short, long)]
+        title: Option<String>,
+
+        /// New author (optional)
+        #[arg(short, long)]
+        author: Option<String>,
+
+        /// Content file path for new content (optional)
+        #[arg(short, long)]
+        content: Option<String>,
+
+        /// New tags (comma-separated, optional)
+        #[arg(long)]
+        tags: Option<String>,
+
+        /// New category (optional)
+        #[arg(long)]
+        category: Option<String>,
+
+        /// Open in editor
+        #[arg(short, long)]
+        editor: bool,
+    },
+
+    /// Delete a post
+    Delete {
+        /// Storage ID of the post to delete
+        id: String,
+
+        /// Force delete without confirmation
+        #[arg(short, long)]
+        force: bool,
+    },
 }
 
 #[tokio::main]
@@ -322,6 +362,138 @@ async fn main() -> Result<()> {
             println!("❌ Press Ctrl+C to stop");
 
             server.run().await?;
+        }
+
+        Commands::Edit {
+            id,
+            title,
+            author,
+            content,
+            tags,
+            category,
+            editor,
+        } => {
+            // First, get the current post
+            let posts = blog_manager.list_posts(false).await?;
+            let post_data = posts
+                .iter()
+                .find(|(storage_id, _)| storage_id == &id || storage_id.starts_with(&id))
+                .ok_or_else(|| anyhow::anyhow!("Post not found with ID: {}", id))?;
+
+            let (storage_id, mut post) = post_data.clone();
+
+            println!("📝 Editing post: {}", post.title);
+            println!("   ID: {}", storage_id);
+
+            // Update fields if provided
+            let mut updated = false;
+
+            if let Some(new_title) = title {
+                post.title = new_title;
+                updated = true;
+            }
+
+            if let Some(new_author) = author {
+                post.author = new_author;
+                updated = true;
+            }
+
+            if let Some(new_category) = category {
+                post.category = Some(new_category);
+                updated = true;
+            }
+
+            if let Some(tags_str) = tags {
+                post.tags = tags_str
+                    .split(',')
+                    .map(|s| s.trim().to_string())
+                    .filter(|s| !s.is_empty())
+                    .collect();
+                updated = true;
+            }
+
+            // Handle content update
+            if let Some(content_path) = content {
+                let new_content = std::fs::read_to_string(&content_path)
+                    .map_err(|e| anyhow::anyhow!("Failed to read content file: {}", e))?;
+                post.content = new_content;
+                updated = true;
+            } else if editor {
+                // Open in default editor
+                let temp_file = format!("/tmp/kpgb-edit-{}.md", post.id);
+                std::fs::write(&temp_file, &post.content)?;
+
+                let editor_cmd = std::env::var("EDITOR").unwrap_or_else(|_| "nano".to_string());
+                std::process::Command::new(&editor_cmd)
+                    .arg(&temp_file)
+                    .status()?;
+
+                let edited_content = std::fs::read_to_string(&temp_file)?;
+                if edited_content != post.content {
+                    post.content = edited_content;
+                    updated = true;
+                }
+
+                // Clean up temp file
+                std::fs::remove_file(&temp_file).ok();
+            }
+
+            if !updated && !editor {
+                println!("ℹ️  No changes specified. Use --title, --author, --content, --tags, --category, or --editor");
+                return Ok(());
+            }
+
+            // Update the post in database
+            blog_manager.update_post(&post).await?;
+
+            println!("✅ Post updated successfully!");
+            println!("   Title: {}", post.title);
+            println!("   Author: {}", post.author);
+            if !post.tags.is_empty() {
+                println!("   Tags: {}", post.tags.join(", "));
+            }
+            if let Some(cat) = &post.category {
+                println!("   Category: {}", cat);
+            }
+        }
+
+        Commands::Delete { id, force } => {
+            // First, get the post to delete
+            let posts = blog_manager.list_posts(false).await?;
+            let post_data = posts
+                .iter()
+                .find(|(storage_id, _)| storage_id == &id || storage_id.starts_with(&id))
+                .ok_or_else(|| anyhow::anyhow!("Post not found with ID: {}", id))?;
+
+            let (storage_id, post) = post_data;
+
+            println!("🗑️  Post to delete:");
+            println!("   Title: {}", post.title);
+            println!("   Author: {}", post.author);
+            println!("   Created: {}", post.created_at.format("%Y-%m-%d %H:%M"));
+            println!("   ID: {}", storage_id);
+
+            // Confirm deletion unless --force is used
+            if !force {
+                print!("\n⚠️  Are you sure you want to delete this post? (y/N): ");
+                use std::io::{self, Write};
+                io::stdout().flush()?;
+
+                let mut input = String::new();
+                io::stdin().read_line(&mut input)?;
+                let input = input.trim().to_lowercase();
+
+                if input != "y" && input != "yes" {
+                    println!("❌ Deletion cancelled");
+                    return Ok(());
+                }
+            }
+
+            // Delete from database
+            blog_manager.delete_post(&post.id).await?;
+
+            println!("✅ Post deleted successfully!");
+            println!("   Note: The content may still exist in IPFS if pinned elsewhere");
         }
     }
 

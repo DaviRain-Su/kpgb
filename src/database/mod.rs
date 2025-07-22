@@ -143,6 +143,80 @@ impl Database {
         Ok(())
     }
 
+    pub async fn update_post(&self, post: &BlogPost) -> Result<()> {
+        let mut tx = self.pool.begin().await?;
+
+        // Update post content and metadata
+        sqlx::query(
+            r#"
+            UPDATE posts 
+            SET title = ?1, content = ?2, excerpt = ?3, author = ?4, 
+                category = ?5, updated_at = ?6, content_hash = ?7
+            WHERE id = ?8
+            "#,
+        )
+        .bind(&post.title)
+        .bind(&post.content)
+        .bind(&post.excerpt)
+        .bind(&post.author)
+        .bind(&post.category)
+        .bind(chrono::Utc::now())
+        .bind(BlogPost::calculate_hash(&post.content))
+        .bind(&post.id)
+        .execute(&mut *tx)
+        .await?;
+
+        // Delete existing tags
+        sqlx::query("DELETE FROM post_tags WHERE post_id = ?1")
+            .bind(&post.id)
+            .execute(&mut *tx)
+            .await?;
+
+        // Insert new tags
+        for tag in &post.tags {
+            // Insert tag if not exists
+            sqlx::query("INSERT OR IGNORE INTO tags (name) VALUES (?1)")
+                .bind(tag)
+                .execute(&mut *tx)
+                .await?;
+
+            // Get tag id
+            let tag_id: i64 = sqlx::query_scalar("SELECT id FROM tags WHERE name = ?1")
+                .bind(tag)
+                .fetch_one(&mut *tx)
+                .await?;
+
+            // Link post and tag
+            sqlx::query("INSERT INTO post_tags (post_id, tag_id) VALUES (?1, ?2)")
+                .bind(&post.id)
+                .bind(tag_id)
+                .execute(&mut *tx)
+                .await?;
+        }
+
+        tx.commit().await?;
+        Ok(())
+    }
+
+    pub async fn delete_post(&self, post_id: &str) -> Result<()> {
+        let mut tx = self.pool.begin().await?;
+
+        // Delete post tags first (foreign key constraint)
+        sqlx::query("DELETE FROM post_tags WHERE post_id = ?1")
+            .bind(post_id)
+            .execute(&mut *tx)
+            .await?;
+
+        // Delete the post
+        sqlx::query("DELETE FROM posts WHERE id = ?1")
+            .bind(post_id)
+            .execute(&mut *tx)
+            .await?;
+
+        tx.commit().await?;
+        Ok(())
+    }
+
     pub async fn list_posts(&self, published_only: bool) -> Result<Vec<(String, BlogPost)>> {
         let query = if published_only {
             r#"
