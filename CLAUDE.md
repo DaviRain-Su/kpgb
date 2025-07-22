@@ -3,12 +3,22 @@
 ## Project Overview
 A fully decentralized personal blog system where all content is stored on IPFS (InterPlanetary File System). The system supports local content indexing for enhanced functionality while maintaining full decentralization. Features both static site generation for GitHub Pages deployment and dynamic web server with API endpoints.
 
-## Recent Updates (2025-07-21)
+### Is KPGB Ready for Blog Writing?
+**Yes, with some limitations.** KPGB currently provides:
+- ✅ **Core Publishing**: Create, publish, and manage posts with markdown
+- ✅ **Beautiful Output**: 5 themes, responsive design, RSS feed
+- ✅ **Decentralized Storage**: Your content on IPFS forever
+- ⚠️ **Limited Editing**: No built-in edit/delete commands yet
+- ⚠️ **Basic Media**: Manual image handling required
+- 📝 **Active Development**: See [Blog Writing Features](#using-kpgb-as-a-blog-writing-tool) section for details
+
+## Recent Updates (2025-07-22)
 - ✅ **Tag System**: Complete tag management with cloud view and filtering
 - ✅ **Pagination**: Clean URL pagination for better navigation
 - ✅ **Auto Excerpts**: Automatic excerpt generation from content
 - ✅ **URL Translation**: English to Chinese translation using Claude API
 - ✅ **ASCII-only Slugs**: Fixed GitHub Pages compatibility issues
+- ✅ **Documentation Center**: Added technical documentation section with NautilusTrader docs
 
 ## Current Implementation Status
 
@@ -101,20 +111,68 @@ A fully decentralized personal blog system where all content is stored on IPFS (
 
 ### 🚧 Pending Features
 
-#### 1. **Site Search Page Optimization** (功能4)
-- Enhanced search UI/UX
-- Search result highlighting
-- Advanced search filters
+#### Core Blog Writing Features (High Priority)
 
-#### 2. **Reading Time Estimation** (功能5)
-- Calculate estimated reading time for articles
-- Display reading time in post metadata
-- Support for different reading speeds
+1. **Post Editing & Management**
+   - `edit` command to modify existing posts
+   - `delete` command to remove posts
+   - `unpublish` command to hide posts
+   - Bulk operations for multiple posts
 
-#### 3. **Related Articles Recommendation** (功能6)
-- Content-based article recommendations
-- Tag-based similarity matching
-- Display related posts at the end of articles
+2. **Image & Media Management**
+   - Built-in image upload to IPFS
+   - Automatic image optimization
+   - Media library browser
+   - Drag-and-drop support
+
+3. **Enhanced SEO & Metadata**
+   - Meta descriptions support
+   - Open Graph tags for social sharing
+   - XML sitemap generation
+   - Canonical URLs
+
+4. **Live Preview & Writing Tools**
+   - Real-time markdown preview
+   - Side-by-side editing mode
+   - Word count and reading time
+   - Auto-save functionality
+
+#### Enhanced Features (Medium Priority)
+
+5. **Site Search Page Optimization** (功能4)
+   - Enhanced search UI/UX
+   - Search result highlighting
+   - Advanced search filters
+
+6. **Reading Time Estimation** (功能5)
+   - Calculate estimated reading time for articles
+   - Display reading time in post metadata
+   - Support for different reading speeds
+
+7. **Related Articles Recommendation** (功能6)
+   - Content-based article recommendations
+   - Tag-based similarity matching
+   - Display related posts at the end of articles
+
+8. **Navigation & Organization**
+   - Previous/Next post links
+   - Post series/collections
+   - Custom page support (About, Contact)
+   - Better category management
+
+#### Advanced Features (Low Priority)
+
+9. **Comments & Interaction**
+   - Decentralized comment system
+   - Webmentions support
+   - Social sharing buttons
+   - Reaction system
+
+10. **Analytics & Insights**
+    - View statistics
+    - Popular content tracking
+    - Reader engagement metrics
+    - Content performance dashboard
 
 #### 12. **Complete CLI Interface**
 ```bash
@@ -611,6 +669,186 @@ This system is designed to be the foundation for a decentralized content aggrega
 - **dotenv**: Environment management
 - **html2text**: HTML to text conversion for translate command
 
+## Using KPGB as a Blog Writing Tool
+
+### Current Blog Writing Capabilities
+
+KPGB currently provides a solid foundation for blog writing with the following features:
+
+#### ✅ Content Creation & Management
+- **Markdown Support**: Full markdown syntax with frontmatter metadata
+- **Rich Metadata**: Title, author, date, tags, categories, excerpts, custom slugs
+- **Tag System**: Comprehensive tagging with browsable tag pages
+- **Auto-Excerpts**: Intelligent excerpt generation for post previews
+- **Multiple Authors**: Support for different authors per post
+- **Draft/Published States**: Control post visibility
+
+#### ✅ Publishing & Distribution
+- **Multi-Storage Options**: IPFS (decentralized), GitHub, or local storage
+- **Static Site Generation**: Generate HTML for GitHub Pages hosting
+- **RSS Feed**: Automatic RSS 2.0 feed generation
+- **SEO-Friendly URLs**: Clean, readable URL structure
+- **Multiple Themes**: 5 beautiful themes to choose from
+
+#### ✅ Reader Experience
+- **Full-Text Search**: Fast search with SQLite FTS5
+- **Responsive Design**: Mobile-optimized reading experience
+- **Archive Pages**: Chronological post browsing
+- **Tag Browsing**: Explore posts by topic
+- **Pagination**: Navigate through post listings
+
+### Blog Writing Workflow
+
+#### Basic Publishing Flow
+```bash
+# 1. Create a new post
+cargo run -- new --title "My Post Title" --author "Your Name"
+# Type your content, press Ctrl+D when done
+
+# 2. Or create from a markdown file
+echo "# My Post" > post.md
+cargo run -- new --title "My Post" --author "Your Name" --content post.md
+
+# 3. List your posts to get the ID
+cargo run -- list
+
+# 4. Publish the post
+cargo run -- publish <post-id>
+
+# 5. Generate static site
+cargo run -- generate
+
+# 6. Deploy to GitHub Pages
+./scripts/deploy.sh
+```
+
+#### Writing with Frontmatter
+```markdown
+---
+title: "Advanced Post Example"
+author: "Your Name"
+date: 2025-07-22
+tags: ["rust", "ipfs", "blog"]
+category: "Technology"
+excerpt: "Custom excerpt for better SEO"
+slug: "custom-url-slug"
+---
+
+# Your Post Content Here
+
+Write your post using standard markdown...
+```
+
+### 🚧 Limitations & Planned Improvements
+
+#### High Priority Improvements Needed
+
+1. **Post Editing** ⚠️
+   - Currently no CLI command to edit existing posts
+   - Planned: `cargo run -- edit <post-id>` command
+   - Workaround: Edit database directly or republish
+
+2. **Delete/Unpublish** ⚠️
+   - No built-in delete functionality
+   - Planned: `cargo run -- delete <post-id>` command
+   - Workaround: Manual database operations
+
+3. **Image Management** ⚠️
+   - No built-in image upload/optimization
+   - Planned: Automatic IPFS image storage
+   - Workaround: Upload images separately to IPFS
+
+4. **Live Preview** 📝
+   - No real-time preview while writing
+   - Planned: Watch mode with auto-refresh
+   - Workaround: Use external markdown editor
+
+5. **SEO Metadata** 🔍
+   - Missing meta descriptions, Open Graph tags
+   - Planned: Enhanced frontmatter support
+   - Workaround: Manually edit templates
+
+#### Medium Priority Enhancements
+
+6. **Navigation Features**
+   - Previous/Next post links
+   - Related posts suggestions
+   - Series/collection support
+
+7. **Custom Pages**
+   - About, Contact, Portfolio pages
+   - Custom page templates
+   - Menu management
+
+8. **Writing Analytics**
+   - Word count display
+   - Reading time estimation
+   - Post performance metrics
+
+9. **Backup System**
+   - Automated backups
+   - Export/import tools
+   - Multi-device sync
+
+10. **Comment System**
+    - Decentralized comments
+    - Moderation tools
+    - Anti-spam measures
+
+### Recommended Workflow Enhancements
+
+Until these features are built-in, here are some workflow recommendations:
+
+#### 1. Create Helper Scripts
+```bash
+#!/bin/bash
+# blog-edit.sh
+sqlite3 kpgb.db "SELECT id, title FROM posts ORDER BY created_at DESC LIMIT 10"
+echo "Enter post ID to edit:"
+read post_id
+# Your editing logic here
+```
+
+#### 2. Use External Tools
+- **Editor**: VS Code with markdown preview
+- **Images**: Optimize with ImageOptim before uploading
+- **Backup**: Git repository for content versioning
+- **Analytics**: Add Google Analytics to templates
+
+#### 3. Template System
+Create post templates in a `templates/` directory:
+```markdown
+<!-- templates/review.md -->
+---
+title: "Review: {PRODUCT}"
+author: "Your Name"
+tags: ["review", "{CATEGORY}"]
+category: "Reviews"
+---
+
+## Overview
+{INTRODUCTION}
+
+## Pros
+- 
+
+## Cons
+- 
+
+## Verdict
+{CONCLUSION}
+```
+
+### Future Vision for Blog Writers
+
+KPGB aims to become a comprehensive blogging platform that combines:
+- **Decentralization**: Your content, your control
+- **Convenience**: Modern writing tools and workflows
+- **Performance**: Fast, SEO-optimized output
+- **Flexibility**: Multiple deployment options
+
+The goal is to make KPGB as convenient as traditional platforms while maintaining the benefits of decentralization.
+
 ## Important Reminders
 
 - Always check for duplicate content before storage
@@ -623,3 +861,6 @@ This system is designed to be the foundation for a decentralized content aggrega
 - Backup your SQLite database regularly
 - Configure base_path for GitHub Pages deployment
 - Run clippy before committing code
+- Consider reader experience when writing posts
+- Use meaningful tags for better organization
+- Write descriptive excerpts for better SEO
