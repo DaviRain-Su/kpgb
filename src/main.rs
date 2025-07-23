@@ -63,6 +63,22 @@ enum Commands {
     Read {
         /// Storage ID of the post
         id: String,
+
+        /// Use pager (less/more) for reading
+        #[arg(short, long)]
+        pager: bool,
+
+        /// Format output (plain, markdown, html)
+        #[arg(short, long, default_value = "markdown")]
+        format: String,
+
+        /// Terminal width for wrapping
+        #[arg(short, long)]
+        width: Option<usize>,
+
+        /// Export to file
+        #[arg(short, long)]
+        export: Option<String>,
     },
 
     /// Search posts
@@ -164,6 +180,40 @@ enum Commands {
         #[arg(short, long)]
         tag: Option<String>,
     },
+}
+
+fn wrap_text(text: &str, width: usize) -> String {
+    // Simple text wrapping for now
+    let mut result = String::new();
+    for line in text.lines() {
+        if line.starts_with("```") || line.starts_with("    ") || line.len() <= width {
+            // Don't wrap code blocks or short lines
+            result.push_str(line);
+            result.push('\n');
+        } else {
+            // Wrap long lines
+            let words = line.split_whitespace();
+            let mut current_line = String::new();
+            for word in words {
+                if current_line.len() + word.len() + 1 > width {
+                    if !current_line.is_empty() {
+                        result.push_str(&current_line);
+                        result.push('\n');
+                        current_line.clear();
+                    }
+                }
+                if !current_line.is_empty() {
+                    current_line.push(' ');
+                }
+                current_line.push_str(word);
+            }
+            if !current_line.is_empty() {
+                result.push_str(&current_line);
+                result.push('\n');
+            }
+        }
+    }
+    result
 }
 
 #[tokio::main]
@@ -293,18 +343,147 @@ async fn main() -> Result<()> {
             println!("✅ Post published successfully!");
         }
 
-        Commands::Read { id } => {
+        Commands::Read {
+            id,
+            pager,
+            format,
+            width,
+            export,
+        } => {
             let post = blog_manager.get_post(&id).await?;
-            println!("📖 {}", post.title);
-            println!(
-                "By: {} | {}",
-                post.author,
-                post.created_at.format("%Y-%m-%d")
-            );
+
+            // Calculate reading time
+            let word_count = post.content.split_whitespace().count();
+            let reading_time = (word_count / 200).max(1); // 200 words per minute
+
+            // Prepare formatted content
+            let mut output = String::new();
+
+            // Header with better formatting
+            output.push_str(&format!("{}\n", "═".repeat(80)));
+            output.push_str(&format!("📖 {}\n", post.title));
+            output.push_str(&format!("{}\n", "─".repeat(80)));
+            output.push_str(&format!("✍️  Author: {}\n", post.author));
+            output.push_str(&format!(
+                "📅 Date: {}\n",
+                post.created_at.format("%Y-%m-%d %H:%M")
+            ));
+            output.push_str(&format!(
+                "⏱️  Reading time: ~{} min ({} words)\n",
+                reading_time, word_count
+            ));
+
             if !post.tags.is_empty() {
-                println!("Tags: {}", post.tags.join(", "));
+                output.push_str(&format!("🏷️  Tags: {}\n", post.tags.join(", ")));
             }
-            println!("\n{}", post.content);
+            if let Some(cat) = &post.category {
+                output.push_str(&format!("📁 Category: {}\n", cat));
+            }
+            output.push_str(&format!("{}\n\n", "═".repeat(80)));
+
+            // Format content based on format option
+            let formatted_content = match format.as_str() {
+                "plain" => {
+                    // Simple plain text - just strip markdown formatting
+                    post.content
+                        .lines()
+                        .map(|line| {
+                            // Remove markdown formatting
+                            line.trim_start_matches('#')
+                                .trim_start_matches('>')
+                                .trim_start_matches('-')
+                                .trim_start_matches('*')
+                                .trim_start_matches('`')
+                                .trim()
+                        })
+                        .collect::<Vec<_>>()
+                        .join("\n")
+                }
+                "html" => {
+                    use pulldown_cmark::{html, Options, Parser};
+                    let mut options = Options::empty();
+                    options.insert(Options::ENABLE_STRIKETHROUGH);
+                    options.insert(Options::ENABLE_TABLES);
+                    let parser = Parser::new_ext(&post.content, options);
+                    let mut html_output = String::new();
+                    html::push_html(&mut html_output, parser);
+                    html_output
+                }
+                _ => {
+                    // Markdown with syntax highlighting hints
+                    let mut formatted = String::new();
+                    for line in post.content.lines() {
+                        if line.starts_with('#') {
+                            // Headers - make them stand out
+                            formatted.push_str(&format!("\n{}\n", line));
+                        } else if line.starts_with("```") {
+                            // Code blocks
+                            formatted.push_str(&format!("{}\n", line));
+                        } else if line.starts_with('>') {
+                            // Quotes
+                            formatted.push_str(&format!("│ {}\n", &line[1..].trim()));
+                        } else if line.starts_with("- ") || line.starts_with("* ") {
+                            // Lists
+                            formatted.push_str(&format!("  • {}\n", &line[2..].trim()));
+                        } else {
+                            formatted.push_str(&format!("{}\n", line));
+                        }
+                    }
+                    formatted
+                }
+            };
+
+            // Apply text wrapping if width is specified
+            let final_content = if let Some(w) = width {
+                wrap_text(&formatted_content, w)
+            } else if let Ok(term_width) = std::env::var("COLUMNS") {
+                if let Ok(w) = term_width.parse::<usize>() {
+                    wrap_text(&formatted_content, w.saturating_sub(4))
+                } else {
+                    formatted_content
+                }
+            } else {
+                formatted_content
+            };
+
+            output.push_str(&final_content);
+
+            // Footer
+            output.push_str(&format!("\n{}\n", "═".repeat(80)));
+            output.push_str(&format!("📌 Post ID: {}\n", id));
+
+            // Export to file if requested
+            if let Some(export_path) = export {
+                std::fs::write(&export_path, &output)?;
+                println!("✅ Post exported to: {}", export_path);
+                return Ok(());
+            }
+
+            // Use pager if requested
+            if pager {
+                use std::io::Write;
+                use std::process::{Command, Stdio};
+
+                let pager_cmd = std::env::var("PAGER").unwrap_or_else(|_| "less".to_string());
+
+                if let Ok(mut pager_process) = Command::new(&pager_cmd)
+                    .arg("-R") // Enable color support in less
+                    .stdin(Stdio::piped())
+                    .spawn()
+                {
+                    if let Some(stdin) = pager_process.stdin.take() {
+                        let mut writer = std::io::BufWriter::new(stdin);
+                        let _ = writer.write_all(output.as_bytes());
+                        let _ = writer.flush();
+                    }
+                    let _ = pager_process.wait();
+                } else {
+                    // Fallback to regular print if pager fails
+                    print!("{}", output);
+                }
+            } else {
+                print!("{}", output);
+            }
         }
 
         Commands::Search { query } => {
@@ -530,9 +709,12 @@ async fn main() -> Result<()> {
             // Calculate word statistics
             let mut total_words = 0;
             let mut total_chars = 0;
-            let mut author_stats: std::collections::HashMap<String, (usize, usize)> = std::collections::HashMap::new();
-            let mut posts_by_month: std::collections::HashMap<String, usize> = std::collections::HashMap::new();
-            let mut category_stats: std::collections::HashMap<String, usize> = std::collections::HashMap::new();
+            let mut author_stats: std::collections::HashMap<String, (usize, usize)> =
+                std::collections::HashMap::new();
+            let mut posts_by_month: std::collections::HashMap<String, usize> =
+                std::collections::HashMap::new();
+            let mut category_stats: std::collections::HashMap<String, usize> =
+                std::collections::HashMap::new();
 
             for (_, post) in &posts {
                 // Count words (split by whitespace)
@@ -556,8 +738,16 @@ async fn main() -> Result<()> {
                 }
             }
 
-            let avg_words = if total_posts > 0 { total_words / total_posts } else { 0 };
-            let avg_chars = if total_posts > 0 { total_chars / total_posts } else { 0 };
+            let avg_words = if total_posts > 0 {
+                total_words / total_posts
+            } else {
+                0
+            };
+            let avg_chars = if total_posts > 0 {
+                total_chars / total_posts
+            } else {
+                0
+            };
 
             if json {
                 // Export as JSON
@@ -583,10 +773,24 @@ async fn main() -> Result<()> {
                 println!();
                 println!("📝 Posts:");
                 println!("   Total:     {}", total_posts);
-                println!("   Published: {} ({}%)", published_posts, 
-                    if total_posts > 0 { published_posts * 100 / total_posts } else { 0 });
-                println!("   Drafts:    {} ({}%)", draft_posts,
-                    if total_posts > 0 { draft_posts * 100 / total_posts } else { 0 });
+                println!(
+                    "   Published: {} ({}%)",
+                    published_posts,
+                    if total_posts > 0 {
+                        published_posts * 100 / total_posts
+                    } else {
+                        0
+                    }
+                );
+                println!(
+                    "   Drafts:    {} ({}%)",
+                    draft_posts,
+                    if total_posts > 0 {
+                        draft_posts * 100 / total_posts
+                    } else {
+                        0
+                    }
+                );
                 println!();
                 println!("📖 Content:");
                 println!("   Total words:      {:>8}", total_words.to_string());
@@ -595,7 +799,7 @@ async fn main() -> Result<()> {
                 println!("   Avg chars/post:   {:>8}", avg_chars.to_string());
                 println!();
                 println!("🏷️  Tags: {} unique tags", tags.len());
-                
+
                 if detailed {
                     // Show top 5 tags
                     println!("\n   Top Tags:");
@@ -606,7 +810,7 @@ async fn main() -> Result<()> {
                     // Show author statistics
                     println!("\n✍️  Authors:");
                     let mut authors: Vec<_> = author_stats.iter().collect();
-                    authors.sort_by(|a, b| b.1.0.cmp(&a.1.0)); // Sort by post count
+                    authors.sort_by(|a, b| b.1 .0.cmp(&a.1 .0)); // Sort by post count
                     for (author, (posts, words)) in authors.iter().take(5) {
                         println!("   {} - {} posts, {} words", author, posts, words);
                     }
@@ -615,7 +819,7 @@ async fn main() -> Result<()> {
                     if !category_stats.is_empty() {
                         println!("\n📁 Categories:");
                         let mut categories: Vec<_> = category_stats.iter().collect();
-                        categories.sort_by(|a, b| b.1.cmp(&a.1));
+                        categories.sort_by(|a, b| b.1.cmp(a.1));
                         for (cat, count) in categories.iter().take(5) {
                             println!("   {} - {} posts", cat, count);
                         }
@@ -624,7 +828,7 @@ async fn main() -> Result<()> {
                     // Show posting frequency
                     println!("\n📅 Recent Activity:");
                     let mut months: Vec<_> = posts_by_month.iter().collect();
-                    months.sort_by(|a, b| b.0.cmp(&a.0)); // Sort by month descending
+                    months.sort_by(|a, b| b.0.cmp(a.0)); // Sort by month descending
                     for (month, count) in months.iter().take(6) {
                         let bar = "█".repeat((**count).min(20));
                         println!("   {} [{:>2}] {}", month, count, bar);
@@ -635,10 +839,11 @@ async fn main() -> Result<()> {
                 println!("\n🎉 Fun Facts:");
                 if total_posts > 0 {
                     // Find longest post
-                    let longest = posts.iter()
+                    let longest = posts
+                        .iter()
                         .max_by_key(|(_, p)| p.content.len())
                         .map(|(_, p)| (&p.title, p.content.split_whitespace().count()));
-                    
+
                     if let Some((title, words)) = longest {
                         println!("   Longest post: \"{}\" ({} words)", title, words);
                     }
@@ -650,15 +855,18 @@ async fn main() -> Result<()> {
 
                     // Estimate reading time for all posts
                     let reading_minutes = total_words / 200; // Average reading speed
-                    println!("   Time to read all posts: ~{} minutes ({} hours)", 
-                        reading_minutes, reading_minutes / 60);
+                    println!(
+                        "   Time to read all posts: ~{} minutes ({} hours)",
+                        reading_minutes,
+                        reading_minutes / 60
+                    );
                 }
             }
         }
 
         Commands::Random { published, tag } => {
             use rand::seq::SliceRandom;
-            
+
             let posts = if let Some(ref tag_filter) = tag {
                 blog_manager.get_posts_by_tag(tag_filter, published).await?
             } else {
