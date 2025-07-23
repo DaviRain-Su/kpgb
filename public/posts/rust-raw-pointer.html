@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Rust Raw Pointer - Anonymous IPFS Blog</title>
+    <meta name="description" content="A decentralized blog powered by IPFS">
+    <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1><a href="&#x2F;kpgb/">Anonymous IPFS Blog</a></h1>
+                <ul>
+                    <li><a href="&#x2F;kpgb/">Home</a></li>
+                    <li><a href="&#x2F;kpgb/archive">Archive</a></li>
+                    <li><a href="&#x2F;kpgb/tags">Tags</a></li>
+                    <li><a href="&#x2F;kpgb/docs">Docs</a></li>
+                    <li><a href="&#x2F;kpgb/feed.xml">RSS</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            
+<article class="post">
+    <header>
+        <h1>About Rust Raw Pointer</h1>
+        <div class="post-meta">
+            <span class="author">By DaviRain</span>
+            <span class="date">2025-07-23 00:49</span>
+            
+            <span class="category">Tech</span>
+            
+        </div>
+        
+    </header>
+
+    <div class="post-content">
+        <h2>Introduction</h2>
+<p>在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。
+原生指针有两种类型：<code>*const T</code>和<code>*mut T</code>，分别是不可变和可变的原生指针。</p>
+<p>Rust提供了一个函数可以获取类型的大小：<code>std::mem::size_of::&lt;T&gt;()</code>。</p>
+<h2>Example</h2>
+<p>这里提供了一个简单的例子，展示了如何使用原生指针。</p>
+<pre><code class="language-rust">let array: [i32; 5] = [1, 2, 3, 4, 5];
+// size of array is 20，因为i32是4字节，所以数组大小是5*4=20，
+// 这里直接使用std::mem::size_of_val(&amp;array)也可以
+println!("size of array: {}", std::mem::size_of_val(&amp;array));
+let raw = &amp;array as *const [i32; 5];
+
+// sizeof raw pointer
+// output: size of raw pointer: 8
+// because raw pointer is 64 bit
+// 因为原生指针是64位，所以大小是8字节
+println!(
+    "size of raw pointer: {}",
+    std::mem::size_of::&lt;*const [i32; 5]&gt;()
+);
+</code></pre>
+<h2>总结</h2>
+<p>原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使用原生指针时需要特别小心，因为可能会导致内存安全问题。</p>
+
+    </div>
+
+    <footer class="post-footer">
+        <div class="post-info">
+            <p><strong>Storage ID:</strong> <code>QmZsCiYzbhe1TCA4WbCJbWPuRQG2VzPqBbvDbR5271Vpoo</code></p>
+            
+            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;QmZsCiYzbhe1TCA4WbCJbWPuRQG2VzPqBbvDbR5271Vpoo" target="_blank">View on IPFS</a></p>
+            
+            <p><strong>Content Hash:</strong> <code>b9220801fa669a27951985d580fb596fd24ec7be48ae2783b9a75b55c1d84895</code></p>
+        </div>
+        <nav class="post-nav">
+            <a href="/archive.html">← Back to Archive</a>
+        </nav>
+    </footer>
+</article>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Anonymous. Powered by IPFS & KPGB.</p>
+            <p>A decentralized blog powered by IPFS</p>
+        </div>
+    </footer>
+</body>
+</html>

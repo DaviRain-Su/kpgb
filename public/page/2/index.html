@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 2 - Anonymous IPFS Blog</title>
+    <meta name="description" content="A decentralized blog powered by IPFS">
+    <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1><a href="&#x2F;kpgb/">Anonymous IPFS Blog</a></h1>
+                <ul>
+                    <li><a href="&#x2F;kpgb/">Home</a></li>
+                    <li><a href="&#x2F;kpgb/archive">Archive</a></li>
+                    <li><a href="&#x2F;kpgb/tags">Tags</a></li>
+                    <li><a href="&#x2F;kpgb/docs">Docs</a></li>
+                    <li><a href="&#x2F;kpgb/feed.xml">RSS</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            
+<div class="posts">
+    
+    <article class="post-preview">
+        <h2><a href="&#x2F;kpgb&#x2F;posts&#x2F;how-to-get-commit-in-rust.html">关于在rust的程序中如何访问到提交的git commit</a></h2>
+        <div class="post-meta">
+            <span class="author">DaviRain</span>
+            <span class="date">2025-07-23</span>
+            
+        </div>
+        <div class="post-content">
+            
+                <p>这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结果赋值给 output 变量。 如果 Git 命令成功执行，函数将从 中获取 Git 哈希值，并将其保存在 变量中。 是 Rust 中的一个字符串类型，用于在运行时决定使用 还是 来表示字符串。 如果 Git 命令未成功执行，函数将输出一个警告信息，并将 设置为 “unknown”。 最后，函数将 环境变量设置为 变量的值，并使用 指令告诉 Cargo 什么情况下需要重新运行构建脚本。 在本例中，当 ../.git/HEAD、../.git/refs 或…</p>
+
+            
+        </div>
+        <a href="&#x2F;kpgb&#x2F;posts&#x2F;how-to-get-commit-in-rust.html" class="read-more">Read more →</a>
+    </article>
+    
+    <article class="post-preview">
+        <h2><a href="&#x2F;kpgb&#x2F;posts&#x2F;hldca.html">History of Lossless Data Compression Algorithms</a></h2>
+        <div class="post-meta">
+            <span class="author">DaviRain</span>
+            <span class="date">2025-07-23</span>
+            
+        </div>
+        <div class="post-content">
+            
+                <p>有两种主要的压缩算法类型：有损和无损。有损压缩算法通常涉及减小文件的大小，通过删除需要大量数据以保持完整保真度的细节。在有损压缩中，由于删除了关键数据，不可能恢复原始文件。有损压缩最常用于存储图像和音频数据，并且虽然可以通过数据删除实现非常高的压缩比，但本文不涵盖此类压缩算法。无损数据压缩是将文件大小减小，以便解压缩功能可以完全恢复原始文件并且不会丢失数据。无损数据压缩在计算机领域中被广泛应用，从在个人电脑上节省空间，到通过网络发送数据，通过安全 shell 进行通信或查看 PNG 或 GIF 图像。 无损压缩算法的基本原理是，任何非随机文件都包含可以使用统计建模技术进行压缩的重复信息，该技术确定字符或短语出现的概率。然后可以使用这些统计模型来为特定字符或短语生成代码，根据它们出现的概率分配最短的代码给最常见的数据。这些技术包括熵编码、行程编码和使用字典的压缩。使用这些技术和其他技术，一个8位字符或这样的字符串可以用只有几个比特来表示，从而删除大量冗余数据。 数据压缩在计算机领域中的作用自1970年代以来才变得显著，当时互联网变得更加流行并发明了Lempel-Ziv算法，但它在计算机之外有着更悠久的历史。莫尔斯电码是最早的数据压缩实例，发明于1838年，英语中最常见的字母，如“e”和“t”被赋予较短的莫尔斯电码。随后，当主机计算机开始在1949年掌握时，Claude Shannon和Robert Fano发明了Shannon-Fano编码。他们的算法基于符号在给定数据块中出现的概率分配代码。符号出现的概率与代码的长度成反比，从而使数据更短的表示方式。 [ 1 ] 两年后，David Huffman在麻省理工学院学习信息理论，并与Robert Fano上了一堂课。Fano给这门课提供了两个选择，要么写一篇学期论文，要么参加期末考试。Huffman选择了写学期论文，题目是找到最有效的二进制编码方法。在工作数月后，没有任何进展，Huffman已经准备放弃所有工作，开始为期末考试而学习。就在那时，他恍然大悟，想出了一种非常类似但更有效的技术，即Huffman编码。Shannon-Fano编码和Huffman编码之间的关键区别在于前者是自下而上构建概率树，从而得到次优结果，而后者是自上而下构建概率树。 [ 2 ] 早期的Shannon-Fano和Huffman编码实现是使用硬件和硬编码的方式进行的。直到1970年代和互联网和在线存储的出现，软件压缩才开始实现，并且Huffman编码是基于输入数据动态生成的。 [ 1 ] 稍后，在1977年，Abraham Lempel和Jacob Ziv发布了他们开创性的LZ77算法，这是第一个使用字典来压缩数据的算法。更具体地说，LZ77使用动态字典，通常称为滑动窗口。 [ 3 ] 1978年，这个团队发表了他们的LZ78算法，也使用了字典。与LZ77不同的是，该算法解析输入数据并生成静态字典，而不是动态生成字典。 [ 4 ]…</p>
+
+            
+        </div>
+        <a href="&#x2F;kpgb&#x2F;posts&#x2F;hldca.html" class="read-more">Read more →</a>
+    </article>
+    
+    <article class="post-preview">
+        <h2><a href="&#x2F;kpgb&#x2F;posts&#x2F;git-frok.html">Git Fork and Upstreams ：如何去做一个很酷的技巧</a></h2>
+        <div class="post-meta">
+            <span class="author">DaviRain</span>
+            <span class="date">2025-07-23</span>
+            
+        </div>
+        <div class="post-content">
+            
+                <p>Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 – 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的原理。在这篇博客中，我将向你介绍基础知识，疑难杂症，甚至给你留下一个很酷的小技巧，让你走在曲线的前面。 让我先详细介绍一下与上游仓库交互的常见设置和最基本的工作流程。 在一个标准的设置中，你通常有一个 origin 和一个 upstream remote - 后者是项目的守门人，或者你希望贡献的真实来源。 首先，缺人你已经为上游仓库设置了一个 remote, 并希望也设置了一个 origin: 如果你没有上游，你可以很容易地用远程命令添加它。…</p>
+
+            
+        </div>
+        <a href="&#x2F;kpgb&#x2F;posts&#x2F;git-frok.html" class="read-more">Read more →</a>
+    </article>
+    
+    <article class="post-preview">
+        <h2><a href="&#x2F;kpgb&#x2F;posts&#x2F;crypto-currency-in-bitcoin.html">Crypto-currency in bitcoin</a></h2>
+        <div class="post-meta">
+            <span class="author">DaviRain</span>
+            <span class="date">2025-07-23</span>
+            
+        </div>
+        <div class="post-content">
+            
+                <p>大家应该都比较熟悉哈希函数的工作原理，密码学中用到的哈希函数被称为crypto-graphic hash function. 它有两个重要的性质：一个叫做collision resistance. 这个地方的collision是指哈希碰撞。 如果有两个输入 x, y且 x ≠ y , hash函数是H(v), 但是H(x) = H(y).这就叫做哈希碰撞。 两个不同的输入算出来的哈希值是相等的。哈希碰撞是很常见的。像我们使用哈希表的过程中就会遇到hash碰撞。 不同的输入可能会被映射到hash表中的同一个位置。一般来说哈希碰撞是不可避免的。 因为输入空间是远远大于输出空间的，比如说我们有256位的hash值。那输出空间有多大呢。 所有hash值的可能性就是2的256次方，输出空间就只有这么大。但是输入空间可以是无限大的。 所以它是有任意多样的可能性。按照鸽笼原理的话。必然会出现有两个输入被映射到同一个输出的情况。 所以我们这里说的collision resistance 并不会出现哈希碰撞。有的📖上管这个性质叫做collision free. 这个说法我不是特别喜欢。因为它对人很容易造成误解。好像是碰撞不会发生。实际上碰撞是客观存在的。 它这个意思是实际上没有什么高效的方法，人为的去制造哈希碰撞。就给定一个x，没有什么好的办法， 你能找到另外一个y，使得H(x) 和(y)的哈希值恰好相等。没有什么高效的方法去找。你硬要找的话可以用蛮力求解的方法。 比如说这个x和y，你就遍历所有输入的可能性。然后看看哪一个算出来的哈希值正好相等。这种叫做brute-froce. 遍历所有的取值，最后找了一个哈希值恰好碰撞在一起。如果输入空间比较大。比如说对于hash值是256位的话， 实际上你要用蛮力求解的方法在实际中是不可行的。他的工作量实在是太大了。…</p>
+
+            
+        </div>
+        <a href="&#x2F;kpgb&#x2F;posts&#x2F;crypto-currency-in-bitcoin.html" class="read-more">Read more →</a>
+    </article>
+    
+    <article class="post-preview">
+        <h2><a href="&#x2F;kpgb&#x2F;posts&#x2F;learning01.html">星荣英语01</a></h2>
+        <div class="post-meta">
+            <span class="author">DaviRain</span>
+            <span class="date">2025-07-23</span>
+            
+        </div>
+        <div class="post-content">
+            
+                <p>I like the food. I don’t like the food. I like to do it. I don’t like to do it. I like to do it now. I don’t like to do it now. I like to be here. I don’t like to be here. I don’t like to be here…</p>
+
+            
+        </div>
+        <a href="&#x2F;kpgb&#x2F;posts&#x2F;learning01.html" class="read-more">Read more →</a>
+    </article>
+    
+    <article class="post-preview">
+        <h2><a href="&#x2F;kpgb&#x2F;posts&#x2F;machine_learning_and_algo_trading.html">Machine Learning And Algorithmic Trading(Textbook)</a></h2>
+        <div class="post-meta">
+            <span class="author">DaviRain</span>
+            <span class="date">2025-07-23</span>
+            
+        </div>
+        <div class="post-content">
+            
+                <p>红色标记的内容是可选的,因为这些内容主要是对之前黑色文本部分的补充和扩展。这取决于你想学习的难度和速度! 你应该先完成第一本教材,然后再决定是先学习机器学习部分还是衍生品部分,当然你也可以同时学习这两部分。 这两个领域有一些交叉点,我个人更偏爱前者(机器学习),不过它们实际上是相互独立的,学习其中一个并不需要另一个领域的知识。 所有教材都提供了亚马逊链接,但要注意避免使用 libgen ,因为那里可以免费获取所有这些教材。 免责声明： 如果你进行盗版行为，我不承担任何责任，我也不建议你这样做，因为这是错误的。不过我听说有些人会用它来预先检查书的质量，确认内容是否值得购买。 另外，购买实体书可以让你拥有一个令人印象深刻的书架，有人认为阅读实体书更好。但我个人觉得PDF版本和实体书都很好。当然，说的是通过作者正当渠道购买的PDF… Quantitative Trading 2nd edition” Algorithmic Trading Machine Trading Trading and Exchanges - This can be skipped if you are not interested in microstructure, but regardless is quite helpful to know as it can make sure you avoid some silly mistakes. 注意：关于Ernest…</p>
+
+            
+        </div>
+        <a href="&#x2F;kpgb&#x2F;posts&#x2F;machine_learning_and_algo_trading.html" class="read-more">Read more →</a>
+    </article>
+    
+    <article class="post-preview">
+        <h2><a href="&#x2F;kpgb&#x2F;posts&#x2F;nautilustrader.html">NautilusTrader 完整快速入门指南</a></h2>
+        <div class="post-meta">
+            <span class="author">Developer</span>
+            <span class="date">2025-07-21</span>
+            
+            <span class="tags">
+                
+                <a href="&#x2F;kpgb/tags/nautilus-trader" class="tag">nautilus-trader</a>
+                
+                <a href="&#x2F;kpgb/tags/量化交易" class="tag">量化交易</a>
+                
+                <a href="&#x2F;kpgb/tags/python" class="tag">python</a>
+                
+                <a href="&#x2F;kpgb/tags/回测" class="tag">回测</a>
+                
+                <a href="&#x2F;kpgb/tags/教程" class="tag">教程</a>
+                
+            </span>
+            
+        </div>
+        <div class="post-content">
+            
+                <p>包含数据获取的完整 NautilusTrader 入门教程，从环境设置到回测分析的全流程指南</p>
+
+            
+        </div>
+        <a href="&#x2F;kpgb&#x2F;posts&#x2F;nautilustrader.html" class="read-more">Read more →</a>
+    </article>
+    
+    <article class="post-preview">
+        <h2><a href="&#x2F;kpgb&#x2F;posts&#x2F;how-to-build-an-agent.html">How to build an agent</a></h2>
+        <div class="post-meta">
+            <span class="author">DaviRain-Su</span>
+            <span class="date">2025-07-21</span>
+            
+            <span class="tags">
+                
+                <a href="&#x2F;kpgb/tags/agent" class="tag">agent</a>
+                
+                <a href="&#x2F;kpgb/tags/go" class="tag">go</a>
+                
+            </span>
+            
+        </div>
+        <div class="post-content">
+            
+                <p>Thorsten Ball，2025年4月15日 构建一个功能完整的代码编辑代理程序其实并不难。 看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。 但其实没有。它就是一个LLM、一个循环，以及足够的token。这就是我们在 播客 中从一开始就在说的。其余的，那些让Amp如此令人上瘾和印象深刻的东西？都是苦工。 但是构建一个小巧而又令人印象深刻的代理程序甚至不需要那些。你可以用不到400行代码完成，其中大部分还是样板代码。 我现在就要向你展示如何做到这一点。我们将一起编写一些代码，从零行代码开始，到“哇，这是…游戏改变者“。 我强烈建议你跟着做。不，真的。你可能会觉得只是读一遍就够了，不用真的敲代码，但这不到400行代码。我需要你感受一下代码量有多少，我希望你在自己的终端、自己的文件夹里亲眼看到这一切。 我们需要的东西： Go Anthropic API密钥 ，设置为环境变量 准备好铅笔！ 让我们直接开始，用四个简单命令建立一个新的Go项目： 现在，让我们打开 ，作为第一步，放入我们需要的基本框架： 是的，这还不能编译。但我们这里有的是一个 ，它可以访问 （默认情况下会寻找 ），并且可以通过从终端的stdin读取来获取用户消息。 现在让我们添加缺失的 方法：…</p>
+
+            
+        </div>
+        <a href="&#x2F;kpgb&#x2F;posts&#x2F;how-to-build-an-agent.html" class="read-more">Read more →</a>
+    </article>
+    
+    <article class="post-preview">
+        <h2><a href="&#x2F;kpgb&#x2F;posts&#x2F;auto-excerpt-test.html">Auto Excerpt Test</a></h2>
+        <div class="post-meta">
+            <span class="author">Developer</span>
+            <span class="date">2025-07-21</span>
+            
+            <span class="tags">
+                
+                <a href="&#x2F;kpgb/tags/features" class="tag">features</a>
+                
+                <a href="&#x2F;kpgb/tags/test" class="tag">test</a>
+                
+            </span>
+            
+        </div>
+        <div class="post-content">
+            
+                <p>This post demonstrates the new automatic excerpt generation feature in KPGB. The excerpt should be generated from the first paragraph of the content, stripping markdown formatting while preserving readability.</p>
+
+            
+        </div>
+        <a href="&#x2F;kpgb&#x2F;posts&#x2F;auto-excerpt-test.html" class="read-more">Read more →</a>
+    </article>
+    
+    <article class="post-preview">
+        <h2><a href="&#x2F;kpgb&#x2F;posts&#x2F;pagination-test-post-3.html">Pagination Test Post 3</a></h2>
+        <div class="post-meta">
+            <span class="author">Developer</span>
+            <span class="date">2025-07-21</span>
+            
+            <span class="tags">
+                
+                <a href="&#x2F;kpgb/tags/test" class="tag">test</a>
+                
+                <a href="&#x2F;kpgb/tags/pagination" class="tag">pagination</a>
+                
+            </span>
+            
+        </div>
+        <div class="post-content">
+            
+                <p>Testing pagination functionality - Post 3</p>
+
+            
+        </div>
+        <a href="&#x2F;kpgb&#x2F;posts&#x2F;pagination-test-post-3.html" class="read-more">Read more →</a>
+    </article>
+    
+</div>
+
+
+<nav class="pagination">
+    <div class="pagination-info">
+        Page 2 of 3
+    </div>
+    <div class="pagination-controls">
+        
+            
+                <a href="&#x2F;kpgb/" class="pagination-link pagination-prev">← Previous</a>
+            
+        
+        
+        <div class="pagination-numbers">
+            
+                
+                    
+                        <a href="&#x2F;kpgb/" class="pagination-number">1</a>
+                    
+                
+            
+                
+                    <span class="pagination-number pagination-current">2</span>
+                
+            
+                
+                    
+                        <a href="&#x2F;kpgb/page/3/" class="pagination-number">3</a>
+                    
+                
+            
+        </div>
+        
+        
+            <a href="&#x2F;kpgb/page/3/" class="pagination-link pagination-next">Next →</a>
+        
+    </div>
+</nav>
+
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Anonymous. Powered by IPFS & KPGB.</p>
+            <p>A decentralized blog powered by IPFS</p>
+        </div>
+    </footer>
+</body>
+</html>

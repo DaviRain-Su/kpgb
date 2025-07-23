@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog</title>
+    <meta name="description" content="A decentralized blog powered by IPFS">
+    <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1><a href="&#x2F;kpgb/">Anonymous IPFS Blog</a></h1>
+                <ul>
+                    <li><a href="&#x2F;kpgb/">Home</a></li>
+                    <li><a href="&#x2F;kpgb/archive">Archive</a></li>
+                    <li><a href="&#x2F;kpgb/tags">Tags</a></li>
+                    <li><a href="&#x2F;kpgb/docs">Docs</a></li>
+                    <li><a href="&#x2F;kpgb/feed.xml">RSS</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            
+<article class="post">
+    <header>
+        <h1>关于在rust的程序中如何访问到提交的git commit</h1>
+        <div class="post-meta">
+            <span class="author">By DaviRain</span>
+            <span class="date">2025-07-23 00:49</span>
+            
+            <span class="category">Tech</span>
+            
+        </div>
+        
+    </header>
+
+    <div class="post-content">
+        <h2>Code example</h2>
+<pre><code class="language-rust">use std::{borrow::Cow, process::Command};
+
+fn main() {
+	// Make git hash available via GIT_HASH build-time env var:
+	output_git_short_hash();
+}
+
+fn output_git_short_hash() {
+	let output = Command::new("git").args(["rev-parse", "HEAD"]).output();
+
+	let git_hash = match output {
+		Ok(o) if o.status.success() =&gt; {
+			let sha = String::from_utf8_lossy(&amp;o.stdout).trim().to_owned();
+			Cow::from(sha)
+		},
+		Ok(o) =&gt; {
+			println!("cargo:warning=Git command failed with status: {}", o.status);
+			Cow::from("unknown")
+		},
+		Err(err) =&gt; {
+			println!("cargo:warning=Failed to execute git command: {}", err);
+			Cow::from("unknown")
+		},
+	};
+
+	println!("cargo:rustc-env=GIT_HASH={}", git_hash);
+	println!("cargo:rerun-if-changed=../.git/HEAD");
+	println!("cargo:rerun-if-changed=../.git/refs");
+	println!("cargo:rerun-if-changed=build.rs");
+}
+</code></pre>
+<h2>代码解释</h2>
+<p>这段代码的作用是使用 Rust 的 <code>std::process::Command</code> 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 <code>build.rs</code> 文件来实现的。</p>
+<p>下面是这个代码的工作原理：</p>
+<ol>
+<li>在 <code>build.rs</code> 文件中，定义了一个函数 <code>output_git_short_hash()</code>，它使用 Rust 的 <code>std::process::Command</code> 模块来执行 Git 命令，并将执行结果赋值给 output 变量。</li>
+<li>如果 Git 命令成功执行，函数将从 <code>output.stdout</code> 中获取 Git 哈希值，并将其保存在 <code>git_hash</code> 变量中。<code>Cow</code> 是 Rust 中的一个字符串类型，用于在运行时决定使用 <code>String</code> 还是 <code>&amp;str</code> 来表示字符串。</li>
+<li>如果 Git 命令未成功执行，函数将输出一个警告信息，并将 <code>git_hash</code> 设置为 “unknown”。</li>
+<li>最后，函数将 <code>GIT_HASH</code> 环境变量设置为 <code>git_hash</code> 变量的值，并使用 <code>cargo:rerun-if-changed</code> 指令告诉 Cargo 什么情况下需要重新运行构建脚本。
+在本例中，当 ../.git/HEAD、../.git/refs 或 build.rs 文件发生变化时，Cargo 将重新运行构建脚本。</li>
+<li>在 <code>main.rs</code> 或其他 Rust 文件中，你可以使用 <code>std::env::var("GIT_HASH")</code> 来访问 GIT_HASH 环境变量，并获取 Git 哈希值。</li>
+</ol>
+<p>总之，这段代码可以在 Rust 项目中通过执行 Git 命令获取 Git 哈希值，并将其设置为环境变量，从而方便其他 Rust 文件访问该值。</p>
+<p>第四步使用了 <code>cargo:rerun-if-changed</code> 指令来告诉 Cargo 什么情况下需要重新运行构建脚本。
+这个指令是 Rust 的编译器 Cargo 提供的一个特殊注释，用于控制项目的构建和重新构建行为。</p>
+<p>具体来说，<code>cargo:rerun-if-changed</code> 指令的作用是告诉 Cargo 某些文件的改动会导致项目需要重新构建，这样 Cargo 就可以在这些文件发生变化时自动重新运行构建脚本。指令的语法如下：</p>
+<pre><code class="language-bash">cargo:rerun-if-changed=&lt;filename&gt;;
+</code></pre>
+<p>其中 <code>filename</code> 表示需要监视的文件名或文件夹名，可以使用相对或绝对路径。</p>
+<p>在这个例子中，<code>cargo:rerun-if-changed</code> 指令告诉 Cargo 在以下情况下需要重新运行构建脚本：</p>
+<ul>
+<li>当 <code>../.git/HEAD</code> 文件发生变化时。</li>
+<li>当 <code>../.git/refs</code> 文件夹下的任何文件发生变化时。</li>
+<li>当 <code>build.rs</code> 文件发生变化时。</li>
+<li>这些文件的变化通常意味着 Git 代码库发生了变化，因此需要重新获取 Git 哈希值并重新编译项目。</li>
+</ul>
+<p>需要注意的是，<code>cargo:rerun-if-changed</code> 指令只能在 <code>build.rs</code> 文件中使用，而且必须放在一个单独的行中，不能和其他代码混在一起。这是因为指令实际上是一种注释，不是 Rust 代码，所以不能包含在函数、结构体或其他 Rust 语言结构中。</p>
+
+    </div>
+
+    <footer class="post-footer">
+        <div class="post-info">
+            <p><strong>Storage ID:</strong> <code>QmTn26MfhM3QpqdHsnnomqYdbmQvpyF2wa2KQU7KwggzY1</code></p>
+            
+            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;QmTn26MfhM3QpqdHsnnomqYdbmQvpyF2wa2KQU7KwggzY1" target="_blank">View on IPFS</a></p>
+            
+            <p><strong>Content Hash:</strong> <code>8460cf42360837e08310335e221d94f1386d131c109813946e8956ae45baa273</code></p>
+        </div>
+        <nav class="post-nav">
+            <a href="/archive.html">← Back to Archive</a>
+        </nav>
+    </footer>
+</article>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Anonymous. Powered by IPFS & KPGB.</p>
+            <p>A decentralized blog powered by IPFS</p>
+        </div>
+    </footer>
+</body>
+</html>

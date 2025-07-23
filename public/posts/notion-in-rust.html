@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nothing in Rust - Anonymous IPFS Blog</title>
+    <meta name="description" content="A decentralized blog powered by IPFS">
+    <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1><a href="&#x2F;kpgb/">Anonymous IPFS Blog</a></h1>
+                <ul>
+                    <li><a href="&#x2F;kpgb/">Home</a></li>
+                    <li><a href="&#x2F;kpgb/archive">Archive</a></li>
+                    <li><a href="&#x2F;kpgb/tags">Tags</a></li>
+                    <li><a href="&#x2F;kpgb/docs">Docs</a></li>
+                    <li><a href="&#x2F;kpgb/feed.xml">RSS</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            
+<article class="post">
+    <header>
+        <h1>Nothing in Rust</h1>
+        <div class="post-meta">
+            <span class="author">By DaviRain</span>
+            <span class="date">2025-07-23 00:49</span>
+            
+            <span class="category">Tech</span>
+            
+        </div>
+        
+    </header>
+
+    <div class="post-content">
+        <h2>Outline</h2>
+<ul>
+<li>我假装这里有东西，但实际上没有。
+<ul>
+<li>PhantomData</li>
+</ul>
+</li>
+<li>这里现在是空的
+<ul>
+<li>Null</li>
+<li>Option::None</li>
+</ul>
+</li>
+<li>这里永远不会有东西。
+<ul>
+<li>The empty tuple</li>
+</ul>
+</li>
+<li>我会让你一直等到时间的尽头，空手而归。
+<ul>
+<li>The never type</li>
+</ul>
+</li>
+</ul>
+<p>这是一个关于 Rust 语言中表达“nothing”的一些方式的短篇选集。</p>
+<p>在编程中，“nothing”这个概念有几种不同的解释：</p>
+<ul>
+<li>“我假装这里有东西，但实际上没有。”</li>
+<li>“这里现在是空的。”</li>
+<li>“这里永远不会有东西。”</li>
+<li>“我会让你一直等到时间的尽头，空手而归。”</li>
+</ul>
+<p>虽然这听起来像是我的前任说的最后一句话，但我很好。</p>
+<h2>我假装这里有东西，但实际上没有。(“I’m pretending like there’s something here, but there actually isn’t.”)</h2>
+<h3>PhantomData</h3>
+<p>Rust标准库中有很多高质量的代码，但是很少有像<code>std::marker::PhantomData</code>这样纯净优雅的示例。（它的实现和<code>std::mem::drop</code>一样优雅纯粹。）</p>
+<p><code>PhantomData&lt;T&gt;</code>是一种零大小的类型，无论T是什么。这就像对编译器撒一个小谎言：你声称持有一个<code>T</code>，但实际上并不是。与一些谎言不同，这实际上有益于代码。</p>
+<p>在实践中，我看到它主要用于两种情况：</p>
+<ol>
+<li>持有生命周期说明符，限制其包含的结构体的生命周期。这对于将生命周期人为地附加到原始指针上可能很有用。</li>
+</ol>
+<pre><code class="language-rust">struct PointerWithLifetime&lt;'a, T&gt; {
+    pointer: *const T,
+    _marker: std::marker::PhantomData&lt;&amp;'a ()&gt;,
+}
+</code></pre>
+<ol start="2">
+<li>为了模拟持有类型T的值，当实际值由另一个系统持有（或管理）时。您可能会在与非传统存储模型或FFI交互时看到这种情况。</li>
+</ol>
+<pre><code class="language-rust">mod external {
+    pub fn get(location: u64) -&gt; Vec&lt;u8&gt; { /* ... */ }
+}
+
+struct Slot&lt;T&gt; {
+    location: u64,
+    _marker: std::marker::PhantomData&lt;T&gt;,
+}
+
+impl&lt;T: From&lt;Vec&lt;u8&gt;&gt;&gt; Slot&lt;T&gt; {
+    fn get(&amp;self) -&gt; T {
+        T::from(external::get(self.location))
+    }
+}
+</code></pre>
+<h2>这里现在是空的。（“There is nothing here now.”）</h2>
+<h3>Null</h3>
+<blockquote>
+<p>There’s no null in Rust.</p>
+</blockquote>
+<p>你被欺骗了，可能还被控制了。我懂的。“哦，Null 没有任何问题。”</p>
+<p>在安全的 Rust 中这是正确的。</p>
+<p>然而，有时需要拔掉创可贴，探究表面下正在发生的事情。</p>
+<pre><code class="language-rust">let n: *const i32 = std::ptr::null();
+unsafe {
+    println!("{}", *n); // Segmentation fault
+}
+</code></pre>
+<p>（提醒：原始指针只能在不安全的代码块中进行解引用。）</p>
+<p>Rust 的设计使您很少需要深入研究指针操作。您可能会在与 C 代码交互时或者在使用 Rust 重写 Quake III 时遇到原始指针（*const 和 *mut 类型）。</p>
+<h3>Option::None</h3>
+<p>标准库提供了 <code>Option</code> 枚举类型，其中包含两个变体 <code>Some</code> 和 <code>None</code>。这是表示可能存在或不存在的值的推荐方式，
+而不是使用空指针。它就像一个小的安全包装器，您应该使用它，除非您知道自己在做什么并准备好了后果，或者是单独工作。</p>
+<p>但是，使用空指针和使用 <code>None</code> 之间存在显着差异。首先，<code>Option&lt;T&gt;</code> 是一个拥有的类型，
+而原始指针只是指向内存中的一些空间。这意味着，除了在使用原始指针时必须小心的不安全操作和所有其他事项之外，<code>None</code> 的大小可以变化，
+适应它所包围的东西的大小。它只是一个枚举类型 <code>Option&lt;T&gt;</code> 的变体，如果 <code>T</code> 是 <code>Sized</code>，
+则任何 <code>Option&lt;T&gt;</code> 值都至少与 <code>T</code> 一样大，包括 <code>None</code>。而 <code>*const T</code> (当 <code>T: Sized</code> 时) 总是与 <code>usize</code> 相同大小。</p>
+<p>Type	| Size
+<code>*const T</code>	| 8 (platform-dependent)
+<code>Option&lt;&amp;T&gt;</code>	|8 (platform-dependent)
+<code>Option&lt;std::num::NonZeroU8&gt;</code>	|1
+<code>Option&lt;u8&gt;</code>	| 2
+<code>Option&lt;std::num::NonZeroU32&gt;</code>	| 4
+<code>Option&lt;u32&gt;</code>	| 8
+<code>Option&lt;std::num::NonZeroU128&gt;</code>	| 16
+<code>Option&lt;u128&gt;</code>	| 24</p>
+<h2>这里永远不会有东西（“There will never be anything here.”）</h2>
+<h3>The empty tuple</h3>
+<p>空元组写作空括号 <code>()</code>。</p>
+<p>我曾经写过 Java 代码。虽然不是完美的，但至少很有品位。在 Java 中，具有 void 返回类型的方法不返回值，无论您给出什么或多少内容。</p>
+<p>空元组在 <code>Rust</code> 中具有类似的作用：不返回实际值的函数隐式返回空元组。但是，它的用途比这更加多样化。</p>
+<p>由于空元组是一个值（尽管是没有内容且大小为零的值），也是一种类型，
+因此有时将其用于参数化 Result 类型以表示一个不提供有意义反馈的易错函数可能会很有用。</p>
+<pre><code class="language-rust">impl Partner {
+    fn process_request(&amp;mut self, proposition: Proposition) -&gt; Result&lt;(), (u32, RejectionReason)&gt; {
+        use std::time::{SystemTime, Duration};
+        use chrono::prelude::*;
+
+        self.last_request = SystemTime::now();
+
+        if SystemTime::now().duration_since(self.last_request).unwrap() &lt; Duration::from_secs(60 * 60 * 24 * 7) {
+            Err((429, RejectionReason::TooManyRequests))
+        } else if proposition.deposit &lt; self.minimum_required_deposit {
+            Err((402, RejectionReason::PaymentRequired))
+        } else if SystemTime::now().duration_since(self.created_at).unwrap() &lt; Duration::from_secs(60 * 60 * 24 * 366 * 18) {
+            Err((451, RejectionReason::UnavailableForLegalReasons))
+        } else if Local::now().hours() &lt; 19 {
+            Err((425, RejectionReason::TooEarly))
+        } else if Local::now().hours() &gt; 20 {
+            Err((503, RejectionReason::ServiceUnavailable))
+        } else if proposition.len() &gt;= 6 {
+            Err((413, RejectionReason::ContentTooLarge))
+        } else if !proposition.flushed() {
+            Err((409, RejectionReason::Conflict))
+        } else if !matches!(proposition.origin_address, Location::Permanent(..)) {
+            Err((417, RejectionReason::ExpectationFailed))
+        } else {
+            Ok(())
+        }
+    }
+}
+</code></pre>
+<h2>我会让你一直等到时间的尽头，空手而归。(“I’m going to leave you, waiting here, empty-handed, until the end of time.”)</h2>
+<h3>The never type</h3>
+<p>如何调用一个函数的返回类型，它不仅不返回值，而且根本永远不会返回？
+嗯，您可以尝试所有传统方法都无济于事 - 您将永远无法在那一点之后继续，因此需要一些精细的处理。</p>
+<p>这就是所谓的“never”类型。以下是几种遇到它的方式</p>
+<pre><code class="language-rust">let never_loop = loop {}; // loop never exits
+let never_panic = panic!(); // panic terminates execution
+
+let value: u32 = match Some(1) {
+    Some(x) =&gt; x,
+    None =&gt; return, // `return` is of type never
+};
+</code></pre>
+<p>虽然语法仍处于实验阶段，但“never”类型用感叹号 ! 表示。与此同时，您可以使用 Infallible 作为替代。</p>
+<p>当实现一个具有您永远不需要的关联类型的 trait 时，“never”类型可能会很有用。再次以 Result 为例：</p>
+<pre><code class="language-rust">trait FailureLogProvider {
+    type Error;
+    fn get_failure_logs(&amp;self) -&gt; Result&lt;Vec&lt;FailureLog&gt;, Self::Error&gt;;
+}
+
+impl FailureLogProvider for Partner {
+    type Error = !;
+    fn get_failure_logs(&amp;self) -&gt; Result&lt;Vec&lt;FailureLog&gt;, Self::Error&gt; {
+        Ok(self.failure_log)
+    }
+}
+</code></pre>
+<p>在示例中的函数实现始终成功，但是 trait 允许实现失败。为了表示这一点，关联的 Error 类型是“never”类型。</p>
+<p><a href="https://geeklaunch.io/blog/nothing-in-rust/">原文</a></p>
+
+    </div>
+
+    <footer class="post-footer">
+        <div class="post-info">
+            <p><strong>Storage ID:</strong> <code>QmVmNEkVSZhb4W4jT13JN1qBe1jVD2NGPwbVthWCkbkCKo</code></p>
+            
+            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;QmVmNEkVSZhb4W4jT13JN1qBe1jVD2NGPwbVthWCkbkCKo" target="_blank">View on IPFS</a></p>
+            
+            <p><strong>Content Hash:</strong> <code>f5dea72a8b94adbcc7f4915d25ce2cd79e33cb1ff6c60a96c17cdad0a63fc1d6</code></p>
+        </div>
+        <nav class="post-nav">
+            <a href="/archive.html">← Back to Archive</a>
+        </nav>
+    </footer>
+</article>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Anonymous. Powered by IPFS & KPGB.</p>
+            <p>A decentralized blog powered by IPFS</p>
+        </div>
+    </footer>
+</body>
+</html>
