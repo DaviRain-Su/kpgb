@@ -417,9 +417,9 @@ async fn main() -> Result<()> {
                         } else if line.starts_with("```") {
                             // Code blocks
                             formatted.push_str(&format!("{}\n", line));
-                        } else if line.starts_with('>') {
+                        } else if let Some(stripped) = line.strip_prefix('>') {
                             // Quotes
-                            formatted.push_str(&format!("│ {}\n", &line[1..].trim()));
+                            formatted.push_str(&format!("│ {}\n", stripped.trim()));
                         } else if line.starts_with("- ") || line.starts_with("* ") {
                             // Lists
                             formatted.push_str(&format!("  • {}\n", &line[2..].trim()));
