@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tag System Demo Post - Anonymous IPFS Blog</title>
+    <title>静态网站生成器完成 - Anonymous IPFS Blog</title>
     <meta name="description" content="A decentralized blog powered by IPFS">
     <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">
     <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">
@@ -29,60 +29,71 @@
             
 <article class="post">
     <header>
-        <h1>Tag System Demo Post</h1>
+        <h1>静态网站生成器完成</h1>
         <div class="post-meta">
             <span class="author">By Developer</span>
-            <span class="date">2025-07-21 07:05</span>
-            
-            <span class="category">Development</span>
-            
-        </div>
-        
-        <div class="tags">
-            
-            <a href="&#x2F;kpgb/tags/rust" class="tag">rust</a>
-            
-            <a href="&#x2F;kpgb/tags/ipfs" class="tag">ipfs</a>
-            
-            <a href="&#x2F;kpgb/tags/blog" class="tag">blog</a>
-            
-            <a href="&#x2F;kpgb/tags/features" class="tag">features</a>
+            <span class="date">2025-07-21 00:14</span>
             
         </div>
         
     </header>
 
     <div class="post-content">
-        <h1>Tag System Demo Post</h1>
-<p>This post demonstrates the new tag system implementation in KPGB.</p>
-<h2>Features Added</h2>
-<p>The tag system now includes:</p>
-<ol>
-<li><strong>Tag Browsing</strong>: Click on any tag to see all posts with that tag</li>
-<li><strong>Tag Cloud</strong>: A dedicated tags page showing all tags with post counts</li>
-<li><strong>API Support</strong>: New endpoints for tag-related queries</li>
-<li><strong>Static Generation</strong>: Tag pages are generated for static sites</li>
-<li><strong>Clean URLs</strong>: Tag pages use clean URL structure</li>
-</ol>
-<h2>Technical Implementation</h2>
+        <h1>静态网站生成器完成！</h1>
+<p>今天我们成功实现了KPGB的静态网站生成功能。</p>
+<h2>新增功能</h2>
+<h3>1. 模板引擎</h3>
 <ul>
-<li>Database layer: Tag queries with post counts</li>
-<li>API endpoints: <code>/api/tags</code> and <code>/api/tags/:tag</code></li>
-<li>Web handlers: Tag listing and filtered post views</li>
-<li>Templates: New tag cloud and tag posts pages</li>
-<li>CSS styling: Enhanced tag presentation</li>
+<li>使用Tera作为模板引擎</li>
+<li>支持继承和包含</li>
+<li>灵活的模板系统</li>
 </ul>
-<p>Try clicking on the tags below to explore posts by topic!</p>
+<h3>2. 静态网站生成</h3>
+<ul>
+<li>自动生成HTML文件</li>
+<li>响应式设计</li>
+<li>美观的CSS样式</li>
+</ul>
+<h3>3. RSS订阅</h3>
+<ul>
+<li>标准RSS 2.0格式</li>
+<li>自动更新</li>
+<li>包含完整文章内容</li>
+</ul>
+<h3>4. 站点配置</h3>
+<ul>
+<li><code>site.toml</code>配置文件</li>
+<li>自定义标题、描述、作者</li>
+<li>IPFS网关配置</li>
+</ul>
+<h2>使用方法</h2>
+<pre><code class="language-bash"># 初始化配置
+cargo run -- init
+
+# 生成网站
+cargo run -- generate
+
+# 启动服务器
+./serve.sh
+</code></pre>
+<h2>技术栈</h2>
+<ul>
+<li><strong>Rust</strong> - 主程序</li>
+<li><strong>Tera</strong> - 模板引擎</li>
+<li><strong>pulldown-cmark</strong> - Markdown解析</li>
+<li><strong>RSS</strong> - 订阅源生成</li>
+</ul>
+<p>现在你的博客可以被任何人通过浏览器访问了！</p>
 
     </div>
 
     <footer class="post-footer">
         <div class="post-info">
-            <p><strong>Storage ID:</strong> <code>QmfTnU8jYJTL2da8YDQjSX9iJYE3LEQNtnRzDAwJaTPtWC</code></p>
+            <p><strong>Storage ID:</strong> <code>QmcBX5fvT3v6KjjKUmD2DK7NX81G4EKito1rNNEFs2papD</code></p>
             
-            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;QmfTnU8jYJTL2da8YDQjSX9iJYE3LEQNtnRzDAwJaTPtWC" target="_blank">View on IPFS</a></p>
+            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;QmcBX5fvT3v6KjjKUmD2DK7NX81G4EKito1rNNEFs2papD" target="_blank">View on IPFS</a></p>
             
-            <p><strong>Content Hash:</strong> <code>552f1a83caedaf76d0341d2a283438a63928c3832daae1be81468be9e9d69f51</code></p>
+            <p><strong>Content Hash:</strong> <code>0566913433ac017ec12b723a779337fb3d7a780bd93dac56f187ae0eb4da489c</code></p>
         </div>
         <nav class="post-nav">
             <a href="/archive.html">← Back to Archive</a>
