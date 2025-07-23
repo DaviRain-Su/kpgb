@@ -1036,3 +1036,151 @@ body.zen-mode {
         margin: 20px auto;
     }
 }
+
+/* Image Lightbox */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.lightbox-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 10001;
+}
+
+.lightbox-controls button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.lightbox-controls button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.lightbox-close {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.lightbox-controls svg {
+    width: 20px;
+    height: 20px;
+    stroke: white;
+}
+
+.lightbox-caption {
+    margin-top: 20px;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    max-width: 80%;
+    opacity: 0.8;
+}
+
+/* Post content images styling */
+.post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.post-content img:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Keyboard hints */
+.lightbox.active::after {
+    content: "ESC to close • +/- to zoom • Mouse wheel to zoom • Drag to pan";
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    text-align: center;
+    pointer-events: none;
+}
+
+/* Mobile adjustments for lightbox */
+@media (max-width: 768px) {
+    .lightbox-controls {
+        top: 10px;
+        right: 10px;
+        gap: 5px;
+    }
+    
+    .lightbox-controls button {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .lightbox-controls svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .lightbox.active::after {
+        font-size: 10px;
+        bottom: 10px;
+        padding: 0 20px;
+    }
+    
+    .lightbox-caption {
+        font-size: 12px;
+        margin-top: 15px;
+    }
+}
+
+/* Dark mode is already handled by the rgba backgrounds */

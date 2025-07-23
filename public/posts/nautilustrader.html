@@ -129,7 +129,7 @@
                 <a href="#前置要求" class="toc-link">前置要求</a></li><li class="toc-item toc-level-2">
                 <a href="#安装步骤" class="toc-link">安装步骤</a><ul class="toc-sublist"><li class="toc-item toc-level-3">
                 <a href="#1_-安装-nautilustrader" class="toc-link">1. 安装 NautilusTrader</a></li><li class="toc-item toc-level-3">
-                <a href="#2_-获取示例数据_重要__" class="toc-link">2. 获取示例数据（重要！）</a></li></ul></li><li class="toc-item toc-level-2">
+                <a href="#2_-获取示例数据（重要！）" class="toc-link">2. 获取示例数据（重要！）</a></li></ul></li><li class="toc-item toc-level-2">
                 <a href="#完整的回测示例" class="toc-link">完整的回测示例</a><ul class="toc-sublist"><li class="toc-item toc-level-3">
                 <a href="#1_-导入必要的模块" class="toc-link">1. 导入必要的模块</a></li><li class="toc-item toc-level-3">
                 <a href="#2_-设置数据目录" class="toc-link">2. 设置数据目录</a></li><li class="toc-item toc-level-3">
@@ -176,7 +176,7 @@ pip install -U nautilus_trader
 pip install -U jupyterlab
 </code></pre>
             </div>
-<h3 id="2_-获取示例数据_重要__">2. 获取示例数据（重要！）</h3>
+<h3 id="2_-获取示例数据（重要！）">2. 获取示例数据（重要！）</h3>
 <p>官方提供了一个便捷的脚本来下载示例数据：</p>
 <div class="code-block-wrapper">
                 <div class="code-header">
@@ -613,6 +613,30 @@ data_client = BinanceLiveDataClientFactory.create(
             </article>
             
             <article class="related-post-card">
+                <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;post-1753263832.html">测试图片灯箱效果</a></h3>
+                <div class="post-meta">
+                    <span class="date">2025-07-23</span>
+                    
+                    <span class="reading-time">2 min read</span>
+                    
+                </div>
+                
+                    <p class="excerpt">展示KPGB博客系统的图片灯箱效果</p>
+                
+                
+                <div class="tags-mini">
+                    
+                    <span class="tag-mini">图片</span>
+                    
+                    <span class="tag-mini">lightbox</span>
+                    
+                    <span class="tag-mini">功能演示</span>
+                    
+                </div>
+                
+            </article>
+            
+            <article class="related-post-card">
                 <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;ipfs.html">IPFS图片自动上传测试</a></h3>
                 <div class="post-meta">
                     <span class="date">2025-07-23</span>
@@ -660,20 +684,6 @@ data_client = BinanceLiveDataClientFactory.create(
                 </div>
                 
                     <p class="excerpt">大多数人最后跑不赢比特币这句话我都不知道讲了多少次了(实际上最后很多人还亏钱)。 如果你指望我通过推荐你买小山寨跑赢比特币，那还是别关注我了，我没有办法给出我认为合理的建议。 现在说也许还早，但是大家可以记住这一条，年底筛选投资标的的时候， 2019-2021这轮牛市表现一般的老币，全部不作为目标，…</p>
-                
-                
-            </article>
-            
-            <article class="related-post-card">
-                <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;rust-raw-pointer.html">About Rust Raw Pointer</a></h3>
-                <div class="post-meta">
-                    <span class="date">2025-07-23</span>
-                    
-                    <span class="reading-time">2 min read</span>
-                    
-                </div>
-                
-                    <p class="excerpt">在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。 原生指针有两种类型： 和 ，分别是不可变和可变的原生指针。 Rust提供了一个函数可以获取类型的大小： 。 这里提供了一个简单的例子，展示了如何使用原生指针。 原生指针是一种裸指针，不受Rust的安全性检查限制，可以…</p>
                 
                 
             </article>
@@ -924,6 +934,182 @@ data_client = BinanceLiveDataClientFactory.create(
             exitZenMode();
         }
     }
+})();
+
+// Image Lightbox
+(function() {
+    // Create lightbox elements
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.innerHTML = `
+        <div class="lightbox-content">
+            <img class="lightbox-image" alt="">
+            <div class="lightbox-controls">
+                <button class="lightbox-close" title="Close (ESC)">&times;</button>
+                <button class="lightbox-zoom-in" title="Zoom In">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </button>
+                <button class="lightbox-zoom-out" title="Zoom Out">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                    </svg>
+                </button>
+                <button class="lightbox-zoom-reset" title="Reset Zoom">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                        <path d="M11 11L11 11"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="lightbox-caption"></div>
+        </div>
+    `;
+    document.body.appendChild(lightbox);
+
+    const lightboxContent = lightbox.querySelector('.lightbox-content');
+    const lightboxImage = lightbox.querySelector('.lightbox-image');
+    const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+    const zoomInBtn = lightbox.querySelector('.lightbox-zoom-in');
+    const zoomOutBtn = lightbox.querySelector('.lightbox-zoom-out');
+    const zoomResetBtn = lightbox.querySelector('.lightbox-zoom-reset');
+
+    let currentScale = 1;
+    let isDragging = false;
+    let startX, startY, translateX = 0, translateY = 0;
+
+    // Find all images in post content
+    const postContent = document.querySelector('.post-content');
+    if (postContent) {
+        const images = postContent.querySelectorAll('img');
+        
+        images.forEach(img => {
+            // Skip small images (likely icons)
+            if (img.width < 100 && img.height < 100) return;
+            
+            // Add cursor style
+            img.style.cursor = 'zoom-in';
+            
+            // Add click handler
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                openLightbox(this);
+            });
+        });
+    }
+
+    function openLightbox(img) {
+        lightboxImage.src = img.src;
+        lightboxImage.alt = img.alt || '';
+        lightboxCaption.textContent = img.alt || '';
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        resetZoom();
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        resetZoom();
+    }
+
+    function zoomIn() {
+        currentScale = Math.min(currentScale * 1.2, 3);
+        updateTransform();
+    }
+
+    function zoomOut() {
+        currentScale = Math.max(currentScale / 1.2, 0.5);
+        updateTransform();
+    }
+
+    function resetZoom() {
+        currentScale = 1;
+        translateX = 0;
+        translateY = 0;
+        updateTransform();
+    }
+
+    function updateTransform() {
+        lightboxImage.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+    }
+
+    // Event listeners
+    closeBtn.addEventListener('click', closeLightbox);
+    zoomInBtn.addEventListener('click', zoomIn);
+    zoomOutBtn.addEventListener('click', zoomOut);
+    zoomResetBtn.addEventListener('click', resetZoom);
+
+    // Close on background click
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    // Keyboard controls
+    document.addEventListener('keydown', function(e) {
+        if (!lightbox.classList.contains('active')) return;
+        
+        switch(e.key) {
+            case 'Escape':
+                closeLightbox();
+                break;
+            case '+':
+            case '=':
+                zoomIn();
+                break;
+            case '-':
+            case '_':
+                zoomOut();
+                break;
+            case '0':
+                resetZoom();
+                break;
+        }
+    });
+
+    // Mouse wheel zoom
+    lightboxContent.addEventListener('wheel', function(e) {
+        if (!lightbox.classList.contains('active')) return;
+        e.preventDefault();
+        
+        if (e.deltaY < 0) {
+            zoomIn();
+        } else {
+            zoomOut();
+        }
+    });
+
+    // Drag to pan when zoomed
+    lightboxImage.addEventListener('mousedown', function(e) {
+        if (currentScale <= 1) return;
+        isDragging = true;
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+        lightboxImage.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', function(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        updateTransform();
+    });
+
+    document.addEventListener('mouseup', function() {
+        isDragging = false;
+        lightboxImage.style.cursor = currentScale > 1 ? 'grab' : '';
+    });
 })();
 </script>
 
