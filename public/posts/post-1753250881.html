@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPFS图片自动上传测试 - Anonymous IPFS Blog</title>
+    <title>静态网站生成器完成 - Anonymous IPFS Blog</title>
     <meta name="description" content="A decentralized blog powered by IPFS">
     <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">
     <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">
@@ -29,79 +29,74 @@
             
 <article class="post">
     <header>
-        <h1>IPFS图片自动上传测试</h1>
+        <h1>静态网站生成器完成</h1>
         <div class="post-meta">
-            <span class="author">By DaviRain</span>
-            <span class="date">2025-07-23 02:55</span>
+            <span class="author">By Developer</span>
+            <span class="date">2025-07-21 00:14</span>
             
             <span class="reading-time">⏱️ 2 min read</span>
             
-            
-            <span class="category">功能测试</span>
-            
-        </div>
-        
-        <div class="tags">
-            
-            <a href="&#x2F;kpgb/tags/" class="tag">测试</a>
-            
-            <a href="&#x2F;kpgb/tags/ipfs" class="tag">IPFS</a>
-            
-            <a href="&#x2F;kpgb/tags/" class="tag">图片</a>
             
         </div>
         
     </header>
 
     <div class="post-content">
-        <h1>IPFS 图片自动上传功能</h1>
-<p>这是一个测试IPFS图片自动上传功能的文章。</p>
-<h2>功能说明</h2>
-<p>当你在文章中使用本地图片时，KPGB会自动：</p>
-<ol>
-<li>检测文章中的本地图片路径</li>
-<li>将图片上传到IPFS</li>
-<li>将本地路径替换为IPFS链接</li>
-<li>保持图片的alt文本不变</li>
-</ol>
-<h2>测试图片</h2>
-<p>下面是一个测试图片（需要你在相同目录下放置一个 test.png 文件）：</p>
-<p><img src="ipfs://QmZqPPqHV7NGe9PEEbK5XR7yL5YLVG4MCuV9azNEmq8Luq" alt="测试图片" /></p>
-<p>也支持相对路径：</p>
-<p><img src="./images/another.jpg" alt="另一个测试" /></p>
-<h2>已经是URL的图片不会被处理</h2>
-<p>这些图片会保持原样：</p>
+        <h1>静态网站生成器完成！</h1>
+<p>今天我们成功实现了KPGB的静态网站生成功能。</p>
+<h2>新增功能</h2>
+<h3>1. 模板引擎</h3>
 <ul>
-<li>HTTP图片：<img src="https://example.com/image.png" alt="HTTP图片" /></li>
-<li>IPFS图片：<img src="/ipfs/QmXxxxx" alt="IPFS图片" /></li>
+<li>使用Tera作为模板引擎</li>
+<li>支持继承和包含</li>
+<li>灵活的模板系统</li>
 </ul>
-<h2>支持的图片格式</h2>
-<p>KPGB支持以下图片格式的自动上传：</p>
+<h3>2. 静态网站生成</h3>
 <ul>
-<li>PNG (.png)</li>
-<li>JPEG (.jpg, .jpeg)</li>
-<li>GIF (.gif)</li>
-<li>WebP (.webp)</li>
-<li>SVG (.svg)</li>
+<li>自动生成HTML文件</li>
+<li>响应式设计</li>
+<li>美观的CSS样式</li>
+</ul>
+<h3>3. RSS订阅</h3>
+<ul>
+<li>标准RSS 2.0格式</li>
+<li>自动更新</li>
+<li>包含完整文章内容</li>
+</ul>
+<h3>4. 站点配置</h3>
+<ul>
+<li><code>site.toml</code>配置文件</li>
+<li>自定义标题、描述、作者</li>
+<li>IPFS网关配置</li>
 </ul>
 <h2>使用方法</h2>
-<p>创建新文章时，只需要使用本地图片路径：</p>
-<pre><code class="language-bash">cargo run -- new --content my-post.md
+<pre><code class="language-bash"># 初始化配置
+cargo run -- init
+
+# 生成网站
+cargo run -- generate
+
+# 启动服务器
+./serve.sh
 </code></pre>
-<p>编辑文章时也会自动处理新添加的图片：</p>
-<pre><code class="language-bash">cargo run -- edit &lt;post-id&gt; --content updated-post.md
-</code></pre>
-<p>这样就能让你的图片永久保存在IPFS上了！</p>
+<h2>技术栈</h2>
+<ul>
+<li><strong>Rust</strong> - 主程序</li>
+<li><strong>Tera</strong> - 模板引擎</li>
+<li><strong>pulldown-cmark</strong> - Markdown解析</li>
+<li><strong>RSS</strong> - 订阅源生成</li>
+</ul>
+<p>现在你的博客可以被任何人通过浏览器访问了！</p>
 
     </div>
 
     <footer class="post-footer">
         <div class="post-info">
-            <p><strong>Storage ID:</strong> <code>QmWjDyAFCDBUhcVJmviTF7V7ndWYFNPbVXzzdoiTgtpQ9e</code></p>
+            <p><strong>Storage ID:</strong> <code>QmcBX5fvT3v6KjjKUmD2DK7NX81G4EKito1rNNEFs2papD</code></p>
             
-            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;QmWjDyAFCDBUhcVJmviTF7V7ndWYFNPbVXzzdoiTgtpQ9e" target="_blank">View on IPFS</a></p>
+            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;QmcBX5fvT3v6KjjKUmD2DK7NX81G4EKito1rNNEFs2papD" target="_blank">View on IPFS</a></p>
             
-            <p><strong>Content Hash:</strong> <code>4fb845c9d7d07a8ec428cf712e1e3fd10e639d1721e0ef803b05ecfd4dc6420d</code></p>
+            <p><strong>Content Hash:</strong> <code>0566913433ac017ec12b723a779337fb3d7a780bd93dac56f187ae0eb4da489c</code></p>
         </div>
         <nav class="post-nav">
             <a href="/archive.html">← Back to Archive</a>

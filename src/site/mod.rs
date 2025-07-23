@@ -1,4 +1,5 @@
 pub mod config;
+pub mod filters;
 pub mod generator;
 
 use serde::{Deserialize, Serialize};

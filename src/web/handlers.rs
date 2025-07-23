@@ -13,6 +13,11 @@ use crate::web::AppState;
 #[derive(Deserialize)]
 pub struct SearchQuery {
     q: Option<String>,
+    author: Option<String>,
+    category: Option<String>,
+    tag: Option<String>,
+    sort: Option<String>,
+    page: Option<usize>,
 }
 
 #[derive(Deserialize)]
@@ -158,26 +163,170 @@ pub async fn search(
     Query(params): Query<SearchQuery>,
 ) -> Result<Html<String>, StatusCode> {
     let query = params.q.unwrap_or_default();
+    let author_filter = params.author.unwrap_or_default();
+    let category_filter = params.category.unwrap_or_default();
+    let tag_filter = params.tag.unwrap_or_default();
+    let sort_order = params.sort.unwrap_or_else(|| "relevance".to_string());
+    let page = params.page.unwrap_or(1);
+    let posts_per_page = state.site_config.posts_per_page;
 
-    let results = if !query.is_empty() {
+    // Get all posts
+    let all_posts = state
+        .blog_manager
+        .list_posts(true)
+        .await
+        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+
+    // Apply filters and search
+    let start_time = std::time::Instant::now();
+    let mut filtered_posts: Vec<(String, crate::models::BlogPost, f32)> = Vec::new();
+
+    for (id, post) in all_posts {
+        // Apply filters
+        if !author_filter.is_empty() && post.author != author_filter {
+            continue;
+        }
+        if !category_filter.is_empty() && post.category.as_ref() != Some(&category_filter) {
+            continue;
+        }
+        if !tag_filter.is_empty() && !post.tags.contains(&tag_filter) {
+            continue;
+        }
+
+        // Calculate search score if query exists
+        let score = if !query.is_empty() {
+            calculate_search_score(&post, &query)
+        } else {
+            1.0 // Default score for filtered results without search query
+        };
+
+        if score > 0.0 || query.is_empty() {
+            filtered_posts.push((id, post, score));
+        }
+    }
+
+    // Sort results based on sort order
+    match sort_order.as_str() {
+        "date_desc" => filtered_posts.sort_by(|a, b| b.1.created_at.cmp(&a.1.created_at)),
+        "date_asc" => filtered_posts.sort_by(|a, b| a.1.created_at.cmp(&b.1.created_at)),
+        "title" => filtered_posts.sort_by(|a, b| a.1.title.cmp(&b.1.title)),
+        _ => filtered_posts.sort_by(|a, b| b.2.partial_cmp(&a.2).unwrap()), // relevance
+    }
+
+    let search_time = start_time.elapsed().as_millis();
+    let total_results = filtered_posts.len();
+    let total_pages = total_results.div_ceil(posts_per_page);
+
+    // Paginate results
+    let start = (page - 1) * posts_per_page;
+    let end = (start + posts_per_page).min(filtered_posts.len());
+    let page_posts = &filtered_posts[start..end];
+
+    // Prepare posts for template
+    let posts: Vec<_> = page_posts
+        .iter()
+        .map(|(id, post, score)| {
+            let mut post_context = serde_json::to_value(post).unwrap();
+            post_context["url"] = serde_json::Value::String(format!("/posts/{}", post.slug));
+            post_context["storage_id"] = serde_json::Value::String(id.clone());
+
+            // Add search score as percentage
+            if !query.is_empty() {
+                post_context["search_score"] = serde_json::Value::Number(
+                    serde_json::Number::from_f64((score * 100.0) as f64).unwrap(),
+                );
+            }
+
+            // Add reading time
+            let reading_time = crate::utils::calculate_reading_time(&post.content, false);
+            post_context["reading_time"] = serde_json::Value::String(reading_time.to_string());
+
+            // Generate excerpt with highlighting if query exists
+            if !query.is_empty() {
+                if let Some(excerpt) = generate_highlighted_excerpt(&post.content, &query, 200) {
+                    post_context["excerpt_highlighted"] = serde_json::Value::String(excerpt);
+                }
+            }
+
+            post_context
+        })
+        .collect();
+
+    // Get all unique values for filters
+    let all_posts_for_filters = state
+        .blog_manager
+        .list_posts(true)
+        .await
+        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+
+    let mut authors = std::collections::HashSet::new();
+    let mut categories = std::collections::HashSet::new();
+    let mut tags = std::collections::HashSet::new();
+
+    for (_, post) in &all_posts_for_filters {
+        authors.insert(post.author.clone());
+        if let Some(cat) = &post.category {
+            categories.insert(cat.clone());
+        }
+        for tag in &post.tags {
+            tags.insert(tag.clone());
+        }
+    }
+
+    let mut authors_vec: Vec<_> = authors.into_iter().collect();
+    let mut categories_vec: Vec<_> = categories.into_iter().collect();
+    let mut tags_vec: Vec<_> = tags.into_iter().collect();
+    authors_vec.sort();
+    categories_vec.sort();
+    tags_vec.sort();
+
+    // Get total posts count before moving the collection
+    let total_posts_count = all_posts_for_filters.len();
+
+    // Get popular tags and recent posts for empty search
+    let popular_tags = if query.is_empty()
+        && author_filter.is_empty()
+        && category_filter.is_empty()
+        && tag_filter.is_empty()
+    {
         state
             .blog_manager
-            .search_posts(&query)
+            .get_all_tags()
             .await
             .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
+            .into_iter()
+            .take(10)
+            .map(|(tag, _)| tag)
+            .collect()
     } else {
         Vec::new()
     };
 
-    let posts: Vec<_> = results
-        .iter()
-        .map(|(id, post)| {
-            let mut post_context = serde_json::to_value(post).unwrap();
-            post_context["url"] = serde_json::Value::String(format!("/posts/{}", post.slug));
-            post_context["storage_id"] = serde_json::Value::String(id.clone());
-            post_context
-        })
-        .collect();
+    let recent_posts = if query.is_empty()
+        && author_filter.is_empty()
+        && category_filter.is_empty()
+        && tag_filter.is_empty()
+    {
+        all_posts_for_filters
+            .into_iter()
+            .take(5)
+            .map(|(_, post)| {
+                let mut post_map = serde_json::Map::new();
+                post_map.insert("title".to_string(), serde_json::Value::String(post.title));
+                post_map.insert(
+                    "url".to_string(),
+                    serde_json::Value::String(format!("/posts/{}", post.slug)),
+                );
+                post_map.insert(
+                    "created_at".to_string(),
+                    serde_json::Value::String(post.created_at.to_rfc3339()),
+                );
+                serde_json::Value::Object(post_map)
+            })
+            .collect()
+    } else {
+        Vec::new()
+    };
 
     let mut context = Context::new();
     // For web server, always use empty base_path
@@ -187,7 +336,28 @@ pub async fn search(
     context.insert("page_title", "Search");
     context.insert("query", &query);
     context.insert("posts", &posts);
-    context.insert("count", &posts.len());
+    context.insert("count", &total_results);
+    context.insert("search_time", &search_time);
+    context.insert("total_posts", &total_posts_count);
+
+    // Filter values
+    context.insert("authors", &authors_vec);
+    context.insert("categories", &categories_vec);
+    context.insert("tags", &tags_vec);
+    context.insert("selected_author", &author_filter);
+    context.insert("selected_category", &category_filter);
+    context.insert("selected_tag", &tag_filter);
+    context.insert("sort", &sort_order);
+
+    // Pagination
+    context.insert("current_page", &page);
+    context.insert("total_pages", &total_pages);
+    context.insert("has_prev", &(page > 1));
+    context.insert("has_next", &(page < total_pages));
+
+    // Suggestions
+    context.insert("popular_tags", &popular_tags);
+    context.insert("recent_posts", &recent_posts);
 
     let rendered = render_template("search.html", &context)?;
     Ok(Html(rendered))
@@ -234,7 +404,7 @@ fn render_template(name: &str, context: &Context) -> Result<String, StatusCode> 
     ])
     .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
-    // Add custom filter for URL-safe tags
+    // Add custom filters
     tera.register_filter(
         "url_safe_tag",
         |value: &tera::Value, _: &std::collections::HashMap<String, tera::Value>| match value
@@ -244,6 +414,8 @@ fn render_template(name: &str, context: &Context) -> Result<String, StatusCode> 
             None => Err(tera::Error::msg("url_safe_tag filter expects a string")),
         },
     );
+
+    tera.register_filter("highlight_search", crate::site::filters::highlight_search);
 
     tera.render(name, context)
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)
@@ -271,6 +443,127 @@ fn markdown_to_html(markdown: &str) -> String {
 
 use chrono::Datelike;
 use rss::{ChannelBuilder, ItemBuilder};
+
+/// Calculate search relevance score for a post
+fn calculate_search_score(post: &crate::models::BlogPost, query: &str) -> f32 {
+    let query_lower = query.to_lowercase();
+    let words: Vec<&str> = query_lower.split_whitespace().collect();
+
+    if words.is_empty() {
+        return 0.0;
+    }
+
+    let mut score = 0.0;
+    let title_lower = post.title.to_lowercase();
+    let content_lower = post.content.to_lowercase();
+    let excerpt_lower = post
+        .excerpt
+        .as_ref()
+        .map(|e| e.to_lowercase())
+        .unwrap_or_default();
+
+    for word in &words {
+        // Title matches (highest weight)
+        if title_lower.contains(word) {
+            score += 10.0;
+            // Exact word match in title
+            if title_lower.split_whitespace().any(|w| w == *word) {
+                score += 5.0;
+            }
+        }
+
+        // Tag matches (high weight)
+        for tag in &post.tags {
+            if tag.to_lowercase().contains(word) {
+                score += 5.0;
+            }
+        }
+
+        // Category match
+        if let Some(cat) = &post.category {
+            if cat.to_lowercase().contains(word) {
+                score += 3.0;
+            }
+        }
+
+        // Excerpt match
+        if excerpt_lower.contains(word) {
+            score += 2.0;
+        }
+
+        // Content matches (lower weight, but count frequency)
+        let content_matches = content_lower.matches(word).count();
+        score += (content_matches as f32).min(5.0) * 0.5;
+    }
+
+    // Normalize score
+    score / words.len() as f32
+}
+
+/// Generate excerpt with search term highlighting
+fn generate_highlighted_excerpt(content: &str, query: &str, max_length: usize) -> Option<String> {
+    let query_lower = query.to_lowercase();
+    let words: Vec<&str> = query_lower.split_whitespace().collect();
+
+    if words.is_empty() {
+        return None;
+    }
+
+    let content_lower = content.to_lowercase();
+
+    // Find the first occurrence of any search word
+    let mut best_pos = None;
+    for word in &words {
+        if let Some(pos) = content_lower.find(word) {
+            if best_pos.is_none() || pos < best_pos.unwrap() {
+                best_pos = Some(pos);
+            }
+        }
+    }
+
+    let start_pos = best_pos?;
+
+    // Find excerpt boundaries
+    let excerpt_start = start_pos.saturating_sub(max_length / 2);
+    let excerpt_end = (start_pos + max_length / 2).min(content.len());
+
+    // Adjust to word boundaries
+    let excerpt_start = if excerpt_start > 0 {
+        content[..excerpt_start]
+            .rfind(|c: char| c.is_whitespace())
+            .map(|i| i + 1)
+            .unwrap_or(excerpt_start)
+    } else {
+        0
+    };
+
+    let excerpt_end = content[excerpt_end..]
+        .find(|c: char| c.is_whitespace())
+        .map(|i| excerpt_end + i)
+        .unwrap_or(excerpt_end);
+
+    let mut excerpt = content[excerpt_start..excerpt_end].to_string();
+
+    // Add ellipsis if needed
+    if excerpt_start > 0 {
+        excerpt = format!("...{}", excerpt);
+    }
+    if excerpt_end < content.len() {
+        excerpt = format!("{}...", excerpt);
+    }
+
+    // Highlight search terms
+    for word in &words {
+        let pattern = regex::Regex::new(&format!(r"(?i)\b{}\b", regex::escape(word))).ok()?;
+        excerpt = pattern
+            .replace_all(&excerpt, |caps: &regex::Captures| {
+                format!("<mark>{}</mark>", &caps[0])
+            })
+            .to_string();
+    }
+
+    Some(excerpt)
+}
 
 pub async fn rss_feed(State(state): State<Arc<AppState>>) -> Result<impl IntoResponse, StatusCode> {
     let posts = state

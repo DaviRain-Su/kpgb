@@ -42,16 +42,9 @@ impl SiteGenerator {
             ("docs.html", include_str!("../../templates/docs.html")),
         ])?;
 
-        // Add custom filter for URL-safe tags
-        tera.register_filter(
-            "url_safe_tag",
-            |value: &tera::Value, _: &std::collections::HashMap<String, tera::Value>| match value
-                .as_str()
-            {
-                Some(tag) => Ok(tera::Value::String(sanitize_tag_for_url(tag))),
-                None => Err(tera::Error::msg("url_safe_tag filter expects a string")),
-            },
-        );
+        // Add custom filters
+        tera.register_filter("url_safe_tag", crate::site::filters::url_safe_tag);
+        tera.register_filter("highlight_search", crate::site::filters::highlight_search);
 
         Ok(Self {
             blog_manager,
