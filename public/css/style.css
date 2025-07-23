@@ -460,6 +460,38 @@ footer p {
     color: var(--bg-primary);
 }
 
+/* Comments section */
+.comments {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+
+.comments h2 {
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.comments h2::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    animation: blink 1s infinite;
+}
+
+.giscus {
+    margin-top: 2rem;
+}
+
+.giscus .giscus-frame {
+    border: 1px solid var(--border) !important;
+    background-color: var(--bg-secondary) !important;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     body {

@@ -36,5 +36,28 @@
             <a href="/archive.html">← Back to Archive</a>
         </nav>
     </footer>
+
+    {% if site.giscus.enabled and site.giscus.repo_id != "" %}
+    <!-- Giscus Comments -->
+    <div class="comments">
+        <h2>Comments</h2>
+        <script src="https://giscus.app/client.js"
+                data-repo="{{ site.giscus.repo }}"
+                data-repo-id="{{ site.giscus.repo_id }}"
+                data-category="{{ site.giscus.category }}"
+                data-category-id="{{ site.giscus.category_id }}"
+                data-mapping="{{ site.giscus.mapping }}"
+                data-strict="0"
+                data-reactions-enabled="{{ site.giscus.reactions_enabled | lower }}"
+                data-emit-metadata="{{ site.giscus.emit_metadata | lower }}"
+                data-input-position="{{ site.giscus.input_position }}"
+                data-theme="{{ site.giscus.theme }}"
+                data-lang="{{ site.giscus.lang }}"
+                data-loading="lazy"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </div>
+    {% endif %}
 </article>
 {% endblock content %}

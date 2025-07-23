@@ -4,6 +4,39 @@ pub mod generator;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct GiscusConfig {
+    pub enabled: bool,
+    pub repo: String,
+    pub repo_id: String,
+    pub category: String,
+    pub category_id: String,
+    pub mapping: String,
+    pub reactions_enabled: bool,
+    pub emit_metadata: bool,
+    pub input_position: String,
+    pub theme: String,
+    pub lang: String,
+}
+
+impl Default for GiscusConfig {
+    fn default() -> Self {
+        Self {
+            enabled: false,
+            repo: String::new(),
+            repo_id: String::new(),
+            category: "Announcements".to_string(),
+            category_id: String::new(),
+            mapping: "pathname".to_string(),
+            reactions_enabled: true,
+            emit_metadata: false,
+            input_position: "bottom".to_string(),
+            theme: "preferred_color_scheme".to_string(),
+            lang: "en".to_string(),
+        }
+    }
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SiteConfig {
     pub title: String,
     pub description: String,
@@ -14,6 +47,8 @@ pub struct SiteConfig {
     pub posts_per_page: usize,
     pub enable_rss: bool,
     pub theme: String,
+    #[serde(default)]
+    pub giscus: GiscusConfig,
 }
 
 impl SiteConfig {
@@ -43,6 +78,7 @@ impl Default for SiteConfig {
             posts_per_page: 10,
             enable_rss: true,
             theme: "default".to_string(),
+            giscus: GiscusConfig::default(),
         }
     }
 }
