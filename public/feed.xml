@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss version="2.0"><channel><title>Anonymous IPFS Blog</title><link>https://Anonymous.github.io/kpgb</link><description>A decentralized blog powered by IPFS</description><item><title>禅者的初心📒</title><link>https://Anonymous.github.io/kpgb/posts/chanzhe.html</link><description><![CDATA[<ol>
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0"><channel><title>DaviRain&apos;s Blog</title><link>https://DaviRain-Su.github.io/kpgb</link><description>探索技术、分享思考 - A decentralized blog powered by IPFS</description><item><title>禅者的初心📒</title><link>https://DaviRain-Su.github.io/kpgb/posts/chanzhe.html</link><description><![CDATA[<ol>
 <li>
 <p>是智慧在追寻智慧。</p>
 </li>
@@ -24,7 +24,7 @@
 <p>永远做一个初学者。</p>
 </li>
 </ol>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmPEiHRYWUL85YYWPKVXCscJNL1Ka1u9hEv3BUFZLiXw1i</guid><pubDate>Wed, 23 Jul 2025 00:49:49 +0000</pubDate></item><item><title>TingHu语录📒</title><link>https://Anonymous.github.io/kpgb/posts/T.html</link><description><![CDATA[<ol>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmPEiHRYWUL85YYWPKVXCscJNL1Ka1u9hEv3BUFZLiXw1i</guid><pubDate>Wed, 23 Jul 2025 00:49:49 +0000</pubDate></item><item><title>TingHu语录📒</title><link>https://DaviRain-Su.github.io/kpgb/posts/T.html</link><description><![CDATA[<ol>
 <li>
 <p>大多数人最后跑不赢比特币这句话我都不知道讲了多少次了(实际上最后很多人还亏钱)。
 如果你指望我通过推荐你买小山寨跑赢比特币，那还是别关注我了，我没有办法给出我认为合理的建议。</p>
@@ -64,7 +64,7 @@
 目前亏损严重的，不用担心翻不了身，只要现在一门心思赚稳定的钱，只要你能安心总结，
 放下执念，认清现实，相信下个周期趋势依旧会来，你就能翻身！趋势来前尽量不要投资，因为事实证明，大牛都赚不到，底部震荡，
 反弹你也很难赚到钱。所以赚到钱再来底部或者底部抬头时一把梭，人来疯时卖。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmYBGJGdy6aGmX6D5VvXhFFdsVdbkKzgsyVo3LnxGtUcut</guid><pubDate>Wed, 23 Jul 2025 00:49:48 +0000</pubDate></item><item><title>About Rust Raw Pointer</title><link>https://Anonymous.github.io/kpgb/posts/rust-raw-pointer.html</link><description><![CDATA[<h2>Introduction</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmYBGJGdy6aGmX6D5VvXhFFdsVdbkKzgsyVo3LnxGtUcut</guid><pubDate>Wed, 23 Jul 2025 00:49:48 +0000</pubDate></item><item><title>About Rust Raw Pointer</title><link>https://DaviRain-Su.github.io/kpgb/posts/rust-raw-pointer.html</link><description><![CDATA[<h2>Introduction</h2>
 <p>在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。
 原生指针有两种类型：<code>*const T</code>和<code>*mut T</code>，分别是不可变和可变的原生指针。</p>
 <p>Rust提供了一个函数可以获取类型的大小：<code>std::mem::size_of::&lt;T&gt;()</code>。</p>
@@ -87,7 +87,7 @@ println!(
 </code></pre>
 <h2>总结</h2>
 <p>原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使用原生指针时需要特别小心，因为可能会导致内存安全问题。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmZsCiYzbhe1TCA4WbCJbWPuRQG2VzPqBbvDbR5271Vpoo</guid><pubDate>Wed, 23 Jul 2025 00:49:46 +0000</pubDate></item><item><title>学习Ocaml的资源</title><link>https://Anonymous.github.io/kpgb/posts/learn-ocaml-sources.html</link><description><![CDATA[<ul>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmZsCiYzbhe1TCA4WbCJbWPuRQG2VzPqBbvDbR5271Vpoo</guid><pubDate>Wed, 23 Jul 2025 00:49:46 +0000</pubDate></item><item><title>学习Ocaml的资源</title><link>https://DaviRain-Su.github.io/kpgb/posts/learn-ocaml-sources.html</link><description><![CDATA[<ul>
 <li><a href="http://courses.cms.caltech.edu/cs134/cs134b/book.pdf">Introduction to Objective Ocaml</a> Objective Caml 简介。</li>
 <li><a href="https://ocaml-book.com/">OCaml from the Very Beginning</a> 一本非常温和的教科书，推荐用于本课程。本书的 PDF 和 HTML 格式都是免费的。</li>
 <li><a href="https://dev.realworldocaml.org/guided-tour.html">A guided tour [of OCaml]</a>
@@ -103,7 +103,7 @@ println!(
 <li>康奈尔大学在线互动教材《OCaml 编程：正确+高效+美丽》：<a href="https://cs3110.github.io/textbook/cover.html">https://cs3110.github.io/textbook/cover.html</a></li>
 <li>尝试 OCaml Pro 的交互式教程和基于 Web 的解释器：<a href="http://try.ocamlpro.com/">http://try.ocamlpro.com/</a></li>
 </ul>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmYRi6EwwvwoTLUkTAfDoG5Q2Eit5hiX9mErKz2juGmKYY</guid><pubDate>Wed, 23 Jul 2025 00:49:45 +0000</pubDate></item><item><title>About Rust tips</title><link>https://Anonymous.github.io/kpgb/posts/rust-tips.html</link><description><![CDATA[<h2>在rust中如何为本crates中的类型带有可选的feature编写测试</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmYRi6EwwvwoTLUkTAfDoG5Q2Eit5hiX9mErKz2juGmKYY</guid><pubDate>Wed, 23 Jul 2025 00:49:45 +0000</pubDate></item><item><title>About Rust tips</title><link>https://DaviRain-Su.github.io/kpgb/posts/rust-tips.html</link><description><![CDATA[<h2>在rust中如何为本crates中的类型带有可选的feature编写测试</h2>
 <p>在 Rust 中，如果你想为你的 <code>crate</code> 中的类型编写带有可选的 <code>feature</code> 的测试，你可以使用<code>cfg_attr</code>属性和<code>#[cfg(feature = "feature_name")]</code>属性来做到这一点。</p>
 <p>以下是一个例子：</p>
 <pre><code class="language-rust">// 在lib.rs或者main.rs中
@@ -186,7 +186,7 @@ let result = some_number.and_then(|x| {
 assert_eq!(result, Some(33));
 </code></pre>
 <p>因此，在使用时，map 用于简单的值转换，而 and_then 用于更复杂的操作和逻辑测试。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmeC1JrFWMsqZkixtS8SAmiZ52W6U2K9Pf8NNKnkLbWoX7</guid><pubDate>Wed, 23 Jul 2025 00:49:44 +0000</pubDate></item><item><title>Rust Resources Every Learner Should Know in 2023</title><link>https://Anonymous.github.io/kpgb/posts/rust-sources.html</link><description><![CDATA[<p>去年，我开始学习Rust，主要是为了应用于嵌入式系统。当时，我也在一篇名为“<a href="https://apollolabsblog.hashnode.dev/35-rust-learning-resources-every-beginner-should-know-in-2022">35个Rust学习资源，每个初学者在2022年都应该知道</a>”的帖子中分享了我所遇到的所有学习材料。自那时以来，我并没有停止学习 Rust，而是不断努力巩固自己的基础。因此，我一直在寻找新的学习资源。</p>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmeC1JrFWMsqZkixtS8SAmiZ52W6U2K9Pf8NNKnkLbWoX7</guid><pubDate>Wed, 23 Jul 2025 00:49:44 +0000</pubDate></item><item><title>Rust Resources Every Learner Should Know in 2023</title><link>https://DaviRain-Su.github.io/kpgb/posts/rust-sources.html</link><description><![CDATA[<p>去年，我开始学习Rust，主要是为了应用于嵌入式系统。当时，我也在一篇名为“<a href="https://apollolabsblog.hashnode.dev/35-rust-learning-resources-every-beginner-should-know-in-2022">35个Rust学习资源，每个初学者在2022年都应该知道</a>”的帖子中分享了我所遇到的所有学习材料。自那时以来，我并没有停止学习 Rust，而是不断努力巩固自己的基础。因此，我一直在寻找新的学习资源。</p>
 <p>在本文中，我将通过添加更多的资源以及对之前未曾利用的一些付费资源的思考，扩展去年的帖子。提醒一下，当时，我将资源分为了6个主要类别：1）阅读材料，2）实践资源，3）YouTube 视频，4）Git 资源，5）速查表，以及6）问题论坛。今年我增加了3个更多的类别，它们是7）课程，8）播客，以及9）新闻通讯。在相关情况下，我还将为资源的级别添加注释，无论是初学者（👶）、中级（👨），还是高级（👴）级别。</p>
 <p>我想再次强调，我的学习之旅始于 Rust 官方的语言资源“the book”，然后我主要通过完成令人惊叹的 Rustlings 练习来练习。我在本文中提到的所有其他资源都是我在学习过程中遇到的，以澄清我在“the book”中阅读的概念或当我在某个 Rustlings 练习中遇到困难并希望进行更多探索时使用的。最后，当我被问及是否会因为手头的资源而学习 Rust 时，如果有的话，基于手头的资源，我可能会首先从下面提到的快速摘要资源开始，然后再着手“the book”。如果我要选择付费资源，那么“Beginning Rust”将是我选择的书籍。</p>
 <h2>1）阅读材料 📚</h2>
@@ -307,7 +307,7 @@ assert_eq!(result, Some(33));
 </ul>
 <h2>结论</h2>
 <p>学习 Rust 不是一件容易的事情，因此利用尽可能多的资源来确认已掌握的知识变得必要。在我的学习过程中，我遇到了许多我觉得有用的资源，并在这篇文章中进行了总结。希望学习者能够找到它有用。你的经历如何？你最喜欢的 Rust 学习资源是什么？在评论中分享你的想法。👇</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmZoYqVCYw5PEfJkMjQd65nKC9N38gAg9aErAs1dE3v5xv</guid><pubDate>Wed, 23 Jul 2025 00:49:43 +0000</pubDate></item><item><title>Rust no-std</title><link>https://Anonymous.github.io/kpgb/posts/rust-no-std.html</link><description><![CDATA[<p>改写 std 的库为支持 no_std 的库及写出一个支持 std 和 no_std 库的经验谈 <a href="https://github.com/DaviRain-Su/rust-no-std-source">github repo</a>。</p>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmZoYqVCYw5PEfJkMjQd65nKC9N38gAg9aErAs1dE3v5xv</guid><pubDate>Wed, 23 Jul 2025 00:49:43 +0000</pubDate></item><item><title>Rust no-std</title><link>https://DaviRain-Su.github.io/kpgb/posts/rust-no-std.html</link><description><![CDATA[<p>改写 std 的库为支持 no_std 的库及写出一个支持 std 和 no_std 库的经验谈 <a href="https://github.com/DaviRain-Su/rust-no-std-source">github repo</a>。</p>
 <h2>简介</h2>
 <p>首先介绍 std 和 no_std 的区别，然后介绍使用 no_std 库的方式，由于支持 no_std 的特性有两种不同的方式，因此使用 no_std 库也有两种方式。其次，验证一个库是否支持 no_std 特性的验证方式，如何改写一个 std 的库为同时支持 std 和 no_std 的特性方法。具体的如何写一个支持 std 和 no_std 的库。一些在 std 和 no_std 下都可以使用的 primitive 的仓库和相关的资源和文章。</p>
 <h2>目录</h2>
@@ -401,7 +401,7 @@ assert_eq!(result, Some(33));
 </ul>
 <h2>结论</h2>
 <p>参照 <code>serder</code> 的使用以及一些论坛的讨论，推荐使用<code>#![cfg_attr(not(feature = "std"), no_std ))]</code>来同时支持 <code>std</code> 和 <code>no_std</code>。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmPL5UgmuZMs3jH7RgkApzwh5F65ydW437qDv8rt9X72w4</guid><pubDate>Wed, 23 Jul 2025 00:49:42 +0000</pubDate></item><item><title>Nothing in Rust</title><link>https://Anonymous.github.io/kpgb/posts/notion-in-rust.html</link><description><![CDATA[<h2>Outline</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmPL5UgmuZMs3jH7RgkApzwh5F65ydW437qDv8rt9X72w4</guid><pubDate>Wed, 23 Jul 2025 00:49:42 +0000</pubDate></item><item><title>Nothing in Rust</title><link>https://DaviRain-Su.github.io/kpgb/posts/notion-in-rust.html</link><description><![CDATA[<h2>Outline</h2>
 <ul>
 <li>我假装这里有东西，但实际上没有。
 <ul>
@@ -561,7 +561,7 @@ impl FailureLogProvider for Partner {
 </code></pre>
 <p>在示例中的函数实现始终成功，但是 trait 允许实现失败。为了表示这一点，关联的 Error 类型是“never”类型。</p>
 <p><a href="https://geeklaunch.io/blog/nothing-in-rust/">原文</a></p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmVmNEkVSZhb4W4jT13JN1qBe1jVD2NGPwbVthWCkbkCKo</guid><pubDate>Wed, 23 Jul 2025 00:49:41 +0000</pubDate></item><item><title>Learn Ocaml in Y Minutes</title><link>https://Anonymous.github.io/kpgb/posts/learn_ocaml_by_y_minutes.html</link><description><![CDATA[<p>OCaml 是一种经过严格评估的函数式语言，具有一些命令式功能。</p>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmVmNEkVSZhb4W4jT13JN1qBe1jVD2NGPwbVthWCkbkCKo</guid><pubDate>Wed, 23 Jul 2025 00:49:41 +0000</pubDate></item><item><title>Learn Ocaml in Y Minutes</title><link>https://DaviRain-Su.github.io/kpgb/posts/learn_ocaml_by_y_minutes.html</link><description><![CDATA[<p>OCaml 是一种经过严格评估的函数式语言，具有一些命令式功能。</p>
 <p>它与标准 ML 及其方言一起属于 ML 语言家族。 F# 也深受 OCaml 的影响。</p>
 <p>就像标准 ML 一样，OCaml 具有可交互使用的解释器和编译器。解释器二进制文件通常称为 ocaml ，编译器称为 ocamlopt 。还有一个字节码编译器 ocamlc ，但使用它的理由很少。</p>
 <p>它还包括包管理器 opam 和构建系统 dune 。</p>
@@ -1468,7 +1468,7 @@ Printf.printf "counter.contents = %d\n" !counter;;
 <li>康奈尔大学在线互动教材《OCaml 编程：正确+高效+美丽》：<a href="https://cs3110.github.io/textbook/cover.html">https://cs3110.github.io/textbook/cover.html</a></li>
 <li>尝试 OCaml Pro 的交互式教程和基于 Web 的解释器：<a href="http://try.ocamlpro.com/">http://try.ocamlpro.com/</a></li>
 </ul>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmehMPqbtR2iUdrLNiNdJjqQCYa59vXFnK5SQq6GtZPB6R</guid><pubDate>Wed, 23 Jul 2025 00:49:39 +0000</pubDate></item><item><title>翻译-区块链间通信协议:概述</title><link>https://Anonymous.github.io/kpgb/posts/ibc.html</link><description><![CDATA[<h2>Abstract</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmehMPqbtR2iUdrLNiNdJjqQCYa59vXFnK5SQq6GtZPB6R</guid><pubDate>Wed, 23 Jul 2025 00:49:39 +0000</pubDate></item><item><title>翻译-区块链间通信协议:概述</title><link>https://DaviRain-Su.github.io/kpgb/posts/ibc.html</link><description><![CDATA[<h2>Abstract</h2>
 <p>区块链间通信协议（IBC）是一个端到端的、面向连接的、有状态的协议，用于在独立的分布式账本上的模块之间进行可靠、有序和认证的通信。IBC是为异质账本之间的互操作而设计的，这些账本排列在一个未知的动态拓扑结构中，以不同的共识算法和状态机运行。该协议通过指定足够的数据结构、抽象和通信协议的语义来实现这一点，一旦被参与的账本实施，它们就可以安全地进行通信。IBC与有效载荷无关，并提供了一个跨账本的异步通信基元，可作为各种应用的组成模块。</p>
 <p>Index Terms—ibc; interblockchain; dlt</p>
 <h2>I. Introduction</h2>
@@ -1983,7 +1983,7 @@ interface ConnectionEnd {
 <p>[19] Jae Kwon, Ethan Buchman, “Cosmos: A network of distributed ledgers.” https://cosmos.network/cosmos-whitepaper.pdf, Sep-2016.</p>
 <p>[20] Ethan Buchman, Jae Kwon, Zarko Milosevic, “The latest gossip on bft consensus.” https://arxiv.org/pdf/1807.04938, Nov-2019.</p>
 <p>[21] Ethan Frey, “IBC protocol specification v0.3.1.”https://github.com/cosmos/ics/blob/master/archive/v0_3_1_IBC.pdf, Nov-2017.</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmcBkbBncPWbDN4MUBYJGZf3wTwuZPVHhYiepsdSqx5xb4</guid><pubDate>Wed, 23 Jul 2025 00:49:38 +0000</pubDate></item><item><title>关于在rust的程序中如何访问到提交的git commit</title><link>https://Anonymous.github.io/kpgb/posts/how-to-get-commit-in-rust.html</link><description><![CDATA[<h2>Code example</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmcBkbBncPWbDN4MUBYJGZf3wTwuZPVHhYiepsdSqx5xb4</guid><pubDate>Wed, 23 Jul 2025 00:49:38 +0000</pubDate></item><item><title>关于在rust的程序中如何访问到提交的git commit</title><link>https://DaviRain-Su.github.io/kpgb/posts/how-to-get-commit-in-rust.html</link><description><![CDATA[<h2>Code example</h2>
 <pre><code class="language-rust">use std::{borrow::Cow, process::Command};
 
 fn main() {
@@ -2041,7 +2041,7 @@ fn output_git_short_hash() {
 <li>这些文件的变化通常意味着 Git 代码库发生了变化，因此需要重新获取 Git 哈希值并重新编译项目。</li>
 </ul>
 <p>需要注意的是，<code>cargo:rerun-if-changed</code> 指令只能在 <code>build.rs</code> 文件中使用，而且必须放在一个单独的行中，不能和其他代码混在一起。这是因为指令实际上是一种注释，不是 Rust 代码，所以不能包含在函数、结构体或其他 Rust 语言结构中。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmTn26MfhM3QpqdHsnnomqYdbmQvpyF2wa2KQU7KwggzY1</guid><pubDate>Wed, 23 Jul 2025 00:49:37 +0000</pubDate></item><item><title>History of Lossless Data Compression Algorithms</title><link>https://Anonymous.github.io/kpgb/posts/hldca.html</link><description><![CDATA[<h2>1 Introduction</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmTn26MfhM3QpqdHsnnomqYdbmQvpyF2wa2KQU7KwggzY1</guid><pubDate>Wed, 23 Jul 2025 00:49:37 +0000</pubDate></item><item><title>History of Lossless Data Compression Algorithms</title><link>https://DaviRain-Su.github.io/kpgb/posts/hldca.html</link><description><![CDATA[<h2>1 Introduction</h2>
 <p>有两种主要的压缩算法类型：有损和无损。有损压缩算法通常涉及减小文件的大小，通过删除需要大量数据以保持完整保真度的细节。在有损压缩中，由于删除了关键数据，不可能恢复原始文件。有损压缩最常用于存储图像和音频数据，并且虽然可以通过数据删除实现非常高的压缩比，但本文不涵盖此类压缩算法。无损数据压缩是将文件大小减小，以便解压缩功能可以完全恢复原始文件并且不会丢失数据。无损数据压缩在计算机领域中被广泛应用，从在个人电脑上节省空间，到通过网络发送数据，通过安全 shell 进行通信或查看 PNG 或 GIF 图像。</p>
 <p>无损压缩算法的基本原理是，任何非随机文件都包含可以使用统计建模技术进行压缩的重复信息，该技术确定字符或短语出现的概率。然后可以使用这些统计模型来为特定字符或短语生成代码，根据它们出现的概率分配最短的代码给最常见的数据。这些技术包括熵编码、行程编码和使用字典的压缩。使用这些技术和其他技术，一个8位字符或这样的字符串可以用只有几个比特来表示，从而删除大量冗余数据。</p>
 <h2>2 History</h2>
@@ -2246,7 +2246,7 @@ inster /table</p>
 <li>Seward, J., “bzip2 and libbzip2”, bzip2 Manual, March 2000.</li>
 <li>Mahoney, M., “Adaptive Weighting of Context Models for Lossless Data Compression”, Unknown, 2002.</li>
 </ol>
-]]></description><author>DaviRain</author><guid isPermaLink="false">Qma8Nh3zVoSZmeGQS8eurB9GSGBE5HCoBBEGyVFqgNrdVX</guid><pubDate>Wed, 23 Jul 2025 00:49:36 +0000</pubDate></item><item><title>Git Fork and Upstreams ：如何去做一个很酷的技巧</title><link>https://Anonymous.github.io/kpgb/posts/git-frok.html</link><description><![CDATA[<p>Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 – 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的原理。在这篇博客中，我将向你介绍基础知识，疑难杂症，甚至给你留下一个很酷的小技巧，让你走在曲线的前面。</p>
+]]></description><author>DaviRain</author><guid isPermaLink="false">Qma8Nh3zVoSZmeGQS8eurB9GSGBE5HCoBBEGyVFqgNrdVX</guid><pubDate>Wed, 23 Jul 2025 00:49:36 +0000</pubDate></item><item><title>Git Fork and Upstreams ：如何去做一个很酷的技巧</title><link>https://DaviRain-Su.github.io/kpgb/posts/git-frok.html</link><description><![CDATA[<p>Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 – 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的原理。在这篇博客中，我将向你介绍基础知识，疑难杂症，甚至给你留下一个很酷的小技巧，让你走在曲线的前面。</p>
 <h2>Git Upstream: 保持最新做出贡献</h2>
 <p>让我先详细介绍一下与上游仓库交互的常见设置和最基本的工作流程。</p>
 <p>在一个标准的设置中，你通常有一个 origin 和一个 upstream remote - 后者是项目的守门人，或者你希望贡献的真实来源。</p>
@@ -2325,7 +2325,7 @@ git rebase upstream/master
 <p>我们使用古老的 Unix tr 将 TAB 转换为分隔符 |.</p>
 <h2>Getting started with git upstream</h2>
 <p>这就是 git upstream 的基本演练，– 如何设置 git upstream, 创建新分支，收集修改，用 git fork 发布，还有一个贴心的提示，这就是你的远程分支领先 / 落后于你多少次提交。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmemS7hUjRit3oQWKU5qv4FWkKnxjremuwdvev4TdRQJuR</guid><pubDate>Wed, 23 Jul 2025 00:49:35 +0000</pubDate></item><item><title>Crypto-currency in bitcoin</title><link>https://Anonymous.github.io/kpgb/posts/crypto-currency-in-bitcoin.html</link><description><![CDATA[<h2>哈希</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmemS7hUjRit3oQWKU5qv4FWkKnxjremuwdvev4TdRQJuR</guid><pubDate>Wed, 23 Jul 2025 00:49:35 +0000</pubDate></item><item><title>Crypto-currency in bitcoin</title><link>https://DaviRain-Su.github.io/kpgb/posts/crypto-currency-in-bitcoin.html</link><description><![CDATA[<h2>哈希</h2>
 <p>大家应该都比较熟悉哈希函数的工作原理，密码学中用到的哈希函数被称为crypto-graphic hash function.</p>
 <p>它有两个重要的性质：一个叫做collision resistance. 这个地方的collision是指哈希碰撞。
 如果有两个输入 x, y且 x ≠ y , hash函数是H(v), 但是H(x) = H(y).这就叫做哈希碰撞。
@@ -2391,7 +2391,7 @@ git rebase upstream/master
 <p>比如说我要转10个比特币给你。然后我这个交易发布到区块链上，别人怎么知道这个交易确定是我发起的呢？会不会是有人冒名顶替。偷偷把我帐上的钱转走呢？这就需要我在发布这个交易的时候要用我自己的私钥对这个交易进行签名，那其他人收到这个交易之后呢，在用我的公钥去验证这个签名的正确行。签名用的是私钥。验证签名用的是这个人的公钥。</p>
 <p>仍然都是同一个人。既然每一个人都是独立的产生账户。本地独立的生成公私钥对。不需要任何人相等，那万一两个人生成的公私钥对相同。怎么办？比如说有人想偷取比特币，一种方法是不停的产生公私钥。然后对比一下我产生的公钥。跟区块链上某个已有的公钥是不是相同。如果是一样的话，就可以用私钥把这个帐上钱给偷走。这种攻击方法从理论上说好像是可以的。但是实际当中是不可行的。比如说你是256位的hash值的话。产生相同的公私钥的可能性是微乎其微的。比如你有一台超级计算机每天产生大量的公私钥对。出现来两个人的公私钥对相同的情况概率也是可以忽略不计的。这个概率比地球爆炸的概率还要小。到目前为止还没有发现那个人用这种方法。能够攻击成功的先例。这里要强调一点，我们这里假设。产生公私钥的时候有一个好的随机源。这叫做a good source of randomness.生成公私钥的过程显然是随机的。如果选取的随机源不好的话，那么前面的分析就不存在了。就会出现两个人的公私钥对生成的是一样的。比特币中用的签名算法不光是，生成公私钥的时候要有好的随机源。之后每一次签名的时候也要有好的随机源。只要有一次签名用的随机源不好的话，就有可能泄露私钥。然后就全完了。这一点大家要一定注意。</p>
 <p>我们讲了两个功能一个是hash，一个签名。 这两个功能是可以结合起来使用的。比特币系统中一般是先对一个消息求一个hash，然后在对这个hash值签名。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmRrEEKddR5rwxj6TvG4DuYeuLA9V15kt3A53qp4NPhpFG</guid><pubDate>Wed, 23 Jul 2025 00:49:34 +0000</pubDate></item><item><title>星荣英语01</title><link>https://Anonymous.github.io/kpgb/posts/learning01.html</link><description><![CDATA[<ul>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmRrEEKddR5rwxj6TvG4DuYeuLA9V15kt3A53qp4NPhpFG</guid><pubDate>Wed, 23 Jul 2025 00:49:34 +0000</pubDate></item><item><title>星荣英语01</title><link>https://DaviRain-Su.github.io/kpgb/posts/learning01.html</link><description><![CDATA[<ul>
 <li>I like the food.</li>
 <li>I don’t like the food.</li>
 <li>I like to do it.</li>
@@ -2432,7 +2432,7 @@ git rebase upstream/master
 <li>i have to eat the food.</li>
 <li>I don’t have to eat the food.</li>
 </ul>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmU243MrDk9VUwMcNSW7QPfPQRDTeJSdj6SYGcW5mEh7kY</guid><pubDate>Wed, 23 Jul 2025 00:49:32 +0000</pubDate></item><item><title>Machine Learning And Algorithmic Trading(Textbook)</title><link>https://Anonymous.github.io/kpgb/posts/machine_learning_and_algo_trading.html</link><description><![CDATA[<h1>机器学习和算法交易(教材)</h1>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmU243MrDk9VUwMcNSW7QPfPQRDTeJSdj6SYGcW5mEh7kY</guid><pubDate>Wed, 23 Jul 2025 00:49:32 +0000</pubDate></item><item><title>Machine Learning And Algorithmic Trading(Textbook)</title><link>https://DaviRain-Su.github.io/kpgb/posts/machine_learning_and_algo_trading.html</link><description><![CDATA[<h1>机器学习和算法交易(教材)</h1>
 <p>红色标记的内容是可选的,因为这些内容主要是对之前黑色文本部分的补充和扩展。这取决于你想学习的难度和速度!</p>
 <p>你应该先完成第一本教材,然后再决定是先学习机器学习部分还是衍生品部分,当然你也可以同时学习这两部分。
 这两个领域有一些交叉点,我个人更偏爱前者(机器学习),不过它们实际上是相互独立的,学习其中一个并不需要另一个领域的知识。</p>
@@ -2652,7 +2652,7 @@ that can be applied to quant</li>
 <li>后续推荐的教材优先级逐渐降低</li>
 <li>读者可以根据需求选择性阅读后面的教材</li>
 </ul>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmRGEMP96GjEp7C1C8PofbXemf4ht9YPRwLXtYS88dXdmi</guid><pubDate>Wed, 23 Jul 2025 00:49:31 +0000</pubDate></item><item><title>NautilusTrader 完整快速入门指南</title><link>https://Anonymous.github.io/kpgb/posts/nautilustrader.html</link><description><![CDATA[<h1>NautilusTrader 完整快速入门指南</h1>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmRGEMP96GjEp7C1C8PofbXemf4ht9YPRwLXtYS88dXdmi</guid><pubDate>Wed, 23 Jul 2025 00:49:31 +0000</pubDate></item><item><title>NautilusTrader 完整快速入门指南</title><link>https://DaviRain-Su.github.io/kpgb/posts/nautilustrader.html</link><description><![CDATA[<h1>NautilusTrader 完整快速入门指南</h1>
 <p>NautilusTrader 是一个高性能的开源交易平台，本文将提供一个包含数据获取的完整入门指南。</p>
 <h2>前置要求</h2>
 <ul>
@@ -2954,7 +2954,7 @@ data_client = BinanceLiveDataClientFactory.create(
 <li><a href="https://discord.gg/AUWEAMZk">社区论坛</a></li>
 </ul>
 <p>现在你已经掌握了 NautilusTrader 的完整入门流程，包括最重要的数据获取步骤！</p>
-]]></description><author>Developer</author><guid isPermaLink="false">b08fe97d1bb5febcc841d7a9a7368b8ab464022089ed03893dbba133154ee448</guid><pubDate>Mon, 21 Jul 2025 13:31:00 +0000</pubDate></item><item><title>How to build an agent</title><link>https://Anonymous.github.io/kpgb/posts/how-to-build-an-agent.html</link><description><![CDATA[<h1>如何构建一个代理程序</h1>
+]]></description><author>Developer</author><guid isPermaLink="false">b08fe97d1bb5febcc841d7a9a7368b8ab464022089ed03893dbba133154ee448</guid><pubDate>Mon, 21 Jul 2025 13:31:00 +0000</pubDate></item><item><title>How to build an agent</title><link>https://DaviRain-Su.github.io/kpgb/posts/how-to-build-an-agent.html</link><description><![CDATA[<h1>如何构建一个代理程序</h1>
 <h2>或者：皇帝的新衣</h2>
 <p><strong>Thorsten Ball，2025年4月15日</strong></p>
 <p>构建一个功能完整的代码编辑代理程序其实并不难。</p>
@@ -3539,7 +3539,7 @@ Congratulations on building a code-editing agent!
 <p>这本质上就是代码编辑代理程序内部循环的全部内容。当然，将其集成到你的编辑器中，调整系统提示，在适当的时间给它适当的反馈，围绕它的漂亮UI，围绕工具的更好工具，对多个代理程序的支持等等——我们在Amp中构建了所有这些，但它不需要天才的时刻。所需要的只是实用的工程和苦工。</p>
 <p>这些模型现在非常强大。300行代码和三个工具，现在你可以与编辑你代码的外星智能对话。如果你认为“好吧，但我们没有真正…“——去试试吧！去看看你能用这个走多远。我打赌比你想象的要远得多。</p>
 <p>这就是为什么我们认为一切都在改变。</p>
-]]></description><author>DaviRain-Su</author><guid isPermaLink="false">QmZx8psFhFU9imDvGaMJTfMiiDoWohBEdVYwSvNhQqDHDW</guid><pubDate>Mon, 21 Jul 2025 10:16:15 +0000</pubDate></item><item><title>Auto Excerpt Test</title><link>https://Anonymous.github.io/kpgb/posts/auto-excerpt-test.html</link><description><![CDATA[<h1>Introduction to Auto Excerpts</h1>
+]]></description><author>DaviRain-Su</author><guid isPermaLink="false">QmZx8psFhFU9imDvGaMJTfMiiDoWohBEdVYwSvNhQqDHDW</guid><pubDate>Mon, 21 Jul 2025 10:16:15 +0000</pubDate></item><item><title>Auto Excerpt Test</title><link>https://DaviRain-Su.github.io/kpgb/posts/auto-excerpt-test.html</link><description><![CDATA[<h1>Introduction to Auto Excerpts</h1>
 <p>This post demonstrates the new automatic excerpt generation feature in KPGB. The excerpt should be generated from the first paragraph of the content, stripping markdown formatting while preserving readability.</p>
 <h2>How It Works</h2>
 <p>The system now automatically generates excerpts when:</p>
@@ -3570,7 +3570,7 @@ fn generate_excerpt(markdown: &amp;str) -&gt; String {
 <li>SEO-friendly summaries</li>
 </ul>
 <p>This feature enhances the overall user experience by providing clear, concise previews of each post without requiring authors to manually write excerpts.</p>
-]]></description><author>Developer</author><guid isPermaLink="false">Qmf29xVBTuy2eUFHHtZQecxBdQDNxLEkWZeQULFS9QArst</guid><pubDate>Mon, 21 Jul 2025 08:45:31 +0000</pubDate></item><item><title>Pagination Test Post 3</title><link>https://Anonymous.github.io/kpgb/posts/pagination-test-post-3.html</link><description><![CDATA[<h1>Pagination Test Post 3</h1>
+]]></description><author>Developer</author><guid isPermaLink="false">Qmf29xVBTuy2eUFHHtZQecxBdQDNxLEkWZeQULFS9QArst</guid><pubDate>Mon, 21 Jul 2025 08:45:31 +0000</pubDate></item><item><title>Pagination Test Post 3</title><link>https://DaviRain-Su.github.io/kpgb/posts/pagination-test-post-3.html</link><description><![CDATA[<h1>Pagination Test Post 3</h1>
 <p>This is test post 3 for testing pagination functionality.</p>
 <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
 ]]></description><author>Developer</author><guid isPermaLink="false">QmVY3Aqhj94jdJLj4ituS8yNZ6WSx4hoA4NRpmivGeVx6w</guid><pubDate>Mon, 21 Jul 2025 07:49:08 +0000</pubDate></item></channel></rss>
