@@ -2,6 +2,7 @@
 #![allow(clippy::uninlined_format_args)]
 #![allow(clippy::iter_kv_map)]
 #![allow(unused_variables)]
+#![allow(clippy::inherent_to_string)]
 
 mod blog;
 mod database;
@@ -345,11 +346,13 @@ async fn main() -> Result<()> {
                 println!("📝 Blog Posts:");
                 println!("{:-<80}", "");
                 for (storage_id, post) in posts {
+                    let reading_time = crate::utils::calculate_reading_time(&post.content, false);
                     println!("ID: {storage_id}");
                     println!("Title: {}", post.title);
                     println!("Author: {}", post.author);
                     println!("Created: {}", post.created_at.format("%Y-%m-%d %H:%M"));
                     println!("Published: {}", if post.published { "Yes" } else { "No" });
+                    println!("Reading: {}", reading_time.to_string());
                     if !post.tags.is_empty() {
                         println!("Tags: {}", post.tags.join(", "));
                     }
@@ -373,8 +376,13 @@ async fn main() -> Result<()> {
             let post = blog_manager.get_post(&id).await?;
 
             // Calculate reading time
-            let word_count = post.content.split_whitespace().count();
-            let reading_time = (word_count / 200).max(1); // 200 words per minute
+            let is_technical = post.tags.iter().any(|tag| {
+                tag.to_lowercase().contains("tech")
+                    || tag.to_lowercase().contains("programming")
+                    || tag.to_lowercase().contains("rust")
+                    || tag.to_lowercase().contains("code")
+            });
+            let reading_time = crate::utils::calculate_reading_time(&post.content, is_technical);
 
             // Prepare formatted content
             let mut output = String::new();
@@ -388,10 +396,7 @@ async fn main() -> Result<()> {
                 "📅 Date: {}\n",
                 post.created_at.format("%Y-%m-%d %H:%M")
             ));
-            output.push_str(&format!(
-                "⏱️  Reading time: ~{} min ({} words)\n",
-                reading_time, word_count
-            ));
+            output.push_str(&format!("⏱️  Reading time: {}\n", reading_time.details()));
 
             if !post.tags.is_empty() {
                 output.push_str(&format!("🏷️  Tags: {}\n", post.tags.join(", ")));

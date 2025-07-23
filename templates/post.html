@@ -7,6 +7,9 @@
         <div class="post-meta">
             <span class="author">By {{ post.author }}</span>
             <span class="date">{{ post.created_at | date(format="%Y-%m-%d %H:%M") }}</span>
+            {% if reading_time %}
+            <span class="reading-time">⏱️ {{ reading_time }}</span>
+            {% endif %}
             {% if post.category %}
             <span class="category">{{ post.category }}</span>
             {% endif %}

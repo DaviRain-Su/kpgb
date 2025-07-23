@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Rust Raw Pointer - Anonymous IPFS Blog</title>
+    <title>IPFS图片自动上传测试 - Anonymous IPFS Blog</title>
     <meta name="description" content="A decentralized blog powered by IPFS">
     <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">
     <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">
@@ -29,54 +29,79 @@
             
 <article class="post">
     <header>
-        <h1>About Rust Raw Pointer</h1>
+        <h1>IPFS图片自动上传测试</h1>
         <div class="post-meta">
             <span class="author">By DaviRain</span>
-            <span class="date">2025-07-23 00:49</span>
+            <span class="date">2025-07-23 02:55</span>
             
             <span class="reading-time">⏱️ 2 min read</span>
             
             
-            <span class="category">Tech</span>
+            <span class="category">功能测试</span>
+            
+        </div>
+        
+        <div class="tags">
+            
+            <a href="&#x2F;kpgb/tags/测试" class="tag">测试</a>
+            
+            <a href="&#x2F;kpgb/tags/ipfs" class="tag">IPFS</a>
+            
+            <a href="&#x2F;kpgb/tags/图片" class="tag">图片</a>
             
         </div>
         
     </header>
 
     <div class="post-content">
-        <h2>Introduction</h2>
-<p>在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。
-原生指针有两种类型：<code>*const T</code>和<code>*mut T</code>，分别是不可变和可变的原生指针。</p>
-<p>Rust提供了一个函数可以获取类型的大小：<code>std::mem::size_of::&lt;T&gt;()</code>。</p>
-<h2>Example</h2>
-<p>这里提供了一个简单的例子，展示了如何使用原生指针。</p>
-<pre><code class="language-rust">let array: [i32; 5] = [1, 2, 3, 4, 5];
-// size of array is 20，因为i32是4字节，所以数组大小是5*4=20，
-// 这里直接使用std::mem::size_of_val(&amp;array)也可以
-println!("size of array: {}", std::mem::size_of_val(&amp;array));
-let raw = &amp;array as *const [i32; 5];
-
-// sizeof raw pointer
-// output: size of raw pointer: 8
-// because raw pointer is 64 bit
-// 因为原生指针是64位，所以大小是8字节
-println!(
-    "size of raw pointer: {}",
-    std::mem::size_of::&lt;*const [i32; 5]&gt;()
-);
+        <h1>IPFS 图片自动上传功能</h1>
+<p>这是一个测试IPFS图片自动上传功能的文章。</p>
+<h2>功能说明</h2>
+<p>当你在文章中使用本地图片时，KPGB会自动：</p>
+<ol>
+<li>检测文章中的本地图片路径</li>
+<li>将图片上传到IPFS</li>
+<li>将本地路径替换为IPFS链接</li>
+<li>保持图片的alt文本不变</li>
+</ol>
+<h2>测试图片</h2>
+<p>下面是一个测试图片（需要你在相同目录下放置一个 test.png 文件）：</p>
+<p><img src="ipfs://QmZqPPqHV7NGe9PEEbK5XR7yL5YLVG4MCuV9azNEmq8Luq" alt="测试图片" /></p>
+<p>也支持相对路径：</p>
+<p><img src="./images/another.jpg" alt="另一个测试" /></p>
+<h2>已经是URL的图片不会被处理</h2>
+<p>这些图片会保持原样：</p>
+<ul>
+<li>HTTP图片：<img src="https://example.com/image.png" alt="HTTP图片" /></li>
+<li>IPFS图片：<img src="/ipfs/QmXxxxx" alt="IPFS图片" /></li>
+</ul>
+<h2>支持的图片格式</h2>
+<p>KPGB支持以下图片格式的自动上传：</p>
+<ul>
+<li>PNG (.png)</li>
+<li>JPEG (.jpg, .jpeg)</li>
+<li>GIF (.gif)</li>
+<li>WebP (.webp)</li>
+<li>SVG (.svg)</li>
+</ul>
+<h2>使用方法</h2>
+<p>创建新文章时，只需要使用本地图片路径：</p>
+<pre><code class="language-bash">cargo run -- new --content my-post.md
 </code></pre>
-<h2>总结</h2>
-<p>原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使用原生指针时需要特别小心，因为可能会导致内存安全问题。</p>
+<p>编辑文章时也会自动处理新添加的图片：</p>
+<pre><code class="language-bash">cargo run -- edit &lt;post-id&gt; --content updated-post.md
+</code></pre>
+<p>这样就能让你的图片永久保存在IPFS上了！</p>
 
     </div>
 
     <footer class="post-footer">
         <div class="post-info">
-            <p><strong>Storage ID:</strong> <code>QmZsCiYzbhe1TCA4WbCJbWPuRQG2VzPqBbvDbR5271Vpoo</code></p>
+            <p><strong>Storage ID:</strong> <code>QmWjDyAFCDBUhcVJmviTF7V7ndWYFNPbVXzzdoiTgtpQ9e</code></p>
             
-            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;QmZsCiYzbhe1TCA4WbCJbWPuRQG2VzPqBbvDbR5271Vpoo" target="_blank">View on IPFS</a></p>
+            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;QmWjDyAFCDBUhcVJmviTF7V7ndWYFNPbVXzzdoiTgtpQ9e" target="_blank">View on IPFS</a></p>
             
-            <p><strong>Content Hash:</strong> <code>b9220801fa669a27951985d580fb596fd24ec7be48ae2783b9a75b55c1d84895</code></p>
+            <p><strong>Content Hash:</strong> <code>4fb845c9d7d07a8ec428cf712e1e3fd10e639d1721e0ef803b05ecfd4dc6420d</code></p>
         </div>
         <nav class="post-nav">
             <a href="/archive.html">← Back to Archive</a>

@@ -147,6 +147,13 @@ A fully decentralized personal blog system where all content is stored on IPFS (
 - **Enhanced Reading**: Terminal pager, formatting options, export
 - **Batch Import**: Import existing Jekyll/Markdown posts
 
+#### 15. **Reading Time Estimation**
+- Automatic calculation based on word count and content type
+- Support for both English and Chinese content
+- Code block consideration for technical articles
+- Display in post lists and article headers
+- Accurate estimation: 200 WPM for English, 300 CPM for Chinese
+
 ### 🚧 Pending Features
 
 #### Core Blog Writing Features (High Priority)
@@ -176,17 +183,13 @@ A fully decentralized personal blog system where all content is stored on IPFS (
    - Search result highlighting
    - Advanced search filters
 
-5. **Reading Time Estimation** (功能5)
-   - Calculate estimated reading time for articles
-   - Display reading time in post metadata
-   - Support for different reading speeds
 
-6. **Related Articles Recommendation** (功能6)
+5. **Related Articles Recommendation** (功能6)
    - Content-based article recommendations
    - Tag-based similarity matching
    - Display related posts at the end of articles
 
-7. **Navigation & Organization**
+6. **Navigation & Organization**
    - Previous/Next post links
    - Post series/collections
    - Custom page support (About, Contact)
@@ -194,14 +197,14 @@ A fully decentralized personal blog system where all content is stored on IPFS (
 
 #### Advanced Features (Low Priority)
 
-8. **Advanced Analytics & Insights**
+7. **Advanced Analytics & Insights**
     - View statistics tracking
     - Popular content analytics
     - Reader engagement metrics
     - Content performance dashboard
     - Export analytics data
 
-#### 15. **Complete CLI Interface**
+#### 16. **Complete CLI Interface**
 ```bash
 # Create new post (with automatic image upload to IPFS)
 cargo run -- new --title "Title" --author "Author" [--content file.md]

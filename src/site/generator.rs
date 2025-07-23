@@ -151,6 +151,13 @@ impl SiteGenerator {
                         serde_json::Value::String(markdown_to_html(&post.content));
                     post_context["storage_id"] = serde_json::Value::String(id.clone());
 
+                    // Add reading time
+                    let reading_time = crate::utils::calculate_reading_time(&post.content, false);
+                    post_context["reading_time"] =
+                        serde_json::Value::String(reading_time.to_string());
+                    post_context["reading_minutes"] =
+                        serde_json::Value::Number(reading_time.minutes.into());
+
                     // Generate excerpt HTML if not provided
                     if post.excerpt.is_none() {
                         let excerpt_text =
@@ -199,6 +206,11 @@ impl SiteGenerator {
         context.insert("post", post);
         context.insert("content_html", &markdown_to_html(&post.content));
         context.insert("storage_id", storage_id);
+
+        // Add reading time
+        let reading_time = crate::utils::calculate_reading_time(&post.content, false);
+        context.insert("reading_time", &reading_time.to_string());
+        context.insert("reading_minutes", &reading_time.minutes);
 
         // Add IPFS link if it's an IPFS CID
         if storage_id.starts_with("Qm") {
@@ -400,6 +412,13 @@ impl SiteGenerator {
                     post_context["content_html"] =
                         serde_json::Value::String(markdown_to_html(&post.content));
                     post_context["storage_id"] = serde_json::Value::String(id.clone());
+
+                    // Add reading time
+                    let reading_time = crate::utils::calculate_reading_time(&post.content, false);
+                    post_context["reading_time"] =
+                        serde_json::Value::String(reading_time.to_string());
+                    post_context["reading_minutes"] =
+                        serde_json::Value::Number(reading_time.minutes.into());
 
                     // Generate excerpt HTML if not provided
                     if post.excerpt.is_none() {

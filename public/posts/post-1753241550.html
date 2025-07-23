@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Rust Raw Pointer - Anonymous IPFS Blog</title>
+    <title>静态网站生成器完成 - Anonymous IPFS Blog</title>
     <meta name="description" content="A decentralized blog powered by IPFS">
     <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">
     <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">
@@ -29,54 +29,74 @@
             
 <article class="post">
     <header>
-        <h1>About Rust Raw Pointer</h1>
+        <h1>静态网站生成器完成</h1>
         <div class="post-meta">
-            <span class="author">By DaviRain</span>
-            <span class="date">2025-07-23 00:49</span>
+            <span class="author">By Developer</span>
+            <span class="date">2025-07-21 00:14</span>
             
             <span class="reading-time">⏱️ 2 min read</span>
             
-            
-            <span class="category">Tech</span>
             
         </div>
         
     </header>
 
     <div class="post-content">
-        <h2>Introduction</h2>
-<p>在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。
-原生指针有两种类型：<code>*const T</code>和<code>*mut T</code>，分别是不可变和可变的原生指针。</p>
-<p>Rust提供了一个函数可以获取类型的大小：<code>std::mem::size_of::&lt;T&gt;()</code>。</p>
-<h2>Example</h2>
-<p>这里提供了一个简单的例子，展示了如何使用原生指针。</p>
-<pre><code class="language-rust">let array: [i32; 5] = [1, 2, 3, 4, 5];
-// size of array is 20，因为i32是4字节，所以数组大小是5*4=20，
-// 这里直接使用std::mem::size_of_val(&amp;array)也可以
-println!("size of array: {}", std::mem::size_of_val(&amp;array));
-let raw = &amp;array as *const [i32; 5];
+        <h1>静态网站生成器完成！</h1>
+<p>今天我们成功实现了KPGB的静态网站生成功能。</p>
+<h2>新增功能</h2>
+<h3>1. 模板引擎</h3>
+<ul>
+<li>使用Tera作为模板引擎</li>
+<li>支持继承和包含</li>
+<li>灵活的模板系统</li>
+</ul>
+<h3>2. 静态网站生成</h3>
+<ul>
+<li>自动生成HTML文件</li>
+<li>响应式设计</li>
+<li>美观的CSS样式</li>
+</ul>
+<h3>3. RSS订阅</h3>
+<ul>
+<li>标准RSS 2.0格式</li>
+<li>自动更新</li>
+<li>包含完整文章内容</li>
+</ul>
+<h3>4. 站点配置</h3>
+<ul>
+<li><code>site.toml</code>配置文件</li>
+<li>自定义标题、描述、作者</li>
+<li>IPFS网关配置</li>
+</ul>
+<h2>使用方法</h2>
+<pre><code class="language-bash"># 初始化配置
+cargo run -- init
 
-// sizeof raw pointer
-// output: size of raw pointer: 8
-// because raw pointer is 64 bit
-// 因为原生指针是64位，所以大小是8字节
-println!(
-    "size of raw pointer: {}",
-    std::mem::size_of::&lt;*const [i32; 5]&gt;()
-);
+# 生成网站
+cargo run -- generate
+
+# 启动服务器
+./serve.sh
 </code></pre>
-<h2>总结</h2>
-<p>原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使用原生指针时需要特别小心，因为可能会导致内存安全问题。</p>
+<h2>技术栈</h2>
+<ul>
+<li><strong>Rust</strong> - 主程序</li>
+<li><strong>Tera</strong> - 模板引擎</li>
+<li><strong>pulldown-cmark</strong> - Markdown解析</li>
+<li><strong>RSS</strong> - 订阅源生成</li>
+</ul>
+<p>现在你的博客可以被任何人通过浏览器访问了！</p>
 
     </div>
 
     <footer class="post-footer">
         <div class="post-info">
-            <p><strong>Storage ID:</strong> <code>QmZsCiYzbhe1TCA4WbCJbWPuRQG2VzPqBbvDbR5271Vpoo</code></p>
+            <p><strong>Storage ID:</strong> <code>QmcBX5fvT3v6KjjKUmD2DK7NX81G4EKito1rNNEFs2papD</code></p>
             
-            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;QmZsCiYzbhe1TCA4WbCJbWPuRQG2VzPqBbvDbR5271Vpoo" target="_blank">View on IPFS</a></p>
+            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;QmcBX5fvT3v6KjjKUmD2DK7NX81G4EKito1rNNEFs2papD" target="_blank">View on IPFS</a></p>
             
-            <p><strong>Content Hash:</strong> <code>b9220801fa669a27951985d580fb596fd24ec7be48ae2783b9a75b55c1d84895</code></p>
+            <p><strong>Content Hash:</strong> <code>0566913433ac017ec12b723a779337fb3d7a780bd93dac56f187ae0eb4da489c</code></p>
         </div>
         <nav class="post-nav">
             <a href="/archive.html">← Back to Archive</a>
