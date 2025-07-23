@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Rust no-std - Anonymous IPFS Blog</title>  <meta name="title" content="Rust no-std - Anonymous IPFS Blog"> <meta name="description" content="改写 std 的库为支持 no_std 的库及写出一个支持 std 和 no_std 库的经验谈 github repo 。 首先介绍 std 和 no_std 的区别，然后介绍使用 no_std 库的方式，由于支持 no_std 的特性有两种不同的方式，因此使用 no_std 库也有两种方式。其次，验证一个库是否支持…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-no-std.html"> <meta property="og:title" content="Rust no-std - Anonymous IPFS Blog"> <meta property="og:description" content="改写 std 的库为支持 no_std 的库及写出一个支持 std 和 no_std 库的经验谈 github repo 。 首先介绍 std 和 no_std 的区别，然后介绍使用 no_std 库的方式，由于支持 no_std 的特性有两种不同的方式，因此使用 no_std 库也有两种方式。其次，验证一个库是否支持…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:42+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:42+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-no-std.html"> <meta property="twitter:title" content="Rust no-std - Anonymous IPFS Blog"> <meta property="twitter:description" content="改写 std 的库为支持 no_std 的库及写出一个支持 std 和 no_std 库的经验谈 github repo 。 首先介绍 std 和 no_std 的区别，然后介绍使用 no_std 库的方式，由于支持 no_std 的特性有两种不同的方式，因此使用 no_std 库也有两种方式。其次，验证一个库是否支持…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-no-std.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Rust no-std - Anonymous IPFS Blog</title>  <meta name="title" content="Rust no-std - Anonymous IPFS Blog"> <meta name="description" content="改写 std 的库为支持 no_std 的库及写出一个支持 std 和 no_std 库的经验谈 github repo 。 首先介绍 std 和 no_std 的区别，然后介绍使用 no_std 库的方式，由于支持 no_std 的特性有两种不同的方式，因此使用 no_std 库也有两种方式。其次，验证一个库是否支持…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-no-std.html"> <meta property="og:title" content="Rust no-std - Anonymous IPFS Blog"> <meta property="og:description" content="改写 std 的库为支持 no_std 的库及写出一个支持 std 和 no_std 库的经验谈 github repo 。 首先介绍 std 和 no_std 的区别，然后介绍使用 no_std 库的方式，由于支持 no_std 的特性有两种不同的方式，因此使用 no_std 库也有两种方式。其次，验证一个库是否支持…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:42+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:42+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-no-std.html"> <meta property="twitter:title" content="Rust no-std - Anonymous IPFS Blog"> <meta property="twitter:description" content="改写 std 的库为支持 no_std 的库及写出一个支持 std 和 no_std 库的经验谈 github repo 。 首先介绍 std 和 no_std 的区别，然后介绍使用 no_std 库的方式，由于支持 no_std 的特性有两种不同的方式，因此使用 no_std 库也有两种方式。其次，验证一个库是否支持…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-no-std.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -177,7 +177,7 @@
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-1">cargo check --target wasm32-unknown-unknown
+                <pre class="line-numbers"><code class="language-bash" id="code-1">cargo check --target wasm32-unknown-unknown
 </code></pre>
             </div>
 <p>但是 wasm 环境不一定就是 no_std，或者别的编译目标也可以，也就是裸露的编译目标环境不带有任何系统的环境。</p>
@@ -637,6 +637,26 @@
             button.classList.remove('copy-success');
         }, 2000);
     }
+    </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        // Configure Prism.js
+        if (window.Prism) {
+            // Set autoloader path for additional languages
+            Prism.plugins.autoloader.languages_path = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/';
+            
+            // Add line numbers to all code blocks
+            document.querySelectorAll('pre code').forEach(function(codeBlock) {
+                codeBlock.parentElement.classList.add('line-numbers');
+            });
+            
+            // Highlight all code blocks
+            Prism.highlightAll();
+        }
     </script>
 </body>
 </html>

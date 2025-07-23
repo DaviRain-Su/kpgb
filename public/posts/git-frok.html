@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Git Fork and Upstreams ：如何去做一个很酷的技巧 - Anonymous IPFS Blog</title>  <meta name="title" content="Git Fork and Upstreams ：如何去做一个很酷的技巧 - Anonymous IPFS Blog"> <meta name="description" content="Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 -- 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/git-frok.html"> <meta property="og:title" content="Git Fork and Upstreams ：如何去做一个很酷的技巧 - Anonymous IPFS Blog"> <meta property="og:description" content="Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 -- 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:35+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:35+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/git-frok.html"> <meta property="twitter:title" content="Git Fork and Upstreams ：如何去做一个很酷的技巧 - Anonymous IPFS Blog"> <meta property="twitter:description" content="Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 -- 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/git-frok.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Git Fork and Upstreams ：如何去做一个很酷的技巧 - Anonymous IPFS Blog</title>  <meta name="title" content="Git Fork and Upstreams ：如何去做一个很酷的技巧 - Anonymous IPFS Blog"> <meta name="description" content="Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 -- 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/git-frok.html"> <meta property="og:title" content="Git Fork and Upstreams ：如何去做一个很酷的技巧 - Anonymous IPFS Blog"> <meta property="og:description" content="Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 -- 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:35+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:35+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/git-frok.html"> <meta property="twitter:title" content="Git Fork and Upstreams ：如何去做一个很酷的技巧 - Anonymous IPFS Blog"> <meta property="twitter:description" content="Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 -- 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/git-frok.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -135,7 +135,7 @@
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-1">$ git remote -v
+                <pre class="line-numbers"><code class="language-bash" id="code-1">$ git remote -v
 origin git@bitbucket.org:my-user/some-project.git (fetch)
 origin git@bitbucket.org:my-user/some-project.git (push)
 </code></pre>
@@ -152,7 +152,7 @@ origin git@bitbucket.org:my-user/some-project.git (push)
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-2">git remote add upstream git@bitbucket.org:some-gatekeeper-maintainer/some-project.git
+                <pre class="line-numbers"><code class="language-bash" id="code-2">git remote add upstream git@bitbucket.org:some-gatekeeper-maintainer/some-project.git
 </code></pre>
             </div>
 <p>检查 remote 添加成功:</p>
@@ -167,7 +167,7 @@ origin git@bitbucket.org:my-user/some-project.git (push)
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-3">git remote -v
+                <pre class="line-numbers"><code class="language-bash" id="code-3">git remote -v
 origin git@bitbucket.org:my-user/some-project.git (fetch)
 origin git@bitbucket.org:my-user/some-project.git (push)
 upstream git@bitbucket.org:some-gatekeeper-maintainer/some-project.git (fetch)
@@ -187,7 +187,7 @@ upstream git@bitbucket.org:some-gatekeeper-maintainer/some-project.git (push)
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-4">git fetch upstream
+                <pre class="line-numbers"><code class="language-bash" id="code-4">git fetch upstream
 </code></pre>
             </div>
 <p>一般来说，你要保持本地分支作为上游主分支的近似镜像，并在特性分支中执行任何工作，因为它们以后可能会成为 pull request .</p>
@@ -203,7 +203,7 @@ upstream git@bitbucket.org:some-gatekeeper-maintainer/some-project.git (push)
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-5">git checkout master
+                <pre class="line-numbers"><code class="language-bash" id="code-5">git checkout master
 git merge upstream/master
 </code></pre>
             </div>
@@ -220,7 +220,7 @@ git merge upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-6">git checkout -b feature-x
+                <pre class="line-numbers"><code class="language-bash" id="code-6">git checkout -b feature-x
 #some work and some commits happen
 #some time passes git fetch upstream
 git rebase upstream/master
@@ -240,7 +240,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-7">git push origin feature-x
+                <pre class="line-numbers"><code class="language-bash" id="code-7">git push origin feature-x
 </code></pre>
             </div>
 <p>如果你在发布远程分支 feature-x 后，因为上游维护者的一些反馈而不得不更新它，就会出现一个小问题，你有几个选择：</p>
@@ -256,7 +256,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-8">git push -f origin feature-x
+                <pre class="line-numbers"><code class="language-bash" id="code-8">git push -f origin feature-x
 </code></pre>
             </div>
 <p>我个人更倾向于尽量保持历史记录的干净，选择方案三，但不同的团队有不同的工作流程。注意：只有在使用你自己的 fork 时，你才能这样做，重写共享库和分支的历史是绝对不应该做的。重写共享库和分支的历史是你永远不应该改做的事情。</p>
@@ -274,7 +274,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-9">nick-macbook-air:~/dev/projects/stash[1|94]$
+                <pre class="line-numbers"><code class="language-bash" id="code-9">nick-macbook-air:~/dev/projects/stash[1|94]$
 </code></pre>
             </div>
 <p>这就是你需要添加到你的.bashrc 或等价物中的东西，只是一个函数：</p>
@@ -289,7 +289,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-10">function ahead_behind {
+                <pre class="line-numbers"><code class="language-bash" id="code-10">function ahead_behind {
   curr_branch=$(git rev-parse --abbrev-ref HEAD);
   curr_remote=$(git config branch.$curr_branch.remote);
   curr_merge_branch=$(git config branch.$curr_branch.merge | cut -d / -f 3);
@@ -310,7 +310,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-11">export PS1="\h:\w[\$(ahead_behind)]$"
+                <pre class="line-numbers"><code class="language-bash" id="code-11">export PS1="\h:\w[\$(ahead_behind)]$"
 </code></pre>
             </div>
 <h2 id="内部结构">内部结构</h2>
@@ -327,7 +327,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-12">curr_branch=$(git rev-parse --abbrev-ref HEAD);
+                <pre class="line-numbers"><code class="language-bash" id="code-12">curr_branch=$(git rev-parse --abbrev-ref HEAD);
 </code></pre>
             </div>
 <p>我们得到当前分支所指向的远程：</p>
@@ -342,7 +342,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-13">curr_remote=$(git config branch.$curr_branch.remote);
+                <pre class="line-numbers"><code class="language-bash" id="code-13">curr_remote=$(git config branch.$curr_branch.remote);
 </code></pre>
             </div>
 <p>我们得到了这个远程分支应该被合并到的分支上（通过一个廉价的 Unix 技巧来丢弃包括最后一个斜杠 [/] 在内的所有内容）。</p>
@@ -357,7 +357,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-14">curr_merge_branch=$(git config branch.$curr_branch.merge | cut -d / -f 3);
+                <pre class="line-numbers"><code class="language-bash" id="code-14">curr_merge_branch=$(git config branch.$curr_branch.merge | cut -d / -f 3);
 </code></pre>
             </div>
 <p>现在我们有了我们需要的东西来手机我们领先和落后的提交次数</p>
@@ -372,7 +372,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-15">git rev-list --left-right --count $curr_branch...$curr_remote/$curr_merge_branch | tr -s '\t' '|';
+                <pre class="line-numbers"><code class="language-bash" id="code-15">git rev-list --left-right --count $curr_branch...$curr_remote/$curr_merge_branch | tr -s '\t' '|';
 </code></pre>
             </div>
 <p>我们使用古老的 Unix tr 将 TAB 转换为分隔符 |.</p>
@@ -784,6 +784,26 @@ git rebase upstream/master
             button.classList.remove('copy-success');
         }, 2000);
     }
+    </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        // Configure Prism.js
+        if (window.Prism) {
+            // Set autoloader path for additional languages
+            Prism.plugins.autoloader.languages_path = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/';
+            
+            // Add line numbers to all code blocks
+            document.querySelectorAll('pre code').forEach(function(codeBlock) {
+                codeBlock.parentElement.classList.add('line-numbers');
+            });
+            
+            // Highlight all code blocks
+            Prism.highlightAll();
+        }
     </script>
 </body>
 </html>

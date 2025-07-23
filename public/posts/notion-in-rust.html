@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Nothing in Rust - Anonymous IPFS Blog</title>  <meta name="title" content="Nothing in Rust - Anonymous IPFS Blog"> <meta name="description" content="我假装这里有东西，但实际上没有。 PhantomData 这里现在是空的 Null Option::None 这里永远不会有东西。 The empty tuple 我会让你一直等到时间的尽头，空手而归。 The never type 这是一个关于 Rust 语言中表达“nothing”的一些方式的短篇选集。 在编程中，…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/notion-in-rust.html"> <meta property="og:title" content="Nothing in Rust - Anonymous IPFS Blog"> <meta property="og:description" content="我假装这里有东西，但实际上没有。 PhantomData 这里现在是空的 Null Option::None 这里永远不会有东西。 The empty tuple 我会让你一直等到时间的尽头，空手而归。 The never type 这是一个关于 Rust 语言中表达“nothing”的一些方式的短篇选集。 在编程中，…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:41+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:41+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/notion-in-rust.html"> <meta property="twitter:title" content="Nothing in Rust - Anonymous IPFS Blog"> <meta property="twitter:description" content="我假装这里有东西，但实际上没有。 PhantomData 这里现在是空的 Null Option::None 这里永远不会有东西。 The empty tuple 我会让你一直等到时间的尽头，空手而归。 The never type 这是一个关于 Rust 语言中表达“nothing”的一些方式的短篇选集。 在编程中，…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/notion-in-rust.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Nothing in Rust - Anonymous IPFS Blog</title>  <meta name="title" content="Nothing in Rust - Anonymous IPFS Blog"> <meta name="description" content="我假装这里有东西，但实际上没有。 PhantomData 这里现在是空的 Null Option::None 这里永远不会有东西。 The empty tuple 我会让你一直等到时间的尽头，空手而归。 The never type 这是一个关于 Rust 语言中表达“nothing”的一些方式的短篇选集。 在编程中，…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/notion-in-rust.html"> <meta property="og:title" content="Nothing in Rust - Anonymous IPFS Blog"> <meta property="og:description" content="我假装这里有东西，但实际上没有。 PhantomData 这里现在是空的 Null Option::None 这里永远不会有东西。 The empty tuple 我会让你一直等到时间的尽头，空手而归。 The never type 这是一个关于 Rust 语言中表达“nothing”的一些方式的短篇选集。 在编程中，…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:41+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:41+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/notion-in-rust.html"> <meta property="twitter:title" content="Nothing in Rust - Anonymous IPFS Blog"> <meta property="twitter:description" content="我假装这里有东西，但实际上没有。 PhantomData 这里现在是空的 Null Option::None 这里永远不会有东西。 The empty tuple 我会让你一直等到时间的尽头，空手而归。 The never type 这是一个关于 Rust 语言中表达“nothing”的一些方式的短篇选集。 在编程中，…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/notion-in-rust.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -176,7 +176,7 @@
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-1">struct PointerWithLifetime&lt;'a, T&gt; {
+                <pre class="line-numbers"><code class="language-rust" id="code-1">struct PointerWithLifetime&lt;'a, T&gt; {
     pointer: *const T,
     _marker: std::marker::PhantomData&lt;&amp;'a ()&gt;,
 }
@@ -196,7 +196,7 @@
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-2">mod external {
+                <pre class="line-numbers"><code class="language-rust" id="code-2">mod external {
     pub fn get(location: u64) -&gt; Vec&lt;u8&gt; { /* ... */ }
 }
 
@@ -231,7 +231,7 @@ impl&lt;T: From&lt;Vec&lt;u8&gt;&gt;&gt; Slot&lt;T&gt; {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-3">let n: *const i32 = std::ptr::null();
+                <pre class="line-numbers"><code class="language-rust" id="code-3">let n: *const i32 = std::ptr::null();
 unsafe {
     println!("{}", *n); // Segmentation fault
 }
@@ -273,7 +273,7 @@ unsafe {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-4">impl Partner {
+                <pre class="line-numbers"><code class="language-rust" id="code-4">impl Partner {
     fn process_request(&amp;mut self, proposition: Proposition) -&gt; Result&lt;(), (u32, RejectionReason)&gt; {
         use std::time::{SystemTime, Duration};
         use chrono::prelude::*;
@@ -319,7 +319,7 @@ unsafe {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-5">let never_loop = loop {}; // loop never exits
+                <pre class="line-numbers"><code class="language-rust" id="code-5">let never_loop = loop {}; // loop never exits
 let never_panic = panic!(); // panic terminates execution
 
 let value: u32 = match Some(1) {
@@ -341,7 +341,7 @@ let value: u32 = match Some(1) {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-6">trait FailureLogProvider {
+                <pre class="line-numbers"><code class="language-rust" id="code-6">trait FailureLogProvider {
     type Error;
     fn get_failure_logs(&amp;self) -&gt; Result&lt;Vec&lt;FailureLog&gt;, Self::Error&gt;;
 }
@@ -762,6 +762,26 @@ impl FailureLogProvider for Partner {
             button.classList.remove('copy-success');
         }, 2000);
     }
+    </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        // Configure Prism.js
+        if (window.Prism) {
+            // Set autoloader path for additional languages
+            Prism.plugins.autoloader.languages_path = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/';
+            
+            // Add line numbers to all code blocks
+            document.querySelectorAll('pre code').forEach(function(codeBlock) {
+                codeBlock.parentElement.classList.add('line-numbers');
+            });
+            
+            // Highlight all code blocks
+            Prism.highlightAll();
+        }
     </script>
 </body>
 </html>

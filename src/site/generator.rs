@@ -578,6 +578,15 @@ fn add_copy_buttons_to_code_blocks(html: &str) -> String {
             .map(|m| m.as_str())
             .unwrap_or("");
 
+        // Ensure language class is properly set for Prism.js
+        let code_attrs = if !language.is_empty() {
+            attrs.to_string()
+        } else if attrs.contains("class=") {
+            attrs.to_string()
+        } else {
+            r#" class="language-plaintext""#.to_string()
+        };
+
         format!(
             r#"<div class="code-block-wrapper">
                 <div class="code-header">
@@ -590,12 +599,12 @@ fn add_copy_buttons_to_code_blocks(html: &str) -> String {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code{} id="code-{}">{}</code></pre>
+                <pre class="line-numbers"><code{} id="code-{}">{}</code></pre>
             </div>"#,
             language,
             block_id,
             block_id,
-            attrs,
+            code_attrs,
             block_id,
             code_content
         )

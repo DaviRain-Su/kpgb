@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>翻译-区块链间通信协议:概述 - Anonymous IPFS Blog</title>  <meta name="title" content="翻译-区块链间通信协议:概述 - Anonymous IPFS Blog"> <meta name="description" content="区块链间通信协议（IBC）是一个端到端的、面向连接的、有状态的协议，用于在独立的分布式账本上的模块之间进行可靠、有序和认证的通信。IBC是为异质账本之间的互操作而设计的，这些账本排列在一个未知的动态拓扑结构中，以不同的共识算法和状态机运行。该协议通过指定足够的数据结构、抽象和通信协议的语义来实现这一点，一旦被参与的账本…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/ibc.html"> <meta property="og:title" content="翻译-区块链间通信协议:概述 - Anonymous IPFS Blog"> <meta property="og:description" content="区块链间通信协议（IBC）是一个端到端的、面向连接的、有状态的协议，用于在独立的分布式账本上的模块之间进行可靠、有序和认证的通信。IBC是为异质账本之间的互操作而设计的，这些账本排列在一个未知的动态拓扑结构中，以不同的共识算法和状态机运行。该协议通过指定足够的数据结构、抽象和通信协议的语义来实现这一点，一旦被参与的账本…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:38+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:39+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/ibc.html"> <meta property="twitter:title" content="翻译-区块链间通信协议:概述 - Anonymous IPFS Blog"> <meta property="twitter:description" content="区块链间通信协议（IBC）是一个端到端的、面向连接的、有状态的协议，用于在独立的分布式账本上的模块之间进行可靠、有序和认证的通信。IBC是为异质账本之间的互操作而设计的，这些账本排列在一个未知的动态拓扑结构中，以不同的共识算法和状态机运行。该协议通过指定足够的数据结构、抽象和通信协议的语义来实现这一点，一旦被参与的账本…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/ibc.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>翻译-区块链间通信协议:概述 - Anonymous IPFS Blog</title>  <meta name="title" content="翻译-区块链间通信协议:概述 - Anonymous IPFS Blog"> <meta name="description" content="区块链间通信协议（IBC）是一个端到端的、面向连接的、有状态的协议，用于在独立的分布式账本上的模块之间进行可靠、有序和认证的通信。IBC是为异质账本之间的互操作而设计的，这些账本排列在一个未知的动态拓扑结构中，以不同的共识算法和状态机运行。该协议通过指定足够的数据结构、抽象和通信协议的语义来实现这一点，一旦被参与的账本…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/ibc.html"> <meta property="og:title" content="翻译-区块链间通信协议:概述 - Anonymous IPFS Blog"> <meta property="og:description" content="区块链间通信协议（IBC）是一个端到端的、面向连接的、有状态的协议，用于在独立的分布式账本上的模块之间进行可靠、有序和认证的通信。IBC是为异质账本之间的互操作而设计的，这些账本排列在一个未知的动态拓扑结构中，以不同的共识算法和状态机运行。该协议通过指定足够的数据结构、抽象和通信协议的语义来实现这一点，一旦被参与的账本…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:38+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:39+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/ibc.html"> <meta property="twitter:title" content="翻译-区块链间通信协议:概述 - Anonymous IPFS Blog"> <meta property="twitter:description" content="区块链间通信协议（IBC）是一个端到端的、面向连接的、有状态的协议，用于在独立的分布式账本上的模块之间进行可靠、有序和认证的通信。IBC是为异质账本之间的互操作而设计的，这些账本排列在一个未知的动态拓扑结构中，以不同的共识算法和状态机运行。该协议通过指定足够的数据结构、抽象和通信协议的语义来实现这一点，一旦被参与的账本…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/ibc.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -387,7 +387,7 @@ IBC为模块提供了拒绝数据包的设施，并将具体细节留给更高�
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-1">enum ConnectionState {
+                <pre class="line-numbers"><code class="language-go" id="code-1">enum ConnectionState {
     INIT,
     TRYOPEN,
     OPEN,
@@ -427,7 +427,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-markdown" id="code-2">|Datagram         | Prior state        |     Posterior state |
+                <pre class="line-numbers"><code class="language-markdown" id="code-2">|Datagram         | Prior state        |     Posterior state |
 |-----------------|--------------------|---------------------|
 |  ConnOpenInit   |    (-, -)          |      (INIT, -)      |
 |  ConnOpenTry    |  (INIT, none)      |      (INIT, TRYOPEN)|
@@ -471,7 +471,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-3">interface ChannelEnd {
+                <pre class="line-numbers"><code class="language-go" id="code-3">interface ChannelEnd {
 	state: ChannelState
 	ordering: ChannelOrder
 	counterpartyPortIdentifier: Identifier
@@ -507,7 +507,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-4">enum ChannelState {
+                <pre class="line-numbers"><code class="language-go" id="code-4">enum ChannelState {
 	INIT,
 	TRYOPEN,
 	OPEN,
@@ -533,7 +533,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-5">interface Packet {
+                <pre class="line-numbers"><code class="language-go" id="code-5">interface Packet {
 	sequence: uint64
 	timeoutHeight: uint64
 	timeoutTimestamp: uint64
@@ -579,7 +579,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-markdown" id="code-6">| Datagram          | Prior state     | Posterior state |
+                <pre class="line-numbers"><code class="language-markdown" id="code-6">| Datagram          | Prior state     | Posterior state |
 | ----------------- | ----------------| --------------- |
 | ChanOpenInit      | (-, -)          | (INIT, -)       |
 | ChanOpenTry       | (INIT, -)       | (INIT, TRYOPEN) |
@@ -607,7 +607,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code id="code-7">| Datagram          | Prior state    | Posterior state |
+                <pre class="line-numbers"><code class="language-plaintext" id="code-7">| Datagram          | Prior state    | Posterior state |
 | ------------------| ---------------| --------------- |
 | ChanCloseInit     | (OPEN, OPEN)   | (CLOSED, OPEN)  |
 | ChanCloseConfirm  | (CLOSED, OPEN) | (CLOSED, CLOSED)|
@@ -754,7 +754,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-8">interface FungibleTokenPacketData {
+                <pre class="line-numbers"><code class="language-go" id="code-8">interface FungibleTokenPacketData {
 	denomination: string
 	amount: uint256
 	sender: string
@@ -774,7 +774,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-9">interface FungibleTokenPacketAcknowledgement {
+                <pre class="line-numbers"><code class="language-go" id="code-9">interface FungibleTokenPacketAcknowledgement {
 	success: boolean
 	error: Maybe&lt;string&gt;
 }
@@ -1229,6 +1229,26 @@ interface ConnectionEnd {
             button.classList.remove('copy-success');
         }, 2000);
     }
+    </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        // Configure Prism.js
+        if (window.Prism) {
+            // Set autoloader path for additional languages
+            Prism.plugins.autoloader.languages_path = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/';
+            
+            // Add line numbers to all code blocks
+            document.querySelectorAll('pre code').forEach(function(codeBlock) {
+                codeBlock.parentElement.classList.add('line-numbers');
+            });
+            
+            // Highlight all code blocks
+            Prism.highlightAll();
+        }
     </script>
 </body>
 </html>

@@ -41,7 +41,7 @@
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-1">cargo run -- new --content my-post.md
+                <pre class="line-numbers"><code class="language-bash" id="code-1">cargo run -- new --content my-post.md
 </code></pre>
             </div>
 <p>编辑文章时也会自动处理新添加的图片：</p>
@@ -56,7 +56,7 @@
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-2">cargo run -- edit &lt;post-id&gt; --content updated-post.md
+                <pre class="line-numbers"><code class="language-bash" id="code-2">cargo run -- edit &lt;post-id&gt; --content updated-post.md
 </code></pre>
             </div>
 <p>这样就能让你的图片永久保存在IPFS上了！</p>
@@ -143,7 +143,7 @@
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-1">let array: [i32; 5] = [1, 2, 3, 4, 5];
+                <pre class="line-numbers"><code class="language-rust" id="code-1">let array: [i32; 5] = [1, 2, 3, 4, 5];
 // size of array is 20，因为i32是4字节，所以数组大小是5*4=20，
 // 这里直接使用std::mem::size_of_val(&amp;array)也可以
 println!("size of array: {}", std::mem::size_of_val(&amp;array));
@@ -191,7 +191,7 @@ println!(
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-1">// 在lib.rs或者main.rs中
+                <pre class="line-numbers"><code class="language-rust" id="code-1">// 在lib.rs或者main.rs中
 #[cfg(feature = "feature_name")]
 pub struct MyStruct {
     // ...
@@ -220,7 +220,7 @@ mod tests {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-2">cargo test --features feature_name
+                <pre class="line-numbers"><code class="language-bash" id="code-2">cargo test --features feature_name
 </code></pre>
             </div>
 <p>这个命令会启用<code>feature_name</code>特性并运行所有的测试，包括依赖于这个特性的测试。</p>
@@ -238,7 +238,7 @@ mod tests {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-3">fn vec_result_to_result_vec&lt;T, E&gt;(v: Vec&lt;Result&lt;T, E&gt;&gt;) -&gt; Result&lt;Vec&lt;T&gt;, E&gt; {
+                <pre class="line-numbers"><code class="language-rust" id="code-3">fn vec_result_to_result_vec&lt;T, E&gt;(v: Vec&lt;Result&lt;T, E&gt;&gt;) -&gt; Result&lt;Vec&lt;T&gt;, E&gt; {
     v.into_iter().try_fold(Vec::new(), |mut acc, res| {
         match res {
             Ok(t) =&gt; {
@@ -266,7 +266,7 @@ mod tests {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-4">fn decimal_to_hex(decimal: u32) -&gt; String {
+                <pre class="line-numbers"><code class="language-rust" id="code-4">fn decimal_to_hex(decimal: u32) -&gt; String {
     format!("{:X}", decimal)
 }
 </code></pre>
@@ -283,7 +283,7 @@ mod tests {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-5">let hex_string = decimal_to_hex(123456789);
+                <pre class="line-numbers"><code class="language-rust" id="code-5">let hex_string = decimal_to_hex(123456789);
 println!("{}", hex_string); // 输出: "75BCD15"
 </code></pre>
             </div>
@@ -304,7 +304,7 @@ println!("{}", hex_string); // 输出: "75BCD15"
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-6">let some_number = Some(5);
+                <pre class="line-numbers"><code class="language-rust" id="code-6">let some_number = Some(5);
 let doubled = some_number.map(|x| x * 2);
 assert_eq!(doubled, Some(10));
 </code></pre>
@@ -322,7 +322,7 @@ assert_eq!(doubled, Some(10));
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-7">let some_number = Some(5);
+                <pre class="line-numbers"><code class="language-rust" id="code-7">let some_number = Some(5);
 let result = some_number.and_then(|x| {
     if x &lt; 10 {
         None
@@ -517,7 +517,7 @@ assert_eq!(result, Some(33));
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-1">cargo check --target wasm32-unknown-unknown
+                <pre class="line-numbers"><code class="language-bash" id="code-1">cargo check --target wasm32-unknown-unknown
 </code></pre>
             </div>
 <p>但是 wasm 环境不一定就是 no_std，或者别的编译目标也可以，也就是裸露的编译目标环境不带有任何系统的环境。</p>
@@ -623,7 +623,7 @@ assert_eq!(result, Some(33));
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-1">struct PointerWithLifetime&lt;'a, T&gt; {
+                <pre class="line-numbers"><code class="language-rust" id="code-1">struct PointerWithLifetime&lt;'a, T&gt; {
     pointer: *const T,
     _marker: std::marker::PhantomData&lt;&amp;'a ()&gt;,
 }
@@ -643,7 +643,7 @@ assert_eq!(result, Some(33));
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-2">mod external {
+                <pre class="line-numbers"><code class="language-rust" id="code-2">mod external {
     pub fn get(location: u64) -&gt; Vec&lt;u8&gt; { /* ... */ }
 }
 
@@ -678,7 +678,7 @@ impl&lt;T: From&lt;Vec&lt;u8&gt;&gt;&gt; Slot&lt;T&gt; {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-3">let n: *const i32 = std::ptr::null();
+                <pre class="line-numbers"><code class="language-rust" id="code-3">let n: *const i32 = std::ptr::null();
 unsafe {
     println!("{}", *n); // Segmentation fault
 }
@@ -720,7 +720,7 @@ unsafe {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-4">impl Partner {
+                <pre class="line-numbers"><code class="language-rust" id="code-4">impl Partner {
     fn process_request(&amp;mut self, proposition: Proposition) -&gt; Result&lt;(), (u32, RejectionReason)&gt; {
         use std::time::{SystemTime, Duration};
         use chrono::prelude::*;
@@ -766,7 +766,7 @@ unsafe {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-5">let never_loop = loop {}; // loop never exits
+                <pre class="line-numbers"><code class="language-rust" id="code-5">let never_loop = loop {}; // loop never exits
 let never_panic = panic!(); // panic terminates execution
 
 let value: u32 = match Some(1) {
@@ -788,7 +788,7 @@ let value: u32 = match Some(1) {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-6">trait FailureLogProvider {
+                <pre class="line-numbers"><code class="language-rust" id="code-6">trait FailureLogProvider {
     type Error;
     fn get_failure_logs(&amp;self) -&gt; Result&lt;Vec&lt;FailureLog&gt;, Self::Error&gt;;
 }
@@ -821,7 +821,7 @@ impl FailureLogProvider for Partner {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-ocaml" id="code-1"># let inc x = x + 1 ;;
+                <pre class="line-numbers"><code class="language-ocaml" id="code-1"># let inc x = x + 1 ;;
 val inc : int -&gt; int = &lt;fun&gt;
 # let a = 99 ;;
 val a : int = 99
@@ -839,7 +839,7 @@ val a : int = 99
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-2">$ cat sigtest.ml
+                <pre class="line-numbers"><code class="language-bash" id="code-2">$ cat sigtest.ml
 let inc x = x + 1
 let add x y = x + y
 
@@ -863,7 +863,7 @@ val a : int
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-ocaml" id="code-3">(*** 注释 ***)
+                <pre class="line-numbers"><code class="language-ocaml" id="code-3">(*** 注释 ***)
 
 (*
   在OCaml中，注释是用 (* 和 *) 来包围的。OCaml支持嵌套注释，这意味着你可以在一个注释块中包含另一个注释块
@@ -1933,7 +1933,7 @@ IBC为模块提供了拒绝数据包的设施，并将具体细节留给更高�
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-1">enum ConnectionState {
+                <pre class="line-numbers"><code class="language-go" id="code-1">enum ConnectionState {
     INIT,
     TRYOPEN,
     OPEN,
@@ -1973,7 +1973,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-markdown" id="code-2">|Datagram         | Prior state        |     Posterior state |
+                <pre class="line-numbers"><code class="language-markdown" id="code-2">|Datagram         | Prior state        |     Posterior state |
 |-----------------|--------------------|---------------------|
 |  ConnOpenInit   |    (-, -)          |      (INIT, -)      |
 |  ConnOpenTry    |  (INIT, none)      |      (INIT, TRYOPEN)|
@@ -2017,7 +2017,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-3">interface ChannelEnd {
+                <pre class="line-numbers"><code class="language-go" id="code-3">interface ChannelEnd {
 	state: ChannelState
 	ordering: ChannelOrder
 	counterpartyPortIdentifier: Identifier
@@ -2053,7 +2053,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-4">enum ChannelState {
+                <pre class="line-numbers"><code class="language-go" id="code-4">enum ChannelState {
 	INIT,
 	TRYOPEN,
 	OPEN,
@@ -2079,7 +2079,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-5">interface Packet {
+                <pre class="line-numbers"><code class="language-go" id="code-5">interface Packet {
 	sequence: uint64
 	timeoutHeight: uint64
 	timeoutTimestamp: uint64
@@ -2125,7 +2125,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-markdown" id="code-6">| Datagram          | Prior state     | Posterior state |
+                <pre class="line-numbers"><code class="language-markdown" id="code-6">| Datagram          | Prior state     | Posterior state |
 | ----------------- | ----------------| --------------- |
 | ChanOpenInit      | (-, -)          | (INIT, -)       |
 | ChanOpenTry       | (INIT, -)       | (INIT, TRYOPEN) |
@@ -2153,7 +2153,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code id="code-7">| Datagram          | Prior state    | Posterior state |
+                <pre class="line-numbers"><code class="language-plaintext" id="code-7">| Datagram          | Prior state    | Posterior state |
 | ------------------| ---------------| --------------- |
 | ChanCloseInit     | (OPEN, OPEN)   | (CLOSED, OPEN)  |
 | ChanCloseConfirm  | (CLOSED, OPEN) | (CLOSED, CLOSED)|
@@ -2300,7 +2300,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-8">interface FungibleTokenPacketData {
+                <pre class="line-numbers"><code class="language-go" id="code-8">interface FungibleTokenPacketData {
 	denomination: string
 	amount: uint256
 	sender: string
@@ -2320,7 +2320,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-9">interface FungibleTokenPacketAcknowledgement {
+                <pre class="line-numbers"><code class="language-go" id="code-9">interface FungibleTokenPacketAcknowledgement {
 	success: boolean
 	error: Maybe&lt;string&gt;
 }
@@ -2381,7 +2381,7 @@ interface ConnectionEnd {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-1">use std::{borrow::Cow, process::Command};
+                <pre class="line-numbers"><code class="language-rust" id="code-1">use std::{borrow::Cow, process::Command};
 
 fn main() {
 	// Make git hash available via GIT_HASH build-time env var:
@@ -2439,7 +2439,7 @@ fn output_git_short_hash() {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-2">cargo:rerun-if-changed=&lt;filename&gt;;
+                <pre class="line-numbers"><code class="language-bash" id="code-2">cargo:rerun-if-changed=&lt;filename&gt;;
 </code></pre>
             </div>
 <p>其中 <code>filename</code> 表示需要监视的文件名或文件夹名，可以使用相对或绝对路径。</p>
@@ -2672,7 +2672,7 @@ inster /table</p>
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-1">$ git remote -v
+                <pre class="line-numbers"><code class="language-bash" id="code-1">$ git remote -v
 origin git@bitbucket.org:my-user/some-project.git (fetch)
 origin git@bitbucket.org:my-user/some-project.git (push)
 </code></pre>
@@ -2689,7 +2689,7 @@ origin git@bitbucket.org:my-user/some-project.git (push)
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-2">git remote add upstream git@bitbucket.org:some-gatekeeper-maintainer/some-project.git
+                <pre class="line-numbers"><code class="language-bash" id="code-2">git remote add upstream git@bitbucket.org:some-gatekeeper-maintainer/some-project.git
 </code></pre>
             </div>
 <p>检查 remote 添加成功:</p>
@@ -2704,7 +2704,7 @@ origin git@bitbucket.org:my-user/some-project.git (push)
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-3">git remote -v
+                <pre class="line-numbers"><code class="language-bash" id="code-3">git remote -v
 origin git@bitbucket.org:my-user/some-project.git (fetch)
 origin git@bitbucket.org:my-user/some-project.git (push)
 upstream git@bitbucket.org:some-gatekeeper-maintainer/some-project.git (fetch)
@@ -2724,7 +2724,7 @@ upstream git@bitbucket.org:some-gatekeeper-maintainer/some-project.git (push)
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-4">git fetch upstream
+                <pre class="line-numbers"><code class="language-bash" id="code-4">git fetch upstream
 </code></pre>
             </div>
 <p>一般来说，你要保持本地分支作为上游主分支的近似镜像，并在特性分支中执行任何工作，因为它们以后可能会成为 pull request .</p>
@@ -2740,7 +2740,7 @@ upstream git@bitbucket.org:some-gatekeeper-maintainer/some-project.git (push)
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-5">git checkout master
+                <pre class="line-numbers"><code class="language-bash" id="code-5">git checkout master
 git merge upstream/master
 </code></pre>
             </div>
@@ -2757,7 +2757,7 @@ git merge upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-6">git checkout -b feature-x
+                <pre class="line-numbers"><code class="language-bash" id="code-6">git checkout -b feature-x
 #some work and some commits happen
 #some time passes git fetch upstream
 git rebase upstream/master
@@ -2777,7 +2777,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-7">git push origin feature-x
+                <pre class="line-numbers"><code class="language-bash" id="code-7">git push origin feature-x
 </code></pre>
             </div>
 <p>如果你在发布远程分支 feature-x 后，因为上游维护者的一些反馈而不得不更新它，就会出现一个小问题，你有几个选择：</p>
@@ -2793,7 +2793,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-8">git push -f origin feature-x
+                <pre class="line-numbers"><code class="language-bash" id="code-8">git push -f origin feature-x
 </code></pre>
             </div>
 <p>我个人更倾向于尽量保持历史记录的干净，选择方案三，但不同的团队有不同的工作流程。注意：只有在使用你自己的 fork 时，你才能这样做，重写共享库和分支的历史是绝对不应该做的。重写共享库和分支的历史是你永远不应该改做的事情。</p>
@@ -2811,7 +2811,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-9">nick-macbook-air:~/dev/projects/stash[1|94]$
+                <pre class="line-numbers"><code class="language-bash" id="code-9">nick-macbook-air:~/dev/projects/stash[1|94]$
 </code></pre>
             </div>
 <p>这就是你需要添加到你的.bashrc 或等价物中的东西，只是一个函数：</p>
@@ -2826,7 +2826,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-10">function ahead_behind {
+                <pre class="line-numbers"><code class="language-bash" id="code-10">function ahead_behind {
   curr_branch=$(git rev-parse --abbrev-ref HEAD);
   curr_remote=$(git config branch.$curr_branch.remote);
   curr_merge_branch=$(git config branch.$curr_branch.merge | cut -d / -f 3);
@@ -2847,7 +2847,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-11">export PS1="\h:\w[\$(ahead_behind)]$"
+                <pre class="line-numbers"><code class="language-bash" id="code-11">export PS1="\h:\w[\$(ahead_behind)]$"
 </code></pre>
             </div>
 <h2 id="内部结构">内部结构</h2>
@@ -2864,7 +2864,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-12">curr_branch=$(git rev-parse --abbrev-ref HEAD);
+                <pre class="line-numbers"><code class="language-bash" id="code-12">curr_branch=$(git rev-parse --abbrev-ref HEAD);
 </code></pre>
             </div>
 <p>我们得到当前分支所指向的远程：</p>
@@ -2879,7 +2879,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-13">curr_remote=$(git config branch.$curr_branch.remote);
+                <pre class="line-numbers"><code class="language-bash" id="code-13">curr_remote=$(git config branch.$curr_branch.remote);
 </code></pre>
             </div>
 <p>我们得到了这个远程分支应该被合并到的分支上（通过一个廉价的 Unix 技巧来丢弃包括最后一个斜杠 [/] 在内的所有内容）。</p>
@@ -2894,7 +2894,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-14">curr_merge_branch=$(git config branch.$curr_branch.merge | cut -d / -f 3);
+                <pre class="line-numbers"><code class="language-bash" id="code-14">curr_merge_branch=$(git config branch.$curr_branch.merge | cut -d / -f 3);
 </code></pre>
             </div>
 <p>现在我们有了我们需要的东西来手机我们领先和落后的提交次数</p>
@@ -2909,7 +2909,7 @@ git rebase upstream/master
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-15">git rev-list --left-right --count $curr_branch...$curr_remote/$curr_merge_branch | tr -s '\t' '|';
+                <pre class="line-numbers"><code class="language-bash" id="code-15">git rev-list --left-right --count $curr_branch...$curr_remote/$curr_merge_branch | tr -s '\t' '|';
 </code></pre>
             </div>
 <p>我们使用古老的 Unix tr 将 TAB 转换为分隔符 |.</p>
@@ -3262,7 +3262,7 @@ that can be applied to quant</li>
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-1"># 创建虚拟环境（推荐）
+                <pre class="line-numbers"><code class="language-bash" id="code-1"># 创建虚拟环境（推荐）
 python -m venv nautilus_env
 source nautilus_env/bin/activate  # Linux/Mac
 # nautilus_env\Scripts\activate  # Windows
@@ -3287,7 +3287,7 @@ pip install -U jupyterlab
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-2"># 在 Jupyter notebook 或 Python 脚本中运行
+                <pre class="line-numbers"><code class="language-python" id="code-2"># 在 Jupyter notebook 或 Python 脚本中运行
 import subprocess
 import sys
 
@@ -3314,7 +3314,7 @@ subprocess.run([
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-3">curl https://raw.githubusercontent.com/nautechsystems/nautilus_data/main/nautilus_data/hist_data_to_catalog.py | python -
+                <pre class="line-numbers"><code class="language-bash" id="code-3">curl https://raw.githubusercontent.com/nautechsystems/nautilus_data/main/nautilus_data/hist_data_to_catalog.py | python -
 </code></pre>
             </div>
 <p>这个脚本会：</p>
@@ -3336,7 +3336,7 @@ subprocess.run([
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-4">from decimal import Decimal
+                <pre class="line-numbers"><code class="language-python" id="code-4">from decimal import Decimal
 from pathlib import Path
 
 import pandas as pd
@@ -3364,7 +3364,7 @@ from nautilus_trader.trading.strategy import Strategy
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-5"># 设置数据目录路径
+                <pre class="line-numbers"><code class="language-python" id="code-5"># 设置数据目录路径
 from nautilus_trader.persistence.catalog import ParquetDataCatalog
 
 # 从环境变量或默认路径创建数据目录
@@ -3392,7 +3392,7 @@ print(f"数据时间范围: {start} 到 {end}")
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-6">from nautilus_trader.indicators.macd import MovingAverageConvergenceDivergence
+                <pre class="line-numbers"><code class="language-python" id="code-6">from nautilus_trader.indicators.macd import MovingAverageConvergenceDivergence
 from nautilus_trader.trading.strategy import Strategy
 
 class MACDStrategy(Strategy):
@@ -3497,7 +3497,7 @@ class MACDStrategy(Strategy):
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-7"># 配置回测
+                <pre class="line-numbers"><code class="language-python" id="code-7"># 配置回测
 config = BacktestRunConfig(
     engine=BacktestEngineConfig(
         strategies=[
@@ -3552,7 +3552,7 @@ results = node.run()
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-8"># 获取引擎实例
+                <pre class="line-numbers"><code class="language-python" id="code-8"># 获取引擎实例
 engine = node.engine
 
 # 生成报告
@@ -3594,7 +3594,7 @@ print(f"收益率: {return_pct:.2f}%")
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-9"># 从 CSV 导入数据
+                <pre class="line-numbers"><code class="language-python" id="code-9"># 从 CSV 导入数据
 from nautilus_trader.persistence.loaders import CSVTickDataLoader
 
 loader = CSVTickDataLoader(
@@ -3622,7 +3622,7 @@ catalog.write_data(ticks)
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-10"># 以 Binance 为例
+                <pre class="line-numbers"><code class="language-python" id="code-10"># 以 Binance 为例
 from nautilus_trader.adapters.binance.config import BinanceDataClientConfig
 from nautilus_trader.adapters.binance.factories import BinanceLiveDataClientFactory
 
@@ -3691,7 +3691,7 @@ data_client = BinanceLiveDataClientFactory.create(
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-1">mkdir code-editing-agent
+                <pre class="line-numbers"><code class="language-bash" id="code-1">mkdir code-editing-agent
 cd code-editing-agent
 go mod init agent
 touch main.go
@@ -3709,7 +3709,7 @@ touch main.go
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-2">package main
+                <pre class="line-numbers"><code class="language-go" id="code-2">package main
 
 import (
     "bufio"
@@ -3763,7 +3763,7 @@ type Agent struct {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-3">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-3">// main.go
 func (a *Agent) Run(ctx context.Context) error {
     conversation := []anthropic.MessageParam{}
     fmt.Println("与Claude聊天（使用'ctrl-c'退出）")
@@ -3821,7 +3821,7 @@ func (a *Agent) runInference(ctx context.Context, conversation []anthropic.Messa
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-4">export ANTHROPIC_API_KEY="这是我最后一次告诉你要设置这个"
+                <pre class="line-numbers"><code class="language-bash" id="code-4">export ANTHROPIC_API_KEY="这是我最后一次告诉你要设置这个"
 # 下载依赖
 go mod tidy
 # 运行
@@ -3866,7 +3866,7 @@ go run main.go
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-5">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-5">// main.go
 type ToolDefinition struct {
     Name string `json:"name"`
     Description string `json:"description"`
@@ -3887,7 +3887,7 @@ type ToolDefinition struct {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-6">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-6">// main.go
 // `tools`在这里添加：
 type Agent struct {
     client *anthropic.Client
@@ -3929,7 +3929,7 @@ func main() {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-7">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-7">// main.go
 func (a *Agent) runInference(ctx context.Context, conversation []anthropic.MessageParam) (*anthropic.Message, error) {
     anthropicTools := []anthropic.ToolUnionParam{}
     for _, tool := range a.tools {
@@ -3966,7 +3966,7 @@ func (a *Agent) runInference(ctx context.Context, conversation []anthropic.Messa
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-8">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-8">// main.go
 var ReadFileDefinition = ToolDefinition{
     Name: "read_file",
     Description: "读取给定相对文件路径的内容。当你想看到文件内部的内容时使用这个。不要对目录名使用这个。",
@@ -4021,7 +4021,7 @@ func GenerateSchema[T any]() anthropic.ToolInputSchemaParam {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-9">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-9">// main.go
 package main
 
 import (
@@ -4049,7 +4049,7 @@ import (
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-10">go mod tidy
+                <pre class="line-numbers"><code class="language-bash" id="code-10">go mod tidy
 </code></pre>
             </div>
 <p>然后，在<code>main</code>函数中，我们需要确保使用定义：</p>
@@ -4064,7 +4064,7 @@ import (
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-11">func main() {
+                <pre class="line-numbers"><code class="language-go" id="code-11">func main() {
     // [... 之前的代码 ...]
     tools := []ToolDefinition{ReadFileDefinition}
     // [... 之前的代码 ...]
@@ -4086,7 +4086,7 @@ import (
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-12">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-12">// main.go
 func (a *Agent) Run(ctx context.Context) error {
     conversation := []anthropic.MessageParam{}
     fmt.Println("与Claude聊天（使用'ctrl-c'退出）")
@@ -4173,7 +4173,7 @@ func (a *Agent) executeTool(id, name string, input json.RawMessage) anthropic.Co
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-13">echo 'what animal is the most disagreeable because it always says neigh?' &gt;&gt; secret-file.txt
+                <pre class="line-numbers"><code class="language-bash" id="code-13">echo 'what animal is the most disagreeable because it always says neigh?' &gt;&gt; secret-file.txt
 </code></pre>
             </div>
 <p>这在我们的目录中创建了一个<code>secret-file.txt</code>，包含一个神秘的谜语。</p>
@@ -4195,7 +4195,7 @@ func (a *Agent) executeTool(id, name string, input json.RawMessage) anthropic.Co
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-14">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-14">// main.go
 var ListFilesDefinition = ToolDefinition{
     Name: "list_files",
     Description: "列出给定路径下的文件和目录。如果没有提供路径，列出当前目录中的文件。",
@@ -4268,7 +4268,7 @@ func ListFiles(input json.RawMessage) (string, error) {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-15">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-15">// main.go
 func main() {
     // [... 之前的代码 ...]
     tools := []ToolDefinition{ReadFileDefinition, ListFilesDefinition}
@@ -4298,7 +4298,7 @@ func main() {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-16">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-16">// main.go
 var EditFileDefinition = ToolDefinition{
     Name: "edit_file",
     Description: `对文本文件进行编辑。
@@ -4332,7 +4332,7 @@ var EditFileInputSchema = GenerateSchema[EditFileInput]()
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-17">func EditFile(input json.RawMessage) (string, error) {
+                <pre class="line-numbers"><code class="language-go" id="code-17">func EditFile(input json.RawMessage) (string, error) {
     editFileInput := EditFileInput{}
     err := json.Unmarshal(input, &amp;editFileInput)
     if err != nil {
@@ -4380,7 +4380,7 @@ var EditFileInputSchema = GenerateSchema[EditFileInput]()
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-18">func createNewFile(filePath, content string) (string, error) {
+                <pre class="line-numbers"><code class="language-go" id="code-18">func createNewFile(filePath, content string) (string, error) {
     dir := path.Dir(filePath)
     if dir != "." {
         err := os.MkdirAll(dir, 0755)
@@ -4410,7 +4410,7 @@ var EditFileInputSchema = GenerateSchema[EditFileInput]()
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-19">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-19">// main.go
 func main() {
     // [... 之前的代码 ...]
     tools := []ToolDefinition{ReadFileDefinition, ListFilesDefinition, EditFileDefinition}
@@ -4433,7 +4433,7 @@ func main() {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-20">$ node fizzbuzz.js
+                <pre class="line-numbers"><code class="language-bash" id="code-20">$ node fizzbuzz.js
 Running FizzBuzz:
 1
 2
@@ -4469,7 +4469,7 @@ FizzBuzz
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-21">$ node fizzbuzz.js
+                <pre class="line-numbers"><code class="language-bash" id="code-21">$ node fizzbuzz.js
 Running FizzBuzz:
 1
 2
@@ -4503,7 +4503,7 @@ FizzBuzz
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-22">$ node congrats.js
+                <pre class="line-numbers"><code class="language-bash" id="code-22">$ node congrats.js
 Congratulations on building a code-editing agent!
 </code></pre>
             </div>
@@ -4541,7 +4541,7 @@ Congratulations on building a code-editing agent!
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-1">// This code block won't appear in the excerpt
+                <pre class="line-numbers"><code class="language-rust" id="code-1">// This code block won't appear in the excerpt
 fn generate_excerpt(markdown: &amp;str) -&gt; String {
     // Implementation details...
 }

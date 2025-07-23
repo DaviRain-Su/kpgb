@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog</title>  <meta name="title" content="关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog"> <meta name="description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html"> <meta property="og:title" content="关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog"> <meta property="og:description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:37+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:38+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html"> <meta property="twitter:title" content="关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog"> <meta property="twitter:description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog</title>  <meta name="title" content="关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog"> <meta name="description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html"> <meta property="og:title" content="关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog"> <meta property="og:description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:37+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:38+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html"> <meta property="twitter:title" content="关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog"> <meta property="twitter:description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -128,7 +128,7 @@
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-1">use std::{borrow::Cow, process::Command};
+                <pre class="line-numbers"><code class="language-rust" id="code-1">use std::{borrow::Cow, process::Command};
 
 fn main() {
 	// Make git hash available via GIT_HASH build-time env var:
@@ -186,7 +186,7 @@ fn output_git_short_hash() {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-2">cargo:rerun-if-changed=&lt;filename&gt;;
+                <pre class="line-numbers"><code class="language-bash" id="code-2">cargo:rerun-if-changed=&lt;filename&gt;;
 </code></pre>
             </div>
 <p>其中 <code>filename</code> 表示需要监视的文件名或文件夹名，可以使用相对或绝对路径。</p>
@@ -604,6 +604,26 @@ fn output_git_short_hash() {
             button.classList.remove('copy-success');
         }, 2000);
     }
+    </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        // Configure Prism.js
+        if (window.Prism) {
+            // Set autoloader path for additional languages
+            Prism.plugins.autoloader.languages_path = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/';
+            
+            // Add line numbers to all code blocks
+            document.querySelectorAll('pre code').forEach(function(codeBlock) {
+                codeBlock.parentElement.classList.add('line-numbers');
+            });
+            
+            // Highlight all code blocks
+            Prism.highlightAll();
+        }
     </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>NautilusTrader 完整快速入门指南 - Anonymous IPFS Blog</title>  <meta name="title" content="NautilusTrader 完整快速入门指南 - Anonymous IPFS Blog"> <meta name="description" content="包含数据获取的完整 NautilusTrader 入门教程，从环境设置到回测分析的全流程指南"> <meta name="keywords" content="nautilus-trader, 量化交易, python, 回测, 教程, IPFS, blog, decentralized, Anonymous"> <meta name="author" content="Developer"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/nautilustrader.html"> <meta property="og:title" content="NautilusTrader 完整快速入门指南 - Anonymous IPFS Blog"> <meta property="og:description" content="包含数据获取的完整 NautilusTrader 入门教程，从环境设置到回测分析的全流程指南"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-21T13:31:00+0000"> <meta property="article:modified_time" content="2025-07-21T13:31:18+0000"> <meta property="article:author" content="Developer"> <meta property="article:tag" content="nautilus-trader"> <meta property="article:tag" content="量化交易"> <meta property="article:tag" content="python"> <meta property="article:tag" content="回测"> <meta property="article:tag" content="教程">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/nautilustrader.html"> <meta property="twitter:title" content="NautilusTrader 完整快速入门指南 - Anonymous IPFS Blog"> <meta property="twitter:description" content="包含数据获取的完整 NautilusTrader 入门教程，从环境设置到回测分析的全流程指南"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/nautilustrader.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>NautilusTrader 完整快速入门指南 - Anonymous IPFS Blog</title>  <meta name="title" content="NautilusTrader 完整快速入门指南 - Anonymous IPFS Blog"> <meta name="description" content="包含数据获取的完整 NautilusTrader 入门教程，从环境设置到回测分析的全流程指南"> <meta name="keywords" content="nautilus-trader, 量化交易, python, 回测, 教程, IPFS, blog, decentralized, Anonymous"> <meta name="author" content="Developer"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/nautilustrader.html"> <meta property="og:title" content="NautilusTrader 完整快速入门指南 - Anonymous IPFS Blog"> <meta property="og:description" content="包含数据获取的完整 NautilusTrader 入门教程，从环境设置到回测分析的全流程指南"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-21T13:31:00+0000"> <meta property="article:modified_time" content="2025-07-21T13:31:18+0000"> <meta property="article:author" content="Developer"> <meta property="article:tag" content="nautilus-trader"> <meta property="article:tag" content="量化交易"> <meta property="article:tag" content="python"> <meta property="article:tag" content="回测"> <meta property="article:tag" content="教程">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/nautilustrader.html"> <meta property="twitter:title" content="NautilusTrader 完整快速入门指南 - Anonymous IPFS Blog"> <meta property="twitter:description" content="包含数据获取的完整 NautilusTrader 入门教程，从环境设置到回测分析的全流程指南"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/nautilustrader.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -164,7 +164,7 @@
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-1"># 创建虚拟环境（推荐）
+                <pre class="line-numbers"><code class="language-bash" id="code-1"># 创建虚拟环境（推荐）
 python -m venv nautilus_env
 source nautilus_env/bin/activate  # Linux/Mac
 # nautilus_env\Scripts\activate  # Windows
@@ -189,7 +189,7 @@ pip install -U jupyterlab
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-2"># 在 Jupyter notebook 或 Python 脚本中运行
+                <pre class="line-numbers"><code class="language-python" id="code-2"># 在 Jupyter notebook 或 Python 脚本中运行
 import subprocess
 import sys
 
@@ -216,7 +216,7 @@ subprocess.run([
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-3">curl https://raw.githubusercontent.com/nautechsystems/nautilus_data/main/nautilus_data/hist_data_to_catalog.py | python -
+                <pre class="line-numbers"><code class="language-bash" id="code-3">curl https://raw.githubusercontent.com/nautechsystems/nautilus_data/main/nautilus_data/hist_data_to_catalog.py | python -
 </code></pre>
             </div>
 <p>这个脚本会：</p>
@@ -238,7 +238,7 @@ subprocess.run([
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-4">from decimal import Decimal
+                <pre class="line-numbers"><code class="language-python" id="code-4">from decimal import Decimal
 from pathlib import Path
 
 import pandas as pd
@@ -266,7 +266,7 @@ from nautilus_trader.trading.strategy import Strategy
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-5"># 设置数据目录路径
+                <pre class="line-numbers"><code class="language-python" id="code-5"># 设置数据目录路径
 from nautilus_trader.persistence.catalog import ParquetDataCatalog
 
 # 从环境变量或默认路径创建数据目录
@@ -294,7 +294,7 @@ print(f"数据时间范围: {start} 到 {end}")
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-6">from nautilus_trader.indicators.macd import MovingAverageConvergenceDivergence
+                <pre class="line-numbers"><code class="language-python" id="code-6">from nautilus_trader.indicators.macd import MovingAverageConvergenceDivergence
 from nautilus_trader.trading.strategy import Strategy
 
 class MACDStrategy(Strategy):
@@ -399,7 +399,7 @@ class MACDStrategy(Strategy):
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-7"># 配置回测
+                <pre class="line-numbers"><code class="language-python" id="code-7"># 配置回测
 config = BacktestRunConfig(
     engine=BacktestEngineConfig(
         strategies=[
@@ -454,7 +454,7 @@ results = node.run()
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-8"># 获取引擎实例
+                <pre class="line-numbers"><code class="language-python" id="code-8"># 获取引擎实例
 engine = node.engine
 
 # 生成报告
@@ -496,7 +496,7 @@ print(f"收益率: {return_pct:.2f}%")
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-9"># 从 CSV 导入数据
+                <pre class="line-numbers"><code class="language-python" id="code-9"># 从 CSV 导入数据
 from nautilus_trader.persistence.loaders import CSVTickDataLoader
 
 loader = CSVTickDataLoader(
@@ -524,7 +524,7 @@ catalog.write_data(ticks)
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-python" id="code-10"># 以 Binance 为例
+                <pre class="line-numbers"><code class="language-python" id="code-10"># 以 Binance 为例
 from nautilus_trader.adapters.binance.config import BinanceDataClientConfig
 from nautilus_trader.adapters.binance.factories import BinanceLiveDataClientFactory
 
@@ -990,6 +990,26 @@ data_client = BinanceLiveDataClientFactory.create(
             button.classList.remove('copy-success');
         }, 2000);
     }
+    </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        // Configure Prism.js
+        if (window.Prism) {
+            // Set autoloader path for additional languages
+            Prism.plugins.autoloader.languages_path = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/';
+            
+            // Add line numbers to all code blocks
+            document.querySelectorAll('pre code').forEach(function(codeBlock) {
+                codeBlock.parentElement.classList.add('line-numbers');
+            });
+            
+            // Highlight all code blocks
+            Prism.highlightAll();
+        }
     </script>
 </body>
 </html>

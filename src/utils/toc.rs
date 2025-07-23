@@ -59,15 +59,16 @@ pub fn generate_toc(markdown: &str) -> Vec<TocEntry> {
 
 /// Generate a URL-safe ID from heading text
 pub fn generate_heading_id(text: &str) -> String {
-    text.to_lowercase()
+    text.trim()
         .chars()
         .map(|c| {
-            if c.is_alphanumeric() {
-                c
+            if c.is_alphanumeric() || c > '\u{007F}' {
+                // Preserve alphanumeric and non-ASCII Unicode characters (like Chinese)
+                c.to_lowercase().to_string()
             } else if c.is_whitespace() || c == '-' || c == '_' {
-                '-'
+                "-".to_string()
             } else {
-                '_'
+                "_".to_string()
             }
         })
         .collect::<String>()
@@ -176,7 +177,7 @@ mod tests {
             generate_heading_id("  Multiple   Spaces  "),
             "multiple-spaces"
         );
-        assert_eq!(generate_heading_id("中文标题"), "_____");
+        assert_eq!(generate_heading_id("中文标题"), "中文标题");
     }
 
     #[test]

@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>About Rust tips - Anonymous IPFS Blog</title>  <meta name="title" content="About Rust tips - Anonymous IPFS Blog"> <meta name="description" content="在 Rust 中，如果你想为你的 中的类型编写带有可选的 的测试，你可以使用 属性和 属性来做到这一点。 以下是一个例子： 在这个例子中， 只有在 被启用时才会被定义，同样， 测试也只有在 被启用时才会被运行。 要运行这个测试，你需要使用以下命令，其中 是你的 的名字： 这个命令会启用 特性并运行所有的测试，包括依赖于…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-tips.html"> <meta property="og:title" content="About Rust tips - Anonymous IPFS Blog"> <meta property="og:description" content="在 Rust 中，如果你想为你的 中的类型编写带有可选的 的测试，你可以使用 属性和 属性来做到这一点。 以下是一个例子： 在这个例子中， 只有在 被启用时才会被定义，同样， 测试也只有在 被启用时才会被运行。 要运行这个测试，你需要使用以下命令，其中 是你的 的名字： 这个命令会启用 特性并运行所有的测试，包括依赖于…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:44+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:45+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-tips.html"> <meta property="twitter:title" content="About Rust tips - Anonymous IPFS Blog"> <meta property="twitter:description" content="在 Rust 中，如果你想为你的 中的类型编写带有可选的 的测试，你可以使用 属性和 属性来做到这一点。 以下是一个例子： 在这个例子中， 只有在 被启用时才会被定义，同样， 测试也只有在 被启用时才会被运行。 要运行这个测试，你需要使用以下命令，其中 是你的 的名字： 这个命令会启用 特性并运行所有的测试，包括依赖于…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-tips.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>About Rust tips - Anonymous IPFS Blog</title>  <meta name="title" content="About Rust tips - Anonymous IPFS Blog"> <meta name="description" content="在 Rust 中，如果你想为你的 中的类型编写带有可选的 的测试，你可以使用 属性和 属性来做到这一点。 以下是一个例子： 在这个例子中， 只有在 被启用时才会被定义，同样， 测试也只有在 被启用时才会被运行。 要运行这个测试，你需要使用以下命令，其中 是你的 的名字： 这个命令会启用 特性并运行所有的测试，包括依赖于…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-tips.html"> <meta property="og:title" content="About Rust tips - Anonymous IPFS Blog"> <meta property="og:description" content="在 Rust 中，如果你想为你的 中的类型编写带有可选的 的测试，你可以使用 属性和 属性来做到这一点。 以下是一个例子： 在这个例子中， 只有在 被启用时才会被定义，同样， 测试也只有在 被启用时才会被运行。 要运行这个测试，你需要使用以下命令，其中 是你的 的名字： 这个命令会启用 特性并运行所有的测试，包括依赖于…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:44+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:45+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-tips.html"> <meta property="twitter:title" content="About Rust tips - Anonymous IPFS Blog"> <meta property="twitter:description" content="在 Rust 中，如果你想为你的 中的类型编写带有可选的 的测试，你可以使用 属性和 属性来做到这一点。 以下是一个例子： 在这个例子中， 只有在 被启用时才会被定义，同样， 测试也只有在 被启用时才会被运行。 要运行这个测试，你需要使用以下命令，其中 是你的 的名字： 这个命令会启用 特性并运行所有的测试，包括依赖于…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-tips.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -132,7 +132,7 @@
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-1">// 在lib.rs或者main.rs中
+                <pre class="line-numbers"><code class="language-rust" id="code-1">// 在lib.rs或者main.rs中
 #[cfg(feature = "feature_name")]
 pub struct MyStruct {
     // ...
@@ -161,7 +161,7 @@ mod tests {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-2">cargo test --features feature_name
+                <pre class="line-numbers"><code class="language-bash" id="code-2">cargo test --features feature_name
 </code></pre>
             </div>
 <p>这个命令会启用<code>feature_name</code>特性并运行所有的测试，包括依赖于这个特性的测试。</p>
@@ -179,7 +179,7 @@ mod tests {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-3">fn vec_result_to_result_vec&lt;T, E&gt;(v: Vec&lt;Result&lt;T, E&gt;&gt;) -&gt; Result&lt;Vec&lt;T&gt;, E&gt; {
+                <pre class="line-numbers"><code class="language-rust" id="code-3">fn vec_result_to_result_vec&lt;T, E&gt;(v: Vec&lt;Result&lt;T, E&gt;&gt;) -&gt; Result&lt;Vec&lt;T&gt;, E&gt; {
     v.into_iter().try_fold(Vec::new(), |mut acc, res| {
         match res {
             Ok(t) =&gt; {
@@ -207,7 +207,7 @@ mod tests {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-4">fn decimal_to_hex(decimal: u32) -&gt; String {
+                <pre class="line-numbers"><code class="language-rust" id="code-4">fn decimal_to_hex(decimal: u32) -&gt; String {
     format!("{:X}", decimal)
 }
 </code></pre>
@@ -224,7 +224,7 @@ mod tests {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-5">let hex_string = decimal_to_hex(123456789);
+                <pre class="line-numbers"><code class="language-rust" id="code-5">let hex_string = decimal_to_hex(123456789);
 println!("{}", hex_string); // 输出: "75BCD15"
 </code></pre>
             </div>
@@ -245,7 +245,7 @@ println!("{}", hex_string); // 输出: "75BCD15"
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-6">let some_number = Some(5);
+                <pre class="line-numbers"><code class="language-rust" id="code-6">let some_number = Some(5);
 let doubled = some_number.map(|x| x * 2);
 assert_eq!(doubled, Some(10));
 </code></pre>
@@ -263,7 +263,7 @@ assert_eq!(doubled, Some(10));
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-7">let some_number = Some(5);
+                <pre class="line-numbers"><code class="language-rust" id="code-7">let some_number = Some(5);
 let result = some_number.and_then(|x| {
     if x &lt; 10 {
         None
@@ -691,6 +691,26 @@ assert_eq!(result, Some(33));
             button.classList.remove('copy-success');
         }, 2000);
     }
+    </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        // Configure Prism.js
+        if (window.Prism) {
+            // Set autoloader path for additional languages
+            Prism.plugins.autoloader.languages_path = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/';
+            
+            // Add line numbers to all code blocks
+            document.querySelectorAll('pre code').forEach(function(codeBlock) {
+                codeBlock.parentElement.classList.add('line-numbers');
+            });
+            
+            // Highlight all code blocks
+            Prism.highlightAll();
+        }
     </script>
 </body>
 </html>

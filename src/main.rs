@@ -6,6 +6,7 @@
 #![allow(clippy::while_let_on_iterator)]
 #![allow(clippy::unnecessary_map_or)]
 #![allow(clippy::unnecessary_to_owned)]
+#![allow(clippy::if_same_then_else)]
 mod blog;
 mod database;
 mod docs;

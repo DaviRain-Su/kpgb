@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>How to build an agent - Anonymous IPFS Blog</title>  <meta name="title" content="How to build an agent - Anonymous IPFS Blog"> <meta name="description" content="Thorsten Ball，2025年4月15日 构建一个功能完整的代码编辑代理程序其实并不难。 看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。 但其实没有。它就是一个LLM、一个循环，以及足够的token。这就是我们在 播客 中从一开始就在说的。其余…"> <meta name="keywords" content="agent, go, IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain-Su"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-build-an-agent.html"> <meta property="og:title" content="How to build an agent - Anonymous IPFS Blog"> <meta property="og:description" content="Thorsten Ball，2025年4月15日 构建一个功能完整的代码编辑代理程序其实并不难。 看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。 但其实没有。它就是一个LLM、一个循环，以及足够的token。这就是我们在 播客 中从一开始就在说的。其余…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-21T10:16:15+0000"> <meta property="article:modified_time" content="2025-07-21T10:16:35+0000"> <meta property="article:author" content="DaviRain-Su"> <meta property="article:tag" content="agent"> <meta property="article:tag" content="go">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-build-an-agent.html"> <meta property="twitter:title" content="How to build an agent - Anonymous IPFS Blog"> <meta property="twitter:description" content="Thorsten Ball，2025年4月15日 构建一个功能完整的代码编辑代理程序其实并不难。 看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。 但其实没有。它就是一个LLM、一个循环，以及足够的token。这就是我们在 播客 中从一开始就在说的。其余…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-build-an-agent.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>How to build an agent - Anonymous IPFS Blog</title>  <meta name="title" content="How to build an agent - Anonymous IPFS Blog"> <meta name="description" content="Thorsten Ball，2025年4月15日 构建一个功能完整的代码编辑代理程序其实并不难。 看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。 但其实没有。它就是一个LLM、一个循环，以及足够的token。这就是我们在 播客 中从一开始就在说的。其余…"> <meta name="keywords" content="agent, go, IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain-Su"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-build-an-agent.html"> <meta property="og:title" content="How to build an agent - Anonymous IPFS Blog"> <meta property="og:description" content="Thorsten Ball，2025年4月15日 构建一个功能完整的代码编辑代理程序其实并不难。 看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。 但其实没有。它就是一个LLM、一个循环，以及足够的token。这就是我们在 播客 中从一开始就在说的。其余…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-21T10:16:15+0000"> <meta property="article:modified_time" content="2025-07-21T10:16:35+0000"> <meta property="article:author" content="DaviRain-Su"> <meta property="article:tag" content="agent"> <meta property="article:tag" content="go">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-build-an-agent.html"> <meta property="twitter:title" content="How to build an agent - Anonymous IPFS Blog"> <meta property="twitter:description" content="Thorsten Ball，2025年4月15日 构建一个功能完整的代码编辑代理程序其实并不难。 看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。 但其实没有。它就是一个LLM、一个循环，以及足够的token。这就是我们在 播客 中从一开始就在说的。其余…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-build-an-agent.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -154,7 +154,7 @@
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-1">mkdir code-editing-agent
+                <pre class="line-numbers"><code class="language-bash" id="code-1">mkdir code-editing-agent
 cd code-editing-agent
 go mod init agent
 touch main.go
@@ -172,7 +172,7 @@ touch main.go
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-2">package main
+                <pre class="line-numbers"><code class="language-go" id="code-2">package main
 
 import (
     "bufio"
@@ -226,7 +226,7 @@ type Agent struct {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-3">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-3">// main.go
 func (a *Agent) Run(ctx context.Context) error {
     conversation := []anthropic.MessageParam{}
     fmt.Println("与Claude聊天（使用'ctrl-c'退出）")
@@ -284,7 +284,7 @@ func (a *Agent) runInference(ctx context.Context, conversation []anthropic.Messa
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-4">export ANTHROPIC_API_KEY="这是我最后一次告诉你要设置这个"
+                <pre class="line-numbers"><code class="language-bash" id="code-4">export ANTHROPIC_API_KEY="这是我最后一次告诉你要设置这个"
 # 下载依赖
 go mod tidy
 # 运行
@@ -329,7 +329,7 @@ go run main.go
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-5">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-5">// main.go
 type ToolDefinition struct {
     Name string `json:"name"`
     Description string `json:"description"`
@@ -350,7 +350,7 @@ type ToolDefinition struct {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-6">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-6">// main.go
 // `tools`在这里添加：
 type Agent struct {
     client *anthropic.Client
@@ -392,7 +392,7 @@ func main() {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-7">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-7">// main.go
 func (a *Agent) runInference(ctx context.Context, conversation []anthropic.MessageParam) (*anthropic.Message, error) {
     anthropicTools := []anthropic.ToolUnionParam{}
     for _, tool := range a.tools {
@@ -429,7 +429,7 @@ func (a *Agent) runInference(ctx context.Context, conversation []anthropic.Messa
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-8">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-8">// main.go
 var ReadFileDefinition = ToolDefinition{
     Name: "read_file",
     Description: "读取给定相对文件路径的内容。当你想看到文件内部的内容时使用这个。不要对目录名使用这个。",
@@ -484,7 +484,7 @@ func GenerateSchema[T any]() anthropic.ToolInputSchemaParam {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-9">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-9">// main.go
 package main
 
 import (
@@ -512,7 +512,7 @@ import (
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-10">go mod tidy
+                <pre class="line-numbers"><code class="language-bash" id="code-10">go mod tidy
 </code></pre>
             </div>
 <p>然后，在<code>main</code>函数中，我们需要确保使用定义：</p>
@@ -527,7 +527,7 @@ import (
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-11">func main() {
+                <pre class="line-numbers"><code class="language-go" id="code-11">func main() {
     // [... 之前的代码 ...]
     tools := []ToolDefinition{ReadFileDefinition}
     // [... 之前的代码 ...]
@@ -549,7 +549,7 @@ import (
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-12">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-12">// main.go
 func (a *Agent) Run(ctx context.Context) error {
     conversation := []anthropic.MessageParam{}
     fmt.Println("与Claude聊天（使用'ctrl-c'退出）")
@@ -636,7 +636,7 @@ func (a *Agent) executeTool(id, name string, input json.RawMessage) anthropic.Co
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-13">echo 'what animal is the most disagreeable because it always says neigh?' &gt;&gt; secret-file.txt
+                <pre class="line-numbers"><code class="language-bash" id="code-13">echo 'what animal is the most disagreeable because it always says neigh?' &gt;&gt; secret-file.txt
 </code></pre>
             </div>
 <p>这在我们的目录中创建了一个<code>secret-file.txt</code>，包含一个神秘的谜语。</p>
@@ -658,7 +658,7 @@ func (a *Agent) executeTool(id, name string, input json.RawMessage) anthropic.Co
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-14">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-14">// main.go
 var ListFilesDefinition = ToolDefinition{
     Name: "list_files",
     Description: "列出给定路径下的文件和目录。如果没有提供路径，列出当前目录中的文件。",
@@ -731,7 +731,7 @@ func ListFiles(input json.RawMessage) (string, error) {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-15">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-15">// main.go
 func main() {
     // [... 之前的代码 ...]
     tools := []ToolDefinition{ReadFileDefinition, ListFilesDefinition}
@@ -761,7 +761,7 @@ func main() {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-16">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-16">// main.go
 var EditFileDefinition = ToolDefinition{
     Name: "edit_file",
     Description: `对文本文件进行编辑。
@@ -795,7 +795,7 @@ var EditFileInputSchema = GenerateSchema[EditFileInput]()
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-17">func EditFile(input json.RawMessage) (string, error) {
+                <pre class="line-numbers"><code class="language-go" id="code-17">func EditFile(input json.RawMessage) (string, error) {
     editFileInput := EditFileInput{}
     err := json.Unmarshal(input, &amp;editFileInput)
     if err != nil {
@@ -843,7 +843,7 @@ var EditFileInputSchema = GenerateSchema[EditFileInput]()
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-18">func createNewFile(filePath, content string) (string, error) {
+                <pre class="line-numbers"><code class="language-go" id="code-18">func createNewFile(filePath, content string) (string, error) {
     dir := path.Dir(filePath)
     if dir != "." {
         err := os.MkdirAll(dir, 0755)
@@ -873,7 +873,7 @@ var EditFileInputSchema = GenerateSchema[EditFileInput]()
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-go" id="code-19">// main.go
+                <pre class="line-numbers"><code class="language-go" id="code-19">// main.go
 func main() {
     // [... 之前的代码 ...]
     tools := []ToolDefinition{ReadFileDefinition, ListFilesDefinition, EditFileDefinition}
@@ -896,7 +896,7 @@ func main() {
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-20">$ node fizzbuzz.js
+                <pre class="line-numbers"><code class="language-bash" id="code-20">$ node fizzbuzz.js
 Running FizzBuzz:
 1
 2
@@ -932,7 +932,7 @@ FizzBuzz
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-21">$ node fizzbuzz.js
+                <pre class="line-numbers"><code class="language-bash" id="code-21">$ node fizzbuzz.js
 Running FizzBuzz:
 1
 2
@@ -966,7 +966,7 @@ FizzBuzz
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-bash" id="code-22">$ node congrats.js
+                <pre class="line-numbers"><code class="language-bash" id="code-22">$ node congrats.js
 Congratulations on building a code-editing agent!
 </code></pre>
             </div>
@@ -1410,6 +1410,26 @@ Congratulations on building a code-editing agent!
             button.classList.remove('copy-success');
         }, 2000);
     }
+    </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        // Configure Prism.js
+        if (window.Prism) {
+            // Set autoloader path for additional languages
+            Prism.plugins.autoloader.languages_path = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/';
+            
+            // Add line numbers to all code blocks
+            document.querySelectorAll('pre code').forEach(function(codeBlock) {
+                codeBlock.parentElement.classList.add('line-numbers');
+            });
+            
+            // Highlight all code blocks
+            Prism.highlightAll();
+        }
     </script>
 </body>
 </html>

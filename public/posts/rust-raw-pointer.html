@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>About Rust Raw Pointer - Anonymous IPFS Blog</title>  <meta name="title" content="About Rust Raw Pointer - Anonymous IPFS Blog"> <meta name="description" content="在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。 原生指针有两种类型： 和 ，分别是不可变和可变的原生指针。 Rust提供了一个函数可以获取类型的大小： 。 这里提供了一个简单的例子，展示了如何使用原生指针。 原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-raw-pointer.html"> <meta property="og:title" content="About Rust Raw Pointer - Anonymous IPFS Blog"> <meta property="og:description" content="在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。 原生指针有两种类型： 和 ，分别是不可变和可变的原生指针。 Rust提供了一个函数可以获取类型的大小： 。 这里提供了一个简单的例子，展示了如何使用原生指针。 原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:46+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:47+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-raw-pointer.html"> <meta property="twitter:title" content="About Rust Raw Pointer - Anonymous IPFS Blog"> <meta property="twitter:description" content="在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。 原生指针有两种类型： 和 ，分别是不可变和可变的原生指针。 Rust提供了一个函数可以获取类型的大小： 。 这里提供了一个简单的例子，展示了如何使用原生指针。 原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-raw-pointer.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>About Rust Raw Pointer - Anonymous IPFS Blog</title>  <meta name="title" content="About Rust Raw Pointer - Anonymous IPFS Blog"> <meta name="description" content="在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。 原生指针有两种类型： 和 ，分别是不可变和可变的原生指针。 Rust提供了一个函数可以获取类型的大小： 。 这里提供了一个简单的例子，展示了如何使用原生指针。 原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-raw-pointer.html"> <meta property="og:title" content="About Rust Raw Pointer - Anonymous IPFS Blog"> <meta property="og:description" content="在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。 原生指针有两种类型： 和 ，分别是不可变和可变的原生指针。 Rust提供了一个函数可以获取类型的大小： 。 这里提供了一个简单的例子，展示了如何使用原生指针。 原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:46+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:47+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-raw-pointer.html"> <meta property="twitter:title" content="About Rust Raw Pointer - Anonymous IPFS Blog"> <meta property="twitter:description" content="在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。 原生指针有两种类型： 和 ，分别是不可变和可变的原生指针。 Rust提供了一个函数可以获取类型的大小： 。 这里提供了一个简单的例子，展示了如何使用原生指针。 原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-raw-pointer.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -134,7 +134,7 @@
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre><code class="language-rust" id="code-1">let array: [i32; 5] = [1, 2, 3, 4, 5];
+                <pre class="line-numbers"><code class="language-rust" id="code-1">let array: [i32; 5] = [1, 2, 3, 4, 5];
 // size of array is 20，因为i32是4字节，所以数组大小是5*4=20，
 // 这里直接使用std::mem::size_of_val(&amp;array)也可以
 println!("size of array: {}", std::mem::size_of_val(&amp;array));
@@ -558,6 +558,26 @@ println!(
             button.classList.remove('copy-success');
         }, 2000);
     }
+    </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script>
+        // Configure Prism.js
+        if (window.Prism) {
+            // Set autoloader path for additional languages
+            Prism.plugins.autoloader.languages_path = 'https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/';
+            
+            // Add line numbers to all code blocks
+            document.querySelectorAll('pre code').forEach(function(codeBlock) {
+                codeBlock.parentElement.classList.add('line-numbers');
+            });
+            
+            // Highlight all code blocks
+            Prism.highlightAll();
+        }
     </script>
 </body>
 </html>
