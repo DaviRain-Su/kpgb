@@ -142,6 +142,28 @@ enum Commands {
         #[arg(short, long)]
         force: bool,
     },
+
+    /// Show blog statistics
+    Stats {
+        /// Show detailed statistics
+        #[arg(short, long)]
+        detailed: bool,
+
+        /// Export statistics as JSON
+        #[arg(short, long)]
+        json: bool,
+    },
+
+    /// Read a random post
+    Random {
+        /// Only from published posts
+        #[arg(short, long)]
+        published: bool,
+
+        /// Filter by tag
+        #[arg(short, long)]
+        tag: Option<String>,
+    },
 }
 
 #[tokio::main]
@@ -494,6 +516,198 @@ async fn main() -> Result<()> {
 
             println!("✅ Post deleted successfully!");
             println!("   Note: The content may still exist in IPFS if pinned elsewhere");
+        }
+
+        Commands::Stats { detailed, json } => {
+            let posts = blog_manager.list_posts(false).await?;
+            let tags = blog_manager.get_all_tags().await?;
+
+            // Calculate basic statistics
+            let total_posts = posts.len();
+            let published_posts = posts.iter().filter(|(_, p)| p.published).count();
+            let draft_posts = total_posts - published_posts;
+
+            // Calculate word statistics
+            let mut total_words = 0;
+            let mut total_chars = 0;
+            let mut author_stats: std::collections::HashMap<String, (usize, usize)> = std::collections::HashMap::new();
+            let mut posts_by_month: std::collections::HashMap<String, usize> = std::collections::HashMap::new();
+            let mut category_stats: std::collections::HashMap<String, usize> = std::collections::HashMap::new();
+
+            for (_, post) in &posts {
+                // Count words (split by whitespace)
+                let words = post.content.split_whitespace().count();
+                let chars = post.content.chars().count();
+                total_words += words;
+                total_chars += chars;
+
+                // Author statistics
+                let entry = author_stats.entry(post.author.clone()).or_insert((0, 0));
+                entry.0 += 1; // post count
+                entry.1 += words; // word count
+
+                // Monthly statistics
+                let month = post.created_at.format("%Y-%m").to_string();
+                *posts_by_month.entry(month).or_insert(0) += 1;
+
+                // Category statistics
+                if let Some(cat) = &post.category {
+                    *category_stats.entry(cat.clone()).or_insert(0) += 1;
+                }
+            }
+
+            let avg_words = if total_posts > 0 { total_words / total_posts } else { 0 };
+            let avg_chars = if total_posts > 0 { total_chars / total_posts } else { 0 };
+
+            if json {
+                // Export as JSON
+                let stats = serde_json::json!({
+                    "total_posts": total_posts,
+                    "published_posts": published_posts,
+                    "draft_posts": draft_posts,
+                    "total_words": total_words,
+                    "total_characters": total_chars,
+                    "average_words_per_post": avg_words,
+                    "average_chars_per_post": avg_chars,
+                    "total_tags": tags.len(),
+                    "authors": author_stats,
+                    "posts_by_month": posts_by_month,
+                    "categories": category_stats,
+                    "tags": tags,
+                });
+                println!("{}", serde_json::to_string_pretty(&stats)?);
+            } else {
+                // Display formatted statistics
+                println!("📊 Blog Statistics");
+                println!("==================");
+                println!();
+                println!("📝 Posts:");
+                println!("   Total:     {}", total_posts);
+                println!("   Published: {} ({}%)", published_posts, 
+                    if total_posts > 0 { published_posts * 100 / total_posts } else { 0 });
+                println!("   Drafts:    {} ({}%)", draft_posts,
+                    if total_posts > 0 { draft_posts * 100 / total_posts } else { 0 });
+                println!();
+                println!("📖 Content:");
+                println!("   Total words:      {:>8}", total_words.to_string());
+                println!("   Total characters: {:>8}", total_chars.to_string());
+                println!("   Avg words/post:   {:>8}", avg_words.to_string());
+                println!("   Avg chars/post:   {:>8}", avg_chars.to_string());
+                println!();
+                println!("🏷️  Tags: {} unique tags", tags.len());
+                
+                if detailed {
+                    // Show top 5 tags
+                    println!("\n   Top Tags:");
+                    for (i, (tag, count)) in tags.iter().take(5).enumerate() {
+                        println!("   {}. {} ({})", i + 1, tag, count);
+                    }
+
+                    // Show author statistics
+                    println!("\n✍️  Authors:");
+                    let mut authors: Vec<_> = author_stats.iter().collect();
+                    authors.sort_by(|a, b| b.1.0.cmp(&a.1.0)); // Sort by post count
+                    for (author, (posts, words)) in authors.iter().take(5) {
+                        println!("   {} - {} posts, {} words", author, posts, words);
+                    }
+
+                    // Show category statistics
+                    if !category_stats.is_empty() {
+                        println!("\n📁 Categories:");
+                        let mut categories: Vec<_> = category_stats.iter().collect();
+                        categories.sort_by(|a, b| b.1.cmp(&a.1));
+                        for (cat, count) in categories.iter().take(5) {
+                            println!("   {} - {} posts", cat, count);
+                        }
+                    }
+
+                    // Show posting frequency
+                    println!("\n📅 Recent Activity:");
+                    let mut months: Vec<_> = posts_by_month.iter().collect();
+                    months.sort_by(|a, b| b.0.cmp(&a.0)); // Sort by month descending
+                    for (month, count) in months.iter().take(6) {
+                        let bar = "█".repeat((**count).min(20));
+                        println!("   {} [{:>2}] {}", month, count, bar);
+                    }
+                }
+
+                // Fun stats
+                println!("\n🎉 Fun Facts:");
+                if total_posts > 0 {
+                    // Find longest post
+                    let longest = posts.iter()
+                        .max_by_key(|(_, p)| p.content.len())
+                        .map(|(_, p)| (&p.title, p.content.split_whitespace().count()));
+                    
+                    if let Some((title, words)) = longest {
+                        println!("   Longest post: \"{}\" ({} words)", title, words);
+                    }
+
+                    // Most used tag
+                    if let Some((tag, count)) = tags.first() {
+                        println!("   Most popular tag: \"{}\" (used {} times)", tag, count);
+                    }
+
+                    // Estimate reading time for all posts
+                    let reading_minutes = total_words / 200; // Average reading speed
+                    println!("   Time to read all posts: ~{} minutes ({} hours)", 
+                        reading_minutes, reading_minutes / 60);
+                }
+            }
+        }
+
+        Commands::Random { published, tag } => {
+            use rand::seq::SliceRandom;
+            
+            let posts = if let Some(ref tag_filter) = tag {
+                blog_manager.get_posts_by_tag(tag_filter, published).await?
+            } else {
+                blog_manager.list_posts(published).await?
+            };
+
+            if posts.is_empty() {
+                println!("❌ No posts found");
+                if tag.is_some() {
+                    println!("   Try without tag filter or use a different tag");
+                }
+                return Ok(());
+            }
+
+            // Pick a random post
+            let mut rng = rand::thread_rng();
+            let (storage_id, post) = posts.choose(&mut rng).unwrap();
+
+            // Display the post
+            println!("🎲 Random post selected!\n");
+            println!("═══════════════════════════════════════════════════════════════");
+            println!("Title:    {}", post.title);
+            println!("Author:   {}", post.author);
+            println!("Date:     {}", post.created_at.format("%Y-%m-%d %H:%M"));
+            if !post.tags.is_empty() {
+                println!("Tags:     {}", post.tags.join(", "));
+            }
+            if let Some(cat) = &post.category {
+                println!("Category: {}", cat);
+            }
+            println!("ID:       {}", storage_id);
+            println!("═══════════════════════════════════════════════════════════════");
+            println!();
+
+            // Show excerpt or beginning of content
+            if let Some(excerpt) = &post.excerpt {
+                println!("{}\n", excerpt);
+                println!("[...continue reading...]");
+            } else {
+                // Show first 500 characters
+                let preview: String = post.content.chars().take(500).collect();
+                println!("{}", preview);
+                if post.content.len() > 500 {
+                    println!("\n[...continue reading...]");
+                }
+            }
+
+            println!("\n💡 To read the full post, run:");
+            println!("   cargo run -- read {}", storage_id);
         }
     }
 

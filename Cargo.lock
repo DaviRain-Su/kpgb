@@ -1319,6 +1319,7 @@ dependencies = [
  "futures",
  "hex",
  "pulldown-cmark",
+ "rand",
  "reqwest",
  "rss",
  "serde",

@@ -46,3 +46,4 @@ dotenv = "0.15"
 toml = "0.8"
 uuid = { version = "1.11", features = ["v4", "serde"] }
 rss = "2.0"
+rand = "0.8"
