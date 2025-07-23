@@ -3,6 +3,7 @@
 #![allow(clippy::iter_kv_map)]
 #![allow(unused_variables)]
 #![allow(clippy::inherent_to_string)]
+#![allow(clippy::while_let_on_iterator)]
 
 mod blog;
 mod database;

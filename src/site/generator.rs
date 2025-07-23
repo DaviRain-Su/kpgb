@@ -111,6 +111,12 @@ impl SiteGenerator {
         self.generate_webmanifest()?;
         self.create_default_images()?;
 
+        // Optimize images
+        self.optimize_all_images().await?;
+
+        // Minify HTML/CSS/JS
+        self.minify_resources().await?;
+
         println!(
             "✅ Site generated successfully in: {}",
             self.output_dir.display()
@@ -370,6 +376,10 @@ impl SiteGenerator {
         };
 
         fs::write(css_dir.join("style.css"), css_content)?;
+
+        // Create images directory
+        let images_dir = self.output_dir.join("images");
+        fs::create_dir_all(&images_dir)?;
 
         Ok(())
     }
@@ -775,6 +785,32 @@ impl SiteGenerator {
         // For now, we'll use the SVGs as placeholders
 
         println!("🖼️  Created default images");
+        Ok(())
+    }
+
+    async fn optimize_all_images(&self) -> Result<()> {
+        println!("🖼️  Optimizing images...");
+
+        // Create image optimization config
+        let config = crate::utils::ImageOptimizationConfig::default();
+
+        // Optimize images in the output directory
+        let stats = crate::utils::optimize_images_in_directory(&self.output_dir, &config).await?;
+
+        println!("✨ {}", stats.summary());
+        Ok(())
+    }
+
+    async fn minify_resources(&self) -> Result<()> {
+        println!("📦 Minifying HTML/CSS/JS...");
+
+        // Create minification config
+        let config = crate::utils::MinifyConfig::default();
+
+        // Minify all resources in the output directory
+        let stats = crate::utils::minify_directory(&self.output_dir, &config).await?;
+
+        println!("🗜️  {}", stats.summary());
         Ok(())
     }
 }
