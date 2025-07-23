@@ -1,0 +1,5 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+            <rect width="1200" height="630" fill="#3498db"/>
+            <text x="600" y="315" font-family="Arial, sans-serif" font-size="72" fill="white" text-anchor="middle" dominant-baseline="middle">KPGB Blog</text>
+            <text x="600" y="400" font-family="Arial, sans-serif" font-size="36" fill="white" text-anchor="middle" opacity="0.8">Decentralized IPFS Blog</text>
+        </svg>

@@ -4,9 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page_title %}{{ page_title }} - {% endif %}{{ site.title }}</title>
-    <meta name="description" content="{{ site.description }}">
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="{% if page_title %}{{ page_title }} - {% endif %}{{ site.title }}">
+    <meta name="description" content="{% if page_description %}{{ page_description }}{% elif post.excerpt %}{{ post.excerpt | striptags | truncate(length=160) }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="keywords" content="{% if post.tags %}{{ post.tags | join(sep=", ") }}, {% endif %}IPFS, blog, decentralized, {{ site.author }}">
+    <meta name="author" content="{% if post.author %}{{ post.author }}{% else %}{{ site.author }}{% endif %}">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Chinese">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% if post %}article{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ site.base_url }}{% if post %}/posts/{{ post.slug }}.html{% endif %}">
+    <meta property="og:title" content="{% if page_title %}{{ page_title }} - {% endif %}{{ site.title }}">
+    <meta property="og:description" content="{% if page_description %}{{ page_description }}{% elif post.excerpt %}{{ post.excerpt | striptags | truncate(length=160) }}{% else %}{{ site.description }}{% endif %}">
+    <meta property="og:image" content="{{ site.base_url }}/images/og-default.svg">
+    <meta property="og:site_name" content="{{ site.title }}">
+    {% if post %}
+    <meta property="article:published_time" content="{{ post.created_at | date(format="%Y-%m-%dT%H:%M:%S%z") }}">
+    <meta property="article:modified_time" content="{{ post.updated_at | date(format="%Y-%m-%dT%H:%M:%S%z") }}">
+    <meta property="article:author" content="{{ post.author }}">
+    {% for tag in post.tags %}
+    <meta property="article:tag" content="{{ tag }}">
+    {% endfor %}
+    {% endif %}
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ site.base_url }}{% if post %}/posts/{{ post.slug }}.html{% endif %}">
+    <meta property="twitter:title" content="{% if page_title %}{{ page_title }} - {% endif %}{{ site.title }}">
+    <meta property="twitter:description" content="{% if page_description %}{{ page_description }}{% elif post.excerpt %}{{ post.excerpt | striptags | truncate(length=160) }}{% else %}{{ site.description }}{% endif %}">
+    <meta property="twitter:image" content="{{ site.base_url }}/images/twitter-card.svg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ site.base_url }}{% if post %}/posts/{{ post.slug }}.html{% elif current_page and current_page > 1 %}/page/{{ current_page }}/{% elif tag %}/tags/{{ tag | url_safe_tag }}/{% endif %}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ site.base_path | default(value="") }}/favicon.svg">
+    <link rel="alternate icon" href="{{ site.base_path | default(value="") }}/favicon.ico">
+    <link rel="manifest" href="{{ site.base_path | default(value="") }}/site.webmanifest">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ site.base_path | default(value="") }}/css/style.css">
+    
+    <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }} RSS Feed" href="{{ site.base_path | default(value="") }}/feed.xml">
+    
+    <!-- JSON-LD Structured Data -->
+    {% if post %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "{{ post.title | escape }}",
+        "description": "{% if post.excerpt %}{{ post.excerpt | striptags | escape }}{% else %}{{ post.content | striptags | truncate(length=160) | escape }}{% endif %}",
+        "author": {
+            "@type": "Person",
+            "name": "{{ post.author }}"
+        },
+        "datePublished": "{{ post.created_at | date(format="%Y-%m-%dT%H:%M:%S%z") }}",
+        "dateModified": "{{ post.updated_at | date(format="%Y-%m-%dT%H:%M:%S%z") }}",
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{ site.title }}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ site.base_url }}/images/logo.svg"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ site.base_url }}/posts/{{ post.slug }}.html"
+        },
+        "wordCount": "{{ post.content | wordcount }}",
+        "keywords": "{{ post.tags | join(sep=", ") }}",
+        {% if post.category %}
+        "articleSection": "{{ post.category }}",
+        {% endif %}
+        "inLanguage": "zh-CN"
+    }
+    </script>
+    {% else %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "{{ site.title }}",
+        "description": "{{ site.description }}",
+        "url": "{{ site.base_url }}",
+        "author": {
+            "@type": "Person",
+            "name": "{{ site.author }}"
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ site.base_url }}/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    {% endif %}
 </head>
 <body>
     <header>

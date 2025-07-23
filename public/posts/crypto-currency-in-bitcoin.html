@@ -4,9 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto-currency in bitcoin - Anonymous IPFS Blog</title>
-    <meta name="description" content="A decentralized blog powered by IPFS">
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Crypto-currency in bitcoin - Anonymous IPFS Blog">
+    <meta name="description" content="大家应该都比较熟悉哈希函数的工作原理，密码学中用到的哈希函数被称为crypto-graphic hash function. 它有两个重要的性质：一个叫做collision resistance. 这个地方的collision是指哈希碰撞。 如果有两个输入 x, y且 x ≠ y , hash函数是H(v), 但是H(…">
+    <meta name="keywords" content="IPFS, blog, decentralized, Anonymous">
+    <meta name="author" content="DaviRain">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Chinese">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/crypto-currency-in-bitcoin.html">
+    <meta property="og:title" content="Crypto-currency in bitcoin - Anonymous IPFS Blog">
+    <meta property="og:description" content="大家应该都比较熟悉哈希函数的工作原理，密码学中用到的哈希函数被称为crypto-graphic hash function. 它有两个重要的性质：一个叫做collision resistance. 这个地方的collision是指哈希碰撞。 如果有两个输入 x, y且 x ≠ y , hash函数是H(v), 但是H(…">
+    <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg">
+    <meta property="og:site_name" content="Anonymous IPFS Blog">
+    
+    <meta property="article:published_time" content="2025-07-23T00:49:34+0000">
+    <meta property="article:modified_time" content="2025-07-23T00:49:34+0000">
+    <meta property="article:author" content="DaviRain">
+    
+    
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/crypto-currency-in-bitcoin.html">
+    <meta property="twitter:title" content="Crypto-currency in bitcoin - Anonymous IPFS Blog">
+    <meta property="twitter:description" content="大家应该都比较熟悉哈希函数的工作原理，密码学中用到的哈希函数被称为crypto-graphic hash function. 它有两个重要的性质：一个叫做collision resistance. 这个地方的collision是指哈希碰撞。 如果有两个输入 x, y且 x ≠ y , hash函数是H(v), 但是H(…">
+    <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/crypto-currency-in-bitcoin.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg">
+    <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico">
+    <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">
+    
+    <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">
+    
+    <!-- JSON-LD Structured Data -->
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Crypto-currency in bitcoin",
+        "description": "大家应该都比较熟悉哈希函数的工作原理，密码学中用到的哈希函数被称为crypto-graphic hash function. 它有两个重要的性质：一个叫做collision resistance. 这个地方的collision是指哈希碰撞。 如果有两个输入 x, y且 x ≠ y , hash函数是H(v), 但是H(x) = H(y).这就叫做哈希碰撞。 两个不同的输入算出来的哈希值是相等的。哈希碰撞是很常见的。像我们使用哈希表的过程中就会遇到hash碰撞。 不同的输入可能会被映射到hash表中的同一个位置。一般来说哈希碰撞是不可避免的。 因为输入空间是远远大于输出空间的，比如说我们有256位的hash值。那输出空间有多大呢。 所有hash值的可能性就是2的256次方，输出空间就只有这么大。但是输入空间可以是无限大的。 所以它是有任意多样的可能性。按照鸽笼原理的话。必然会出现有两个输入被映射到同一个输出的情况。 所以我们这里说的collision resistance 并不会出现哈希碰撞。有的📖上管这个性质叫做collision free. 这个说法我不是特别喜欢。因为它对人很容易造成误解。好像是碰撞不会发生。实际上碰撞是客观存在的。 它这个意思是实际上没有什么高效的方法，人为的去制造哈希碰撞。就给定一个x，没有什么好的办法， 你能找到另外一个y，使得H(x) 和(y)的哈希值恰好相等。没有什么高效的方法去找。你硬要找的话可以用蛮力求解的方法。 比如说这个x和y，你就遍历所有输入的可能性。然后看看哪一个算出来的哈希值正好相等。这种叫做brute-froce. 遍历所有的取值，最后找了一个哈希值恰好碰撞在一起。如果输入空间比较大。比如说对于hash值是256位的话， 实际上你要用蛮力求解的方法在实际中是不可行的。他的工作量实在是太大了。...",
+        "author": {
+            "@type": "Person",
+            "name": "DaviRain"
+        },
+        "datePublished": "2025-07-23T00:49:34+0000",
+        "dateModified": "2025-07-23T00:49:34+0000",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Anonymous IPFS Blog",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/logo.svg"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/crypto-currency-in-bitcoin.html"
+        },
+        "wordCount": "171",
+        "keywords": "",
+        
+        "articleSection": "Tech",
+        
+        "inLanguage": "zh-CN"
+    }
+    </script>
+    
 </head>
 <body>
     <header>

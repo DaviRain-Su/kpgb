@@ -4,9 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nothing in Rust - Anonymous IPFS Blog</title>
-    <meta name="description" content="A decentralized blog powered by IPFS">
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Nothing in Rust - Anonymous IPFS Blog">
+    <meta name="description" content="我假装这里有东西，但实际上没有。 PhantomData 这里现在是空的 Null Option::None 这里永远不会有东西。 The empty tuple 我会让你一直等到时间的尽头，空手而归。 The never type 这是一个关于 Rust 语言中表达“nothing”的一些方式的短篇选集。 在编程中，…">
+    <meta name="keywords" content="IPFS, blog, decentralized, Anonymous">
+    <meta name="author" content="DaviRain">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Chinese">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/notion-in-rust.html">
+    <meta property="og:title" content="Nothing in Rust - Anonymous IPFS Blog">
+    <meta property="og:description" content="我假装这里有东西，但实际上没有。 PhantomData 这里现在是空的 Null Option::None 这里永远不会有东西。 The empty tuple 我会让你一直等到时间的尽头，空手而归。 The never type 这是一个关于 Rust 语言中表达“nothing”的一些方式的短篇选集。 在编程中，…">
+    <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg">
+    <meta property="og:site_name" content="Anonymous IPFS Blog">
+    
+    <meta property="article:published_time" content="2025-07-23T00:49:41+0000">
+    <meta property="article:modified_time" content="2025-07-23T00:49:41+0000">
+    <meta property="article:author" content="DaviRain">
+    
+    
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/notion-in-rust.html">
+    <meta property="twitter:title" content="Nothing in Rust - Anonymous IPFS Blog">
+    <meta property="twitter:description" content="我假装这里有东西，但实际上没有。 PhantomData 这里现在是空的 Null Option::None 这里永远不会有东西。 The empty tuple 我会让你一直等到时间的尽头，空手而归。 The never type 这是一个关于 Rust 语言中表达“nothing”的一些方式的短篇选集。 在编程中，…">
+    <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/notion-in-rust.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg">
+    <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico">
+    <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">
+    
+    <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">
+    
+    <!-- JSON-LD Structured Data -->
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Nothing in Rust",
+        "description": "我假装这里有东西，但实际上没有。 PhantomData 这里现在是空的 Null Option::None 这里永远不会有东西。 The empty tuple 我会让你一直等到时间的尽头，空手而归。 The never type 这是一个关于 Rust 语言中表达“nothing”的一些方式的短篇选集。 在编程中，“nothing”这个概念有几种不同的解释： “我假装这里有东西，但实际上没有。” “这里现在是空的。” “这里永远不会有东西。” “我会让你一直等到时间的尽头，空手而归。” 虽然这听起来像是我的前任说的最后一句话，但我很好。 Rust标准库中有很多高质量的代码，但是很少有像 这样纯净优雅的示例。（它的实现和 一样优雅纯粹。）...",
+        "author": {
+            "@type": "Person",
+            "name": "DaviRain"
+        },
+        "datePublished": "2025-07-23T00:49:41+0000",
+        "dateModified": "2025-07-23T00:49:41+0000",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Anonymous IPFS Blog",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/logo.svg"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/notion-in-rust.html"
+        },
+        "wordCount": "467",
+        "keywords": "",
+        
+        "articleSection": "Tech",
+        
+        "inLanguage": "zh-CN"
+    }
+    </script>
+    
 </head>
 <body>
     <header>

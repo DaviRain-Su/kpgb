@@ -1,0 +1,13 @@
+# Robots.txt for KPGB Blog
+
+User-agent: *
+Allow: /
+Crawl-delay: 1
+
+# Block draft pages
+Disallow: /drafts/
+Disallow: /admin/
+
+Sitemap: https://Anonymous.github.io/kpgb/sitemap.xml
+
+Host: https://Anonymous.github.io/kpgb

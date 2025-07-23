@@ -69,6 +69,23 @@ pub fn url_safe_tag(value: &Value, _args: &HashMap<String, Value>) -> Result<Val
     Ok(Value::String(safe_tag))
 }
 
+/// Escape HTML special characters for safe display in HTML attributes
+pub fn escape_html(value: &Value, _args: &HashMap<String, Value>) -> Result<Value> {
+    let text = match value.as_str() {
+        Some(s) => s,
+        None => return Ok(value.clone()),
+    };
+
+    let escaped = text
+        .replace('&', "&amp;")
+        .replace('<', "&lt;")
+        .replace('>', "&gt;")
+        .replace('"', "&quot;")
+        .replace('\'', "&#x27;");
+
+    Ok(Value::String(escaped))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

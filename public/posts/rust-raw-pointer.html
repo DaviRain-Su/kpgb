@@ -4,9 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Rust Raw Pointer - Anonymous IPFS Blog</title>
-    <meta name="description" content="A decentralized blog powered by IPFS">
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="About Rust Raw Pointer - Anonymous IPFS Blog">
+    <meta name="description" content="在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。 原生指针有两种类型： 和 ，分别是不可变和可变的原生指针。 Rust提供了一个函数可以获取类型的大小： 。 这里提供了一个简单的例子，展示了如何使用原生指针。 原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使…">
+    <meta name="keywords" content="IPFS, blog, decentralized, Anonymous">
+    <meta name="author" content="DaviRain">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Chinese">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-raw-pointer.html">
+    <meta property="og:title" content="About Rust Raw Pointer - Anonymous IPFS Blog">
+    <meta property="og:description" content="在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。 原生指针有两种类型： 和 ，分别是不可变和可变的原生指针。 Rust提供了一个函数可以获取类型的大小： 。 这里提供了一个简单的例子，展示了如何使用原生指针。 原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使…">
+    <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg">
+    <meta property="og:site_name" content="Anonymous IPFS Blog">
+    
+    <meta property="article:published_time" content="2025-07-23T00:49:46+0000">
+    <meta property="article:modified_time" content="2025-07-23T00:49:47+0000">
+    <meta property="article:author" content="DaviRain">
+    
+    
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-raw-pointer.html">
+    <meta property="twitter:title" content="About Rust Raw Pointer - Anonymous IPFS Blog">
+    <meta property="twitter:description" content="在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。 原生指针有两种类型： 和 ，分别是不可变和可变的原生指针。 Rust提供了一个函数可以获取类型的大小： 。 这里提供了一个简单的例子，展示了如何使用原生指针。 原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使…">
+    <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-raw-pointer.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg">
+    <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico">
+    <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">
+    
+    <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">
+    
+    <!-- JSON-LD Structured Data -->
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "About Rust Raw Pointer",
+        "description": "在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。 原生指针有两种类型： 和 ，分别是不可变和可变的原生指针。 Rust提供了一个函数可以获取类型的大小： 。 这里提供了一个简单的例子，展示了如何使用原生指针。 原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使用原生指针时需要特别小心，因为可能会导致内存安全问题。...",
+        "author": {
+            "@type": "Person",
+            "name": "DaviRain"
+        },
+        "datePublished": "2025-07-23T00:49:46+0000",
+        "dateModified": "2025-07-23T00:49:47+0000",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Anonymous IPFS Blog",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/logo.svg"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/rust-raw-pointer.html"
+        },
+        "wordCount": "76",
+        "keywords": "",
+        
+        "articleSection": "Tech",
+        
+        "inLanguage": "zh-CN"
+    }
+    </script>
+    
 </head>
 <body>
     <header>

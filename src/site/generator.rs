@@ -45,6 +45,7 @@ impl SiteGenerator {
         // Add custom filters
         tera.register_filter("url_safe_tag", crate::site::filters::url_safe_tag);
         tera.register_filter("highlight_search", crate::site::filters::highlight_search);
+        tera.register_filter("escape", crate::site::filters::escape_html);
 
         Ok(Self {
             blog_manager,
@@ -103,6 +104,12 @@ impl SiteGenerator {
 
         // Generate docs page
         self.generate_docs_page().await?;
+
+        // Generate SEO files
+        self.generate_sitemap(&posts).await?;
+        self.generate_robots_txt()?;
+        self.generate_webmanifest()?;
+        self.create_default_images()?;
 
         println!(
             "✅ Site generated successfully in: {}",
@@ -554,6 +561,189 @@ impl SiteGenerator {
         let html = self.tera.render("docs.html", &context)?;
         fs::write(self.output_dir.join("docs.html"), html)?;
 
+        Ok(())
+    }
+
+    async fn generate_sitemap(&self, posts: &[(String, BlogPost)]) -> Result<()> {
+        use chrono::SecondsFormat;
+
+        let mut sitemap = String::from("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        sitemap.push_str("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n");
+
+        // Add homepage
+        sitemap.push_str(&format!(
+            "  <url>\n    <loc>{}/</loc>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>\n",
+            self.config.base_url
+        ));
+
+        // Add archive page
+        sitemap.push_str(&format!(
+            "  <url>\n    <loc>{}/archive/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n",
+            self.config.base_url
+        ));
+
+        // Add tags page
+        sitemap.push_str(&format!(
+            "  <url>\n    <loc>{}/tags/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>\n",
+            self.config.base_url
+        ));
+
+        // Add docs page if exists
+        sitemap.push_str(&format!(
+            "  <url>\n    <loc>{}/docs/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n",
+            self.config.base_url
+        ));
+
+        // Add all posts
+        for (_, post) in posts {
+            let safe_slug = sanitize_slug(&post.slug);
+            sitemap.push_str(&format!(
+                "  <url>\n    <loc>{}/posts/{}.html</loc>\n    <lastmod>{}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>\n",
+                self.config.base_url,
+                safe_slug,
+                post.updated_at.to_rfc3339_opts(SecondsFormat::Secs, true)
+            ));
+        }
+
+        // Add tag pages
+        let all_tags = self.blog_manager.get_all_tags().await?;
+        for (tag_name, _) in all_tags {
+            let tag_url_safe = sanitize_tag_for_url(&tag_name);
+            sitemap.push_str(&format!(
+                "  <url>\n    <loc>{}/tags/{}/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.5</priority>\n  </url>\n",
+                self.config.base_url,
+                tag_url_safe
+            ));
+        }
+
+        // Add pagination pages
+        let total_pages = posts.len().div_ceil(self.config.posts_per_page);
+        for page in 2..=total_pages {
+            sitemap.push_str(&format!(
+                "  <url>\n    <loc>{}/page/{}/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.4</priority>\n  </url>\n",
+                self.config.base_url,
+                page
+            ));
+        }
+
+        sitemap.push_str("</urlset>");
+
+        let output_path = self.output_dir.join("sitemap.xml");
+        fs::write(output_path, sitemap)?;
+
+        println!("📄 Generated sitemap.xml");
+        Ok(())
+    }
+
+    fn generate_robots_txt(&self) -> Result<()> {
+        let mut robots = String::from("# Robots.txt for KPGB Blog\n\n");
+
+        // Allow all crawlers by default
+        robots.push_str("User-agent: *\n");
+        robots.push_str("Allow: /\n");
+        robots.push_str("Crawl-delay: 1\n\n");
+
+        // Block specific paths if needed
+        robots.push_str("# Block draft pages\n");
+        robots.push_str("Disallow: /drafts/\n");
+        robots.push_str("Disallow: /admin/\n\n");
+
+        // Add sitemap location
+        robots.push_str(&format!("Sitemap: {}/sitemap.xml\n", self.config.base_url));
+
+        // Add host directive
+        robots.push_str(&format!("\nHost: {}\n", self.config.base_url));
+
+        let output_path = self.output_dir.join("robots.txt");
+        fs::write(output_path, robots)?;
+
+        println!("🤖 Generated robots.txt");
+        Ok(())
+    }
+
+    fn generate_webmanifest(&self) -> Result<()> {
+        let manifest = serde_json::json!({
+            "name": self.config.title,
+            "short_name": self.config.title,
+            "description": self.config.description,
+            "start_url": "/",
+            "display": "standalone",
+            "background_color": "#ffffff",
+            "theme_color": "#3498db",
+            "icons": [
+                {
+                    "src": "/favicon-16x16.png",
+                    "sizes": "16x16",
+                    "type": "image/png"
+                },
+                {
+                    "src": "/favicon-32x32.png",
+                    "sizes": "32x32",
+                    "type": "image/png"
+                },
+                {
+                    "src": "/android-chrome-192x192.png",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                },
+                {
+                    "src": "/android-chrome-512x512.png",
+                    "sizes": "512x512",
+                    "type": "image/png"
+                }
+            ]
+        });
+
+        let output_path = self.output_dir.join("site.webmanifest");
+        fs::write(output_path, serde_json::to_string_pretty(&manifest)?)?;
+
+        println!("📱 Generated site.webmanifest");
+        Ok(())
+    }
+
+    fn create_default_images(&self) -> Result<()> {
+        // Create images directory
+        let images_dir = self.output_dir.join("images");
+        fs::create_dir_all(&images_dir)?;
+
+        // Generate simple SVG placeholders for now
+        // In production, you would use actual images
+
+        // Open Graph default image (1200x630)
+        let og_svg = r##"<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+            <rect width="1200" height="630" fill="#3498db"/>
+            <text x="600" y="315" font-family="Arial, sans-serif" font-size="72" fill="white" text-anchor="middle" dominant-baseline="middle">KPGB Blog</text>
+            <text x="600" y="400" font-family="Arial, sans-serif" font-size="36" fill="white" text-anchor="middle" opacity="0.8">Decentralized IPFS Blog</text>
+        </svg>"##;
+        fs::write(images_dir.join("og-default.svg"), og_svg)?;
+
+        // Twitter card image (1200x600)
+        let twitter_svg = r##"<svg width="1200" height="600" xmlns="http://www.w3.org/2000/svg">
+            <rect width="1200" height="600" fill="#2c3e50"/>
+            <text x="600" y="300" font-family="Arial, sans-serif" font-size="72" fill="white" text-anchor="middle" dominant-baseline="middle">KPGB Blog</text>
+            <text x="600" y="380" font-family="Arial, sans-serif" font-size="36" fill="white" text-anchor="middle" opacity="0.8">Powered by IPFS</text>
+        </svg>"##;
+        fs::write(images_dir.join("twitter-card.svg"), twitter_svg)?;
+
+        // Logo placeholder
+        let logo_svg = r##"<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+            <rect width="512" height="512" fill="#3498db"/>
+            <text x="256" y="256" font-family="Arial, sans-serif" font-size="200" fill="white" text-anchor="middle" dominant-baseline="middle">K</text>
+        </svg>"##;
+        fs::write(images_dir.join("logo.svg"), logo_svg)?;
+
+        // Create favicon placeholders
+        let favicon_svg = r##"<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" fill="#3498db" rx="4"/>
+            <text x="16" y="16" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle" dominant-baseline="middle">K</text>
+        </svg>"##;
+
+        fs::write(self.output_dir.join("favicon.svg"), favicon_svg)?;
+
+        // Note: In production, you would convert these SVGs to PNGs
+        // For now, we'll use the SVGs as placeholders
+
+        println!("🖼️  Created default images");
         Ok(())
     }
 }

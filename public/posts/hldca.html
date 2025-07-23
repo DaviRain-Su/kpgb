@@ -4,9 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History of Lossless Data Compression Algorithms - Anonymous IPFS Blog</title>
-    <meta name="description" content="A decentralized blog powered by IPFS">
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="History of Lossless Data Compression Algorithms - Anonymous IPFS Blog">
+    <meta name="description" content="有两种主要的压缩算法类型：有损和无损。有损压缩算法通常涉及减小文件的大小，通过删除需要大量数据以保持完整保真度的细节。在有损压缩中，由于删除了关键数据，不可能恢复原始文件。有损压缩最常用于存储图像和音频数据，并且虽然可以通过数据删除实现非常高的压缩比，但本文不涵盖此类压缩算法。无损数据压缩是将文件大小减小，以便解压缩功…">
+    <meta name="keywords" content="IPFS, blog, decentralized, Anonymous">
+    <meta name="author" content="DaviRain">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Chinese">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/hldca.html">
+    <meta property="og:title" content="History of Lossless Data Compression Algorithms - Anonymous IPFS Blog">
+    <meta property="og:description" content="有两种主要的压缩算法类型：有损和无损。有损压缩算法通常涉及减小文件的大小，通过删除需要大量数据以保持完整保真度的细节。在有损压缩中，由于删除了关键数据，不可能恢复原始文件。有损压缩最常用于存储图像和音频数据，并且虽然可以通过数据删除实现非常高的压缩比，但本文不涵盖此类压缩算法。无损数据压缩是将文件大小减小，以便解压缩功…">
+    <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg">
+    <meta property="og:site_name" content="Anonymous IPFS Blog">
+    
+    <meta property="article:published_time" content="2025-07-23T00:49:36+0000">
+    <meta property="article:modified_time" content="2025-07-23T00:49:36+0000">
+    <meta property="article:author" content="DaviRain">
+    
+    
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/hldca.html">
+    <meta property="twitter:title" content="History of Lossless Data Compression Algorithms - Anonymous IPFS Blog">
+    <meta property="twitter:description" content="有两种主要的压缩算法类型：有损和无损。有损压缩算法通常涉及减小文件的大小，通过删除需要大量数据以保持完整保真度的细节。在有损压缩中，由于删除了关键数据，不可能恢复原始文件。有损压缩最常用于存储图像和音频数据，并且虽然可以通过数据删除实现非常高的压缩比，但本文不涵盖此类压缩算法。无损数据压缩是将文件大小减小，以便解压缩功…">
+    <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/hldca.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg">
+    <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico">
+    <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">
+    
+    <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">
+    
+    <!-- JSON-LD Structured Data -->
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "History of Lossless Data Compression Algorithms",
+        "description": "有两种主要的压缩算法类型：有损和无损。有损压缩算法通常涉及减小文件的大小，通过删除需要大量数据以保持完整保真度的细节。在有损压缩中，由于删除了关键数据，不可能恢复原始文件。有损压缩最常用于存储图像和音频数据，并且虽然可以通过数据删除实现非常高的压缩比，但本文不涵盖此类压缩算法。无损数据压缩是将文件大小减小，以便解压缩功能可以完全恢复原始文件并且不会丢失数据。无损数据压缩在计算机领域中被广泛应用，从在个人电脑上节省空间，到通过网络发送数据，通过安全 shell 进行通信或查看 PNG 或 GIF 图像。 无损压缩算法的基本原理是，任何非随机文件都包含可以使用统计建模技术进行压缩的重复信息，该技术确定字符或短语出现的概率。然后可以使用这些统计模型来为特定字符或短语生成代码，根据它们出现的概率分配最短的代码给最常见的数据。这些技术包括熵编码、行程编码和使用字典的压缩。使用这些技术和其他技术，一个8位字符或这样的字符串可以用只有几个比特来表示，从而删除大量冗余数据。 数据压缩在计算机领域中的作用自1970年代以来才变得显著，当时互联网变得更加流行并发明了Lempel-Ziv算法，但它在计算机之外有着更悠久的历史。莫尔斯电码是最早的数据压缩实例，发明于1838年，英语中最常见的字母，如“e”和“t”被赋予较短的莫尔斯电码。随后，当主机计算机开始在1949年掌握时，Claude Shannon和Robert Fano发明了Shannon-Fano编码。他们的算法基于符号在给定数据块中出现的概率分配代码。符号出现的概率与代码的长度成反比，从而使数据更短的表示方式。 [ 1 ] 两年后，David Huffman在麻省理工学院学习信息理论，并与Robert Fano上了一堂课。Fano给这门课提供了两个选择，要么写一篇学期论文，要么参加期末考试。Huffman选择了写学期论文，题目是找到最有效的二进制编码方法。在工作数月后，没有任何进展，Huffman已经准备放弃所有工作，开始为期末考试而学习。就在那时，他恍然大悟，想出了一种非常类似但更有效的技术，即Huffman编码。Shannon-Fano编码和Huffman编码之间的关键区别在于前者是自下而上构建概率树，从而得到次优结果，而后者是自上而下构建概率树。 [ 2 ] 早期的Shannon-Fano和Huffman编码实现是使用硬件和硬编码的方式进行的。直到1970年代和互联网和在线存储的出现，软件压缩才开始实现，并且Huffman编码是基于输入数据动态生成的。 [ 1 ] 稍后，在1977年，Abraham Lempel和Jacob Ziv发布了他们开创性的LZ77算法，这是第一个使用字典来压缩数据的算法。更具体地说，LZ77使用动态字典，通常称为滑动窗口。 [ 3 ] 1978年，这个团队发表了他们的LZ78算法，也使用了字典。与LZ77不同的是，该算法解析输入数据并生成静态字典，而不是动态生成字典。 [ 4 ]...",
+        "author": {
+            "@type": "Person",
+            "name": "DaviRain"
+        },
+        "datePublished": "2025-07-23T00:49:36+0000",
+        "dateModified": "2025-07-23T00:49:36+0000",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Anonymous IPFS Blog",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/logo.svg"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/hldca.html"
+        },
+        "wordCount": "932",
+        "keywords": "",
+        
+        "articleSection": "Tech",
+        
+        "inLanguage": "zh-CN"
+    }
+    </script>
+    
 </head>
 <body>
     <header>

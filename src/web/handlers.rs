@@ -439,6 +439,7 @@ fn render_template(name: &str, context: &Context) -> Result<String, StatusCode> 
     );
 
     tera.register_filter("highlight_search", crate::site::filters::highlight_search);
+    tera.register_filter("escape", crate::site::filters::escape_html);
 
     tera.render(name, context)
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)
