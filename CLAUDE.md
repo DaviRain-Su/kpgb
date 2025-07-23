@@ -4,15 +4,26 @@
 A fully decentralized personal blog system where all content is stored on IPFS (InterPlanetary File System). The system supports local content indexing for enhanced functionality while maintaining full decentralization. Features both static site generation for GitHub Pages deployment and dynamic web server with API endpoints.
 
 ### Is KPGB Ready for Blog Writing?
-**Yes, with some limitations.** KPGB currently provides:
+**Yes!** KPGB now provides a complete blog writing experience:
 - ✅ **Core Publishing**: Create, publish, and manage posts with markdown
 - ✅ **Beautiful Output**: 5 themes, responsive design, RSS feed
 - ✅ **Decentralized Storage**: Your content on IPFS forever
-- ⚠️ **Limited Editing**: No built-in edit/delete commands yet
-- ⚠️ **Basic Media**: Manual image handling required
+- ✅ **Post Management**: Edit and delete commands
+- ✅ **Automatic Image Upload**: Local images auto-uploaded to IPFS
+- ✅ **Comments**: Giscus integration for reader engagement
+- ✅ **Statistics**: Blog analytics and random post discovery
 - 📝 **Active Development**: See [Blog Writing Features](#using-kpgb-as-a-blog-writing-tool) section for details
 
-## Recent Updates (2025-07-22)
+## Recent Updates (2025-07-23)
+- ✅ **Image Auto-Upload**: Local images automatically uploaded to IPFS
+- ✅ **Comment System**: Giscus integration for reader discussions
+- ✅ **Post Management**: Edit and delete commands for easy content updates
+- ✅ **Blog Statistics**: Analytics with word count, author stats, and posting trends
+- ✅ **Random Post**: Discover random articles with tag filtering
+- ✅ **Better Reading**: Enhanced terminal reading with pager, formatting, and export
+- ✅ **Batch Import**: Import existing Jekyll/Markdown posts
+
+## Previous Updates (2025-07-22)
 - ✅ **Tag System**: Complete tag management with cloud view and filtering
 - ✅ **Pagination**: Clean URL pagination for better navigation
 - ✅ **Auto Excerpts**: Automatic excerpt generation from content
@@ -52,8 +63,19 @@ A fully decentralized personal blog system where all content is stored on IPFS (
 - Tag and category support
 - **Automatic excerpt generation** from content
 - Draft/published status management
+- **Edit and delete** existing posts
+- **Batch import** from Jekyll/Markdown files
 
-#### 5. **Static Site Generation**
+#### 5. **Automatic Image Upload to IPFS**
+- Detects local images in markdown content
+- Automatically uploads images to IPFS during post creation/editing
+- Replaces local paths with permanent IPFS URLs
+- Supports PNG, JPEG, GIF, WebP, SVG formats
+- Preserves image alt text
+- Skips already uploaded images (HTTP/IPFS URLs)
+- Works with relative and absolute paths
+
+#### 6. **Static Site Generation**
 - Tera template engine with inheritance
 - Responsive CSS design
 - Generate complete static websites
@@ -64,7 +86,7 @@ A fully decentralized personal blog system where all content is stored on IPFS (
 - Production-ready deployment scripts
 - **Multiple themes**: default, hacker, minimal, dark, cyberpunk
 
-#### 6. **Dynamic Web Interface**
+#### 7. **Dynamic Web Interface**
 - Axum web server with async support
 - Real-time search functionality
 - RESTful API endpoints
@@ -72,21 +94,21 @@ A fully decentralized personal blog system where all content is stored on IPFS (
 - CORS support for API access
 - Embeddable widget support
 
-#### 7. **GitHub Pages Deployment**
+#### 8. **GitHub Pages Deployment**
 - Automated deployment scripts
 - GitHub Actions CI/CD workflows
 - Base path configuration for subdirectory deployment
 - Static asset optimization
 - SEO-friendly URLs
 
-#### 8. **External Website Integration**
+#### 9. **External Website Integration**
 - Embeddable JavaScript widget
 - CORS-enabled API endpoints
 - Client-side search functionality
 - Customizable themes
 - Demo page for testing integration
 
-#### 9. **Tag System**
+#### 10. **Tag System**
 - Complete tag management with SQLite backend
 - Tag cloud page showing all tags with post counts
 - Tag-filtered post listings
@@ -94,14 +116,14 @@ A fully decentralized personal blog system where all content is stored on IPFS (
 - Static generation of tag pages
 - Clean URL structure for tag navigation
 
-#### 10. **Pagination System**
+#### 11. **Pagination System**
 - Paginated post listings (configurable posts per page)
 - Clean URL structure (`/page/2/`, `/page/3/`)
 - Pagination navigation UI with page numbers
 - Support for both dynamic and static site generation
 - Efficient database queries with LIMIT/OFFSET
 
-#### 11. **URL Content Translation**
+#### 12. **URL Content Translation**
 - Fetch and translate web content from English to Chinese
 - Uses Claude API for high-quality translations
 - HTML to text conversion
@@ -109,29 +131,39 @@ A fully decentralized personal blog system where all content is stored on IPFS (
 - Preserves both original and translated content
 - Custom title and author support
 
+#### 13. **Comment System (Giscus)**
+- GitHub Discussions-based comments
+- Zero-cost, ad-free solution
+- Supports reactions and threading
+- Configurable themes and languages
+- Easy setup with GitHub repo
+- Respects user privacy
+
+#### 14. **Blog Management Tools**
+- **Edit Command**: Modify posts with metadata updates
+- **Delete Command**: Remove posts with confirmation
+- **Statistics**: Word count, author analytics, posting trends
+- **Random Discovery**: Find random posts with tag filtering
+- **Enhanced Reading**: Terminal pager, formatting options, export
+- **Batch Import**: Import existing Jekyll/Markdown posts
+
 ### 🚧 Pending Features
 
 #### Core Blog Writing Features (High Priority)
 
-1. **Post Editing & Management**
-   - `edit` command to modify existing posts
-   - `delete` command to remove posts
-   - `unpublish` command to hide posts
-   - Bulk operations for multiple posts
+1. **Advanced Media Management**
+   - Automatic image optimization before upload
+   - Media library browser UI
+   - Drag-and-drop support in web interface
+   - Video and audio file support
 
-2. **Image & Media Management**
-   - Built-in image upload to IPFS
-   - Automatic image optimization
-   - Media library browser
-   - Drag-and-drop support
-
-3. **Enhanced SEO & Metadata**
+2. **Enhanced SEO & Metadata**
    - Meta descriptions support
    - Open Graph tags for social sharing
    - XML sitemap generation
    - Canonical URLs
 
-4. **Live Preview & Writing Tools**
+3. **Live Preview & Writing Tools**
    - Real-time markdown preview
    - Side-by-side editing mode
    - Word count and reading time
@@ -139,22 +171,22 @@ A fully decentralized personal blog system where all content is stored on IPFS (
 
 #### Enhanced Features (Medium Priority)
 
-5. **Site Search Page Optimization** (功能4)
+4. **Site Search Page Optimization** (功能4)
    - Enhanced search UI/UX
    - Search result highlighting
    - Advanced search filters
 
-6. **Reading Time Estimation** (功能5)
+5. **Reading Time Estimation** (功能5)
    - Calculate estimated reading time for articles
    - Display reading time in post metadata
    - Support for different reading speeds
 
-7. **Related Articles Recommendation** (功能6)
+6. **Related Articles Recommendation** (功能6)
    - Content-based article recommendations
    - Tag-based similarity matching
    - Display related posts at the end of articles
 
-8. **Navigation & Organization**
+7. **Navigation & Organization**
    - Previous/Next post links
    - Post series/collections
    - Custom page support (About, Contact)
@@ -162,21 +194,16 @@ A fully decentralized personal blog system where all content is stored on IPFS (
 
 #### Advanced Features (Low Priority)
 
-9. **Comments & Interaction**
-   - Decentralized comment system
-   - Webmentions support
-   - Social sharing buttons
-   - Reaction system
-
-10. **Analytics & Insights**
-    - View statistics
-    - Popular content tracking
+8. **Advanced Analytics & Insights**
+    - View statistics tracking
+    - Popular content analytics
     - Reader engagement metrics
     - Content performance dashboard
+    - Export analytics data
 
-#### 12. **Complete CLI Interface**
+#### 15. **Complete CLI Interface**
 ```bash
-# Create new post
+# Create new post (with automatic image upload to IPFS)
 cargo run -- new --title "Title" --author "Author" [--content file.md]
 
 # List posts
@@ -185,8 +212,20 @@ cargo run -- list [--published]
 # Publish post
 cargo run -- publish <storage-id>
 
-# Read post
-cargo run -- read <storage-id>
+# Read post (with enhanced terminal display)
+cargo run -- read <storage-id> [--pager] [--format plain|markdown|html] [--width 80] [--export file.txt]
+
+# Edit post (with automatic image upload)
+cargo run -- edit <storage-id> [--title "New Title"] [--author "New Author"] [--content file.md] [--tags "tag1,tag2"] [--category "Tech"] [--editor]
+
+# Delete post
+cargo run -- delete <storage-id> [--force]
+
+# Blog statistics
+cargo run -- stats [--detailed] [--json]
+
+# Random post discovery
+cargo run -- random [--published] [--tag "tech"]
 
 # Search posts
 cargo run -- search "query"

@@ -1320,6 +1320,7 @@ dependencies = [
  "hex",
  "pulldown-cmark",
  "rand",
+ "regex",
  "reqwest",
  "rss",
  "serde",

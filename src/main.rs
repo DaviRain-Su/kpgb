@@ -258,19 +258,41 @@ async fn main() -> Result<()> {
             author,
             content,
         } => {
-            let content_text = match content {
-                Some(path) => std::fs::read_to_string(path)?,
+            let (content_text, content_dir) = match &content {
+                Some(path) => {
+                    let content_path = std::path::Path::new(path);
+                    let content_dir = content_path.parent();
+                    (std::fs::read_to_string(path)?, content_dir)
+                }
                 None => {
                     println!("Enter content (press Ctrl+D when done):");
                     use std::io::Read;
                     let mut buffer = String::new();
                     std::io::stdin().read_to_string(&mut buffer)?;
-                    buffer
+                    (buffer, None)
                 }
             };
 
             // Parse frontmatter if present
-            let (frontmatter, clean_content) = frontmatter::parse_frontmatter(&content_text)?;
+            let (frontmatter, mut clean_content) = frontmatter::parse_frontmatter(&content_text)?;
+
+            // Process images in content
+            println!("🖼️  Processing images...");
+            let (processed_content, image_map) = crate::utils::process_images_in_markdown(
+                &clean_content,
+                content_dir,
+                &storage_manager,
+            )
+            .await?;
+
+            if !image_map.is_empty() {
+                println!("✅ Uploaded {} images to IPFS:", image_map.len());
+                for (local_path, ipfs_url) in &image_map {
+                    println!("   {} -> {}", local_path, ipfs_url);
+                }
+            }
+
+            clean_content = processed_content;
 
             let post = if let Some(fm) = frontmatter {
                 // Use frontmatter data, CLI args override frontmatter
@@ -613,9 +635,28 @@ async fn main() -> Result<()> {
 
             // Handle content update
             if let Some(content_path) = content {
-                let new_content = std::fs::read_to_string(&content_path)
+                let content_path = std::path::Path::new(&content_path);
+                let content_dir = content_path.parent();
+                let new_content = std::fs::read_to_string(content_path)
                     .map_err(|e| anyhow::anyhow!("Failed to read content file: {}", e))?;
-                post.content = new_content;
+
+                // Process images in new content
+                println!("🖼️  Processing images...");
+                let (processed_content, image_map) = crate::utils::process_images_in_markdown(
+                    &new_content,
+                    content_dir,
+                    &storage_manager,
+                )
+                .await?;
+
+                if !image_map.is_empty() {
+                    println!("✅ Uploaded {} images to IPFS:", image_map.len());
+                    for (local_path, ipfs_url) in &image_map {
+                        println!("   {} -> {}", local_path, ipfs_url);
+                    }
+                }
+
+                post.content = processed_content;
                 updated = true;
             } else if editor {
                 // Open in default editor

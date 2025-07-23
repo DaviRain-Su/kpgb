@@ -88,4 +88,20 @@ impl StorageManager {
             .expect("Default backend not configured")
             .clone()
     }
+
+    pub async fn store(
+        &self,
+        content: &[u8],
+        metadata: HashMap<String, String>,
+    ) -> Result<StorageResult> {
+        self.default_backend().store(content, metadata).await
+    }
+
+    pub async fn retrieve(&self, id: &str) -> Result<Vec<u8>> {
+        self.default_backend().retrieve(id).await
+    }
+
+    pub async fn exists(&self, id: &str) -> Result<bool> {
+        self.default_backend().exists(id).await
+    }
 }
