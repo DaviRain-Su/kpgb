@@ -119,8 +119,25 @@
         
     </header>
 
-    <div class="post-content">
-        <h2>Outline</h2>
+    
+    <div class="post-with-toc">
+        <aside class="toc-container">
+            <nav class="toc" id="toc">
+    <h2 class="toc-title">Table of Contents</h2>
+    <ul class="toc-list"><li class="toc-item toc-level-2">
+                <a href="#outline" class="toc-link">Outline</a></li><li class="toc-item toc-level-2">
+                <a href="#我假装这里有东西_但实际上没有___i_m-pretending-like-there_s-something-here_-but-there-actually-isn_t___" class="toc-link">我假装这里有东西，但实际上没有。(“I’m pretending like there’s something here, but there actually isn’t.”)</a><ul class="toc-sublist"><li class="toc-item toc-level-3">
+                <a href="#phantomdata" class="toc-link">PhantomData</a></li></ul></li><li class="toc-item toc-level-2">
+                <a href="#这里现在是空的___there-is-nothing-here-now___" class="toc-link">这里现在是空的。（“There is nothing here now.”）</a><ul class="toc-sublist"><li class="toc-item toc-level-3">
+                <a href="#null" class="toc-link">Null</a></li><li class="toc-item toc-level-3">
+                <a href="#option__none" class="toc-link">Option::None</a></li></ul></li><li class="toc-item toc-level-2">
+                <a href="#这里永远不会有东西__there-will-never-be-anything-here___" class="toc-link">这里永远不会有东西（“There will never be anything here.”）</a><ul class="toc-sublist"><li class="toc-item toc-level-3">
+                <a href="#the-empty-tuple" class="toc-link">The empty tuple</a></li></ul></li><li class="toc-item toc-level-2">
+                <a href="#我会让你一直等到时间的尽头_空手而归___i_m-going-to-leave-you_-waiting-here_-empty-handed_-until-the-end-of-time___" class="toc-link">我会让你一直等到时间的尽头，空手而归。(“I’m going to leave you, waiting here, empty-handed, until the end of time.”)</a><ul class="toc-sublist"><li class="toc-item toc-level-3">
+                <a href="#the-never-type" class="toc-link">The never type</a></li></ul></li></ul></nav>
+        </aside>
+        <div class="post-content">
+            <h2 id="outline">Outline</h2>
 <ul>
 <li>我假装这里有东西，但实际上没有。
 <ul>
@@ -153,8 +170,8 @@
 <li>“我会让你一直等到时间的尽头，空手而归。”</li>
 </ul>
 <p>虽然这听起来像是我的前任说的最后一句话，但我很好。</p>
-<h2>我假装这里有东西，但实际上没有。(“I’m pretending like there’s something here, but there actually isn’t.”)</h2>
-<h3>PhantomData</h3>
+<h2 id="我假装这里有东西_但实际上没有___i_m-pretending-like-there_s-something-here_-but-there-actually-isn_t___">我假装这里有东西，但实际上没有。(“I’m pretending like there’s something here, but there actually isn’t.”)</h2>
+<h3 id="phantomdata">PhantomData</h3>
 <p>Rust标准库中有很多高质量的代码，但是很少有像<code>std::marker::PhantomData</code>这样纯净优雅的示例。（它的实现和<code>std::mem::drop</code>一样优雅纯粹。）</p>
 <p><code>PhantomData&lt;T&gt;</code>是一种零大小的类型，无论T是什么。这就像对编译器撒一个小谎言：你声称持有一个<code>T</code>，但实际上并不是。与一些谎言不同，这实际上有益于代码。</p>
 <p>在实践中，我看到它主要用于两种情况：</p>
@@ -184,8 +201,8 @@ impl&lt;T: From&lt;Vec&lt;u8&gt;&gt;&gt; Slot&lt;T&gt; {
     }
 }
 </code></pre>
-<h2>这里现在是空的。（“There is nothing here now.”）</h2>
-<h3>Null</h3>
+<h2 id="这里现在是空的___there-is-nothing-here-now___">这里现在是空的。（“There is nothing here now.”）</h2>
+<h3 id="null">Null</h3>
 <blockquote>
 <p>There’s no null in Rust.</p>
 </blockquote>
@@ -199,7 +216,7 @@ unsafe {
 </code></pre>
 <p>（提醒：原始指针只能在不安全的代码块中进行解引用。）</p>
 <p>Rust 的设计使您很少需要深入研究指针操作。您可能会在与 C 代码交互时或者在使用 Rust 重写 Quake III 时遇到原始指针（*const 和 *mut 类型）。</p>
-<h3>Option::None</h3>
+<h3 id="option__none">Option::None</h3>
 <p>标准库提供了 <code>Option</code> 枚举类型，其中包含两个变体 <code>Some</code> 和 <code>None</code>。这是表示可能存在或不存在的值的推荐方式，
 而不是使用空指针。它就像一个小的安全包装器，您应该使用它，除非您知道自己在做什么并准备好了后果，或者是单独工作。</p>
 <p>但是，使用空指针和使用 <code>None</code> 之间存在显着差异。首先，<code>Option&lt;T&gt;</code> 是一个拥有的类型，
@@ -215,8 +232,8 @@ unsafe {
 <code>Option&lt;u32&gt;</code>	| 8
 <code>Option&lt;std::num::NonZeroU128&gt;</code>	| 16
 <code>Option&lt;u128&gt;</code>	| 24</p>
-<h2>这里永远不会有东西（“There will never be anything here.”）</h2>
-<h3>The empty tuple</h3>
+<h2 id="这里永远不会有东西__there-will-never-be-anything-here___">这里永远不会有东西（“There will never be anything here.”）</h2>
+<h3 id="the-empty-tuple">The empty tuple</h3>
 <p>空元组写作空括号 <code>()</code>。</p>
 <p>我曾经写过 Java 代码。虽然不是完美的，但至少很有品位。在 Java 中，具有 void 返回类型的方法不返回值，无论您给出什么或多少内容。</p>
 <p>空元组在 <code>Rust</code> 中具有类似的作用：不返回实际值的函数隐式返回空元组。但是，它的用途比这更加多样化。</p>
@@ -251,8 +268,8 @@ unsafe {
     }
 }
 </code></pre>
-<h2>我会让你一直等到时间的尽头，空手而归。(“I’m going to leave you, waiting here, empty-handed, until the end of time.”)</h2>
-<h3>The never type</h3>
+<h2 id="我会让你一直等到时间的尽头_空手而归___i_m-going-to-leave-you_-waiting-here_-empty-handed_-until-the-end-of-time___">我会让你一直等到时间的尽头，空手而归。(“I’m going to leave you, waiting here, empty-handed, until the end of time.”)</h2>
+<h3 id="the-never-type">The never type</h3>
 <p>如何调用一个函数的返回类型，它不仅不返回值，而且根本永远不会返回？
 嗯，您可以尝试所有传统方法都无济于事 - 您将永远无法在那一点之后继续，因此需要一些精细的处理。</p>
 <p>这就是所谓的“never”类型。以下是几种遇到它的方式</p>
@@ -281,7 +298,9 @@ impl FailureLogProvider for Partner {
 <p>在示例中的函数实现始终成功，但是 trait 允许实现失败。为了表示这一点，关联的 Error 类型是“never”类型。</p>
 <p><a href="https://geeklaunch.io/blog/nothing-in-rust/">原文</a></p>
 
+        </div>
     </div>
+    
 
     <footer class="post-footer">
         <div class="post-info">
@@ -399,6 +418,50 @@ impl FailureLogProvider for Partner {
     </div>
     
 </article>
+
+
+<script>
+// TOC active section highlighting
+(function() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    
+    if (tocLinks.length === 0 || headings.length === 0) return;
+    
+    function updateActiveSection() {
+        const scrollPosition = window.scrollY + 100; // Offset for better UX
+        
+        let activeHeading = null;
+        for (const heading of headings) {
+            if (heading.offsetTop <= scrollPosition) {
+                activeHeading = heading;
+            } else {
+                break;
+            }
+        }
+        
+        if (activeHeading) {
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + activeHeading.id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateActiveSection, 50);
+    });
+    
+    // Initial update
+    updateActiveSection();
+})();
+</script>
+
 
         </div>
     </main>

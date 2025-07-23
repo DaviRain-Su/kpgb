@@ -119,8 +119,17 @@
         
     </header>
 
-    <div class="post-content">
-        <h2>哈希</h2>
+    
+    <div class="post-with-toc">
+        <aside class="toc-container">
+            <nav class="toc" id="toc">
+    <h2 class="toc-title">Table of Contents</h2>
+    <ul class="toc-list"><li class="toc-item toc-level-2">
+                <a href="#哈希" class="toc-link">哈希</a></li><li class="toc-item toc-level-2">
+                <a href="#签名" class="toc-link">签名</a></li></ul></nav>
+        </aside>
+        <div class="post-content">
+            <h2 id="哈希">哈希</h2>
 <p>大家应该都比较熟悉哈希函数的工作原理，密码学中用到的哈希函数被称为crypto-graphic hash function.</p>
 <p>它有两个重要的性质：一个叫做collision resistance. 这个地方的collision是指哈希碰撞。
 如果有两个输入 x, y且 x ≠ y , hash函数是H(v), 但是H(x) = H(y).这就叫做哈希碰撞。
@@ -179,7 +188,7 @@
 <p>除了密码学中要求的这两个性质之外，比特币中用到的hash函数还要求第三个性质。叫puzzle friendly。他这个意思是说，hash的计算是事先不可预测的。你光看这个输入，你很难知道他这个hash值是什么。所以你想到你算出来的hash值是落在某个范围之内的。那没有什么好办法你只能一个一个去试。看那个输入算出来是恰好落在要求的那个范围之内。比如说你想得到一个hash值。前面k位都是0。0000000…0000000xxxxxxx..xxx 整个是256位，必须以k个零开始。那什么要的输入会算出这个hash值呢？不知道puzzle friendly这个性质是说你事先是不知道的。那个输入更有可能算出这个hash值。那你要得到这个hash值就一个一个去试。没有什么捷径。这个性质为什么叫做puzzle friendly后面我们讲到比特币挖矿的过程。大家可能听说过挖矿这个词。挖矿实际上就试找一个nonce。找这么一个随机数，这个nonce跟区块的块头里的其他信息合在一起。作为输入，取出一个hash来，那个hash值要小于等于某个制定的目标阈值。这是H(block header) ≤ target. 比特币是区块链，区块链就是一个一个区块组成的链表，每一个区块都有一个块头，block header， block header中有很多的域。 其中有一个域是我们可以设置的随机数nonce。那挖矿的过程就是不停的去试各种不同的nonce，使得整个block header取hash之后，落在指定的范围之内。就比如说这是整个的输出空间outspace。我们要求算出来的hash值只有前面这一点是合法的。这个是target space。这个puzzle friendly这个性质是说，这个挖矿的过程没有捷径。只能够不停的去试大量的nonce，才能找打符合要求的解。所以这个过程才可以用来作为工作量证明。 叫做proof of work。 你挖到矿了找到了符合要求的的nonce，一定是因为你做了大量的工作。因为没有别的捷径。</p>
 <p>这里大家注意，虽然这个挖矿的过程。需要很多的工作量，才能找到一个符合要求的nonce。但是一旦有人找打了这样一个nonce。发布出去之后，其他人要验证这个nonce是不是符合要求。 是很容易的，只要算一次hash就行了。这个nonce作为header的一部分，算一次hash值 看他是不是小于等于这个目标的阈值。挖矿很难验证很容易。这个性质叫做difficult to solve, but easy to verify.我们设计这种mining puzzle的之后要注意这个性质。</p>
 <p>比特币中用的hash函数是SHA-256，这个sha的意思是，secure hash algorithm.我们说的这三个性质她都是满足的。有同学可能觉得puzzle friendly和collision resistance 很像。这两个性质是有一定的联系。但是不是完全一样 。我们说比特币用到了密码学中的两个功能， 一个是hash，一个签名。</p>
-<h2>签名</h2>
+<h2 id="签名">签名</h2>
 <p>到这里我们把第一个功能hash讲完了。我们下面讲签名。</p>
 <p>要讲签名我要讲一下比特币系统中的账户管理。日常生活中你想要开个账户怎么办，带上证件去银行办理开户手续。这就是中心化系统中的账户管理方式。 那比特币是去中心话的，他没有银行之类的这类机构。那怎么开账户呢？每个用户自己决定开户。不需要任何人批准。开户的过程很简单，就是创立一个公钥和私钥的对pair。(public key, private key).在本地创立一个公私钥对。就是一个账户。这个就在比特币中代表了一个账户，公私钥这个概念是来自非对称加密这个体系。叫做asymmetric encryption algorithm,最早的加密体系是对称的。叫做symmetric encryption algorithm。比如说两个人之间要进行通信，我要把某个信息发给你。但是这个通信的网络是有可能被窃听的。那怎么办呢。咱们两个事先商量一个密钥。一个叫做encyption key.我把这个信息加密之后发送给你。你收到之后再用这个密钥解密。因为这个加密和解密用的是同一个密钥。所以这个叫做对称的加密体系。他这个前提是假设。有某种安全的渠道。能够把这个密钥分发给通讯的双方。因为你显然的不能把这个密钥在网络上以明文的形式传输。我们假设网络本身就是不安全的。有可能被窃听，这个就是对称加密体系的一个弱点。密钥的分发不是很方便。解决这个问题非对称加密体系就提出来我们不是用一个密钥，而是用一对密钥。有一个公钥还有一个私钥。加密用的是公钥，解密用的是私钥，比如说我要把一个信息传给你，我用你的公钥给这个信息加密，你收到之后再用你的私钥解密。得到原来的信息。 大家注意这个加密和解密用的是同一个人的公钥和私钥。都是这个接收方的公钥和私钥。</p>
 <p>这有什么好处呢？公钥是不用保密的，加密用的公钥是不用保密的，你可以告诉所有的人。有的人他的homepage就列出来他的pbk： public key。大家都可以知道。私钥是要保密的，解密是要用私钥解密的， 但是私钥只要保存在本地就行了。不用传给对方。就给你通讯的那个人不需要知道你的私钥。他是用你的公钥加密的。 你要回复他的话你用他的公钥加密。都不需要知道对方的私钥。这就解决了对称加密体系中密钥分发的不方便的问题。 比特币系统中呢，你要创建一个账户。就在本地产生一对公私钥。这个公钥就相当于你的银行账号。别人要给你转账，只要知道你的公钥就行了。这个私钥相当于你的账户密码。知道这个私钥就可以把这个账户上的钱转走。那么有一个问题我们前面说比特币系统是不加密的。他叫加密货币他其实不是加密的。 信息都是公开的。那我要这个公钥和私钥干什么呢？实际上用来做签名。</p>
@@ -187,7 +196,9 @@
 <p>仍然都是同一个人。既然每一个人都是独立的产生账户。本地独立的生成公私钥对。不需要任何人相等，那万一两个人生成的公私钥对相同。怎么办？比如说有人想偷取比特币，一种方法是不停的产生公私钥。然后对比一下我产生的公钥。跟区块链上某个已有的公钥是不是相同。如果是一样的话，就可以用私钥把这个帐上钱给偷走。这种攻击方法从理论上说好像是可以的。但是实际当中是不可行的。比如说你是256位的hash值的话。产生相同的公私钥的可能性是微乎其微的。比如你有一台超级计算机每天产生大量的公私钥对。出现来两个人的公私钥对相同的情况概率也是可以忽略不计的。这个概率比地球爆炸的概率还要小。到目前为止还没有发现那个人用这种方法。能够攻击成功的先例。这里要强调一点，我们这里假设。产生公私钥的时候有一个好的随机源。这叫做a good source of randomness.生成公私钥的过程显然是随机的。如果选取的随机源不好的话，那么前面的分析就不存在了。就会出现两个人的公私钥对生成的是一样的。比特币中用的签名算法不光是，生成公私钥的时候要有好的随机源。之后每一次签名的时候也要有好的随机源。只要有一次签名用的随机源不好的话，就有可能泄露私钥。然后就全完了。这一点大家要一定注意。</p>
 <p>我们讲了两个功能一个是hash，一个签名。 这两个功能是可以结合起来使用的。比特币系统中一般是先对一个消息求一个hash，然后在对这个hash值签名。</p>
 
+        </div>
     </div>
+    
 
     <footer class="post-footer">
         <div class="post-info">
@@ -305,6 +316,50 @@
     </div>
     
 </article>
+
+
+<script>
+// TOC active section highlighting
+(function() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    
+    if (tocLinks.length === 0 || headings.length === 0) return;
+    
+    function updateActiveSection() {
+        const scrollPosition = window.scrollY + 100; // Offset for better UX
+        
+        let activeHeading = null;
+        for (const heading of headings) {
+            if (heading.offsetTop <= scrollPosition) {
+                activeHeading = heading;
+            } else {
+                break;
+            }
+        }
+        
+        if (activeHeading) {
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + activeHeading.id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateActiveSection, 50);
+    });
+    
+    // Initial update
+    updateActiveSection();
+})();
+</script>
+
 
         </div>
     </main>

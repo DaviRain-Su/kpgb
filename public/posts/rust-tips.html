@@ -119,8 +119,19 @@
         
     </header>
 
-    <div class="post-content">
-        <h2>在rust中如何为本crates中的类型带有可选的feature编写测试</h2>
+    
+    <div class="post-with-toc">
+        <aside class="toc-container">
+            <nav class="toc" id="toc">
+    <h2 class="toc-title">Table of Contents</h2>
+    <ul class="toc-list"><li class="toc-item toc-level-2">
+                <a href="#在rust中如何为本crates中的类型带有可选的feature编写测试" class="toc-link">在rust中如何为本crates中的类型带有可选的feature编写测试</a></li><li class="toc-item toc-level-2">
+                <a href="#将-vec_result_-e_-转换为-result_vec_-e_" class="toc-link">将 Vec&lt;Result, E&gt; 转换为 Result&lt;Vec, E&gt;</a></li><li class="toc-item toc-level-2">
+                <a href="#rust十进制和16进制之间的互相转换" class="toc-link">Rust十进制和16进制之间的互相转换</a></li><li class="toc-item toc-level-2">
+                <a href="#and-then-和-map在使用上有什么区别" class="toc-link">and_then 和 map在使用上有什么区别</a></li></ul></nav>
+        </aside>
+        <div class="post-content">
+            <h2 id="在rust中如何为本crates中的类型带有可选的feature编写测试">在rust中如何为本crates中的类型带有可选的feature编写测试</h2>
 <p>在 Rust 中，如果你想为你的 <code>crate</code> 中的类型编写带有可选的 <code>feature</code> 的测试，你可以使用<code>cfg_attr</code>属性和<code>#[cfg(feature = "feature_name")]</code>属性来做到这一点。</p>
 <p>以下是一个例子：</p>
 <pre><code class="language-rust">// 在lib.rs或者main.rs中
@@ -143,7 +154,7 @@ mod tests {
 <pre><code class="language-bash">cargo test --features feature_name
 </code></pre>
 <p>这个命令会启用<code>feature_name</code>特性并运行所有的测试，包括依赖于这个特性的测试。</p>
-<h2>将 Vec&lt;Result<T>, E&gt; 转换为 Result&lt;Vec<T>, E&gt;</h2>
+<h2 id="将-vec_lt_result_-e_gt_-转换为-result_lt_vec_-e_gt_">将 Vec&lt;Result<T>, E&gt; 转换为 Result&lt;Vec<T>, E&gt;</h2>
 <p>要将 <code>Vec&lt;Result&lt;T, E&gt;&gt;</code> 转换为 <code>Result&lt;Vec, E&gt;</code>，可以使用 <code>Iterator trait</code> 中的 <code>try_fold ()</code> 方法。下面是一个示例实现：</p>
 <p>在这里，我们使用 <code>into_iter ()</code> 将 <code>Vec</code> 转换为迭代器。然后调用 <code>try_fold ()</code>，传入一个初始值 <code>Vec::new ()</code> 和一个闭包，该闭包接受两个参数：一个累加器（<code>acc</code>）和一个 <code>Result（res）</code>。</p>
 <pre><code class="language-rust">fn vec_result_to_result_vec&lt;T, E&gt;(v: Vec&lt;Result&lt;T, E&gt;&gt;) -&gt; Result&lt;Vec&lt;T&gt;, E&gt; {
@@ -160,7 +171,7 @@ mod tests {
 </code></pre>
 <p>闭包模式匹配 <code>Result</code> 变体，将 <code>Ok</code> 值推入 <code>acc</code> 向量并返回 <code>Ok (acc)</code>，如果 <code>Result</code> 是 <code>Err</code>，则返回 <code>Err (e)</code>。<code>try_fold ()</code> 方法将继续迭代迭代器中的剩余项，并将更新后的累加器值传递给每个后续调用闭包的调用。</p>
 <p>如果原始 <code>Vec</code> 中的任何 <code>Result</code> 是 <code>Err</code>，则 <code>try_fold ()</code> 将短路并返回遇到的第一个 <code>Err</code>。否则，它将返回带有解包的 <code>T</code> 值的 <code>Vec</code> 的 <code>Ok (acc)</code>。</p>
-<h2>Rust十进制和16进制之间的互相转换</h2>
+<h2 id="rust十进制和16进制之间的互相转换">Rust十进制和16进制之间的互相转换</h2>
 <p>在 Rust 中，可以使用 <code>format!()</code> 宏将十进制数格式化为十六进制字符串。下面是一个简单的示例实现：</p>
 <pre><code class="language-rust">fn decimal_to_hex(decimal: u32) -&gt; String {
     format!("{:X}", decimal)
@@ -171,7 +182,7 @@ mod tests {
 println!("{}", hex_string); // 输出: "75BCD15"
 </code></pre>
 <p>注意，如果要处理更大的数字，可以使用 u64 或 u128 类型。如果需要将十六进制字符串转换回十进制数字，则可以使用 <code>u64::from_str_radix ()</code> 函数。</p>
-<h2>and_then 和 map在使用上有什么区别</h2>
+<h2 id="and-then-和-map在使用上有什么区别">and_then 和 map在使用上有什么区别</h2>
 <p>在 Rust 中，and_then 和 map 都是用于在对 Option 或 Result 进行转换时使用的方法，但它们的使用方式有所不同。</p>
 <p>map 方法将一个 Option或 Result&lt;T, E&gt; 映射到一个新的 Option或 Result&lt;U, E&gt;，其中函数闭包中的操作是应用于 Option 或 Result 中包含的值的。如果原始值是 None 或 Err，则映射函数将不会被执行，而是直接返回一个新的 None 或 Err。</p>
 <p>例如，下面是使用 map 方法将 Option中的值加倍的示例：</p>
@@ -204,7 +215,9 @@ assert_eq!(result, Some(33));
 </code></pre>
 <p>因此，在使用时，map 用于简单的值转换，而 and_then 用于更复杂的操作和逻辑测试。</p>
 
+        </div>
     </div>
+    
 
     <footer class="post-footer">
         <div class="post-info">
@@ -322,6 +335,50 @@ assert_eq!(result, Some(33));
     </div>
     
 </article>
+
+
+<script>
+// TOC active section highlighting
+(function() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    
+    if (tocLinks.length === 0 || headings.length === 0) return;
+    
+    function updateActiveSection() {
+        const scrollPosition = window.scrollY + 100; // Offset for better UX
+        
+        let activeHeading = null;
+        for (const heading of headings) {
+            if (heading.offsetTop <= scrollPosition) {
+                activeHeading = heading;
+            } else {
+                break;
+            }
+        }
+        
+        if (activeHeading) {
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + activeHeading.id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateActiveSection, 50);
+    });
+    
+    // Initial update
+    updateActiveSection();
+})();
+</script>
+
 
         </div>
     </main>

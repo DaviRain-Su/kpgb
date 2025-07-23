@@ -119,12 +119,22 @@
         
     </header>
 
-    <div class="post-content">
-        <h2>Introduction</h2>
+    
+    <div class="post-with-toc">
+        <aside class="toc-container">
+            <nav class="toc" id="toc">
+    <h2 class="toc-title">Table of Contents</h2>
+    <ul class="toc-list"><li class="toc-item toc-level-2">
+                <a href="#introduction" class="toc-link">Introduction</a></li><li class="toc-item toc-level-2">
+                <a href="#example" class="toc-link">Example</a></li><li class="toc-item toc-level-2">
+                <a href="#总结" class="toc-link">总结</a></li></ul></nav>
+        </aside>
+        <div class="post-content">
+            <h2 id="introduction">Introduction</h2>
 <p>在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。
 原生指针有两种类型：<code>*const T</code>和<code>*mut T</code>，分别是不可变和可变的原生指针。</p>
 <p>Rust提供了一个函数可以获取类型的大小：<code>std::mem::size_of::&lt;T&gt;()</code>。</p>
-<h2>Example</h2>
+<h2 id="example">Example</h2>
 <p>这里提供了一个简单的例子，展示了如何使用原生指针。</p>
 <pre><code class="language-rust">let array: [i32; 5] = [1, 2, 3, 4, 5];
 // size of array is 20，因为i32是4字节，所以数组大小是5*4=20，
@@ -141,10 +151,12 @@ println!(
     std::mem::size_of::&lt;*const [i32; 5]&gt;()
 );
 </code></pre>
-<h2>总结</h2>
+<h2 id="总结">总结</h2>
 <p>原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使用原生指针时需要特别小心，因为可能会导致内存安全问题。</p>
 
+        </div>
     </div>
+    
 
     <footer class="post-footer">
         <div class="post-info">
@@ -262,6 +274,50 @@ println!(
     </div>
     
 </article>
+
+
+<script>
+// TOC active section highlighting
+(function() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    
+    if (tocLinks.length === 0 || headings.length === 0) return;
+    
+    function updateActiveSection() {
+        const scrollPosition = window.scrollY + 100; // Offset for better UX
+        
+        let activeHeading = null;
+        for (const heading of headings) {
+            if (heading.offsetTop <= scrollPosition) {
+                activeHeading = heading;
+            } else {
+                break;
+            }
+        }
+        
+        if (activeHeading) {
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + activeHeading.id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateActiveSection, 50);
+    });
+    
+    // Initial update
+    updateActiveSection();
+})();
+</script>
+
 
         </div>
     </main>

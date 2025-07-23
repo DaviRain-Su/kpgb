@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><rss version="2.0"><channel><title>Anonymous IPFS Blog</title><link>https://Anonymous.github.io/kpgb</link><description>A decentralized blog powered by IPFS</description><item><title>IPFS图片自动上传测试</title><link>https://Anonymous.github.io/kpgb/posts/ipfs.html</link><description><![CDATA[<h1>IPFS 图片自动上传功能</h1>
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0"><channel><title>Anonymous IPFS Blog</title><link>https://Anonymous.github.io/kpgb</link><description>A decentralized blog powered by IPFS</description><item><title>IPFS图片自动上传测试</title><link>https://Anonymous.github.io/kpgb/posts/ipfs.html</link><description><![CDATA[<h1 id="ipfs-图片自动上传功能">IPFS 图片自动上传功能</h1>
 <p>这是一个测试IPFS图片自动上传功能的文章。</p>
-<h2>功能说明</h2>
+<h2 id="功能说明">功能说明</h2>
 <p>当你在文章中使用本地图片时，KPGB会自动：</p>
 <ol>
 <li>检测文章中的本地图片路径</li>
@@ -8,18 +8,18 @@
 <li>将本地路径替换为IPFS链接</li>
 <li>保持图片的alt文本不变</li>
 </ol>
-<h2>测试图片</h2>
+<h2 id="测试图片">测试图片</h2>
 <p>下面是一个测试图片（需要你在相同目录下放置一个 test.png 文件）：</p>
 <p><img src="ipfs://QmZqPPqHV7NGe9PEEbK5XR7yL5YLVG4MCuV9azNEmq8Luq" alt="测试图片" /></p>
 <p>也支持相对路径：</p>
 <p><img src="./images/another.jpg" alt="另一个测试" /></p>
-<h2>已经是URL的图片不会被处理</h2>
+<h2 id="已经是url的图片不会被处理">已经是URL的图片不会被处理</h2>
 <p>这些图片会保持原样：</p>
 <ul>
 <li>HTTP图片：<img src="https://example.com/image.png" alt="HTTP图片" /></li>
 <li>IPFS图片：<img src="/ipfs/QmXxxxx" alt="IPFS图片" /></li>
 </ul>
-<h2>支持的图片格式</h2>
+<h2 id="支持的图片格式">支持的图片格式</h2>
 <p>KPGB支持以下图片格式的自动上传：</p>
 <ul>
 <li>PNG (.png)</li>
@@ -28,7 +28,7 @@
 <li>WebP (.webp)</li>
 <li>SVG (.svg)</li>
 </ul>
-<h2>使用方法</h2>
+<h2 id="使用方法">使用方法</h2>
 <p>创建新文章时，只需要使用本地图片路径：</p>
 <pre><code class="language-bash">cargo run -- new --content my-post.md
 </code></pre>
@@ -102,11 +102,11 @@
 目前亏损严重的，不用担心翻不了身，只要现在一门心思赚稳定的钱，只要你能安心总结，
 放下执念，认清现实，相信下个周期趋势依旧会来，你就能翻身！趋势来前尽量不要投资，因为事实证明，大牛都赚不到，底部震荡，
 反弹你也很难赚到钱。所以赚到钱再来底部或者底部抬头时一把梭，人来疯时卖。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmYBGJGdy6aGmX6D5VvXhFFdsVdbkKzgsyVo3LnxGtUcut</guid><pubDate>Wed, 23 Jul 2025 00:49:48 +0000</pubDate></item><item><title>About Rust Raw Pointer</title><link>https://Anonymous.github.io/kpgb/posts/rust-raw-pointer.html</link><description><![CDATA[<h2>Introduction</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmYBGJGdy6aGmX6D5VvXhFFdsVdbkKzgsyVo3LnxGtUcut</guid><pubDate>Wed, 23 Jul 2025 00:49:48 +0000</pubDate></item><item><title>About Rust Raw Pointer</title><link>https://Anonymous.github.io/kpgb/posts/rust-raw-pointer.html</link><description><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。
 原生指针有两种类型：<code>*const T</code>和<code>*mut T</code>，分别是不可变和可变的原生指针。</p>
 <p>Rust提供了一个函数可以获取类型的大小：<code>std::mem::size_of::&lt;T&gt;()</code>。</p>
-<h2>Example</h2>
+<h2 id="example">Example</h2>
 <p>这里提供了一个简单的例子，展示了如何使用原生指针。</p>
 <pre><code class="language-rust">let array: [i32; 5] = [1, 2, 3, 4, 5];
 // size of array is 20，因为i32是4字节，所以数组大小是5*4=20，
@@ -123,7 +123,7 @@ println!(
     std::mem::size_of::&lt;*const [i32; 5]&gt;()
 );
 </code></pre>
-<h2>总结</h2>
+<h2 id="总结">总结</h2>
 <p>原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使用原生指针时需要特别小心，因为可能会导致内存安全问题。</p>
 ]]></description><author>DaviRain</author><guid isPermaLink="false">QmZsCiYzbhe1TCA4WbCJbWPuRQG2VzPqBbvDbR5271Vpoo</guid><pubDate>Wed, 23 Jul 2025 00:49:46 +0000</pubDate></item><item><title>学习Ocaml的资源</title><link>https://Anonymous.github.io/kpgb/posts/learn-ocaml-sources.html</link><description><![CDATA[<ul>
 <li><a href="http://courses.cms.caltech.edu/cs134/cs134b/book.pdf">Introduction to Objective Ocaml</a> Objective Caml 简介。</li>
@@ -141,7 +141,7 @@ println!(
 <li>康奈尔大学在线互动教材《OCaml 编程：正确+高效+美丽》：<a href="https://cs3110.github.io/textbook/cover.html">https://cs3110.github.io/textbook/cover.html</a></li>
 <li>尝试 OCaml Pro 的交互式教程和基于 Web 的解释器：<a href="http://try.ocamlpro.com/">http://try.ocamlpro.com/</a></li>
 </ul>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmYRi6EwwvwoTLUkTAfDoG5Q2Eit5hiX9mErKz2juGmKYY</guid><pubDate>Wed, 23 Jul 2025 00:49:45 +0000</pubDate></item><item><title>About Rust tips</title><link>https://Anonymous.github.io/kpgb/posts/rust-tips.html</link><description><![CDATA[<h2>在rust中如何为本crates中的类型带有可选的feature编写测试</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmYRi6EwwvwoTLUkTAfDoG5Q2Eit5hiX9mErKz2juGmKYY</guid><pubDate>Wed, 23 Jul 2025 00:49:45 +0000</pubDate></item><item><title>About Rust tips</title><link>https://Anonymous.github.io/kpgb/posts/rust-tips.html</link><description><![CDATA[<h2 id="在rust中如何为本crates中的类型带有可选的feature编写测试">在rust中如何为本crates中的类型带有可选的feature编写测试</h2>
 <p>在 Rust 中，如果你想为你的 <code>crate</code> 中的类型编写带有可选的 <code>feature</code> 的测试，你可以使用<code>cfg_attr</code>属性和<code>#[cfg(feature = "feature_name")]</code>属性来做到这一点。</p>
 <p>以下是一个例子：</p>
 <pre><code class="language-rust">// 在lib.rs或者main.rs中
@@ -164,7 +164,7 @@ mod tests {
 <pre><code class="language-bash">cargo test --features feature_name
 </code></pre>
 <p>这个命令会启用<code>feature_name</code>特性并运行所有的测试，包括依赖于这个特性的测试。</p>
-<h2>将 Vec&lt;Result<T>, E&gt; 转换为 Result&lt;Vec<T>, E&gt;</h2>
+<h2 id="将-vec_lt_result_-e_gt_-转换为-result_lt_vec_-e_gt_">将 Vec&lt;Result<T>, E&gt; 转换为 Result&lt;Vec<T>, E&gt;</h2>
 <p>要将 <code>Vec&lt;Result&lt;T, E&gt;&gt;</code> 转换为 <code>Result&lt;Vec, E&gt;</code>，可以使用 <code>Iterator trait</code> 中的 <code>try_fold ()</code> 方法。下面是一个示例实现：</p>
 <p>在这里，我们使用 <code>into_iter ()</code> 将 <code>Vec</code> 转换为迭代器。然后调用 <code>try_fold ()</code>，传入一个初始值 <code>Vec::new ()</code> 和一个闭包，该闭包接受两个参数：一个累加器（<code>acc</code>）和一个 <code>Result（res）</code>。</p>
 <pre><code class="language-rust">fn vec_result_to_result_vec&lt;T, E&gt;(v: Vec&lt;Result&lt;T, E&gt;&gt;) -&gt; Result&lt;Vec&lt;T&gt;, E&gt; {
@@ -181,7 +181,7 @@ mod tests {
 </code></pre>
 <p>闭包模式匹配 <code>Result</code> 变体，将 <code>Ok</code> 值推入 <code>acc</code> 向量并返回 <code>Ok (acc)</code>，如果 <code>Result</code> 是 <code>Err</code>，则返回 <code>Err (e)</code>。<code>try_fold ()</code> 方法将继续迭代迭代器中的剩余项，并将更新后的累加器值传递给每个后续调用闭包的调用。</p>
 <p>如果原始 <code>Vec</code> 中的任何 <code>Result</code> 是 <code>Err</code>，则 <code>try_fold ()</code> 将短路并返回遇到的第一个 <code>Err</code>。否则，它将返回带有解包的 <code>T</code> 值的 <code>Vec</code> 的 <code>Ok (acc)</code>。</p>
-<h2>Rust十进制和16进制之间的互相转换</h2>
+<h2 id="rust十进制和16进制之间的互相转换">Rust十进制和16进制之间的互相转换</h2>
 <p>在 Rust 中，可以使用 <code>format!()</code> 宏将十进制数格式化为十六进制字符串。下面是一个简单的示例实现：</p>
 <pre><code class="language-rust">fn decimal_to_hex(decimal: u32) -&gt; String {
     format!("{:X}", decimal)
@@ -192,7 +192,7 @@ mod tests {
 println!("{}", hex_string); // 输出: "75BCD15"
 </code></pre>
 <p>注意，如果要处理更大的数字，可以使用 u64 或 u128 类型。如果需要将十六进制字符串转换回十进制数字，则可以使用 <code>u64::from_str_radix ()</code> 函数。</p>
-<h2>and_then 和 map在使用上有什么区别</h2>
+<h2 id="and-then-和-map在使用上有什么区别">and_then 和 map在使用上有什么区别</h2>
 <p>在 Rust 中，and_then 和 map 都是用于在对 Option 或 Result 进行转换时使用的方法，但它们的使用方式有所不同。</p>
 <p>map 方法将一个 Option或 Result&lt;T, E&gt; 映射到一个新的 Option或 Result&lt;U, E&gt;，其中函数闭包中的操作是应用于 Option 或 Result 中包含的值的。如果原始值是 None 或 Err，则映射函数将不会被执行，而是直接返回一个新的 None 或 Err。</p>
 <p>例如，下面是使用 map 方法将 Option中的值加倍的示例：</p>
@@ -227,8 +227,8 @@ assert_eq!(result, Some(33));
 ]]></description><author>DaviRain</author><guid isPermaLink="false">QmeC1JrFWMsqZkixtS8SAmiZ52W6U2K9Pf8NNKnkLbWoX7</guid><pubDate>Wed, 23 Jul 2025 00:49:44 +0000</pubDate></item><item><title>Rust Resources Every Learner Should Know in 2023</title><link>https://Anonymous.github.io/kpgb/posts/rust-sources.html</link><description><![CDATA[<p>去年，我开始学习Rust，主要是为了应用于嵌入式系统。当时，我也在一篇名为“<a href="https://apollolabsblog.hashnode.dev/35-rust-learning-resources-every-beginner-should-know-in-2022">35个Rust学习资源，每个初学者在2022年都应该知道</a>”的帖子中分享了我所遇到的所有学习材料。自那时以来，我并没有停止学习 Rust，而是不断努力巩固自己的基础。因此，我一直在寻找新的学习资源。</p>
 <p>在本文中，我将通过添加更多的资源以及对之前未曾利用的一些付费资源的思考，扩展去年的帖子。提醒一下，当时，我将资源分为了6个主要类别：1）阅读材料，2）实践资源，3）YouTube 视频，4）Git 资源，5）速查表，以及6）问题论坛。今年我增加了3个更多的类别，它们是7）课程，8）播客，以及9）新闻通讯。在相关情况下，我还将为资源的级别添加注释，无论是初学者（👶）、中级（👨），还是高级（👴）级别。</p>
 <p>我想再次强调，我的学习之旅始于 Rust 官方的语言资源“the book”，然后我主要通过完成令人惊叹的 Rustlings 练习来练习。我在本文中提到的所有其他资源都是我在学习过程中遇到的，以澄清我在“the book”中阅读的概念或当我在某个 Rustlings 练习中遇到困难并希望进行更多探索时使用的。最后，当我被问及是否会因为手头的资源而学习 Rust 时，如果有的话，基于手头的资源，我可能会首先从下面提到的快速摘要资源开始，然后再着手“the book”。如果我要选择付费资源，那么“Beginning Rust”将是我选择的书籍。</p>
-<h2>1）阅读材料 📚</h2>
-<h3>快速摘要</h3>
+<h2 id="1_阅读材料-_">1）阅读材料 📚</h2>
+<h3 id="快速摘要">快速摘要</h3>
 <ul>
 <li>
 <p>👶<a href="https://tourofrust.com/">《Rust 指南》</a>是 Rust 编程语言的一步一步指南。它很好地概述了语言，并允许学习者修改代码示例以进行实验。</p>
@@ -240,7 +240,7 @@ assert_eq!(result, Some(33));
 <p>👶<a href="https://stevedonovan.github.io/rust-gentle-intro/readme.html">《温和介绍 Rust》</a>是一本简短的书，概括了 Rust 的主要概念。作者提出的想法是，在深入了解像“the book”这样的更复杂的资源之前，先“试用”了解足够的语言知识。</p>
 </li>
 </ul>
-<h3>🆓 Free Online Books:</h3>
+<h3 id="_-free-online-books_">🆓 Free Online Books:</h3>
 <ul>
 <li>
 <p>👶 <a href="https://doc.rust-lang.org/book/">Rust Book “The Book”</a>：这是由Mozilla基金会的Rust开发团队编写的Rust编程语言官方书籍。这是我开始学习Rust的地方，也是我最喜欢的资源之一。在编写Rust代码时，我经常会回到这本书中查找信息。</p>
@@ -258,7 +258,7 @@ assert_eq!(result, Some(33));
 <p>👴 <a href="https://rust-unofficial.github.io/patterns/intro.html">Rust Design Patterns</a>：如果你想编写更符合Rust编程语言惯例的代码，这是一个很好的资源。对于初学者来说，这不是一本好书，而是在进一步学习Rust时可以参考的书籍。如果你来自另一种编程语言，这本书也可以帮助你理解设计模式的不同之处。阅读这本书的部分内容实际上帮助了我阅读其他人的代码。</p>
 </li>
 </ul>
-<h3>💲 付费印刷书籍：</h3>
+<h3 id="_-付费印刷书籍_">💲 付费印刷书籍：</h3>
 <p>我个人完全依赖免费材料来学习Rust，但是这里列出的书籍是我在学习之后获得的。此外，一些人可能更喜欢更有触感的免费书籍，其中“the book”本身也可以作为纸质版购买。</p>
 <ul>
 <li>👨 <a href="https://www.manning.com/books/rust-in-action">Rust in Action</a>：去年我购买了这本书。Rust in Action是一本很棒的读物，提供了许多例子，但我不会推荐给初学者。作者（Tim Mcnamara）本人也建议那些已经熟悉一些Rust的人去阅读本书。我的个人经验是，这本书帮助我澄清了一些我仍然不太清楚的Rust概念。另一方面，在书的更深层次上，有一些我跳过的章节，我发现那些章节更专注于特定的应用领域。最后，附带一提，作者Tim Mcnamara还维护着一个与Rust相关的Youtube频道，在下面的视频部分列出。</li>
@@ -266,8 +266,8 @@ assert_eq!(result, Some(33));
 <li>👶 <a href="https://www.amazon.com/Beginning-Rust-Professional-Carlo-Milanesi/dp/1484234677">Beginning Rust: From Novice to Professional</a>：如果您想购买书籍，并且您是初学者，我会说这是您应该选择的书籍。我发现这本书是教授Rust最易理解的书籍之一。这本书的好处是它的材料也与Educative上的实践材料相结合。</li>
 <li>👴 <a href="https://rust-for-rustaceans.com/">Rust for Rustaceans</a>：这是高级用户中广受欢迎的一本书，拥有很好的评价，但是我还没有得到过。我之所以推荐它，是因为作者Jon Gjengset有一个我非常喜欢的Youtube频道（下面的视频部分有更多详细信息）。</li>
 </ul>
-<h2>2） 练习材料 🏋️‍♂️</h2>
-<h3>🆓 免费资源</h3>
+<h2 id="2_-练习材料-_____">2） 练习材料 🏋️‍♂️</h2>
+<h3 id="_-免费资源">🆓 免费资源</h3>
 <ul>
 <li>👶 <a href="https://github.com/rust-lang/rustlings">Rustlings</a>是一个git项目，包含了一些小练习来学习Rust。我非常喜欢这个资源，因为它涵盖了“The Book“中的每个主题，并且有时会很有挑战性。我完成了所有的练习，每当我完成一项困难的任务时，我都感到非常有成就感。我最喜欢的是利用迭代器在单行中编写函数以找到一个数字的阶乘。</li>
 <li>👶 <a href="https://exercism.org/tracks/rust">Exercism</a>有一个实践Rust的学习路径。我觉得这些练习的呈现方式很有趣。尽管我发现这些练习有点过于简单，这可能是因为我在学习的较晚时才发现这个资源。</li>
@@ -277,12 +277,12 @@ assert_eq!(result, Some(33));
 <li>👨👴 <a href="https://adventofcode.com/">Advent of Code</a>是一年一度的活动，您可以在其中使用任何您想要的语言解决小型（但高质量的）编程难题。它适用于您正在学习的任何语言。您可能会发现这个、这个和这个存储库很有用，它们为前几年提供了模板和解决方案。</li>
 <li>👶👨👴 <a href="https://leetcode.com/">LeetCode</a>是一个流行的面试准备平台，有各种不同难度的代码问题需要解决。如果您遇到困难，还有各种仓库和开发者解决Rust代码问题的视频资源。</li>
 </ul>
-<h3>💲 Paid Resources</h3>
+<h3 id="_-paid-resources">💲 Paid Resources</h3>
 <ul>
 <li>👶 <a href="https://egghead.io/q/rust">Egghead.io</a>是以项目为导向的资源，通过为工作构建项目来帮助开发人员建立组合。有各种有趣的选项，其中之一是通过一个课程步入Rustlings练习。</li>
 <li>👶 <a href="https://www.educative.io/">Educative</a>有几个实践学习Rust的资源，其中一个与“<a href="https://www.amazon.com/Beginning-Rust-Professional-Carlo-Milanesi/dp/1484234677">从新手到专业人士的Rust</a>”一书联系紧密。</li>
 </ul>
-<h2>3） YouTube Videos 📹</h2>
+<h2 id="3_-youtube-videos-_">3） YouTube Videos 📹</h2>
 <ul>
 <li>👶 <a href="https://www.youtube.com/playlist?list=PLLqEtX6ql2EyPAZ1M2_C0GgVd4A-_L4_5">Rust教程</a>，由Doug Milford提供，是我最喜欢的资源之一。Doug做了很好的工作，解释了Rust中的许多棘手概念。视频还介绍了不同的代码示例和场景，以解释概念。</li>
 <li>👶 <a href="https://www.youtube.com/channel/UCRA18QWPzB7FYVyg0WFKC6g/featured">CS Honors @ Illinois</a>是另一个我喜欢的去参考概念的频道。这个视频系列是基于伊利诺伊大学厄巴纳-香槟分校的CS196（现在是CS124）大一课程，由学生主持。这些课程视频并不完全涵盖Rust，但对于那些涵盖Rust概念的视频，我发现它们非常有帮助。</li>
@@ -298,20 +298,20 @@ assert_eq!(result, Some(33));
 <li>👶 <a href="https://www.youtube.com/@300secondsofrust">300 秒 Rust</a> 提供了不同 Rust 概念的精短视频。如果您想快速刷新或深入了解某个概念，这将是一个很好的资源。</li>
 <li>👶 <a href="https://www.youtube.com/watch?v=pGh-0cMvH5g&amp;list=PLAJ-sYO1aGdxQ_skPPtJ7PlSAjTXM-atv">The dev method</a> 提供了 Rust 视频列表，解释了特定的概念。我发现解释非常清晰，很容易理解。</li>
 </ul>
-<h2>4） Git资源💾</h2>
+<h2 id="4_-git资源_">4） Git资源💾</h2>
 <ul>
 <li><a href="https://github.com/rust-lang">Rust编程语言</a>是寻找与Rust语言和其箱库相关的大多数文档和指南的主要来源。</li>
 <li><a href="https://github.com/rust-unofficial/awesome-rust">Awesome Rust</a>是一个非常好的仓库，拥有大量Rust代码和资源的精选列表。您可以找到基于Rust构建的不同领域的完整应用程序。</li>
 <li><a href="https://github.com/ferrous-systems">Ferrous Systems</a>是一家Rust咨询公司，也是Rust生态系统的主要贡献者之一。在他们的仓库中，Ferrous公开提供所有培训材料（代码示例和幻灯片），包括他们的嵌入式培训课程。</li>
 <li><a href="https://github.com/TheAlgorithms/Rust">Algorithms Rust</a> git仓库提供了许多基本标准算法的代码示例，包括数据结构、排序和字符串等。如果您正在为工作面试做练习，这是一个非常好的资源。</li>
 </ul>
-<h2>5） 课程 👨‍🏫</h2>
+<h2 id="5_-课程-___">5） 课程 👨‍🏫</h2>
 <ul>
 <li>👶 <a href="https://learn.microsoft.com/en-us/training/paths/rust-first-steps/?WT.mc_id=academic-29077-cxa">《Rust 初步》</a>是由 Microsoft 提供的免费课程，提供 Rust 入门视角。</li>
 <li>👶 <a href="https://www.manning.com/livevideo/rust-in-motion">《Rust in Motion》</a>是由 Carol Nichols 和 Jake Goulding 提供的付费短视频课程。Carol Nichols 是前面提到的《Rust 编程语言》的合著者。视频介绍 Rust 的基本方面。</li>
 <li>👶 <a href="https://www.linkedin.com/learning/rust-essential-training">《Rust Essential Training》</a>是 LinkedIn 上提供的付费课程，评价很高。它涵盖了对初学者至关重要的 Rust 基本方面。</li>
 </ul>
-<h2>6） 小抄 📃</h2>
+<h2 id="6_-小抄-_">6） 小抄 📃</h2>
 <p>有多种选择，选择最适合您的即可</p>
 <ul>
 <li><a href="https://cheats.rs/">Rust 语言小抄</a></li>
@@ -319,7 +319,7 @@ assert_eq!(result, Some(33));
 <li><a href="https://phaiax.github.io/rust-cheatsheet/">Rust 小抄</a></li>
 <li>《让我们变得生疏的 Rust》小抄，需要在这里<a href="https://letsgetrusty.com/">注册</a>以获取新闻简报。</li>
 </ul>
-<h2>7）问题论坛 🙋‍♂️</h2>
+<h2 id="7_问题论坛-____">7）问题论坛 🙋‍♂️</h2>
 <p>提问显然是学习的关键部分。Rustaceans 的友好和乐于助人让它变得更好。对于下面列出的资源，令人惊喜的是，你可以非常快速地得到问题的答案（大多数时间几乎是立即得到答案）。</p>
 <ul>
 <li><a href="https://discord.com/invite/rust-lang">The Rust Programming Language Discord</a></li>
@@ -327,7 +327,7 @@ assert_eq!(result, Some(33));
 <li><a href="https://www.reddit.com/r/rust/">The Rust Programming Language Subreddit</a></li>
 <li>还有 <a href="https://users.rust-lang.org/">Rust 语言论坛</a>，我个人没有使用，因为我在前面的论坛中找到了我需要的。</li>
 </ul>
-<h2>9） 播客 📻</h2>
+<h2 id="9_-播客-_">9） 播客 📻</h2>
 <p>以下是一些有用的播客，讨论 Rust 概念和有趣的主题。</p>
 <ul>
 <li><a href="https://newrustacean.com/">New Rustacean</a></li>
@@ -335,7 +335,7 @@ assert_eq!(result, Some(33));
 <li><a href="https://podcasts.apple.com/gb/podcast/building-with-rust/id1553513574">Building with Rust</a></li>
 <li><a href="https://rustgamedev.com/">Rust Game Dev</a></li>
 </ul>
-<h2>9） 新闻通讯 📰</h2>
+<h2 id="9_-新闻通讯-_">9） 新闻通讯 📰</h2>
 <p>为了保持对 Rust 的了解，可以订阅以下一些新闻通讯。这些新闻通讯每周提供与 Rust 相关的一切信息的汇总。</p>
 <ul>
 <li><a href="https://rust.libhunt.com/newsletter?ref=inboxreads">Awesome Rust Weekly</a></li>
@@ -343,12 +343,12 @@ assert_eq!(result, Some(33));
 <li><a href="https://discu.eu/weekly/rust/?ref=inboxreads">Rust Weekly</a></li>
 <li><a href="https://rustinblockchain.org/?ref=inboxreads">Rust in Blockchain</a></li>
 </ul>
-<h2>结论</h2>
+<h2 id="结论">结论</h2>
 <p>学习 Rust 不是一件容易的事情，因此利用尽可能多的资源来确认已掌握的知识变得必要。在我的学习过程中，我遇到了许多我觉得有用的资源，并在这篇文章中进行了总结。希望学习者能够找到它有用。你的经历如何？你最喜欢的 Rust 学习资源是什么？在评论中分享你的想法。👇</p>
 ]]></description><author>DaviRain</author><guid isPermaLink="false">QmZoYqVCYw5PEfJkMjQd65nKC9N38gAg9aErAs1dE3v5xv</guid><pubDate>Wed, 23 Jul 2025 00:49:43 +0000</pubDate></item><item><title>Rust no-std</title><link>https://Anonymous.github.io/kpgb/posts/rust-no-std.html</link><description><![CDATA[<p>改写 std 的库为支持 no_std 的库及写出一个支持 std 和 no_std 库的经验谈 <a href="https://github.com/DaviRain-Su/rust-no-std-source">github repo</a>。</p>
-<h2>简介</h2>
+<h2 id="简介">简介</h2>
 <p>首先介绍 std 和 no_std 的区别，然后介绍使用 no_std 库的方式，由于支持 no_std 的特性有两种不同的方式，因此使用 no_std 库也有两种方式。其次，验证一个库是否支持 no_std 特性的验证方式，如何改写一个 std 的库为同时支持 std 和 no_std 的特性方法。具体的如何写一个支持 std 和 no_std 的库。一些在 std 和 no_std 下都可以使用的 primitive 的仓库和相关的资源和文章。</p>
-<h2>目录</h2>
+<h2 id="目录">目录</h2>
 <ul>
 <li>std 和 no_std 的区别</li>
 <li>Rust 中使用 no_std 的两种方式</li>
@@ -356,8 +356,8 @@ assert_eq!(result, Some(33));
 <li>具体的写一个支持 std 和 no_std 的库</li>
 <li>一些 no_std 和 std 可以使用 primitive 类型的仓库和相关资源的文章</li>
 </ul>
-<h2>std 和 no_std 的区别</h2>
-<h3>核心库</h3>
+<h2 id="std-和-no-std-的区别">std 和 no_std 的区别</h2>
+<h3 id="核心库">核心库</h3>
 <p>Rust 语言的语法由核心库和标准库共同提供。 其中 Rust 核心库是标准库的基础。核心库中定义的是 Rust 语言的核心，不依赖于操作系统和网络等相关的库，甚至不知道堆分配，也不提供并发和 I/O</p>
 <p>可以通过在模块顶部引入 #![no_std] 来使用核心库。核心库和标准库的功能有一些重复，包括如下部分：</p>
 <ul>
@@ -366,7 +366,7 @@ assert_eq!(result, Some(33));
 <li>常用功能型数据类型，满足常见的功能性需求，如 String、Vec、HashMap、Rc、Arc、Box 等。</li>
 <li>常用的宏定义，如 println！、assert！、panic！、vec！等。做嵌入式应用开发的时候，核心库是必需的。</li>
 </ul>
-<h3>标准库</h3>
+<h3 id="标准库">标准库</h3>
 <p>Rust 标准库提供应用程序开发所需要的基础和跨平台支持。标准库包含的内容大概如下：</p>
 <ul>
 <li>与核心库一样的基本 trait、原始数据类型、功能型数据类型和常用宏等，以及与核心库几乎完全一致的 API。</li>
@@ -381,11 +381,11 @@ assert_eq!(result, Some(33));
 <p>然后是，core crate 是 std crate 的一个子集，对程序运行的系统不做任何假设。因此它提供了基于语言的 API，如浮点，字符串和切片，以及暴露处理器特性的 API，如原子操作和 SIMD 指令。然而，它缺乏涉及堆内存分配和 I/O 的任何 API。</p>
 <p>对于一个应用程序来说，std 所做的不仅仅是提供一种访问操作系统抽象的方式，std 还负责涉及堆栈溢出保护，处理命令行参数，以及在程序的主函数被调用之前生成主线程。一个#![no_std]应用程序缺乏所有这些标准的运行时，所以它必须初始化自己的运行时，如果需要的话。</p>
 <p>由于这些特性，#![no_std]应用程序可以是第一个或者唯一在系统上运行的代码。</p>
-<h2>Rust 中 no_std 的一些使用方法</h2>
+<h2 id="rust-中-no-std-的一些使用方法">Rust 中 no_std 的一些使用方法</h2>
 <p>主要具体介绍第二种方式的使用 no_std</p>
 <p>具体如何使用，参见写一个 no_std 的库的第二种使用方式。</p>
 <p>也可参考，实例:<a href="https://serde.rs/no-std.html">serde no-std 的使用规范</a></p>
-<h2>验证一个库是否支持 no_std 的验证方式</h2>
+<h2 id="验证一个库是否支持-no-std-的验证方式">验证一个库是否支持 no_std 的验证方式</h2>
 <pre><code class="language-bash">cargo check --target wasm32-unknown-unknown
 </code></pre>
 <p>但是 wasm 环境不一定就是 no_std，或者别的编译目标也可以，也就是裸露的编译目标环境不带有任何系统的环境。</p>
@@ -399,7 +399,7 @@ assert_eq!(result, Some(33));
 <li><a href="https://github.com/DaviRain-Su/rust-no-std-source/commit/8bcd0b909ee116d3dc9c6464c2548e1c008d672e">开始添加一个函数编译报错 commit 1</a></li>
 <li><a href="https://github.com/DaviRain-Su/rust-no-std-source/commit/ae94f9cf147b7ce37632cb4e9c36e20c5135b3ad">修复错误 commit 2</a></li>
 </ul>
-<h2>创建 no_std 库的第二种方式（使用 #![cfg_attr (not (features = “std”), no_std)] )#</h2>
+<h2 id="创建-no-std-库的第二种方式_使用-___cfg-attr-_not-_features-_-_std___-no-std__-__">创建 no_std 库的第二种方式（使用 #![cfg_attr (not (features = “std”), no_std)] )#</h2>
 <ul>
 <li><a href="https://github.com/DaviRain-Su/rust-no-std-source/commit/8cfd063be536028d9f8cfe1c7c04f16765825f8c">创建一个仓库</a></li>
 <li><a href="https://github.com/DaviRain-Su/rust-no-std-source/commit/aa09b0d2e2807d788564aea5fa4fc8cbfc760043">使用#![cfg_attr(not(feature = “std”), no_std)]</a></li>
@@ -415,13 +415,13 @@ assert_eq!(result, Some(33));
 <li><a href="https://github.com/cosmos/ics23/pull/41">相关的 Pr, 使 ics23 支持 no_std</a></li>
 </ul>
 <p><a href="https://github.com/cosmos/ics23/pull/41/commits/dac5c3d0fc368e0b92c4a4804b6787bd1c3fb168">有些代码也在 no_std 写测试很难。因为这里做了编译选择处理</a></p>
-<h2>一些 no_std 和 std 可以使用的 primitive 类型的仓库</h2>
+<h2 id="一些-no-std-和-std-可以使用的-primitive-类型的仓库">一些 no_std 和 std 可以使用的 primitive 类型的仓库</h2>
 <ul>
 <li><a href="https://github.com/paritytech/substrate/tree/master/primitives/std">sp-std</a></li>
 <li><a href="https://doc.rust-lang.org/alloc/index.html">rust Alloc crate</a></li>
 <li><a href="https://doc.rust-lang.org/core/index.html">rust Core crate</a></li>
 </ul>
-<h2>引用及资源</h2>
+<h2 id="引用及资源">引用及资源</h2>
 <ul>
 <li><a href="https://weread.qq.com/web/reader/0303203071848774030b9d6k9bf32f301f9bf31c7ff0a60">Rust 编程之道核心库和标准库的介绍</a></li>
 <li><a href="https://docs.rust-embedded.org/book/intro/hardware.html">Rust embeded book</a></li>
@@ -437,9 +437,9 @@ assert_eq!(result, Some(33));
 <li><a href="https://blog.dbrgn.ch/2019/12/24/testing-for-no-std-compatibility/">testing-for-no-std-compatibility</a></li>
 <li><a href="https://docs.substrate.io/">substrate 中关于 cfg_attr 的介绍</a></li>
 </ul>
-<h2>结论</h2>
+<h2 id="结论">结论</h2>
 <p>参照 <code>serder</code> 的使用以及一些论坛的讨论，推荐使用<code>#![cfg_attr(not(feature = "std"), no_std ))]</code>来同时支持 <code>std</code> 和 <code>no_std</code>。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmPL5UgmuZMs3jH7RgkApzwh5F65ydW437qDv8rt9X72w4</guid><pubDate>Wed, 23 Jul 2025 00:49:42 +0000</pubDate></item><item><title>Nothing in Rust</title><link>https://Anonymous.github.io/kpgb/posts/notion-in-rust.html</link><description><![CDATA[<h2>Outline</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmPL5UgmuZMs3jH7RgkApzwh5F65ydW437qDv8rt9X72w4</guid><pubDate>Wed, 23 Jul 2025 00:49:42 +0000</pubDate></item><item><title>Nothing in Rust</title><link>https://Anonymous.github.io/kpgb/posts/notion-in-rust.html</link><description><![CDATA[<h2 id="outline">Outline</h2>
 <ul>
 <li>我假装这里有东西，但实际上没有。
 <ul>
@@ -472,8 +472,8 @@ assert_eq!(result, Some(33));
 <li>“我会让你一直等到时间的尽头，空手而归。”</li>
 </ul>
 <p>虽然这听起来像是我的前任说的最后一句话，但我很好。</p>
-<h2>我假装这里有东西，但实际上没有。(“I’m pretending like there’s something here, but there actually isn’t.”)</h2>
-<h3>PhantomData</h3>
+<h2 id="我假装这里有东西_但实际上没有___i_m-pretending-like-there_s-something-here_-but-there-actually-isn_t___">我假装这里有东西，但实际上没有。(“I’m pretending like there’s something here, but there actually isn’t.”)</h2>
+<h3 id="phantomdata">PhantomData</h3>
 <p>Rust标准库中有很多高质量的代码，但是很少有像<code>std::marker::PhantomData</code>这样纯净优雅的示例。（它的实现和<code>std::mem::drop</code>一样优雅纯粹。）</p>
 <p><code>PhantomData&lt;T&gt;</code>是一种零大小的类型，无论T是什么。这就像对编译器撒一个小谎言：你声称持有一个<code>T</code>，但实际上并不是。与一些谎言不同，这实际上有益于代码。</p>
 <p>在实践中，我看到它主要用于两种情况：</p>
@@ -503,8 +503,8 @@ impl&lt;T: From&lt;Vec&lt;u8&gt;&gt;&gt; Slot&lt;T&gt; {
     }
 }
 </code></pre>
-<h2>这里现在是空的。（“There is nothing here now.”）</h2>
-<h3>Null</h3>
+<h2 id="这里现在是空的___there-is-nothing-here-now___">这里现在是空的。（“There is nothing here now.”）</h2>
+<h3 id="null">Null</h3>
 <blockquote>
 <p>There’s no null in Rust.</p>
 </blockquote>
@@ -518,7 +518,7 @@ unsafe {
 </code></pre>
 <p>（提醒：原始指针只能在不安全的代码块中进行解引用。）</p>
 <p>Rust 的设计使您很少需要深入研究指针操作。您可能会在与 C 代码交互时或者在使用 Rust 重写 Quake III 时遇到原始指针（*const 和 *mut 类型）。</p>
-<h3>Option::None</h3>
+<h3 id="option__none">Option::None</h3>
 <p>标准库提供了 <code>Option</code> 枚举类型，其中包含两个变体 <code>Some</code> 和 <code>None</code>。这是表示可能存在或不存在的值的推荐方式，
 而不是使用空指针。它就像一个小的安全包装器，您应该使用它，除非您知道自己在做什么并准备好了后果，或者是单独工作。</p>
 <p>但是，使用空指针和使用 <code>None</code> 之间存在显着差异。首先，<code>Option&lt;T&gt;</code> 是一个拥有的类型，
@@ -534,8 +534,8 @@ unsafe {
 <code>Option&lt;u32&gt;</code>	| 8
 <code>Option&lt;std::num::NonZeroU128&gt;</code>	| 16
 <code>Option&lt;u128&gt;</code>	| 24</p>
-<h2>这里永远不会有东西（“There will never be anything here.”）</h2>
-<h3>The empty tuple</h3>
+<h2 id="这里永远不会有东西__there-will-never-be-anything-here___">这里永远不会有东西（“There will never be anything here.”）</h2>
+<h3 id="the-empty-tuple">The empty tuple</h3>
 <p>空元组写作空括号 <code>()</code>。</p>
 <p>我曾经写过 Java 代码。虽然不是完美的，但至少很有品位。在 Java 中，具有 void 返回类型的方法不返回值，无论您给出什么或多少内容。</p>
 <p>空元组在 <code>Rust</code> 中具有类似的作用：不返回实际值的函数隐式返回空元组。但是，它的用途比这更加多样化。</p>
@@ -570,8 +570,8 @@ unsafe {
     }
 }
 </code></pre>
-<h2>我会让你一直等到时间的尽头，空手而归。(“I’m going to leave you, waiting here, empty-handed, until the end of time.”)</h2>
-<h3>The never type</h3>
+<h2 id="我会让你一直等到时间的尽头_空手而归___i_m-going-to-leave-you_-waiting-here_-empty-handed_-until-the-end-of-time___">我会让你一直等到时间的尽头，空手而归。(“I’m going to leave you, waiting here, empty-handed, until the end of time.”)</h2>
+<h3 id="the-never-type">The never type</h3>
 <p>如何调用一个函数的返回类型，它不仅不返回值，而且根本永远不会返回？
 嗯，您可以尝试所有传统方法都无济于事 - 您将永远无法在那一点之后继续，因此需要一些精细的处理。</p>
 <p>这就是所谓的“never”类型。以下是几种遇到它的方式</p>
@@ -1497,7 +1497,7 @@ Printf.printf "counter.contents = %d\n" !counter;;
   这是一种简写，它等同于 { contents = 0; }。
 *)
 </code></pre>
-<h2>进一步阅读</h2>
+<h2 id="进一步阅读">进一步阅读</h2>
 <ul>
 <li>访问官方网站获取编译器并阅读文档：<a href="http://ocaml.org/">http://ocaml.org/</a></li>
 <li>OCaml 快速教程：<a href="https://ocaml.org/docs/up-and-running">https://ocaml.org/docs/up-and-running</a></li>
@@ -1506,10 +1506,10 @@ Printf.printf "counter.contents = %d\n" !counter;;
 <li>康奈尔大学在线互动教材《OCaml 编程：正确+高效+美丽》：<a href="https://cs3110.github.io/textbook/cover.html">https://cs3110.github.io/textbook/cover.html</a></li>
 <li>尝试 OCaml Pro 的交互式教程和基于 Web 的解释器：<a href="http://try.ocamlpro.com/">http://try.ocamlpro.com/</a></li>
 </ul>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmehMPqbtR2iUdrLNiNdJjqQCYa59vXFnK5SQq6GtZPB6R</guid><pubDate>Wed, 23 Jul 2025 00:49:39 +0000</pubDate></item><item><title>翻译-区块链间通信协议:概述</title><link>https://Anonymous.github.io/kpgb/posts/ibc.html</link><description><![CDATA[<h2>Abstract</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmehMPqbtR2iUdrLNiNdJjqQCYa59vXFnK5SQq6GtZPB6R</guid><pubDate>Wed, 23 Jul 2025 00:49:39 +0000</pubDate></item><item><title>翻译-区块链间通信协议:概述</title><link>https://Anonymous.github.io/kpgb/posts/ibc.html</link><description><![CDATA[<h2 id="abstract">Abstract</h2>
 <p>区块链间通信协议（IBC）是一个端到端的、面向连接的、有状态的协议，用于在独立的分布式账本上的模块之间进行可靠、有序和认证的通信。IBC是为异质账本之间的互操作而设计的，这些账本排列在一个未知的动态拓扑结构中，以不同的共识算法和状态机运行。该协议通过指定足够的数据结构、抽象和通信协议的语义来实现这一点，一旦被参与的账本实施，它们就可以安全地进行通信。IBC与有效载荷无关，并提供了一个跨账本的异步通信基元，可作为各种应用的组成模块。</p>
 <p>Index Terms—ibc; interblockchain; dlt</p>
-<h2>I. Introduction</h2>
+<h2 id="i_-introduction">I. Introduction</h2>
 <p>由于其作为复制状态机的性质，必须在其上保持确定性的执行，因此必须保持对确切的确定性规则集的持续认同，
 单个分布式账本的吞吐量和灵活性都是有限的，必须用特定的应用优化来换取通用能力，
 并且只能为建立在其上的应用提供单一的安全模型。为了支持交易吞吐量、应用多样性、成本效率和容错性，
@@ -1559,12 +1559,12 @@ IBC定义了两个分类帐之间的通信协议，以及更高级别的协议�
 数据包中继、边缘情况处理和中继器操作的子协议。在解释了协议的内部结构后，
 我们定义了应用程序可以利用IBC的接口，并简述了一个用于可替换令牌传输的应用级协议的例子。
 最后，我们叙述了到目前为止该协议的测试和部署工作。附录包括连接握手、信道握手和数据包中继算法的伪代码。</p>
-<h2>II. Protocol scope &amp; properties</h2>
-<h3>A. Scope</h3>
+<h2 id="ii_-protocol-scope-_amp_-properties">II. Protocol scope &amp; properties</h2>
+<h3 id="a_-scope">A. Scope</h3>
 <p>IBC处理独立账本上的模块之间转发的不透明数据包的认证、传输和排序–账本可以在单机上运行，
 由运行共识算法的许多节点复制，或者由状态可以被验证的任何进程构建。
 该协议是在两个账本上的模块之间定义的，但被设计为在任意拓扑结构中连接的任意数量的账本上的任意数量的模块之间安全地同时使用。</p>
-<h3>B. Interface</h3>
+<h3 id="b_-interface">B. Interface</h3>
 <p>IBC位于模块–智能合约、其他账本组件或其他独立执行的账本上的应用逻辑片断–和底层共识协议、
 区块链和网络基础设施（如TCP/IP）之间，位于另一侧。</p>
 <p>IBC为模块提供了一系列功能，这些功能很像可能提供给一个模块与同一账本上的另一个模块互动的功能：
@@ -1573,22 +1573,22 @@ IBC定义了两个分类帐之间的通信协议，以及更高级别的协议�
 <p>IBC需要底层账本的某些功能和属性，主要是最终性（或阈值最终性小工具）、
 廉价的可验证的共识记录（这样，一个轻量级的客户端算法可以用比完整节点少得多的计算和存储来验证共识过程的结果），
 以及简单的键/值存储功能。在网络方面，IBC只需要最终的数据交付–不需要认证、同步或排序属性。</p>
-<h3>C. Operation</h3>
+<h3 id="c_-operation">C. Operation</h3>
 <p>IBC的主要目的是在独立主机账本上运行的模块之间提供可靠的、经过验证的、有序的通信。
 这需要在数据中继、数据保密性和可读性、可靠性、流量控制、认证、状态性和复用等方面的协议逻辑。</p>
-<h4>1. Data Relay</h4>
+<h4 id="1_-data-relay">1. Data Relay</h4>
 <p>在IBC架构中，各模块并不直接通过网络基础设施相互发送消息，而是创建要发送的消息，
 然后通过监测 “中继进程 “从一个分类账物理地中继到另一个分类账。IBC假定存在一组中继进程，
 可以访问底层网络协议栈（可能是TCP/IP、UDP/IP或QUIC/IP）和物理互连基础设施。
 这些中继进程监控着一组执行IBC协议的分类账，持续扫描每个分类账的状态，
 并在发出的数据包被提交后请求在另一个分类账上执行交易。对于两个分类账之间连接的正确操作和进展，
 IBC只要求至少存在一个正确的、活的中继进程，可以在分类账之间中继。</p>
-<h4>2. Data confidentiality and legibility</h4>
+<h4 id="2_-data-confidentiality-and-legibility">2. Data confidentiality and legibility</h4>
 <p>IBC协议只要求将IBC协议正确运行所需的最低限度的数据提供给中继者进程并使其可读（以标准化的格式进行序列化），
 分类账可以选择只将这些数据提供给特定的中继者。这些数据包括共识状态、客户、连接、信道和数据包信息，
 以及构建状态中特定键/值对的包含或排除证明所需的任何辅助状态结构。所有必须证明给另一个分类账的数据也必须是可读的；
 也就是说，它必须以两个分类账商定的标准化格式进行序列化。</p>
-<h4>3. Reliability</h4>
+<h4 id="3_-reliability">3. Reliability</h4>
 <p>网络层和中继器进程可以以任意的方式行事，丢弃、重新排序或重复数据包，
 故意尝试发送无效的交易，或以其他拜占庭方式行事，而不影响IBC的安全性或有效性。
 这是通过为通过IBC通道发送的每个数据包分配一个序列号来实现的，
@@ -1597,31 +1597,31 @@ IBC只要求至少存在一个正确的、活的中继进程，可以在分类�
 加密承诺被用来防止数据报伪造：发送分类账对发出的数据包作出承诺，而接收分类账则检查这些承诺，
 因此在传输过程中被中继者改变的数据报将被拒绝。IBC还支持无序信道，它不强制执行相对于发送的数据包接收顺序，
 但仍强制执行完全一次的交付。</p>
-<h4>4. Flow control</h4>
+<h4 id="4_-flow-control">4. Flow control</h4>
 <p>IBC并没有为计算层面或经济层面的流量控制提供具体的协议级规定。
 底层分类账预计会有计算吞吐量限制设备和它们自己的流量控制机制，如气体市场。
 应用层面的经济流量控制–根据内容限制特定数据包的速率–对于确保安全属性和遏制拜占庭故障的破坏可能是有用的。
 例如，在IBC通道上传输价值的应用程序可能希望限制每个区块的价值传输率，以限制潜在的拜占庭行为的损害。
 IBC为模块提供了拒绝数据包的设施，并将具体细节留给更高级别的应用协议。</p>
-<h4>5. Authentication</h4>
+<h4 id="5_-authentication">5. Authentication</h4>
 <p>所有通过IBC发送的数据都是经过验证的：由发送账本的共识算法最终确定的区块必须通过加密承诺对发出的数据包进行承诺，而接收账本的IBC处理程序必须在对数据报采取行动之前验证共识记录和加密承诺证明。</p>
-<h4>6. Statefulness</h4>
+<h4 id="6_-statefulness">6. Statefulness</h4>
 <p>如上所述，可靠性、流量控制和认证要求IBC为每个数据流初始化和维护某些状态信息。这些信息被分成三个抽象：客户、连接和通道。每个客户对象都包含关于对手方账本的共识状态的信息。每个连接对象包含一对特定的命名标识符，由两个分类账在握手协议中商定，它唯一地标识了两个分类账之间的连接。每个通道，具体到一对模块，包含有关协商的编码和复用选项以及状态和序列号的信息。当两个模块希望进行通信时，它们必须在两个分类账之间找到一个现有的连接和通道，如果还没有，则初始化一个新的连接和通道。初始化连接和通道需要一个多步骤的握手，一旦完成，在连接的情况下，确保只有两个预定的分类账被连接，在通道的情况下，确保两个模块被连接，未来转发的数据报将被认证、编码，并按要求排序。</p>
-<h4>7. Multiplexing</h4>
+<h4 id="7_-multiplexing">7. Multiplexing</h4>
 <p>为了让单个主机分类账内的许多模块同时使用IBC连接，IBC允许将任何数量的通道与单个连接相关联。每个通道唯一标识一个数据流，数据包可以按顺序（在有序通道的情况下）发送，并且总是精确地发送一次，到接收分类账上的目标模块。通道通常被期望与每个分类账上的一个模块相关联，但一对多和多对一的通道也是可能的。每个连接的通道数量是无限制的，促进了并发的吞吐量，只受限于底层分类账的吞吐量，只需要一个连接和一对客户端来跟踪共识信息（和共识成绩单的验证成本因此在使用连接的所有通道中摊销）。</p>
-<h3>III. Host ledger requirements</h3>
-<h4>1) Module system</h4>
+<h3 id="iii_-host-ledger-requirements">III. Host ledger requirements</h3>
+<h4 id="1_-module-system">1) Module system</h4>
 <p>主账本必须支持一个模块系统，据此，独立的、可能相互不信任的代码包可以安全地在同一个账本上执行，控制它们如何以及何时允许其他模块与之通信，并由控制器模块或执行环境识别和操纵。</p>
-<h4>2) Key/value Store</h4>
+<h4 id="2_-key_value-store">2) Key/value Store</h4>
 <p>主账本必须提供一个键/值存储接口，允许读取、写入和删除值。</p>
 <p>这些功能必须被许可给IBC处理模块，以便只有IBC处理模块可以写入或删除某个子集的路径。这可能会被实现为整个分类账所使用的更大的键/值存储的一个子存储（前缀为key-space）</p>
 <p>主账本必须提供该接口的实例，该实例是可证明的，这样，主账本的轻客户端算法可以验证是否存在被写入它的特定键值对。</p>
 <p>该接口不需要任何特定的存储后端或后端数据布局。分类账可以选择使用根据其需求配置的存储后端，只要上面的存储满足指定接口并提供承诺证明。</p>
-<h4>3) Consensus state introspection</h4>
+<h4 id="3_-consensus-state-introspection">3) Consensus state introspection</h4>
 <p>主机分类账必须提供反省其当前高度、当前共识状态（由主机分类账的轻客户端算法利用）和一定数量的最近共识状态（例如过去的头文件）的能力。这些都是用来防止在与其他分类账建立连接的握手过程中的中间人攻击–每个分类账都会检查其他分类账是否真的在使用其共识状态来验证 使用其共识状态的数据。</p>
-<h4>4) Timestamp access</h4>
+<h4 id="4_-timestamp-access">4) Timestamp access</h4>
 <p>为了支持基于时间戳的超时，主机分类帐必须提供一个当前的Unix风格的时间戳。后续头文件中的超时必须是不递减的。</p>
-<h4>5) Port system</h4>
+<h4 id="5_-port-system">5) Port system</h4>
 <p>主机分类账必须实现一个端口系统，IBC处理程序可以允许主机分类账中的不同模块与唯一命名的端口绑定。端口由一个标识符来识别，并且必须经过许可，以便:</p>
 <ul>
 <li>一旦一个模块绑定了一个端口，其他模块就不能使用该端口，直到该模块释放它。</li>
@@ -1631,56 +1631,56 @@ IBC为模块提供了拒绝数据包的设施，并将具体细节留给更高�
 </ul>
 <p>这种许可可以用每个端口的唯一引用（对象能力[5]）来实现，也可以用基于来源的认证（如以太坊合约中的msg.sender），或者用其他的访问控制方法，在任何情况下都由主机分类账来执行。</p>
 <p>端口一般不打算成为人类可读的标识符–正如DNS名称解析和特定应用的标准化端口号是为了从TCP/IP用户那里抽象出IP地址和端口的细节一样，分类账名称解析和特定应用的标准化端口可以被创建，以抽象出分类账识别和端口选择的细节。这种寻址系统可以很容易地建立在IBC本身之上，这样，通过IBC与寻址系统的初始连接就可以为随后与其他分类账和应用程序的连接进行名称解析。</p>
-<h4>6) Exception/rollback system</h4>
+<h4 id="6_-exception_rollback-system">6) Exception/rollback system</h4>
 <p>主机分类账必须支持异常或回滚系统，据此，交易可以中止执行，并恢复之前做出的任何状态变化（包括在同一交易中发生的其他模块的状态变化），酌情排除消耗的天然气和费用支付。</p>
-<h4>7) Data availability</h4>
+<h4 id="7_-data-availability">7) Data availability</h4>
 <p>对于交付或超时安全，主机分类账必须具有最终的数据可用性，这样，状态中的任何键/值对最终都可以被中继者检索到。对于确切的一次安全来说，数据的可用性是不需要的。</p>
 <p>对于数据包中继的有效性，主机账本必须具有有界的交易有效性，这样，传入的交易会在区块高度或时间戳约束内得到确认（特别是小于分配给数据包的超时）。</p>
 <p>IBC数据和其他不直接存储在Merklized状态中但被中继器依赖的数据，必须可以被中继器进程有效计算。</p>
-<h3>IV. Protocol structure</h3>
-<h4>A. Clients</h4>
+<h3 id="iv_-protocol-structure">IV. Protocol structure</h3>
+<h4 id="a_-clients">A. Clients</h4>
 <p>客户端抽象封装了实施区块链间通信协议的分类账的共识算法所需满足的属性。这些属性对于在更高层次的协议抽象中进行有效和安全的状态验证是必要的。IBC中用来验证另一个分类账的共识笔录和状态子组件的算法被称为 “有效性谓词”，并将其与验证者认为正确的状态配对，形成一个 “轻型客户端”（俗称 “客户端”）。</p>
-<h5>1) Motivation</h5>
+<h5 id="1_-motivation">1) Motivation</h5>
 <p>在IBC协议中，行为体可以是终端用户、非账本进程或账本，需要能够验证另一个账本的共识算法所同意的另一个账本的状态更新，并拒绝任何另一个账本的共识算法没有同意的可能的更新。轻客户端是一个行为体可以做到这一点的算法。客户端抽象化了这个模型的接口和要求，因此IBC协议可以很容易地与运行新共识算法的新账本集成，只要提供满足所列要求的相关轻客户端算法。</p>
 <p>除了本规范中描述的属性外，IBC并没有对分类账的内部操作及其共识算法提出任何要求。一个分类账可以由一个用私钥签署操作的单一进程、一个一致签署的法定进程、许多操作拜占庭容错共识算法的进程（一个复制的或分布式的分类账），或其他尚未发明的配置组成–从IBC的角度来看，一个分类账完全由其轻度客户验证和等价检测逻辑定义。客户端一般不会包括一般的状态转换逻辑的验证（因为这相当于简单地执行其他状态机），但在特定情况下可以选择验证部分状态转换，如果这样做是渐进式的高效，可以验证整个状态转换，也许通过使用SNARK[6]进行压缩。</p>
 <p>然而，在外部，IBC客户端使用的轻型客户端验证功能必须具有最终性，这样，经过验证的区块（受制于通常的共识安全假设），一旦被验证，就不能再被恢复。IBC协议的更高抽象层的安全性和提供给使用该协议的应用程序的保证取决于这种最终性的属性。</p>
 <p>为了将最终性嫁接到中本聪的共识算法上，比如比特币[7]中使用的算法，客户端可以作为内部非最终性客户端的阈值视图。在利用IBC协议的模块与概率最终性共识算法互动的情况下，不同的应用可能需要不同的最终性阈值，可以创建一个只写的客户端来跟踪标题，许多具有不同最终性阈值（确认深度后，状态根部被认为是最终的）的只读客户端可以使用同一个状态。当然，这将引入与运行共识算法的完整节点所要求的不同的安全假设，以及用户必须在其特定应用安全需求的基础上进行权衡。</p>
 <p>客户端协议的设计是为了支持第三方的引入。考虑一下一般的例子。爱丽丝，一个账本上的模块，想把鲍勃，一个爱丽丝认识（也认识爱丽丝）的第二个账本上的模块，介绍给卡罗尔，一个爱丽丝认识但鲍勃不认识的第三个账本上的模块。爱丽丝必须利用现有的渠道向鲍勃传递卡诺尔的可序列化谓词。有效性谓词，然后Bob可以与之建立连接和通道，以便Bob和Carol可以直接对话。如果有必要，Alice也可以在Bob尝试连接之前，向Carol传达Bob的有效性谓词，这样Carol就知道要接受传入的请求。</p>
 <p>客户端接口的构造是，只要底层分类账能够提供适当的气体计量机制来收取计算和存储费用，就可以在运行时安全地提供自定义验证逻辑来定义一个自定义客户端。例如，在一个支持WASM执行的主机分类账上，有效性谓词和等价谓词可以在客户端实例创建时作为可执行的WASM函数提供。</p>
-<h5>2) Definitions</h5>
+<h5 id="2_-definitions">2) Definitions</h5>
 <p>有效性谓词是一个不透明的函数，由客户类型定义，根据当前的共识状态来验证头文件。使用有效性谓词应该比为给定的父标头和网络消息列表重放完整的共识算法和状态机的计算效率高得多。</p>
 <p>共识状态是一个不透明的类型，代表有效性谓词的状态。轻客户有效性谓词算法与特定的共识状态相结合，必须能够验证相关共识算法所同意的状态更新。共识状态也必须可以以规范的方式进行清算，以便第三方，如对手方账本，可以检查某一账本是否存储了某一状态。它还必须可以被它所代表的分类账反查，这样分类账就可以在过去的高度上查找自己的共识状态，并将其与另一个分类账的客户端中存储的共识状态进行比较。</p>
 <p>承诺根是一种廉价的方式，用于下游逻辑验证键/值对在特定高度的状态下是存在还是没有。通常这将被实例化为梅克尔树的根。头是一个由客户类型定义的不透明的数据结构，它提供信息来更新一个共识状态。头信息可以提交给相关的客户端，以更新存储的共识状态。它们可能包含一个高度，一个证明，一个新的承诺根，以及可能对有效性谓词的更新。</p>
 <p>错误行为谓词是一个由客户端类型定义的不透明函数，用于检查数据是否构成对共识协议的违反。这可能是两个状态根数不同但高度相同的签名头，一个包含无效状态转换的签名头，或共识算法所定义的其他渎职证据。</p>
-<h5>3) Desired properties</h5>
+<h5 id="3_-desired-properties">3) Desired properties</h5>
 <p>轻客户端必须提供一个安全的算法来验证其他分类账的规范头，使用现有的共识状态。然后，更高级别的抽象将能够用存储在共识状态中的承诺根来验证状态的子组件，这些子组件保证已经被其他分类账的共识算法所承诺。</p>
 <p>有效性谓词被期望反映运行相应共识算法的完整节点的行为。给定一个共识状态和一个消息列表，如果一个完整的节点接受了一个新的头，那么轻型客户端也必须接受它，如果一个完整的节点拒绝它，那么轻型客户端也必须拒绝它。</p>
 <p>轻客户机没有重放整个消息记录，所以在共识不当行为的情况下，轻客户机的行为有可能与完整节点的行为不同。在这种情况下，可以生成一个错误行为证明，证明有效性谓词和完整节点之间的分歧，并提交给分类帐，这样分类帐就可以安全地停用轻型客户机，使过去的状态根基无效，并等待更高级别的干预。</p>
 <p>有效性谓词的有效性取决于共识算法的安全模型。例如，共识算法可以是具有受信任的操作者集的BFT授权证明，或具有tokenholder集的BFT股权证明，每一种都有一个定义的阈值，超过这个阈值的拜占庭行为可能导致分歧。客户端可以有时间敏感的有效性谓词，例如，如果在一段时间内没有提供标头（例如，在股权证明系统中的三周解约期），将不再有可能更新客户端。</p>
-<h5>4) State verification</h5>
+<h5 id="4_-state-verification">4) State verification</h5>
 <p>客户端类型必须定义函数来验证客户端所追踪的分类账的内部状态。内部实现的细节可能有所不同（例如，回环客户端可以简单地直接从状态中读取，不需要证明）。面向外部的客户端可能会验证签名或矢量承诺证明。</p>
-<h5>5) Example client instantiations</h5>
-<h6>a) Loopback</h6>
+<h5 id="5_-example-client-instantiations">5) Example client instantiations</h5>
+<h6 id="a_-loopback">a) Loopback</h6>
 <p>本地账本的回环客户只是从本地状态中读取，它必须有访问权限。这类似于TCP/IP中的localhost或127.0.0.1。</p>
-<h6>b) Simple signatures</h6>
+<h6 id="b_-simple-signatures">b) Simple signatures</h6>
 <p>运行非复制账本的单机客户端用已知的公钥检查该本地机器发送的信息的签名。多重签名或阈值签名方案也可以以这种方式使用。</p>
-<h6>c) Proxy clients</h6>
+<h6 id="c_-proxy-clients">c) Proxy clients</h6>
 <p>代理客户端验证另一个（代理）账本对目标账本的验证，方法是在证明中首先包括代理账本上客户状态的证明，然后是目标账本相对于代理账本上客户状态的子状态的二次证明。这使得代理客户端可以避免存储和跟踪目标分类账本身的共识状态，代价是增加代理分类账正确性的安全假设。</p>
-<h6>d) BFT consensus and verifiable state</h6>
+<h6 id="d_-bft-consensus-and-verifiable-state">d) BFT consensus and verifiable state</h6>
 <p>对于主权、容错分布式账本之间的互操作性的直接应用，最常见和最有用的客户端类型将是BFT共识算法实例的轻型客户端，如Tendermint[8]、GRANDPA[9]或HotStuff[10]，账本使用Merklized状态树，如IAWL+树[11]或Merkle Patricia树[12]。此类实例的客户端算法将利用BFT共识算法的轻度客户端有效性谓词，并将最低限度的共识等价交换（双重签名）视为不当行为，以及其他可能的不当行为类型，具体到所涉及的权威证明或股权证明系统。</p>
-<h5>6) Client lifecycle</h5>
-<h6>a) Creation</h6>
+<h5 id="6_-client-lifecycle">6) Client lifecycle</h5>
+<h6 id="a_-creation">a) Creation</h6>
 <p>任何人都可以在任何时候通过指定一个标识符、客户类型和初始共识状态来创建无权限的客户。</p>
-<h6>b) Update</h6>
+<h6 id="b_-update">b) Update</h6>
 <p>更新一个客户端是通过提交一个新的头来完成的。当新的标头与存储的客户端状态的有效性谓词和共识状态进行验证时，客户端将相应地更新其内部状态，可能最终确定承诺根，并更新存储的共识状态中的签名授权逻辑。</p>
 <p>如果一个客户端不能再被更新（例如，如果解除绑定期已过），将不再可能通过与该客户端相关的连接和通道发送任何数据包，或在飞行中对任何数据包进行超时处理（因为目的地分类账上的高度和时间戳不再能被验证）。必须进行人工干预，以重置客户端的状态或将连接和通道迁移到另一个客户端。这不能安全地自动完成，但实施IBC的分类账可以选择允许治理机制来执行这些行动（甚至可能是每个客户/连接/通道的控制性多重签名或合同）。</p>
-<h6>c) Misbehaviour</h6>
+<h6 id="c_-misbehaviour">c) Misbehaviour</h6>
 <p>如果客户端检测到错误行为的证据，客户端可以采取适当的行动，可能会使以前有效的承诺根部无效，并阻止未来的更新。什么是错误行为的确切构成取决于有效性谓词验证输出的共识算法。</p>
-<h4>B. Connections</h4>
+<h4 id="b_-connections">B. Connections</h4>
 <p>连接抽象在两个独立的分类账上封装了两个有状态的对象（连接端），每个对象都与另一个分类账的轻客户端相关，它们共同促进了跨分类账的子状态验证和数据包中继（通过通道）。在一个未知的、动态的拓扑结构中，使用握手子协议安全地建立连接。</p>
-<h5>1) Motivation</h5>
+<h5 id="1_-motivation">1) Motivation</h5>
 <p>IBC协议为数据包提供了授权和排序语义：分别保证数据包已经在发送账本上提交（并根据执行的状态转换，如托管令牌），以及它们已经以特定的顺序提交了一次，并可以以相同的顺序交付一次。连接抽象与客户端抽象一起定义了IBC的授权语义。秩序语义由通道提供。</p>
-<h5>2) Definitions</h5>
+<h5 id="2_-definitions">2) Definitions</h5>
 <p>连接结束是对一个分类账上的连接结束的状态跟踪，定义如下。</p>
 <pre><code class="language-go">enum ConnectionState {
     INIT,
@@ -1706,7 +1706,7 @@ interface ConnectionEnd {
 <li>counterpartyClientIdentifier字段确定了与此连接相关的对手方分类账上的客户。</li>
 <li>version 字段是一个不透明的字符串，可用于确定利用此连接的通道或数据包的编码或协议。</li>
 </ul>
-<h5>3) Opening handshake</h5>
+<h5 id="3_-opening-handshake">3) Opening handshake</h5>
 <p>开放式握手子协议允许每个分类账验证用于引用其他分类账上的连接的标识符，使每个分类账上的模块能够推理出其他分类账上的引用。</p>
 <p>开放握手由四个数据报组成。ConnOpenInit, ConnOpenTry, ConnOpenAck, 和ConnOpenConfirm.</p>
 <p>一个正确的协议执行，在两个分类账A和B之间，连接状态格式为（A，B），流程如下。</p>
@@ -1728,15 +1728,15 @@ interface ConnectionEnd {
 <p>在分类账B上执行的ConnOpenTry向分类账B转发了分类账A的连接尝试通知，提供了一对连接标识符、一对客户端标识符和所需版本。ledger B验证这些标识符是否有效，检查版本是否兼容，验证ledger A存储了这些标识符的证明，并验证ledger A用来验证ledger B的轻型客户端拥有ledger B的正确共识状态的证明。</p>
 <p>在分类账A上执行的ConnOpenAck，将接受从分类账B到分类账A的连接打开尝试，提供标识符，现在可以用来查找连接端对象。分类账A验证所请求的版本是兼容的，验证分类账B已经存储了与分类账A相同的标识符的证明，并验证分类账B用来验证分类账A的轻客户端具有分类账A的正确共识状态。</p>
 <p>在分类账B上执行的ConnOpenConfirm确认了分类账A对分类账B的连接的开放。分类账B只是检查分类账A是否已经执行了ConnOpenAck并将连接标记为开放。Ledger B随后将其连接的末端标记为开放。在执行ConnOpenConfirm后，连接在两端都是开放的，可以立即使用。</p>
-<h5>4) Versioning</h5>
+<h5 id="4_-versioning">4) Versioning</h5>
 <p>在握手过程中，连接的两端就与该连接相关的版本字节串达成协议。目前，这个版本字节符的内容对IBC核心协议是不透明的。在未来，它可能被用来指示什么样的通道可以利用有关的连接，或者与通道相关的数据报将使用什么样的编码格式。主机分类帐可以利用版本数据来协商编码、优先级或与IBC之上的自定义逻辑有关的连接特定元数据。主机分类帐也可以安全地忽略版本数据或指定一个空字符串。</p>
-<h4>C. Channels</h4>
+<h4 id="c_-channels">C. Channels</h4>
 <p>通道抽象为区块链间通信协议提供了三类消息交付语义：排序、完全一次交付和模块许可。通道作为一个账本上的模块和另一个账本上的模块之间传递数据包的管道，确保数据包只执行一次，按照发送的顺序交付（如果需要），并且只交付给目的地账本上拥有通道另一端的相应模块。每个通道都与一个特定的连接相关联，一个连接可以有任何数量的相关通道，允许使用共同的标识符，并在利用一个连接和轻型客户端的所有通道中摊薄头的验证成本。</p>
 <p>通道是与有效载荷无关的。发送和接收IBC数据包的模块决定如何构建数据包以及如何对传入的数据包采取行动，并且必须利用自己的应用逻辑来决定根据数据包包含的数据应用哪些状态事务。</p>
-<h5>1) Motivation</h5>
+<h5 id="1_-motivation">1) Motivation</h5>
 <p>区块链间通信协议使用跨账本的消息传递模式。IBC数据包由外部中继程序从一个分类账转发到另一个分类账。两个账本，A和B，独立地确认新的区块，从一个账本到另一个账本的数据包可能会被延迟，审查，或任意地重新排序。数据包对中继者是可见的，任何中继者进程都可以从一个分类账中读取数据包，并提交给任何其他分类账。</p>
 <p>IBC协议必须提供Ordering（对于ordered的通道）和完全一次的交付保证，以允许应用程序推理两个分类账上连接模块的综合状态。例如，一个应用程序可能希望允许一个单一的代币化资产在多个分类账之间转移并持有，同时保持可替换性和供应保护。当一个特定的IBC包被投入到分类账B时，应用程序可以在分类账B上铸造资产凭证，并要求分类账A上该包的发送者在分类账A上托管同等数量的资产，直到这些凭证后来被反向的IBC包赎回到分类账A。这种订购保证和正确的应用逻辑可以确保两个分类账的总供应量得到保留，并且在分类账B上铸造的任何凭证后来都可以被赎回到分类账A。</p>
-<h5>2) Definitions</h5>
+<h5 id="2_-definitions">2) Definitions</h5>
 <p>通道是一个管道，用于在不同账本上的特定模块之间精确地传递数据包，它至少有一端能够发送数据包，另一端能够接收数据包。</p>
 <p>有序信道是一个信道，其中数据包完全按照它们被发送的顺序交付。</p>
 <p>无序信道是一个信道，数据包可以按任何顺序交付，这可能与它们的发送顺序不同。</p>
@@ -1802,17 +1802,17 @@ interface ConnectionEnd {
 <li>data是一个不透明的值，可以由相关模块的应用逻辑来定义。</li>
 </ul>
 <p>请注意，数据包从未被直接序列化。相反，它是在某些函数调用中使用的一种中介结构，可能需要由调用IBC处理程序的模块来创建或处理。</p>
-<h5>3) Properties</h5>
-<h6>a) Efficiency</h6>
+<h5 id="3_-properties">3) Properties</h5>
+<h6 id="a_-efficiency">a) Efficiency</h6>
 <p>由于信道本身没有施加流量控制，数据包传输和确认的速度只受限于底层分类账的速度。</p>
-<h6>b) Exactly-once delivery</h6>
+<h6 id="b_-exactly-once-delivery">b) Exactly-once delivery</h6>
 <p>在信道一端发送的IBC数据包不超过一次就能传递到另一端。确切的一次安全不需要网络同步假设。如果一个或两个分类帐停止，数据包可能被传递不超过一次，一旦分类帐恢复，数据包将能够再次流动。</p>
-<h6>c) Ordering</h6>
+<h6 id="c_-ordering">c) Ordering</h6>
 <p>在有序通道上，数据包的发送和接收顺序是相同的：如果数据包x在数据包y之前由分类账A的通道端发送，那么数据包x将在数据包y之前由分类账B的相应通道端接收。无序数据包，像有序数据包一样，有单独的超时，以目的地分类账的高度或时间戳来指定。</p>
-<h6>d) Permissioning</h6>
+<h6 id="d_-permissioning">d) Permissioning</h6>
 <p>信道被许可给每一端的一个模块，在握手过程中确定，并且在握手后不可改变（高层逻辑可以通过标记端口的所有权来标记信道的所有权）。只有拥有与通道端相关的端口的模块才能在该通道上发送或接收。</p>
-<h5>4) Channel lifecycle management</h5>
-<h6>a) Opening handshake</h6>
+<h5 id="4_-channel-lifecycle-management">4) Channel lifecycle management</h5>
+<h6 id="a_-opening-handshake">a) Opening handshake</h6>
 <p>两个账本A和B之间的通道开放握手，其状态格式为（A，B），流程如下。</p>
 <pre><code class="language-markdown">| Datagram          | Prior state     | Posterior state |
 | ----------------- | ----------------| --------------- |
@@ -1826,9 +1826,9 @@ interface ConnectionEnd {
 <p>在分类账A上执行的ChanOpenAck，将对信道握手尝试的接受转达给分类账A上的模块，提供标识符，现在可以用来查询信道端。分类账A验证了分类账B已按要求存储信道元数据的证明，并将其信道端标记为OPEN。</p>
 <p>在分类账B上执行的ChanOpenConfirm确认了从分类账A到分类账B的通道的开放。分类账B只是检查分类账A是否执行了ChanOpenAck并将通道标记为开放。Ledger B随后将其通道的一端标记为开放。在执行ChanOpenConfirm后，通道在两端都是开放的，可以立即使用。</p>
 <p>当开放握手完成后，发起握手的模块将拥有主机分类帐上创建的通道的一端，而它指定的对手方模块将拥有对手方分类帐上创建的通道的另一端。一旦一个通道被创建，所有权只能通过改变相关端口的所有权来改变。</p>
-<h6>b) Versioning</h6>
+<h6 id="b_-versioning">b) Versioning</h6>
 <p>在握手过程中，通道的两端就与该通道相关的版本字节串达成协议。这个版本字节串的内容对IBC核心协议是不透明的。主机分类帐可以利用版本数据来表明支持的应用层协议，同意数据包编码格式，或协商其他与IBC之上的自定义逻辑相关的通道元数据。主机分类帐也可以安全地忽略版本数据或指定一个空字符串</p>
-<h6>c) Closing handshake</h6>
+<h6 id="c_-closing-handshake">c) Closing handshake</h6>
 <p>两个账本A和B之间的通道关闭握手，其状态格式为（A，B），流程如下。</p>
 <pre><code>| Datagram          | Prior state    | Posterior state |
 | ------------------| ---------------| --------------- |
@@ -1839,7 +1839,7 @@ interface ConnectionEnd {
 <p>ChanCloseInit，在分类账B上执行，只是验证通道在分类账A上被标记为关闭，并在分类账B上关闭结束。</p>
 <p>任何飞行中的数据包都可以在通道关闭后立即超时退出。</p>
 <p>一旦关闭，通道就不能再打开，标识符也不能再使用。识别符的重复使用被阻止，因为我们要防止对以前发送的数据包进行潜在的重放。重放问题类似于使用签名信息的序列号，除了轻客户端算法 “签名 “信息（IBC数据包），重放预防序列是端口标识符、信道标识符和数据包序列的组合–因此我们不能允许相同的端口标识符和信道标识符在序列重置为零的情况下再次重用，因为这可能允许数据包被重放。如果规定并跟踪特定的最大高度/时间的超时，就有可能安全地重复使用标识符，未来的协议版本可能会纳入这一功能。</p>
-<h5>5) Sending packets</h5>
+<h5 id="5_-sending-packets">5) Sending packets</h5>
 <p>一个模块调用sendPacket函数，以便在调用模块所拥有的信道端向对手方分类账上的相应模块发送一个IBC数据包。</p>
 <p>调用模块必须在调用sendPacket的同时原子化地执行应用逻辑。 IBC处理程序依次执行以下步骤:</p>
 <ul>
@@ -1851,7 +1851,7 @@ interface ConnectionEnd {
 <li>对数据包数据和数据包超时进行恒定大小的承诺</li>
 </ul>
 <p>请注意，完整的数据包并不存储在账本的状态中–只是对数据和超时值的简短哈希承诺。数据包的数据可以从交易执行中计算出来，并可能作为日志输出返回，中继者可以索引。</p>
-<h5>6) Receiving packets</h5>
+<h5 id="6_-receiving-packets">6) Receiving packets</h5>
 <p>recvPacket函数由一个模块调用，以便接收和处理在对手方账本上相应信道端发送的IBC数据包。调用模块必须在调用recvPacket的同时原子化地执行应用逻辑，很可能事先就计算出确认值。</p>
 <p>IBC处理程序依次执行以下步骤。</p>
 <ul>
@@ -1864,7 +1864,7 @@ interface ConnectionEnd {
 <li>在数据包独有的存储路径上设置不透明的确认值（如果确认是非空的或通道是无序的）。</li>
 <li>增加与通道端相关的数据包接收序列（对于有序的通道）。</li>
 </ul>
-<h6>a) Acknowledgements</h6>
+<h6 id="a_-acknowledgements">a) Acknowledgements</h6>
 <p>acknowledgePacket函数被一个模块调用，以处理先前由调用模块在通道上向对手方账本上的对手方模块发送的数据包的确认。 acknowledgePacket还清理了数据包的承诺，因为数据包已经被接收并采取行动，所以不再需要。</p>
 <p>调用模块可以在调用 acknowledgePacket 的同时，原子化地执行适当的应用程序确认处理逻辑。</p>
 <p>IBC处理程序依次执行以下步骤:</p>
@@ -1878,9 +1878,9 @@ interface ConnectionEnd {
 <li>删除数据包的承诺（清理状态，防止重放）。</li>
 <li>增加下一个确认序列（对于有序通道）。</li>
 </ul>
-<h5>7) Timeouts</h5>
+<h5 id="7_-timeouts">7) Timeouts</h5>
 <p>应用程序的语义可能需要一些超时：分类账在认为是错误之前等待交易处理的时间的上限。由于两个账本有不同的本地时钟，这是一个明显的双重消费的攻击载体–攻击者可能会推迟收据的转发，或者等到超时后再发送数据包–所以应用程序不能安全地自己实现天真的超时逻辑。为了避免任何可能的 “双重消费 “攻击，超时算法要求目标账本正在运行并可到达。超时必须在接收方账本上得到证明，而不仅仅是在发送方账本上没有回应。</p>
-<h6>a) Sending end</h6>
+<h6 id="a_-sending-end">a) Sending end</h6>
 <p>超时包（timeoutPacket）函数由最初试图向对方模块发送数据包的模块调用，此时对方账本上的超时高度或超时时间戳已过，但数据包没有被提交，以证明该数据包不能再被执行，并允许调用模块安全地执行适当的状态转换。</p>
 <p>调用模块可以在调用timeoutPacket的同时原子化地执行适当的应用超时处理逻辑。</p>
 <p>IBC处理程序依次执行以下步骤:</p>
@@ -1895,17 +1895,17 @@ interface ConnectionEnd {
 <li>在有序信道的情况下，如果有数据包超时，timeoutPacket会自动关闭该信道。无序的通道在面对超时的数据包时应该继续。</li>
 </ul>
 <p>如果后续数据包的超时高度之间的关系被强制执行，可以对超时数据包之前的所有数据包进行安全的批量超时。</p>
-<h6>b) Timing-out on close</h6>
+<h6 id="b_-timing-out-on-close">b) Timing-out on close</h6>
 <p>如果一个信道被关闭了，飞行中的数据包就永远不能被接收，因此可以安全地超时。timeoutOnClose函数被一个模块调用，以证明一个未接收的数据包所在的通道已经关闭，所以数据包将永远不会被接收（即使还没有达到timeoutHeight或timeoutTimestamp）。然后可以安全地执行适当的应用特定的逻辑。</p>
-<h6>c) Cleaning up state</h6>
+<h6 id="c_-cleaning-up-state">c) Cleaning up state</h6>
 <p>如果不写回执（因为在这种情况下处理回执会清理状态），cleanupPacket可以被模块调用，以便从存储中删除收到的数据包承诺。接收端必须已经处理了该数据包（无论是正常的还是过了超时的）。</p>
 <p>在有序信道的情况下，cleanupPacket通过证明接收序列已通过另一端的数据包序列来清理有序信道上的数据包。</p>
 <p>在无序通道的情况下，cleanupPacket通过证明相关的确认已被写入来清理无序通道上的一个数据包。</p>
-<h5>D. Relayers</h5>
+<h5 id="d_-relayers">D. Relayers</h5>
 <p>中继器算法是IBC的 “物理 “连接层–非账本进程负责在运行IBC协议的两个账本之间中继数据，方法是扫描每个账本的状态，构建适当的数据报，并在协议允许的情况下在对面的账本上执行这些数据报。</p>
-<h4>1) Motivation</h4>
+<h4 id="1_-motivation">1) Motivation</h4>
 <p>在IBC协议中，一个分类账只能记录向另一个分类账发送特定数据的意图，它不能直接访问网络传输层。物理数据报中继必须由能够访问传输层（如TCP/IP）的非分类账基础设施来执行。本标准定义了中继器算法的概念，可由具有查询分类账状态能力的非分类账进程执行，以执行这种中继。中继器是一个非账本进程，有能力利用IBC协议读取账本的状态并向一些账本集提交交易。</p>
-<h5>2) Properties</h5>
+<h5 id="2_-properties">2) Properties</h5>
 <ul>
 <li>IBC没有确切的一次或交付或超时安全的适当联系，这取决于中继者的行为（假定是拜占庭中继者）。</li>
 <li>IBC的小包中继有效性属性仅取决于至少一个正确的、活的中继者的存在。</li>
@@ -1913,30 +1913,30 @@ interface ConnectionEnd {
 <li>IBC用户和中继者之间的必要通信被最小化</li>
 <li>核心协议中不包括对中继者激励的规定，但在应用层可以实现。</li>
 </ul>
-<h5>3) Basic relayer algorithm</h5>
+<h5 id="3_-basic-relayer-algorithm">3) Basic relayer algorithm</h5>
 <p>中继器算法是在实现IBC协议的一组分类账上定义的。每个中继者不一定能从多账本网络中的所有账本中读取状态和写入数据报（特别是在许可或私有账本的情况下）–不同的中继者可以在不同的子集之间进行中继。每隔一段时间，尽管在任何一个分类账上不超过每个区块一次，中继者会根据两个分类账的状态，计算所有有效数据报的集合，从一个分类账中继到另一个分类账。中继者必须事先了解他们要中继的分类账中IBC协议的哪个子集是由分类账实现的（例如通过阅读源代码）。数据报可以作为单个交易单独提交，如果分类账支持，也可以作为单个交易原子提交。不同的中继者可以在不同的分类账之间进行中继–只要每对分类账至少有一个正确的、活的中继者，并且分类账保持活的，网络中分类账之间流动的所有数据包最终都会被中继。</p>
-<h5>4) Packets, acknowledgements, timeouts</h5>
-<h6>a) Relaying packets in an ordered channel</h6>
+<h5 id="4_-packets_-acknowledgements_-timeouts">4) Packets, acknowledgements, timeouts</h5>
+<h6 id="a_-relaying-packets-in-an-ordered-channel">a) Relaying packets in an ordered channel</h6>
 <p>有序通道中的数据包可以以基于事件的方式或基于查询的方式进行中继。对于前者，中继器应该观察源分类帐中每当发送数据包时发出的事件，然后使用事件日志中的数据组成数据包。对于后者，中继器应定期查询源分类账上的发送序列，并保留最后转发的序列号，因此，介于两者之间的任何序列都是需要查询的数据包，然后进行转发。在这两种情况下，随后，中继器进程应该通过查询接收序列来检查目的地分类账是否还没有收到数据包，然后进行中继。</p>
-<h6>b) Relaying packets in an unordered channel</h6>
+<h6 id="b_-relaying-packets-in-an-unordered-channel">b) Relaying packets in an unordered channel</h6>
 <p>无序通道中的数据包最容易以基于事件的方式进行转发。中继器应该观察源分类账在发送数据包时发出的事件，然后使用事件日志中的数据组成数据包。随后，中继器应该通过查询数据包的序列号是否存在确认来检查目的地分类账是否已经收到数据包，如果还没有确认，中继器就应该中继该数据包。</p>
-<h6>c) Relaying acknowledgements</h6>
+<h6 id="c_-relaying-acknowledgements">c) Relaying acknowledgements</h6>
 <p>确认可以最容易地以一种基于事件的方式进行中继。中继器应该观察目的地分类账在收到数据包和写入确认时发出的事件，然后利用事件日志中的数据组成确认，检查数据包的承诺是否仍然存在于源分类账中（一旦确认被中继，它将被删除），如果是，则将确认中继至源分类账。</p>
-<h6>d) Relaying timeouts</h6>
+<h6 id="d_-relaying-timeouts">d) Relaying timeouts</h6>
 <p>超时中继稍微复杂一些，因为当数据包超时时，并没有发出具体的事件–只是数据包不能再被中继了，因为超时高度或时间戳在目的账本上已经过了。中继过程必须选择跟踪一组数据包（可以通过扫描事件日志来构建），一旦目的地分类账的高度或时间戳超过被跟踪的数据包，就检查该数据包的承诺是否仍然存在于源分类账上（一旦超时被中继，它将被删除），如果是，就向源分类账中继一个超时。</p>
-<h6>e) Ordering constraints</h6>
+<h6 id="e_-ordering-constraints">e) Ordering constraints</h6>
 <p>在中继器过程中，有一些隐含的顺序限制，决定了哪些数据报必须以什么顺序提交。例如，在数据包可以被中继之前，必须提交一个头，以最终确定存储的共识状态和轻客户端中特定高度的承诺根。中继者进程负责经常查询他们所中继的分类账的状态，以确定什么时候必须中继。</p>
-<h6>f) Bundling</h6>
+<h6 id="f_-bundling">f) Bundling</h6>
 <p>如果主机分类帐支持它，中继器进程可以将许多数据报捆绑成一个交易，这将导致它们被依次执行，并摊销任何开销成本（例如支付费用的签名检查）。</p>
-<h6>g) Race conditions</h6>
+<h6 id="g_-race-conditions">g) Race conditions</h6>
 <p>在同一对模块和分类账之间中继的多个中继者可能试图同时中继同一个数据包（或提交同一个头）。
 如果两个中继者这样做，第一个交易将成功，第二个将失败。中继者之间或发送原始数据包的行为者与中继者之间的带外协调是必要的，
 以减轻这种情况。</p>
-<h6>h) Incentivisation</h6>
+<h6 id="h_-incentivisation">h) Incentivisation</h6>
 <p>中继过程必须能够访问两个分类账上的账户，并有足够的余额来支付交易费用。中继者可以采用应用层面的方法来收回这些费用，例如在数据包数据中包括对自己的小额付款。</p>
 <p>任何数量的中继器进程都可以安全地并行运行（事实上，预计独立的中继器将服务于多账本网络的独立子集）。然而，如果他们多次提交相同的证明，可能会消耗不必要的费用，所以一些最小的协调可能是理想的（例如将特定的中继器分配给特定的数据包，或扫描待处理交易的内存池）。</p>
-<h3>V. Usage patterns</h3>
-<h4>A. Call receiver</h4>
+<h3 id="v_-usage-patterns">V. Usage patterns</h3>
+<h4 id="a_-call-receiver">A. Call receiver</h4>
 <p>对IBC处理程序的功能至关重要的是一个与运行在同一分类账上的其他模块的接口，这样它就可以接受发送数据包的请求，并可以将传入的数据包路由到模块。这个接口应该尽可能的小，以减少实施的复杂性和对主机分类账的要求。</p>
 <p>由于这个原因，IBC的核心逻辑使用了一种只接收的调用模式，与直观的数据流略有不同。正如人们所期望的，模块调用IBC处理程序来创建连接、通道和发送数据包。然而，IBC处理程序在收到另一个分类账的数据包时，不是选择并调用适当的模块，而是模块本身必须在IBC处理程序上调用recvPacket（同样地，接受通道创建握手）。当recvPacket被调用时，IBC处理程序将检查调用的模块是否被授权接收和处理数据包（基于包含的证明和连接/通道的已知状态），执行适当的状态更新（增加序列号以防止重播），并将控制权返回给模块或抛出错误。</p>
 <p>IBC处理程序从不直接调用模块 虽然一开始推理起来有点反常，但这种模式有几个显著的优点。</p>
@@ -1947,15 +1947,15 @@ interface ConnectionEnd {
 <li>它也有一个明显的缺点：如果没有一个额外的抽象，中继器的逻辑就会变得更加复杂，因为账外中继器进程将需要跟踪多个模块的状态，以确定何时可以提交数据包。</li>
 </ul>
 <p>出于这个原因，分类账可以实现一个额外的IBC “路由模块”，它暴露了一个调用调度接口。</p>
-<h4>B. Call dispatch</h4>
+<h4 id="b_-call-dispatch">B. Call dispatch</h4>
 <p>对于常见的中继模式，可以实施一个 “IBC路由模块”，它维护一个模块调度表并简化中继者的工作。</p>
 <p>在调用调度模式中，数据报（包含在主机分类帐定义的事务类型中）被直接转发到路由模块，然后路由模块查找适当的模块（拥有数据报被寻址的通道和端口）并调用适当的函数（必须事先在路由模块注册）。这允许模块避免直接处理数据报，并使其更难意外地搞砸必须与发送或接收数据包一起发生的原子状态转换执行（因为模块从未直接处理数据包，而是暴露了路由模块在收到有效数据包后调用的函数）。</p>
 <p>此外，路由模块可以实现默认的握手数据报处理逻辑（代表模块接受传入的握手），这对那些不需要实现自己的自定义逻辑的模块来说是很方便的。</p>
-<h3>VI. Example application-level module</h3>
+<h3 id="vi_-example-application-level-module">VI. Example application-level module</h3>
 <p>该部分规定了数据包结构和状态机处理逻辑，用于在独立分类账的两个模块之间通过IBC通道传输可替换的代币。所提出的状态机逻辑允许安全的多账簿面额处理和无权限通道开放。这个逻辑构成了一个 “可替换代币转移的桥梁模块”，在IBC路由模块和主机分类账上的现有资产追踪模块之间进行对接。</p>
-<h4>1) Motivation</h4>
+<h4 id="1_-motivation">1) Motivation</h4>
 <p>通过IBC协议连接的一组分类账的用户可能希望在另一个分类账上使用一个分类账上发行的资产，也许是为了利用额外的功能，如交换或隐私保护，同时保留与发行分类账上的原始资产的可替代性。这个应用层协议允许在与IBC相连的分类账之间转移可替换的代币，其方式是保留资产的可替换性，保留资产所有权，限制拜占庭故障的影响，并且不需要额外的许可。</p>
-<h4>2) Properties</h4>
+<h4 id="2_-properties">2) Properties</h4>
 <ul>
 <li>保存可替代性（双向挂钩）。</li>
 <li>保存总供应量（在单一来源的分类账和模块上保持不变或通货膨胀）。</li>
@@ -1963,7 +1963,7 @@ interface ConnectionEnd {
 <li>对称性（所有分类账实现相同的逻辑）</li>
 <li>故障遏制：防止由于分类账B的拜占庭行为而导致源自分类账A的代币出现拜占庭式的通货膨胀（尽管任何向分类账B发送代币的用户可能面临风险）。</li>
 </ul>
-<h4>3) Packet definition</h4>
+<h4 id="3_-packet-definition">3) Packet definition</h4>
 <p>只需要一个数据包类型，即FungibleTokenPacketData，它指定面额、金额、发送账户、接收账户，以及发送分类账是否为资产来源。</p>
 <pre><code class="language-go">interface FungibleTokenPacketData {
 	denomination: string
@@ -1978,7 +1978,7 @@ interface ConnectionEnd {
 	error: Maybe&lt;string&gt;
 }
 </code></pre>
-<h4>4) Packet handling semantics</h4>
+<h4 id="4_-packet-handling-semantics">4) Packet handling semantics</h4>
 <p>协议逻辑是对称的，因此源自任何一个分类账的面额都可以在另一个分类账上转换为凭证，然后稍后再赎回。</p>
 <ul>
 <li>当作为源分类账时，桥模块在发送分类账上托管现有的本地资产面额，并在接收分类账上铸造凭证。</li>
@@ -1986,20 +1986,20 @@ interface ConnectionEnd {
 <li>当数据包超时时，本地资产将被解押回发送方，或将凭证适当地铸回发送方。</li>
 <li>确认数据用于处理失败，如无效的面额或无效的目标账户。返回失败确认比中止交易更可取，因为它更容易使发送分类账根据失败的性质采取适当的行动。</li>
 </ul>
-<h4>5) Fault containment</h4>
+<h4 id="5_-fault-containment">5) Fault containment</h4>
 <p>这种实现方式保留了可替代性和供应。如果代币已经被发送到对手方分类账，它们可以在源分类账上以相同的面额和金额被赎回。赎回，并以相同的面额和金额在源分类账上兑换。两个分类账上特定的解锁代币的综合供应量是恒定的，因为每个发送-接收数据包对锁定和铸造的 相同的数量（尽管特定资产的源分类账可以改变本协议范围之外的供应）。</p>
 <p>账本可能会以两种方式之一未能遵循这里概述的可替换传输令牌协议：运行共识算法的全部节点可能与轻型客户机发生分歧，或者账本的状态机可能不正确地实现托管和凭证逻辑（无论是无意的还是有意的）。共识分歧最终应该导致错误行为的证据，可以用来冻结客户端，但可能不会立即这样做（而且不能保证这种证据会在更多数据包之前提交），所以从协议隔离故障的目标来看，这些情况必须以同样的方式处理。无法保证资产的恢复–选择将代币转移到分类账的用户要承担该分类账失败的风险–但遏制逻辑可以很容易地在接口边界上实现，即跟踪每种资产的进出供应，并确保不允许任何分类账为超过其最初托管的代币赎回凭证。实质上，特定的通道可以被视为账户，通道另一端的模块不能花费超过它所收到的。由于多账本可互换代币转移系统的孤立拜占庭子图将无法转移出比他们最初收到的更多的代币，这防止了任何源资产的供应膨胀，并确保用户只承担他们有意连接的账本的共识风险。</p>
-<h4>6) Multi-ledger transfer paths</h4>
+<h4 id="6_-multi-ledger-transfer-paths">6) Multi-ledger transfer paths</h4>
 <p>该协议不直接处理 “钻石问题”，即用户将源自分类账A的代币发送到分类账B，然后再发送到分类账D，并希望通过D-&gt;C-&gt;A的路径返回–由于供应被跟踪为分类账B所有（并且凭证面值将是“<code>{portD}/{channelD}/{portB}/{channelB}/denom</code>“），分类账C不能作为中间人。由于上文所述的故障遏制要求，这一点是必要的。长赎回路径产生的复杂性可能导致网络拓扑中出现中央账本或自动市场来交换不同赎回路径的资产。</p>
 <p>为了跟踪在分类账网络中以各种路径移动的所有面额，对于一个特定的分类账来说，实施一个注册表可能会有帮助，该注册表将跟踪每个面额的 “全球 “源分类账。终端用户服务提供商（如钱包作者）可能希望整合这样一个注册表，或保留他们自己的规范源分类账和人类可读名称的映射，以改善用户体验。</p>
-<h3>VII. Testing &amp; deployment</h3>
+<h3 id="vii_-testing-_amp_-deployment">VII. Testing &amp; deployment</h3>
 <p>区块链协议的完整版本已经在Cosmos SDK[13]中用Go实现，在Rust[14]中的实现正在进行中，未来还计划在其他语言中实现。Go[15]中也实现了一个非账本中继器守护程序。区块链游戏[16]，一个对初始软件发布的实时测试，目前正在进行中。超过一百个模拟区（独立的共识实例和分类账）已经成功地连接在一起[17]。</p>
 <p>计划在今年夏天晚些时候向宇宙网络发布和部署产品。由于IBC是一个无权限的、选择加入的协议，采用IBC将取决于分类账自愿选择全部或部分地支持该规范。IBC的采用不需要连接到Cosmos Hub，不需要使用任何特定的令牌，甚至不需要使用任何其他的Cosmos软件–IBC可以在其他状态机框架（如Substrate[18]）之上实现，或者由独立的分类账使用自定义逻辑实现–遵守正确的协议对于成功的互操作既必要又充分</p>
-<h3>VIII. Acknowledgements</h3>
+<h3 id="viii_-acknowledgements">VIII. Acknowledgements</h3>
 <p>IBC的最初想法首次在Cosmos白皮书[19]中概述，该协议的实现是通过Tendermint中介绍的拜占庭容错共识和高效的轻客户端验证来实现的，在Tendermint。不挖矿的共识[8]中介绍，并在《BFT共识的最新流言》[20]中更新。IBC规范的早期版本[21]是由Ethan Frey编写的。</p>
 <p>All in Bits (dba Tendermint Inc.)、Agoric Systems、Interchain Foundation、Informal Systems和Interchain GmbH的许多现任和前任员工参与了IBC协议的头脑风暴和审查。特别要感谢Ethan Buchman, Jae Kwon, Ethan Frey, Juwoon Yun, Anca Zamfir, Zarko Milosevic, Zaki Manian, Aditya Sripal, Federico Kunze, Dean Tribble, Mark Miller, Brian Warner, Chris Hibbert, Michael FIG, Sunny Aggarwal, Dev Ojha, Colin Axner, and Jack Zampolin。还要感谢第一合唱团的Meher Roy。感谢Zaki Manian、Sam Hart和Adi Seredinschi审查本文。</p>
 <p>这项工作得到了Interchain基金的支持。</p>
-<h3>References</h3>
+<h3 id="references">References</h3>
 <p>[1] Alistair Stewart and Fatemeh Shirazi and Leon Groot Bruinderink, “Web3 foundation research: XCMP.” https://research.web3.foundation/en/latest/polkadot/ XCMP.html, May-2020.</p>
 <p>[2] E. 2.0 Contributors, “Ethereum sharding research compendium: Cross-shard communication.” https://notes.ethereum.org/@serenity/H1PGqDhpm?type=view#Cross-shard-communication, 2020.</p>
 <p>[3] Near Protocol, “The authoritative guide to blockchain sharding: Part 2.” https://medium.com/nearprotocol/unsolved-problems-in-blockchain-sharding-2327d6517f43, Dec-2018.</p>
@@ -2021,7 +2021,7 @@ interface ConnectionEnd {
 <p>[19] Jae Kwon, Ethan Buchman, “Cosmos: A network of distributed ledgers.” https://cosmos.network/cosmos-whitepaper.pdf, Sep-2016.</p>
 <p>[20] Ethan Buchman, Jae Kwon, Zarko Milosevic, “The latest gossip on bft consensus.” https://arxiv.org/pdf/1807.04938, Nov-2019.</p>
 <p>[21] Ethan Frey, “IBC protocol specification v0.3.1.”https://github.com/cosmos/ics/blob/master/archive/v0_3_1_IBC.pdf, Nov-2017.</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmcBkbBncPWbDN4MUBYJGZf3wTwuZPVHhYiepsdSqx5xb4</guid><pubDate>Wed, 23 Jul 2025 00:49:38 +0000</pubDate></item><item><title>关于在rust的程序中如何访问到提交的git commit</title><link>https://Anonymous.github.io/kpgb/posts/how-to-get-commit-in-rust.html</link><description><![CDATA[<h2>Code example</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmcBkbBncPWbDN4MUBYJGZf3wTwuZPVHhYiepsdSqx5xb4</guid><pubDate>Wed, 23 Jul 2025 00:49:38 +0000</pubDate></item><item><title>关于在rust的程序中如何访问到提交的git commit</title><link>https://Anonymous.github.io/kpgb/posts/how-to-get-commit-in-rust.html</link><description><![CDATA[<h2 id="code-example">Code example</h2>
 <pre><code class="language-rust">use std::{borrow::Cow, process::Command};
 
 fn main() {
@@ -2053,7 +2053,7 @@ fn output_git_short_hash() {
 	println!("cargo:rerun-if-changed=build.rs");
 }
 </code></pre>
-<h2>代码解释</h2>
+<h2 id="代码解释">代码解释</h2>
 <p>这段代码的作用是使用 Rust 的 <code>std::process::Command</code> 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 <code>build.rs</code> 文件来实现的。</p>
 <p>下面是这个代码的工作原理：</p>
 <ol>
@@ -2079,18 +2079,18 @@ fn output_git_short_hash() {
 <li>这些文件的变化通常意味着 Git 代码库发生了变化，因此需要重新获取 Git 哈希值并重新编译项目。</li>
 </ul>
 <p>需要注意的是，<code>cargo:rerun-if-changed</code> 指令只能在 <code>build.rs</code> 文件中使用，而且必须放在一个单独的行中，不能和其他代码混在一起。这是因为指令实际上是一种注释，不是 Rust 代码，所以不能包含在函数、结构体或其他 Rust 语言结构中。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmTn26MfhM3QpqdHsnnomqYdbmQvpyF2wa2KQU7KwggzY1</guid><pubDate>Wed, 23 Jul 2025 00:49:37 +0000</pubDate></item><item><title>History of Lossless Data Compression Algorithms</title><link>https://Anonymous.github.io/kpgb/posts/hldca.html</link><description><![CDATA[<h2>1 Introduction</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmTn26MfhM3QpqdHsnnomqYdbmQvpyF2wa2KQU7KwggzY1</guid><pubDate>Wed, 23 Jul 2025 00:49:37 +0000</pubDate></item><item><title>History of Lossless Data Compression Algorithms</title><link>https://Anonymous.github.io/kpgb/posts/hldca.html</link><description><![CDATA[<h2 id="1-introduction">1 Introduction</h2>
 <p>有两种主要的压缩算法类型：有损和无损。有损压缩算法通常涉及减小文件的大小，通过删除需要大量数据以保持完整保真度的细节。在有损压缩中，由于删除了关键数据，不可能恢复原始文件。有损压缩最常用于存储图像和音频数据，并且虽然可以通过数据删除实现非常高的压缩比，但本文不涵盖此类压缩算法。无损数据压缩是将文件大小减小，以便解压缩功能可以完全恢复原始文件并且不会丢失数据。无损数据压缩在计算机领域中被广泛应用，从在个人电脑上节省空间，到通过网络发送数据，通过安全 shell 进行通信或查看 PNG 或 GIF 图像。</p>
 <p>无损压缩算法的基本原理是，任何非随机文件都包含可以使用统计建模技术进行压缩的重复信息，该技术确定字符或短语出现的概率。然后可以使用这些统计模型来为特定字符或短语生成代码，根据它们出现的概率分配最短的代码给最常见的数据。这些技术包括熵编码、行程编码和使用字典的压缩。使用这些技术和其他技术，一个8位字符或这样的字符串可以用只有几个比特来表示，从而删除大量冗余数据。</p>
-<h2>2 History</h2>
+<h2 id="2-history">2 History</h2>
 <p>数据压缩在计算机领域中的作用自1970年代以来才变得显著，当时互联网变得更加流行并发明了Lempel-Ziv算法，但它在计算机之外有着更悠久的历史。莫尔斯电码是最早的数据压缩实例，发明于1838年，英语中最常见的字母，如“e”和“t”被赋予较短的莫尔斯电码。随后，当主机计算机开始在1949年掌握时，Claude Shannon和Robert Fano发明了Shannon-Fano编码。他们的算法基于符号在给定数据块中出现的概率分配代码。符号出现的概率与代码的长度成反比，从而使数据更短的表示方式。[1]</p>
 <p>两年后，David Huffman在麻省理工学院学习信息理论，并与Robert Fano上了一堂课。Fano给这门课提供了两个选择，要么写一篇学期论文，要么参加期末考试。Huffman选择了写学期论文，题目是找到最有效的二进制编码方法。在工作数月后，没有任何进展，Huffman已经准备放弃所有工作，开始为期末考试而学习。就在那时，他恍然大悟，想出了一种非常类似但更有效的技术，即Huffman编码。Shannon-Fano编码和Huffman编码之间的关键区别在于前者是自下而上构建概率树，从而得到次优结果，而后者是自上而下构建概率树。[2]</p>
 <p>早期的Shannon-Fano和Huffman编码实现是使用硬件和硬编码的方式进行的。直到1970年代和互联网和在线存储的出现，软件压缩才开始实现，并且Huffman编码是基于输入数据动态生成的。[1] 稍后，在1977年，Abraham Lempel和Jacob Ziv发布了他们开创性的LZ77算法，这是第一个使用字典来压缩数据的算法。更具体地说，LZ77使用动态字典，通常称为滑动窗口。[3] 1978年，这个团队发表了他们的LZ78算法，也使用了字典。与LZ77不同的是，该算法解析输入数据并生成静态字典，而不是动态生成字典。[4]</p>
-<h3>2.1 Legal Issues</h3>
+<h3 id="2_1-legal-issues">2.1 Legal Issues</h3>
 <p>LZ77和LZ78算法都迅速流行起来，产生了许多变种，如右图所示。这些算法中的大多数自发明以来已经消失了，只有少数几个如DEFLATE、LZMA和LZX被广泛使用。其中大多数常用算法都是源自LZ77算法。这不是因为其技术优越，而是因为LZ78算法在Sperry在1984年为其派生的LZW算法取得专利后，成为受专利保护的，开始起诉软件供应商、服务器管理员，甚至最终用户未经许可使用GIF格式。[5][6]</p>
 <p>当时，UNIX压缩实用程序使用了一种名为LZC的LZW算法的微小修改，并因专利问题而被停止使用。其他UNIX开发者也开始摒弃使用LZW算法，转而使用开源算法。这使得UNIX社区采用了基于DEFLATE和基于Burrows-Wheeler变换的bzip2格式。从长远来看，这对UNIX社区是有益的，因为gzip和bzip2格式几乎总能实现比LZW格式更高的压缩比。[6] 关于LZW的专利问题已经消失，因为LZW算法的专利在2003年已经过期。[5]尽管如此，LZW算法已经被大部分替换，只在GIF压缩中常用。此后也有一些LZW的派生算法，但它们并没有普及，LZ77算法仍然是主流。</p>
 <p>另一场法律纠纷于1993年爆发，涉及LZS算法。LZS是由Stac Electronics开发的磁盘压缩软件，例如Stacker使用的算法。Microsoft在开发与MS-DOS 6.0一起发布的磁盘压缩软件时使用了LZS算法，声称可以将硬盘容量翻倍。当Stac Electronics发现其知识产权被使用时，便对Microsoft提起了诉讼。后来，Microsoft被裁定侵犯专利权，并被命令向Stac Electronics支付1.2亿美元的赔偿金，扣除了1360万美元的反诉判决，认为Microsoft的侵权并非故意的[7]。尽管Stac Electronics v. Microsoft的判决很大，但它并没有像LZW专利纠纷那样阻碍了Lempel-Ziv算法的发展。唯一的后果似乎是LZS没有被分叉成任何新算法。</p>
-<h3>2.2 The Rise of Deflate</h3>
+<h3 id="2_2-the-rise-of-deflate">2.2 The Rise of Deflate</h3>
 <p>自从Lempel-Ziv算法被发表以来，企业和其他大型实体就一直在使用数据压缩，因为它们的存储需求不断增加，而数据压缩可以帮助它们满足这些需求。然而，直到互联网开始兴起，数据压缩才开始得到广泛应用，这是因为在1980年代末，出现了对数据压缩的需求。带宽要么受到限制，要么很昂贵，而数据压缩有助于缓解这些瓶颈。当万维网被开发出来时，压缩变得尤为重要，因为人们开始分享更多的图像和其他格式，这些格式比文本要大得多。为了满足需求，开发了几种新的文件格式，包括ZIP、GIF和PNG，其中包含了压缩技术。</p>
 <p>1985年，Thom Henderson通过他的公司System Enhancement Associates发布了第一个商业上成功的档案格式ARC。由于ARC是能够打包和压缩文件的首个程序之一，因此在BBS社区中特别受欢迎，同时它也是开源的。ARC格式使用对LZW算法的修改来压缩数据。Phil Katz注意到ARC的流行，并决定通过使用汇编语言编写压缩和解压缩程序来改进它。他在1987年发布了PKARC程序作为共享软件，并因版权侵权被Henderson起诉。他被认定有罪，并被迫支付版税和其他罚款，作为跨许可协议的一部分。他被认定有罪，因为PKARC是ARC的一个显然的副本；在某些情况下，甚至注释中的拼写错误都是相同的。[8]</p>
 <p>由于交叉许可协议的限制，Phil Katz在1988年后不能再销售PKARC。因此，他在1989年创建了一个经过调整的PKARC版本，现在被称为ZIP格式。由于它使用了LZW，所以被认为是受专利限制的，后来Katz选择切换到新的IMPLODE算法。在1993年，Katz发布了PKZIP 2.0，实现了DEFLATE算法以及其他功能，如分割卷。尽管其已经有很长时间了，但是今天几乎所有的.zip文件都遵循PKZIP 2.0格式，因此这个ZIP格式的版本是无处不在的。</p>
@@ -2098,18 +2098,18 @@ fn output_git_short_hash() {
 <p>虽然GIF无法被阻止，CompuServe仍然寻求一个没有专利限制的格式，于1994年推出了Portable Network Graphics（PNG）格式。和ZIP一样，PNG标准使用DEFLATE算法来进行压缩。尽管DEFLATE是由Katz获得专利的[10]，但这一专利从未被执行，因此PNG和其他基于DEFLATE的格式避免了侵犯专利。虽然LZW在压缩的早期被广泛采用，但由于Unisys的好诉性质，它已经逐渐退出历史舞台，被速度更快、更高效的DEFLATE算法所取代。DEFLATE是目前最常用的数据压缩算法，有点像压缩中的瑞士军刀。</p>
 <p>除了在PNG和ZIP格式中使用DEFLATE，DEFLATE在计算机领域的其他地方也非常常见。例如，gzip（.gz）文件格式使用DEFLATE，因为它本质上是ZIP的开源版本。DEFLATE的其他用途包括HTTP、SSL和其他旨在在网络上实现高效数据压缩的技术。</p>
 <p>不幸的是，Phil Katz没有活着看到他的DEFLATE算法征服计算机世界。他多年来一直酗酒，他的生活在1990年代末开始瓦解，曾因酒后驾车和其他违规行为多次被捕。2000年4月14日，37岁的卡茨被发现死在一家旅馆房间里。死因是急性胰腺出血，由他尸体旁发现的许多空酒瓶引起的酒精中毒。[11]</p>
-<h3>2.3 Current Archival Software</h3>
+<h3 id="2_3-current-archival-software">2.3 Current Archival Software</h3>
 <p>到了1990年代中期，新的和更好的格式开始出现，ZIP格式和其他基于DEFLATE的格式不再占据主导地位。1993年，Eugene Roshal发布了他的压缩软件WinRAR，使用专有的RAR格式。RAR的最新版本使用了PPM和LZSS算法的组合，但较早的实现情况并不为人所知。RAR已成为在互联网上共享文件的标准格式，特别是在分发盗版媒体方面。一个名为bzip2的开源Burrows-Wheeler变换实现于1996年发布，迅速在UNIX平台上对DEFLATE-based gzip格式产生了很大的竞争。另一个开源压缩程序在1999年发布，即7-Zip或.7z格式。由于其通常较高的压缩比率以及格式的模块化和开放性，7-Zip可能是首个挑战ZIP和RAR主导地位的格式。这种格式不限于使用一个压缩算法，而是可以在bzip2、LZMA、LZMA2和PPMd等算法之间进行选择。最后，在存档软件的前沿是PAQ*格式。第一个PAQ格式由Matt Mahoney于2002年发布，称为PAQ1。PAQ通过使用称为上下文混合的技术将两个或多个统计模型结合起来，从而显著改进了PPM算法，以生成比任何一个模型单独预测下一个符号更好的预测。</p>
-<h2>3 Future Developments</h2>
+<h2 id="3-future-developments">3 Future Developments</h2>
 <p>未来从来都是不确定的，但基于当前的趋势，可以对数据压缩的未来做出一些预测。如PAQ及其变种的上下文混合算法开始受到欢迎，它们往往可以实现最高的压缩比，但速度通常较慢。随着硬件速度呈指数级增长，遵循摩尔定律，上下文混合算法将很可能在高压缩比的情况下大放异彩，因为速度惩罚将被更快的硬件所克服。PAQ旨在改进的预测部分匹配（PPM）算法也可能会出现新的变种。最后，Lempel-Ziv Markov Chain算法（LZMA）一直表现出优秀的速度和高压缩比之间的平衡，将很可能产生更多的变种。随着LZMA自从在7-Zip格式中推出以来，已经被广泛采用于许多竞争的压缩格式中，它甚至可能成为“赢家”。另一个潜在的发展方向是使用子串枚举压缩（CSE），这是一种新兴的压缩技术，尚未看到许多软件实现。在其朴素形式下，它的表现类似于bzip2和PPM，并且研究人员一直在努力提高其效率。[12]</p>
-<h2>4 Compression Techniques</h2>
+<h2 id="4-compression-techniques">4 Compression Techniques</h2>
 <p>许多不同的技术被用于压缩数据。大多数压缩技术不能独立存在，必须结合起来形成一个压缩算法。那些可以独立存在的压缩技术通常会在与其他压缩技术结合时更加有效。大多数这些技术属于熵编码器，但还有其他一些常用的技术，如游程编码和Burrows-Wheeler变换。</p>
-<h3>4.1 Run-Length Encoding</h3>
+<h3 id="4_1-run-length-encoding">4.1 Run-Length Encoding</h3>
 <p>运行长度编码是一种非常简单的压缩技术，它用一个数字来表示同一字符的连续出现次数，后面跟着这个字符；单个字符编码为1次连续出现。RLE 对于高度冗余的数据，具有许多相同颜色的像素行的索引图像或与其他压缩技术（如 Burrows-Wheeler 变换）结合使用是非常有用的。</p>
 <p>下面是 RLE 的一个快速示例：</p>
 <p>输入：AAABBCCCCDEEEEEEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
 <p>输出：3A2B4C1D6E38A</p>
-<h3>4.2 Burrows-Wheeler Transform</h3>
+<h3 id="4_2-burrows-wheeler-transform">4.2 Burrows-Wheeler Transform</h3>
 <p>Burrows-Wheeler变换是一种于1994年发明的压缩技术，旨在可逆地转换输入数据块，使得相同字符的重复出现数量最大化。BWT本身并不执行任何压缩操作，它只是将输入转换为更有效地由游程编码器或其他次要压缩技术编码的形式。</p>
 <p>BWT的算法很简单：</p>
 <ol>
@@ -2121,9 +2121,9 @@ fn output_git_short_hash() {
 <p>BWT通常在具有许多交替出现相同字符的长输入上效果最佳。以下是在理想输入上运行该算法的示例。请注意，＆是文件结束字符：
 inster /table</p>
 <p>由于其交替相同的字符，对此输入执行BWT会生成一个最优的结果，另一个算法可以进一步压缩，例如RLE，将产生“3H＆3A”。尽管这个例子产生了一个最优的结果，但它在大多数真实数据上并不会产生最优结果。</p>
-<h3>4.3 Entropy Encoding</h3>
+<h3 id="4_3-entropy-encoding">4.3 Entropy Encoding</h3>
 <p>在数据压缩中，熵指的是平均需要表示一个符号或文字所需的最少比特数。基本的熵编码器结合了统计模型和编码器。输入文件被解析并用于生成统计模型，该模型由给定符号出现的概率组成。然后，编码器将使用统计模型来确定为每个符号分配什么位或字节码，以使最常见的符号具有最短的代码，最不常见的符号具有最长的代码。</p>
-<h3>4.3.1 Shannon-Fano Coding</h3>
+<h3 id="4_3_1-shannon-fano-coding">4.3.1 Shannon-Fano Coding</h3>
 <p>这是一种最早的压缩技术，由Claude Shannon和Robert Fano于1949年发明。这种技术涉及生成一个二叉树来表示每个符号出现的概率。这些符号被排序，以便最常见的符号出现在树的顶部，最不可能出现的符号出现在底部。</p>
 <p>给定一个符号的编码是通过在Shannon-Fano树中搜索该符号，并附加每个左或右分支的值（0或1）来获取的。例如，如果“A”是两个左分支和一个右分支，它的编码将是“0012”。由于它从下往上构建二叉树的方式，Shannon-Fano编码并不总是生成最优代码。因此，通常使用Huffman编码，因为它能为任何给定的输入生成最优代码。</p>
 <p>生成Shannon-Fano编码的算法相当简单：</p>
@@ -2134,7 +2134,7 @@ inster /table</p>
 <p>5.将列表分成两个部分，同时使左分支的概率大致相等于右分支的概率。</p>
 <p>6.将0和1分别添加到左和右节点的代码前面。</p>
 <p>7.递归地将步骤5和6应用于左和右子树，直到每个节点都是树中的叶子。</p>
-<h3>4.3.2 Huffman Coding</h3>
+<h3 id="4_3_2-huffman-coding">4.3.2 Huffman Coding</h3>
 <p>Huffman编码是熵编码的另一种变体，工作方式与Shannon-Fano编码非常相似，但二叉树是从上向下构建的，以生成最优结果。</p>
 <p>生成Huffman编码的算法与Shannon-Fano共享其前几个步骤：</p>
 <ol>
@@ -2153,7 +2153,7 @@ inster /table</p>
 </li>
 <li>队列中剩下的最后一个节点是Huffman树的根节点。[16]</li>
 </ol>
-<h3>4.3.3 Arithmetic Coding</h3>
+<h3 id="4_3_3-arithmetic-coding">4.3.3 Arithmetic Coding</h3>
 <p>这种方法是在1979年IBM公司开发的，当时该公司正在研究用于其大型计算机的数据压缩技术。如果目标是获得最佳的压缩比，算术编码可以说是最优秀的熵编码技术，因为它通常比Huffman编码获得更好的结果。然而，相对于其他编码技术，算术编码要复杂得多。</p>
 <p>算术编码不是将符号的概率分裂成树形结构，而是通过更改基数并为0到基数之间的每个唯一符号分配一个单一值，将输入数据转换为0到1之间的一个有理数。然后，它进一步转换为一个固定小数位数的二进制数，这是编码结果。可以通过将基数从二进制更改回原始基数，并将值替换为它们对应的符号，将该值解码为原始输出。</p>
 <p>计算算术编码的一般算法如下：</p>
@@ -2173,50 +2173,50 @@ inster /table</p>
 <li>找到结果。请注意，在结果中，输入长度为8。</li>
 </ol>
 <p>假设为8位字符，则输入长度为64位，而其算术编码仅为15位，导致优秀的压缩比为24％。此示例演示了在给定有限字符集时，算术编码如何进行良好的压缩。</p>
-<h2>5 Compression Algorithms</h2>
-<h3>5.1 Sliding Window Algorithms</h3>
-<h4>5.1.1 LZ77</h4>
+<h2 id="5-compression-algorithms">5 Compression Algorithms</h2>
+<h3 id="5_1-sliding-window-algorithms">5.1 Sliding Window Algorithms</h3>
+<h4 id="5_1_1-lz77">5.1.1 LZ77</h4>
 <p>发表于1977年的LZ77算法是开创先河的算法。它首次引入了“滑动窗口”的概念，这带来了比更原始算法更大的压缩比改进。LZ77使用三元组来维护字典，这些三元组表示偏移量、运行长度和一个偏差字符。偏移量表示给定短语从文件的开头开始的距离，运行长度表示从偏移量到偏移量+长度的字符数。偏差字符只是表示发现了一个新的短语，并且该短语等于从偏移量到偏移量+长度加上偏差字符。使用的字典根据解析文件时滑动窗口的变化而动态改变。例如，滑动窗口可能是64MB，这意味着字典将包含过去64MB输入数据的条目。</p>
 <p>给定输入“abbadabba”，输出将类似于“abb(0,1,‘d’)(0,3,‘a’)”，如下面的示例所示：</p>
 <p>insert table</p>
 <p>虽然这种替换的大小略大于输入，但通常在输入数据更长的情况下，它会获得更小的结果。[3]</p>
-<h4>5.1.2 LZR</h4>
+<h4 id="5_1_2-lzr">5.1.2 LZR</h4>
 <p>LZR是由Michael Rodeh在1981年改进的LZ77算法。该算法旨在成为LZ77的线性时间替代方法。然而，编码指针可以指向文件中的任何偏移量，这意味着LZR会消耗大量的内存。加上其较差的压缩比（LZ77通常更优），这使得LZR成为一个不可行的变种。[18][19]</p>
-<h4>5.1.3 DEFLATE</h4>
+<h4 id="5_1_3-deflate">5.1.3 DEFLATE</h4>
 <p>DEFLATE是由Phil Katz在1993年发明的，是今天大部分压缩任务的基础。它只是简单地将LZ77或LZSS预处理器与后端的Huffman编码相结合，以在短时间内实现适度压缩的结果。</p>
-<h4>5.1.4 DEFLATE64</h4>
+<h4 id="5_1_4-deflate64">5.1.4 DEFLATE64</h4>
 <p>DEFLATE64是DEFLATE算法的一种专有扩展，它将字典大小增加到64KB（因此得名），并允许在滑动窗口中有更大的距离。与DEFLATE相比，它提高了性能和压缩比。然而，DEFLATE64的专有性质以及与DEFLATE相比的温和改进导致该格式的采用受限。相反，通常使用像LZMA这样的开源算法。</p>
-<h4>5.1.5 LZSS</h4>
+<h4 id="5_1_5-lzss">5.1.5 LZSS</h4>
 <p>LZSS（Lempel-Ziv-Storer-Szymanski）算法是由James Storer和Thomas Szymanski于1982年首次发布。LZSS改进了LZ77，因为它可以检测替换是否会减小文件大小。如果没有大小减小，输入将作为字面值保留在输出中。否则，输入的部分将被替换为一个（偏移量，长度）对，其中偏移量表示距离输入开头多少个字节，长度表示从该位置读取多少个字符。与LZ77相比，LZSS的另一个改进是消除了“下一个字符”，只使用偏移量和长度对。</p>
 <p>以下是一个简短的示例，给定输入“ these theses”，产生了“ these(0,6)s”，它只节省了一个字节，但对于更大的输入节省了更多的空间。</p>
 <p>// insert table</p>
 <p>LZSS仍然被许多流行的存档格式使用，其中最著名的是RAR。它有时也用于网络数据压缩。</p>
-<h4>5.1.6 LZH</h4>
+<h4 id="5_1_6-lzh">5.1.6 LZH</h4>
 <p>LZH是在1987年开发的，“Lempel-Ziv Huffman”的缩写。它是LZSS的一个变种，利用Huffman编码来压缩指针，从而获得稍微更好的压缩效果。然而，使用Huffman编码带来的改进微不足道，而且压缩效果不值得使用Huffman编码所付出的性能代价。</p>
-<h4>5.1.7 LZB</h4>
+<h4 id="5_1_7-lzb">5.1.7 LZB</h4>
 <p>LZB是由Timothy Bell等人于1987年开发的LZSS变体。与LZH类似，LZB旨在通过更有效地编码LZSS指针来减少压缩文件的大小。它通过逐渐增加指针的大小来实现这一目标，随着滑动窗口的增大，指针也变得更大。与LZSS和LZH相比，它可以实现更高的压缩率，但由于指针的额外编码步骤，它仍然比LZSS慢。</p>
-<h4>5.1.8 ROLZ</h4>
+<h4 id="5_1_8-rolz">5.1.8 ROLZ</h4>
 <p>ROLZ指的是“Reduced Offset Lempel-Ziv”，它的目标是通过限制offset length来减少编码offset-length对所需的数据量，从而提高LZ77的压缩率。这种LZ77的衍生算法最初出现在Ross Williams的LZRW4算法中，其他实现包括BALZ、QUAD和RZM。高度优化的ROLZ可以实现几乎与LZMA相同的压缩比，但是由于缺乏广泛的应用，ROLZ的流行度较低。</p>
-<h4>5.1.9 LZP</h4>
+<h4 id="5_1_9-lzp">5.1.9 LZP</h4>
 <p>LZP是“Lempel-Ziv + Prediction”的缩写。它是ROLZ算法的一个特例，其中偏移量被减小到1。有几种不同的变体，使用不同的技术来实现更快的操作或更好的压缩比率。LZW4实现了算术编码器，以获得最佳的压缩比率，但代价是速度较慢。[22]</p>
-<h4>5.1.10 LZRW1</h4>
+<h4 id="5_1_10-lzrw1">5.1.10 LZRW1</h4>
 <p>Ron Williams在1991年创建了LZRW1算法，首次引入了“减少偏移量的Lempel-Ziv压缩”概念。LZRW1可以实现高压缩比，同时保持速度快和高效的特点。Ron Williams还创建了几个改进LZRW1的变体，例如LZRW1-A、2、3、3-A和4等。</p>
-<h4>5.1.11 LZJB</h4>
+<h4 id="5_1_11-lzjb">5.1.11 LZJB</h4>
 <p>Jeff Bonwick于1998年创建了他的Lempel-Ziv Jeff Bonwick算法，用于Solaris Z文件系统（ZFS）。它被认为是LZRW算法的变体，特别是LZRW1变体，旨在实现最大压缩速度。由于它用于文件系统，速度尤为重要，以确保压缩算法不成为磁盘操作的瓶颈。</p>
-<h4>5.1.12 LZS</h4>
+<h4 id="5_1_12-lzs">5.1.12 LZS</h4>
 <p>Lempel-Ziv-Stac算法是由Stac Electronics于1994年为磁盘压缩软件开发的一种改进型LZ77算法。它在输出中区分了字面符号和偏移长度对，同时省略了下一个遇到的符号，LZS算法在功能上与LZSS算法最相似。</p>
-<h4>5.1.13 LZX</h4>
+<h4 id="5_1_13-lzx">5.1.13 LZX</h4>
 <p>LZX算法是由Jonathan Forbes和Tomi Poutanen于1995年为Amiga计算机开发的。LZX中的X没有特殊含义。Forbes于1996年将该算法出售给了微软，并为微软工作，使其进一步改进以用于Microsoft的cabinet (.CAB)格式。该算法也被微软用于压缩压缩的HTML帮助（CHM）文件，Windows Imaging Format（WIM）文件和Xbox Live Avatars。</p>
-<h4>5.1.14 LZO</h4>
+<h4 id="5_1_14-lzo">5.1.14 LZO</h4>
 <p>LZO是由Markus Oberhumer在1996年开发的，其开发目标是实现快速的压缩和解压缩。它允许调整压缩级别，并且最高压缩级别仅需要额外的64KB内存，而解压缩仅需要输入和输出缓冲区。LZO的功能与LZSS算法非常相似，但其针对的是速度而不是压缩比率。[26]</p>
-<h4>5.1.15 LZMA</h4>
+<h4 id="5_1_15-lzma">5.1.15 LZMA</h4>
 <p>Lempel-Ziv Markov chain算法最早在1998年随7-Zip压缩软件的发布而公开，用于.7z文件格式。它通常能够比bzip2、DEFLATE和其他算法获得更好的压缩效果。LZMA使用一系列压缩技术来实现输出。首先，采用修改版的LZ77算法对数据进行位级别的解析，而不是传统的字节级别。然后，LZ77算法的输出经过算术编码。根据特定的LZMA实现，可以应用更多技术。结果通常比大多数其他LZ变种的压缩比例都要好，这主要是由于采用了位级别的压缩方法，而不是字节级别的压缩。</p>
-<h4>5.1.16 LZMA2</h4>
+<h4 id="5_1_16-lzma2">5.1.16 LZMA2</h4>
 <p>LZMA2是对原始LZMA算法的渐进改进，最初在2009年通过7-Zip存档软件的更新引入[28]。LZMA2改善了LZMA算法的多线程能力和性能，并更好地处理无法压缩的数据，从而实现略微更好的压缩。</p>
-<h4>5.1.17 Statistical Lempel-Ziv</h4>
+<h4 id="5_1_17-statistical-lempel-ziv">5.1.17 Statistical Lempel-Ziv</h4>
 <p>统计 Lempel-Ziv 是由Sam Kwong博士和Yu Fan Ho在2001年提出的概念。它的基本原则是将数据的统计分析与LZ77变体算法相结合，以进一步优化存储在字典中的编码。[29]</p>
-<h3>5.2 Dictionary Algorithms</h3>
-<h4>5.2.1 LZ78</h4>
+<h3 id="5_2-dictionary-algorithms">5.2 Dictionary Algorithms</h3>
+<h4 id="5_2_1-lz78">5.2.1 LZ78</h4>
 <p>LZ78算法是由Lempel和Ziv于1978年创造的，因此缩写中包含“78”。与使用滑动窗口生成字典的方法不同，输入数据可以预处理以生成具有输入无限范围的字典，或者在解析文件时形成字典。LZ78采用后一种策略。字典大小通常限制为几兆字节，或所有代码均为一定数量的字节，例如8个字节；这样做是为了减少内存要求。大多数LZ78类型算法如何处理字典已满是它们的区别所在。</p>
 <p>在解析文件的过程中，LZ78算法将遇到的每个新字符或字符串添加到字典中。对于输入中的每个符号，都会生成一个以字典索引和未知符号为形式的字典条目；如果一个符号已经在字典中，则字典将被搜索以查找当前符号和其后面的符号的子字符串。最长子字符串匹配的索引用于字典索引。由字典索引指向的数据将添加到未知子串的最后一个字符。如果当前符号未知，则将字典索引设置为0，以指示它是一个单字符条目。这些条目形成了一个类似于链表的数据结构。</p>
 <p>例如输入 “abbadabbaabaad” 将生成输出 “(0,a)(0,b)(2,a)(0,d)(1,b)(3,a)(6,d)”，下面的示例演示了它是如何得出的：</p>
@@ -2225,28 +2225,28 @@ inster /table</p>
 <tr><td>Dictionary Index</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
 <tr><td>Output</td><td>NULL</td><td>(0,a)</td><td>(0,b)</td><td>(2,a)</td><td>(0,d)</td><td>(1,b)</td><td>(3,a)</td><td>(6,d)</td></tr>
 </tbody></table>
-<h4>5.2.2 LZW</h4>
+<h4 id="5_2_2-lzw">5.2.2 LZW</h4>
 <p>LZW是Lempel-Ziv-Welch算法，由特里·韦尔奇在1984年创建。尽管存在严重的专利问题，但LZW是LZ78算法家族中使用最广泛的算法。与LZ78类似，LZW通过消除输出中的冗余字符并使输出完全由指针构成来改进LZ78。在开始压缩之前，它还将字典中的每个字符包括在内，并采用其他技巧来提高压缩效果，例如将每个新短语的最后一个字符编码为下一个短语的第一个字符。LZW通常出现在图形交换格式(GIF)以及ZIP格式的早期规范和其他专用应用程序中。LZW非常快，但与大多数新算法相比，压缩效果较差，而有些算法既更快速，又可以实现更好的压缩效果。</p>
-<h4>5.2.3 LZC</h4>
+<h4 id="5_2_3-lzc">5.2.3 LZC</h4>
 <p>LZC（Lempel-Ziv Compress）是对 UNIX 压缩实用程序中使用的 LZW 算法的轻微修改。LZC 和 LZW 之间的主要区别在于，LZC 监控输出的压缩比。一旦比率超过某个阈值，字典就被丢弃并重建。[19]</p>
-<h4>5.2.4 LZT</h4>
+<h4 id="5_2_4-lzt">5.2.4 LZT</h4>
 <p>Lempel-Ziv Tischer算法是LZC的一种改进，当词典满时，它会删除最近最少使用的短语，并用新条目替换它。有一些其他的渐进式改进，但是LZC和LZT今天都不常用。</p>
-<h4>5.2.5 LZMW</h4>
+<h4 id="5_2_5-lzmw">5.2.5 LZMW</h4>
 <p>LZMW算法是由Victor Miller和Mark Wegman于1984年发明的，与LZT类似，采用最近未使用的短语替换策略。但是，LZMW不是将字典中的相似条目合并，而是将最后两个编码的短语合并，并将结果存储为新条目。因此，字典的大小可以迅速扩大，必须更频繁地丢弃LRUs。与LZT相比，LZMW通常实现更好的压缩，但它是另一个不太常见的算法。[19]</p>
-<h4>5.2.6 LZAP</h4>
+<h4 id="5_2_6-lzap">5.2.6 LZAP</h4>
 <p>LZAP是由詹姆斯·斯托勒于1988年修改LZMW算法创建的。AP代表“所有前缀”，即字典不仅存储单个短语，而是存储每个排列组合。例如，如果上一个短语是“last”，当前短语是“next”，那么字典将存储“lastn”、“lastne”、“lastnex”和“lastnext”。[30]</p>
-<h4>5.2.7 LZWL</h4>
+<h4 id="5_2_7-lzwl">5.2.7 LZWL</h4>
 <p>LZWL 是一个修改后的 LZW 算法，于 2006 年创造，它使用音节而不是单个字符进行压缩。LZWL 的设计旨在更好地处理具有许多常见音节的特定数据集，例如 XML 数据。通常，此类算法与预处理器一起使用，将输入数据分解为音节。</p>
-<h4>5.2.8 LZJ</h4>
+<h4 id="5_2_8-lzj">5.2.8 LZJ</h4>
 <p>Matti Jakobsson在1985年发布了LZJ算法[32]，它是唯一与LZW不同的LZ78算法之一。该算法通过在字典中存储已处理的输入中的每个唯一字符串（长度不超过一个任意的最大长度）并为每个字符串分配代码来工作。当字典已满时，将删除仅出现一次的所有条目。[19]</p>
-<h3>5.3 Non-dictionary Algorithms</h3>
-<h4>5.3.1 PPM</h4>
+<h3 id="5_3-non-dictionary-algorithms">5.3 Non-dictionary Algorithms</h3>
+<h4 id="5_3_1-ppm">5.3.1 PPM</h4>
 <p>预测通过部分匹配是一种统计建模技术，它使用输入中一组先前的符号来预测下一个符号，以减少输出数据的熵。这与字典不同，因为PPM预测下一个符号，而不是尝试在字典中找到下一个符号进行编码。通常将PPM与编码器结合使用，如算术编码或自适应霍夫曼编码。PPM或其变体PPMd被实现在许多存档格式中，包括7-Zip和RAR。</p>
-<h4>5.3.2 bzip2</h4>
+<h4 id="5_3_2-bzip2">5.3.2 bzip2</h4>
 <p>bzip2是Burrows-Wheeler变换的一个开源实现。它的工作原理非常简单，但它们在速度和压缩比之间取得了非常好的平衡，这使得bzip2格式在UNIX环境中非常受欢迎。首先，对数据应用运行长度编码。接下来，应用Burrows-Wheeler变换。然后，应用移动到前面的变换，旨在创建大量形成运行的相同符号，以供另一个运行长度编码器使用。最后，结果进行霍夫曼编码并包装在一个头文件中。</p>
-<h4>5.3.3 PAQ</h4>
+<h4 id="5_3_3-paq">5.3.3 PAQ</h4>
 <p>PAQ是由Matt Mahoney于2002年创建的，旨在改进旧的PPM（d）算法。它使用一种被称为上下文混合的革命性技术，将多个统计模型（PPM是其中之一）智能组合在一起，以比任何单个模型更好地预测下一个符号。PAQ是最有前途的算法之一，因为它具有极高的压缩比和非常活跃的开发。自其诞生以来，已经创建了20多个变种，其中一些变种实现了创纪录的压缩比。 PAQ最大的缺点是由于使用多个统计模型以获得最佳压缩比而导致速度缓慢。但是，随着硬件不断变得更快，它可能成为未来的标准。 PAQ正在慢慢被采用，可在Windows上的PeaZip程序中找到带有64位支持和主要速度改进的PAQ8O变体。其他PAQ格式大多是仅限命令行的。</p>
-<h2>6 References</h2>
+<h2 id="6-references">6 References</h2>
 <ol>
 <li>Wolfram, Stephen. A New Kind of Science. Champaign, IL: Wolfram Media, 2002. 1069. Print.</li>
 <li>Ken Huffman. Profile: David A. Huffman, Scientific American, September 1991, pp. 54–58.</li>
@@ -2285,7 +2285,7 @@ inster /table</p>
 <li>Mahoney, M., “Adaptive Weighting of Context Models for Lossless Data Compression”, Unknown, 2002.</li>
 </ol>
 ]]></description><author>DaviRain</author><guid isPermaLink="false">Qma8Nh3zVoSZmeGQS8eurB9GSGBE5HCoBBEGyVFqgNrdVX</guid><pubDate>Wed, 23 Jul 2025 00:49:36 +0000</pubDate></item><item><title>Git Fork and Upstreams ：如何去做一个很酷的技巧</title><link>https://Anonymous.github.io/kpgb/posts/git-frok.html</link><description><![CDATA[<p>Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 – 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的原理。在这篇博客中，我将向你介绍基础知识，疑难杂症，甚至给你留下一个很酷的小技巧，让你走在曲线的前面。</p>
-<h2>Git Upstream: 保持最新做出贡献</h2>
+<h2 id="git-upstream_-保持最新做出贡献">Git Upstream: 保持最新做出贡献</h2>
 <p>让我先详细介绍一下与上游仓库交互的常见设置和最基本的工作流程。</p>
 <p>在一个标准的设置中，你通常有一个 origin 和一个 upstream remote - 后者是项目的守门人，或者你希望贡献的真实来源。</p>
 <p>首先，缺人你已经为上游仓库设置了一个 remote, 并希望也设置了一个 origin:</p>
@@ -2320,7 +2320,7 @@ git merge upstream/master
 git rebase upstream/master
 </code></pre>
 <p>如果你需要把几个提交压成一个，你可以在这时使用厉害的 rebase 互动。</p>
-<h2>Publish with git fork</h2>
+<h2 id="publish-with-git-fork">Publish with git fork</h2>
 <p>经过以上步骤后，通过简单的 push, 在远程 fork 中发布你的作品。</p>
 <pre><code class="language-bash">git push origin feature-x
 </code></pre>
@@ -2329,7 +2329,7 @@ git rebase upstream/master
 <pre><code class="language-bash">git push -f origin feature-x
 </code></pre>
 <p>我个人更倾向于尽量保持历史记录的干净，选择方案三，但不同的团队有不同的工作流程。注意：只有在使用你自己的 fork 时，你才能这样做，重写共享库和分支的历史是绝对不应该做的。重写共享库和分支的历史是你永远不应该改做的事情。</p>
-<h2>Tip of the day: Ahead/Behind number in the promt</h2>
+<h2 id="tip-of-the-day_-ahead_behind-number-in-the-promt">Tip of the day: Ahead/Behind number in the promt</h2>
 <p>fetch 之后，git status 会显示你比同步的远程分支提前或落后多少次提交。如果你能在你忠实的命令行提示符下看到这些信息，岂不是更好？我也是这么想的，所以我开始用我的 bash chopsticks 并制作了它。</p>
 <p>下面是你配置好后，它在你的提示符上的样子：</p>
 <pre><code class="language-bash">nick-macbook-air:~/dev/projects/stash[1|94]$
@@ -2346,7 +2346,7 @@ git rebase upstream/master
 <p>Sampl prompt:</p>
 <pre><code class="language-bash">export PS1="\h:\w[\$(ahead_behind)]$"
 </code></pre>
-<h2>内部结构</h2>
+<h2 id="内部结构">内部结构</h2>
 <p>对于那些喜欢细节和解释的人来说，这是如何工作的。</p>
 <p>我们得到当前 HEAD 的符号名称，及当前分支。</p>
 <pre><code class="language-bash">curr_branch=$(git rev-parse --abbrev-ref HEAD);
@@ -2361,9 +2361,9 @@ git rebase upstream/master
 <pre><code class="language-bash">git rev-list --left-right --count $curr_branch...$curr_remote/$curr_merge_branch | tr -s '\t' '|';
 </code></pre>
 <p>我们使用古老的 Unix tr 将 TAB 转换为分隔符 |.</p>
-<h2>Getting started with git upstream</h2>
+<h2 id="getting-started-with-git-upstream">Getting started with git upstream</h2>
 <p>这就是 git upstream 的基本演练，– 如何设置 git upstream, 创建新分支，收集修改，用 git fork 发布，还有一个贴心的提示，这就是你的远程分支领先 / 落后于你多少次提交。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmemS7hUjRit3oQWKU5qv4FWkKnxjremuwdvev4TdRQJuR</guid><pubDate>Wed, 23 Jul 2025 00:49:35 +0000</pubDate></item><item><title>Crypto-currency in bitcoin</title><link>https://Anonymous.github.io/kpgb/posts/crypto-currency-in-bitcoin.html</link><description><![CDATA[<h2>哈希</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmemS7hUjRit3oQWKU5qv4FWkKnxjremuwdvev4TdRQJuR</guid><pubDate>Wed, 23 Jul 2025 00:49:35 +0000</pubDate></item><item><title>Crypto-currency in bitcoin</title><link>https://Anonymous.github.io/kpgb/posts/crypto-currency-in-bitcoin.html</link><description><![CDATA[<h2 id="哈希">哈希</h2>
 <p>大家应该都比较熟悉哈希函数的工作原理，密码学中用到的哈希函数被称为crypto-graphic hash function.</p>
 <p>它有两个重要的性质：一个叫做collision resistance. 这个地方的collision是指哈希碰撞。
 如果有两个输入 x, y且 x ≠ y , hash函数是H(v), 但是H(x) = H(y).这就叫做哈希碰撞。
@@ -2422,7 +2422,7 @@ git rebase upstream/master
 <p>除了密码学中要求的这两个性质之外，比特币中用到的hash函数还要求第三个性质。叫puzzle friendly。他这个意思是说，hash的计算是事先不可预测的。你光看这个输入，你很难知道他这个hash值是什么。所以你想到你算出来的hash值是落在某个范围之内的。那没有什么好办法你只能一个一个去试。看那个输入算出来是恰好落在要求的那个范围之内。比如说你想得到一个hash值。前面k位都是0。0000000…0000000xxxxxxx..xxx 整个是256位，必须以k个零开始。那什么要的输入会算出这个hash值呢？不知道puzzle friendly这个性质是说你事先是不知道的。那个输入更有可能算出这个hash值。那你要得到这个hash值就一个一个去试。没有什么捷径。这个性质为什么叫做puzzle friendly后面我们讲到比特币挖矿的过程。大家可能听说过挖矿这个词。挖矿实际上就试找一个nonce。找这么一个随机数，这个nonce跟区块的块头里的其他信息合在一起。作为输入，取出一个hash来，那个hash值要小于等于某个制定的目标阈值。这是H(block header) ≤ target. 比特币是区块链，区块链就是一个一个区块组成的链表，每一个区块都有一个块头，block header， block header中有很多的域。 其中有一个域是我们可以设置的随机数nonce。那挖矿的过程就是不停的去试各种不同的nonce，使得整个block header取hash之后，落在指定的范围之内。就比如说这是整个的输出空间outspace。我们要求算出来的hash值只有前面这一点是合法的。这个是target space。这个puzzle friendly这个性质是说，这个挖矿的过程没有捷径。只能够不停的去试大量的nonce，才能找打符合要求的解。所以这个过程才可以用来作为工作量证明。 叫做proof of work。 你挖到矿了找到了符合要求的的nonce，一定是因为你做了大量的工作。因为没有别的捷径。</p>
 <p>这里大家注意，虽然这个挖矿的过程。需要很多的工作量，才能找到一个符合要求的nonce。但是一旦有人找打了这样一个nonce。发布出去之后，其他人要验证这个nonce是不是符合要求。 是很容易的，只要算一次hash就行了。这个nonce作为header的一部分，算一次hash值 看他是不是小于等于这个目标的阈值。挖矿很难验证很容易。这个性质叫做difficult to solve, but easy to verify.我们设计这种mining puzzle的之后要注意这个性质。</p>
 <p>比特币中用的hash函数是SHA-256，这个sha的意思是，secure hash algorithm.我们说的这三个性质她都是满足的。有同学可能觉得puzzle friendly和collision resistance 很像。这两个性质是有一定的联系。但是不是完全一样 。我们说比特币用到了密码学中的两个功能， 一个是hash，一个签名。</p>
-<h2>签名</h2>
+<h2 id="签名">签名</h2>
 <p>到这里我们把第一个功能hash讲完了。我们下面讲签名。</p>
 <p>要讲签名我要讲一下比特币系统中的账户管理。日常生活中你想要开个账户怎么办，带上证件去银行办理开户手续。这就是中心化系统中的账户管理方式。 那比特币是去中心话的，他没有银行之类的这类机构。那怎么开账户呢？每个用户自己决定开户。不需要任何人批准。开户的过程很简单，就是创立一个公钥和私钥的对pair。(public key, private key).在本地创立一个公私钥对。就是一个账户。这个就在比特币中代表了一个账户，公私钥这个概念是来自非对称加密这个体系。叫做asymmetric encryption algorithm,最早的加密体系是对称的。叫做symmetric encryption algorithm。比如说两个人之间要进行通信，我要把某个信息发给你。但是这个通信的网络是有可能被窃听的。那怎么办呢。咱们两个事先商量一个密钥。一个叫做encyption key.我把这个信息加密之后发送给你。你收到之后再用这个密钥解密。因为这个加密和解密用的是同一个密钥。所以这个叫做对称的加密体系。他这个前提是假设。有某种安全的渠道。能够把这个密钥分发给通讯的双方。因为你显然的不能把这个密钥在网络上以明文的形式传输。我们假设网络本身就是不安全的。有可能被窃听，这个就是对称加密体系的一个弱点。密钥的分发不是很方便。解决这个问题非对称加密体系就提出来我们不是用一个密钥，而是用一对密钥。有一个公钥还有一个私钥。加密用的是公钥，解密用的是私钥，比如说我要把一个信息传给你，我用你的公钥给这个信息加密，你收到之后再用你的私钥解密。得到原来的信息。 大家注意这个加密和解密用的是同一个人的公钥和私钥。都是这个接收方的公钥和私钥。</p>
 <p>这有什么好处呢？公钥是不用保密的，加密用的公钥是不用保密的，你可以告诉所有的人。有的人他的homepage就列出来他的pbk： public key。大家都可以知道。私钥是要保密的，解密是要用私钥解密的， 但是私钥只要保存在本地就行了。不用传给对方。就给你通讯的那个人不需要知道你的私钥。他是用你的公钥加密的。 你要回复他的话你用他的公钥加密。都不需要知道对方的私钥。这就解决了对称加密体系中密钥分发的不方便的问题。 比特币系统中呢，你要创建一个账户。就在本地产生一对公私钥。这个公钥就相当于你的银行账号。别人要给你转账，只要知道你的公钥就行了。这个私钥相当于你的账户密码。知道这个私钥就可以把这个账户上的钱转走。那么有一个问题我们前面说比特币系统是不加密的。他叫加密货币他其实不是加密的。 信息都是公开的。那我要这个公钥和私钥干什么呢？实际上用来做签名。</p>
@@ -2470,7 +2470,7 @@ git rebase upstream/master
 <li>i have to eat the food.</li>
 <li>I don’t have to eat the food.</li>
 </ul>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmU243MrDk9VUwMcNSW7QPfPQRDTeJSdj6SYGcW5mEh7kY</guid><pubDate>Wed, 23 Jul 2025 00:49:32 +0000</pubDate></item><item><title>Machine Learning And Algorithmic Trading(Textbook)</title><link>https://Anonymous.github.io/kpgb/posts/machine_learning_and_algo_trading.html</link><description><![CDATA[<h1>机器学习和算法交易(教材)</h1>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmU243MrDk9VUwMcNSW7QPfPQRDTeJSdj6SYGcW5mEh7kY</guid><pubDate>Wed, 23 Jul 2025 00:49:32 +0000</pubDate></item><item><title>Machine Learning And Algorithmic Trading(Textbook)</title><link>https://Anonymous.github.io/kpgb/posts/machine_learning_and_algo_trading.html</link><description><![CDATA[<h1 id="机器学习和算法交易_教材_">机器学习和算法交易(教材)</h1>
 <p>红色标记的内容是可选的,因为这些内容主要是对之前黑色文本部分的补充和扩展。这取决于你想学习的难度和速度!</p>
 <p>你应该先完成第一本教材,然后再决定是先学习机器学习部分还是衍生品部分,当然你也可以同时学习这两部分。
 这两个领域有一些交叉点,我个人更偏爱前者(机器学习),不过它们实际上是相互独立的,学习其中一个并不需要另一个领域的知识。</p>
@@ -2639,7 +2639,7 @@ but regardless is quite helpful to know as it can make sure you avoid some silly
 </ul>
 <p>核心启示：
 简单模型往往比复杂模型更实用，这是经验的体现，而不是技术能力的限制。</p>
-<h2>Bonus Books:</h2>
+<h2 id="bonus-books_">Bonus Books:</h2>
 <ul>
 <li><a href="https://www.dropbox.com/scl/fo/ehfyv6ckypgj2fepyijxd/AL22Oebn7Jfh425weo4tadg?rlkey=w0v26iyoxd0xj7b3lchdu5zhn&amp;e=1&amp;st=o4krsjtb&amp;dl=0">Elements of Quantitative Investing Draft</a> this is a book written by @__paleologo on
 Twitter, and is in draft form but is incredibly good so well worth the read)</li>
@@ -2649,7 +2649,7 @@ Twitter, and is in draft form but is incredibly good so well worth the read)</li
 <li><a href="https://www.amazon.co.uk/Optimal-Trading-Strategies-Quantitative-Approaches/dp/0814407242?crid=3DTXLGQ51O398&amp;dib=eyJ2IjoiMSJ9.S5ySlDfuqxRJkewpVopbQNYwrXOeMavYs-v9_ysyRd2TUFX0AlNkt4ng9ja3w7kQrbz1Ck8wpQBObnNYA25v34_3icAG_cv1ccgKIGgQ2gKi5N8VfteiS7FREx_Js07SVwgdsMUQpuhEsp31opO8qk4X0N8OZErX4rw-frHDlljZ8mYpd-WODIR-g8cPCGAwYG9Vcqvo_YsmjVsc_VfOptq453970FH-2KHDs_2qRjM.o_luRbe_h20X0gAR5r0cjbF3uNbfTsEubysbZcdRi4k&amp;dib_tag=se&amp;keywords=Optimal+trading&amp;qid=1720376996&amp;s=books&amp;sprefix=optimal+trading,stripbooks,79&amp;sr=1-4&amp;linkCode=sl1&amp;tag=quantarb-21&amp;linkId=e7423674cedd6400539225175ed446a5&amp;language=en_GB&amp;ref_=as_li_ss_tl">Optimal Trading Strategies</a></li>
 <li><a href="https://www.amazon.co.uk/Advanced-Futures-Trading-Strategies-strategies/dp/0857199684?crid=23ILX7II640HQ&amp;dib=eyJ2IjoiMSJ9.ss9lYLZgpez7QBSELoTi2Yf2WZgknl5fgH0UQ-emprpJAUYEzJ3D_DKn2LRUrnIFH9gte3Z4qsiO4P-MQe0lIQS5XEKHsJw44vf1-6gGk1me8np-MHqA6cCdT2xnNGOK27s4zAWEOf2garfjMhq0oZXc9pw2G3EoUDgfmxexTvNo-LKhWzNYS4NUehH-P6SH3s0HHaw7IWjthginjX4SOZmhwem9UK9rdu7NT5RhF60.rTmHMXWo-woctt9i5rWYzmelLQcEkiuilEQKrsRP2D4&amp;dib_tag=se&amp;keywords=Advanced+Futures+trading&amp;qid=1720377036&amp;s=books&amp;sprefix=advanced+futures+trading,stripbooks,84&amp;sr=1-3&amp;linkCode=sl1&amp;tag=quantarb-21&amp;linkId=8b60df132ee8c367a7d804af611a8ad2&amp;language=en_GB&amp;ref_=as_li_ss_tl">Advanced Futures Trading Strategies</a></li>
 </ul>
-<h2>4th Edition Extras:</h2>
+<h2 id="4th-edition-extras_">4th Edition Extras:</h2>
 <ul>
 <li><a href="https://www.amazon.co.uk/Science-Algorithmic-Trading-Portfolio-Management/dp/0128156309?crid=1I1EMQX159M6Z&amp;dib=eyJ2IjoiMSJ9.lPeUuRYLDtL7AkIkI0nwAdjzF9fxVuSpVqZpezLnlolzjhyunrr5SUDq8vNxxEJ-BE6elNFsHcptGgFJeDTx51UAizs6_rkhUQFYEAZm69dUlgZQKJ_9ljGGIZCZQnJxGbY0DdLJvAoMa3_E9JgC8trl3WAUOZhnfpiTaXnIPnD0DvQKE7eqyPAlo3YS74sIryt6MUHiPHG_Z-alLT2iGhUgA2fYkINGEVRl6D50ayo.pHjPs03iv3e-V-h8h1CddhVF5JqOPRa2g7aM2Jt0Sg4&amp;dib_tag=se&amp;keywords=Advanced+Algorithmic+Trading&amp;qid=1720376691&amp;sprefix=advanced+algorithmic+trading,aps,97&amp;sr=8-5&amp;linkCode=sl1&amp;tag=quantarb-21&amp;linkId=943d6768fc844384831d31f2879252d3&amp;language=en_GB&amp;ref_=as_li_ss_tl">Algorithmic Trading Methods</a> Goes through some models</li>
 <li><a href="https://www.amazon.co.uk/Trades-Quotes-Prices-Financial-Microscope/dp/110715605X?crid=37X8WR6THTLSC&amp;dib=eyJ2IjoiMSJ9.Udw8in-Cspx6kW0rxTdVjLPKJr0Z9yIh9VzXXFsg_44rd1fINp6XWovQl4ljJryUHRLxZy1ql_Ahpt_TN8plR-YGCWDT26ipnAfyEtDv2F8.6P8IEd5-zHC_NsUnKW7Qn5SIEkiJzQ7bvKgoQjRv1xw&amp;dib_tag=se&amp;keywords=Trading+Quotes+and+prices&amp;qid=1720376759&amp;sprefix=trading+quotes+and+prices,aps,93&amp;sr=8-1-fkmr0&amp;linkCode=sl1&amp;tag=quantarb-21&amp;linkId=7cdd8a7ca911aa2b154525934d4c6b4f&amp;language=en_GB&amp;ref_=as_li_ss_tl">Trades Quotes and Prices</a> Microstructure textbook</li>
@@ -2657,7 +2657,7 @@ Twitter, and is in draft form but is incredibly good so well worth the read)</li
 <li><a href="https://www.amazon.co.uk/Data-Driven-Science-Engineering-Learning-Dynamical/dp/1009098489?crid=3Q11KOBBBT5EJ&amp;dib=eyJ2IjoiMSJ9.Sh7_nWp0apS4QcVcyKr67L5g_U3seWBpztxzbjYF8SnAfhnGBleNQ4jSGxOSeMpLNOvPoRDm-bz8uJnWhlRXKKaJ0BIIkeAb9k0596qOoiAuPf9CsgcvT5VOLGM3HBrZXno9DhbFsv9ZfdEROF7lJCfo1umkg0r3ExvY-3jFhH8NFNVas9BsjG0TtccnpL8WPD7T_AaiprM2t_ItM8zlQQOYeA3HjCgwBOopkBDEdr0.SMR2Exru8mQXmZr9LzH2QurN5NeHSJWYJ6qo4siVrMY&amp;dib_tag=se&amp;keywords=data+driven+science+%26+engineering&amp;qid=1720376805&amp;sprefix=Data+Driven+,aps,99&amp;sr=8-1&amp;linkCode=sl1&amp;tag=quantarb-21&amp;linkId=f068713501a901b28d9412ed4cae7408&amp;language=en_GB&amp;ref_=as_li_ss_tl">Data Driven Science and Engineering</a> Not specifically quant, but there is huge alpha from
 engineering/ signal processing</li>
 </ul>
-<h2>5th Edition Extras:</h2>
+<h2 id="5th-edition-extras_">5th Edition Extras:</h2>
 <ul>
 <li><a href="https://www.amazon.co.uk/Analysis-Financial-Wiley-Probability-Statistics/dp/0470414359?crid=1W7667WKY942I&amp;dib=eyJ2IjoiMSJ9.4luAy9ih3zAujJf8eIj_DDw331nImmmHq-JVOb_vQR8WBS7XEL-4zxGg1Twc8M3azKTn6zH4iaLES-0cOAFUA1rtvXc1rZzOaJogjHeAeOXIzZQNgaz_FczdursmnrrFkVfQ1byMMgSPCQ1LXS5Ccs4OqTnKcyZ-L3M3KNCGSfz6rnMz09dYiJBUefIRk6K_9ZrOOxClPBYRIecBGt1kwYs3wBZfK98ycpbuNkr3Imw.v5kYVBIb2PmQKLvOK-CSzL5IC-ni7MZp_uv0er9fDgg&amp;dib_tag=se&amp;keywords=analysis+of+financial+time+series&amp;qid=1720463989&amp;s=books&amp;sprefix=analysis+of+financial+time+series,stripbooks,93&amp;sr=1-1&amp;linkCode=sl1&amp;tag=quantarb-21&amp;linkId=7b9c7dc6a4f4ee379575c5d212d54032&amp;language=en_GB&amp;ref_=as_li_ss_tl">Analysis of Financial Time Series</a></li>
 <li><a href="https://www.amazon.co.uk/Bayesian-Analysis-Chapman-Statistical-Science/dp/1439840954?crid=3D5KV9A23LX9V&amp;dib=eyJ2IjoiMSJ9.GgHJc1I4hZvm94heq45UD1DRyMqHiIpNxYXMLtCZ7-p7tTbePdc-dbd2I35AwAG3MG6uUPAcAh9O27IFidSiYexoJDcrPkAqJhViLt29b9yihIRDqt_G6SF66n17o1sIyfr4N1kOH5Rp886xf29191d79UKk_3vMwF1rBtHfZCEXjtRLPTa_XbCwyXMap-B47wUkObdKCBXvABIicAlnONJ7e6fygo71WrAscq8-xX0.-P2fw7hGjJhihxyUMrg_WIQdB8MnjyV1LxI_FUfzU_M&amp;dib_tag=se&amp;keywords=bayesian+data+analysis&amp;qid=1720464030&amp;s=books&amp;sprefix=bayesian+data+analysis,stripbooks,80&amp;sr=1-1&amp;linkCode=sl1&amp;tag=quantarb-21&amp;linkId=b12365e6d25606e19419a57d7200e928&amp;language=en_GB&amp;ref_=as_li_ss_tl">Bayesian Data Analysis</a></li>
@@ -2665,7 +2665,7 @@ engineering/ signal processing</li>
 Driven Science and Engineering’ it presents a lot of opportunities to find interesting methods
 that can be applied to quant</li>
 </ul>
-<h2>Robert Carver Textbooks (These are an alternative to some of the initial textbooks):</h2>
+<h2 id="robert-carver-textbooks-_these-are-an-alternative-to-some-of-the-initial-textbooks__">Robert Carver Textbooks (These are an alternative to some of the initial textbooks):</h2>
 <ul>
 <li><a href="https://www.amazon.co.uk/Systematic-Trading-designing-trading-investing/dp/0857194453?pd_rd_w=kaLYC&amp;content-id=amzn1.sym.46f507f3-7fc1-4bf4-9492-ed026d6e4f68&amp;pf_rd_p=46f507f3-7fc1-4bf4-9492-ed026d6e4f68&amp;pf_rd_r=RNVT16PZYX4JAX84PD0Y&amp;pd_rd_wg=v8Kdn&amp;pd_rd_r=4ea24564-a177-4182-950b-ce61190a2de1&amp;pd_rd_i=0857194453&amp;psc=1&amp;linkCode=sl1&amp;tag=quantarb-21&amp;linkId=e6d2ee49f479b018e965777ee7f8200d&amp;language=en_GB&amp;ref_=as_li_ss_tl">Systematic Trading</a></li>
 <li><a href="https://www.amazon.co.uk/Leveraged-Trading-professional-approach-trading/dp/0857197215?pd_rd_w=kaLYC&amp;content-id=amzn1.sym.46f507f3-7fc1-4bf4-9492-ed026d6e4f68&amp;pf_rd_p=46f507f3-7fc1-4bf4-9492-ed026d6e4f68&amp;pf_rd_r=RNVT16PZYX4JAX84PD0Y&amp;pd_rd_wg=v8Kdn&amp;pd_rd_r=4ea24564-a177-4182-950b-ce61190a2de1&amp;pd_rd_i=0857197215&amp;psc=1&amp;linkCode=sl1&amp;tag=quantarb-21&amp;linkId=93dda06538cad52e32de90908c3bacd7&amp;language=en_GB&amp;ref_=as_li_ss_tl">Leveraged Trading</a></li>
@@ -2690,15 +2690,15 @@ that can be applied to quant</li>
 <li>后续推荐的教材优先级逐渐降低</li>
 <li>读者可以根据需求选择性阅读后面的教材</li>
 </ul>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmRGEMP96GjEp7C1C8PofbXemf4ht9YPRwLXtYS88dXdmi</guid><pubDate>Wed, 23 Jul 2025 00:49:31 +0000</pubDate></item><item><title>NautilusTrader 完整快速入门指南</title><link>https://Anonymous.github.io/kpgb/posts/nautilustrader.html</link><description><![CDATA[<h1>NautilusTrader 完整快速入门指南</h1>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmRGEMP96GjEp7C1C8PofbXemf4ht9YPRwLXtYS88dXdmi</guid><pubDate>Wed, 23 Jul 2025 00:49:31 +0000</pubDate></item><item><title>NautilusTrader 完整快速入门指南</title><link>https://Anonymous.github.io/kpgb/posts/nautilustrader.html</link><description><![CDATA[<h1 id="nautilustrader-完整快速入门指南">NautilusTrader 完整快速入门指南</h1>
 <p>NautilusTrader 是一个高性能的开源交易平台，本文将提供一个包含数据获取的完整入门指南。</p>
-<h2>前置要求</h2>
+<h2 id="前置要求">前置要求</h2>
 <ul>
 <li>Python 3.11 或更高版本</li>
 <li>稳定的网络连接（用于下载数据）</li>
 </ul>
-<h2>安装步骤</h2>
-<h3>1. 安装 NautilusTrader</h3>
+<h2 id="安装步骤">安装步骤</h2>
+<h3 id="1_-安装-nautilustrader">1. 安装 NautilusTrader</h3>
 <pre><code class="language-bash"># 创建虚拟环境（推荐）
 python -m venv nautilus_env
 source nautilus_env/bin/activate  # Linux/Mac
@@ -2710,7 +2710,7 @@ pip install -U nautilus_trader
 # 安装 JupyterLab（可选，用于交互式开发）
 pip install -U jupyterlab
 </code></pre>
-<h3>2. 获取示例数据（重要！）</h3>
+<h3 id="2_-获取示例数据_重要__">2. 获取示例数据（重要！）</h3>
 <p>官方提供了一个便捷的脚本来下载示例数据：</p>
 <pre><code class="language-python"># 在 Jupyter notebook 或 Python 脚本中运行
 import subprocess
@@ -2735,8 +2735,8 @@ subprocess.run([
 <li>将数据转换为 Parquet 格式</li>
 <li>创建数据目录结构</li>
 </ul>
-<h2>完整的回测示例</h2>
-<h3>1. 导入必要的模块</h3>
+<h2 id="完整的回测示例">完整的回测示例</h2>
+<h3 id="1_-导入必要的模块">1. 导入必要的模块</h3>
 <pre><code class="language-python">from decimal import Decimal
 from pathlib import Path
 
@@ -2752,7 +2752,7 @@ from nautilus_trader.model.objects import Price, Quantity
 from nautilus_trader.persistence.catalog.parquet import ParquetDataCatalog
 from nautilus_trader.trading.strategy import Strategy
 </code></pre>
-<h3>2. 设置数据目录</h3>
+<h3 id="2_-设置数据目录">2. 设置数据目录</h3>
 <pre><code class="language-python"># 设置数据目录路径
 from nautilus_trader.persistence.catalog import ParquetDataCatalog
 
@@ -2768,7 +2768,7 @@ start = catalog.min_timestamp("quote_tick", instrument_id="EUR/USD.SIM")
 end = catalog.max_timestamp("quote_tick", instrument_id="EUR/USD.SIM")
 print(f"数据时间范围: {start} 到 {end}")
 </code></pre>
-<h3>3. 创建简单的 MACD 策略</h3>
+<h3 id="3_-创建简单的-macd-策略">3. 创建简单的 MACD 策略</h3>
 <pre><code class="language-python">from nautilus_trader.indicators.macd import MovingAverageConvergenceDivergence
 from nautilus_trader.trading.strategy import Strategy
 
@@ -2861,7 +2861,7 @@ class MACDStrategy(Strategy):
         )
         self.submit_order(order)
 </code></pre>
-<h3>4. 配置并运行回测</h3>
+<h3 id="4_-配置并运行回测">4. 配置并运行回测</h3>
 <pre><code class="language-python"># 配置回测
 config = BacktestRunConfig(
     engine=BacktestEngineConfig(
@@ -2904,7 +2904,7 @@ config = BacktestRunConfig(
 node = BacktestNode(configs=[config])
 results = node.run()
 </code></pre>
-<h3>5. 分析回测结果</h3>
+<h3 id="5_-分析回测结果">5. 分析回测结果</h3>
 <pre><code class="language-python"># 获取引擎实例
 engine = node.engine
 
@@ -2932,8 +2932,8 @@ return_pct = (pnl / starting_balance) * 100
 print(f"盈亏: ${pnl:.2f}")
 print(f"收益率: {return_pct:.2f}%")
 </code></pre>
-<h2>数据获取的其他方式</h2>
-<h3>1. 使用自己的数据</h3>
+<h2 id="数据获取的其他方式">数据获取的其他方式</h2>
+<h3 id="1_-使用自己的数据">1. 使用自己的数据</h3>
 <p>如果你有自己的数据，可以将其转换为 NautilusTrader 格式：</p>
 <pre><code class="language-python"># 从 CSV 导入数据
 from nautilus_trader.persistence.loaders import CSVTickDataLoader
@@ -2950,7 +2950,7 @@ ticks = loader.load("path/to/your/data.csv")
 # 保存到 catalog
 catalog.write_data(ticks)
 </code></pre>
-<h3>2. 从交易所获取实时数据</h3>
+<h3 id="2_-从交易所获取实时数据">2. 从交易所获取实时数据</h3>
 <pre><code class="language-python"># 以 Binance 为例
 from nautilus_trader.adapters.binance.config import BinanceDataClientConfig
 from nautilus_trader.adapters.binance.factories import BinanceLiveDataClientFactory
@@ -2969,14 +2969,14 @@ data_client = BinanceLiveDataClientFactory.create(
     config=config,
 )
 </code></pre>
-<h2>注意事项</h2>
+<h2 id="注意事项">注意事项</h2>
 <ol>
 <li><strong>数据质量</strong>：回测结果的准确性依赖于数据质量</li>
 <li><strong>滑点和手续费</strong>：记得在回测配置中设置现实的滑点和手续费</li>
 <li><strong>过度拟合</strong>：避免过度优化策略参数</li>
 <li><strong>样本外测试</strong>：使用未参与优化的数据进行验证</li>
 </ol>
-<h2>下一步</h2>
+<h2 id="下一步">下一步</h2>
 <ol>
 <li>尝试修改 MACD 策略参数</li>
 <li>实现其他技术指标策略</li>
@@ -2984,7 +2984,7 @@ data_client = BinanceLiveDataClientFactory.create(
 <li>尝试多品种交易</li>
 <li>连接实盘交易</li>
 </ol>
-<h2>资源链接</h2>
+<h2 id="资源链接">资源链接</h2>
 <ul>
 <li><a href="https://nautilustrader.io/docs/">官方文档</a></li>
 <li><a href="https://github.com/nautechsystems/nautilus_trader">GitHub 仓库</a></li>
@@ -2992,8 +2992,8 @@ data_client = BinanceLiveDataClientFactory.create(
 <li><a href="https://discord.gg/AUWEAMZk">社区论坛</a></li>
 </ul>
 <p>现在你已经掌握了 NautilusTrader 的完整入门流程，包括最重要的数据获取步骤！</p>
-]]></description><author>Developer</author><guid isPermaLink="false">b08fe97d1bb5febcc841d7a9a7368b8ab464022089ed03893dbba133154ee448</guid><pubDate>Mon, 21 Jul 2025 13:31:00 +0000</pubDate></item><item><title>How to build an agent</title><link>https://Anonymous.github.io/kpgb/posts/how-to-build-an-agent.html</link><description><![CDATA[<h1>如何构建一个代理程序</h1>
-<h2>或者：皇帝的新衣</h2>
+]]></description><author>Developer</author><guid isPermaLink="false">b08fe97d1bb5febcc841d7a9a7368b8ab464022089ed03893dbba133154ee448</guid><pubDate>Mon, 21 Jul 2025 13:31:00 +0000</pubDate></item><item><title>How to build an agent</title><link>https://Anonymous.github.io/kpgb/posts/how-to-build-an-agent.html</link><description><![CDATA[<h1 id="如何构建一个代理程序">如何构建一个代理程序</h1>
+<h2 id="或者_皇帝的新衣">或者：皇帝的新衣</h2>
 <p><strong>Thorsten Ball，2025年4月15日</strong></p>
 <p>构建一个功能完整的代码编辑代理程序其实并不难。</p>
 <p>看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。</p>
@@ -3111,7 +3111,7 @@ go run main.go
 <p>然后你就可以和Claude聊天了，像这样：</p>
 <p>注意我们如何在多轮对话中保持同一个对话。它记住了我在第一条消息中的名字。<code>conversation</code>在每一轮中都会变长，我们每次都发送整个对话。服务器——Anthropic的服务器——是无状态的。它只能看到<code>conversation</code>切片中的内容。维护状态是我们的责任。</p>
 <p>好的，让我们继续，因为昵称很糟糕，而且这还不是一个代理程序。什么是代理程序？这是<a href="https://youtu.be/J1-W9O3n7j8?t=72">我的定义</a>：一个可以访问工具的LLM，让它具有修改上下文窗口之外内容的能力。</p>
-<h2>第一个工具</h2>
+<h2 id="第一个工具">第一个工具</h2>
 <p>具有工具访问权限的LLM？什么是工具？基本思想是这样的：你向模型发送一个提示，说如果它想使用“工具“，应该以某种特定方式回复。然后你，作为消息的接收者，通过执行工具来“使用工具“并回复结果。就是这样。我们将看到的其他一切都只是在此基础上的抽象。</p>
 <p>想象你正在和朋友交谈，你告诉他们：“在接下来的对话中，如果你想让我举起手臂，就眨眼睛”。说出来很奇怪，但这是一个容易理解的概念。</p>
 <p>我们已经可以在不改变任何代码的情况下尝试它了。</p>
@@ -3125,7 +3125,7 @@ go run main.go
 </ol>
 <p>为了使(1)更容易，大型模型提供商构建了内置API来发送工具定义。</p>
 <p>好的，现在让我们构建我们的第一个工具：<code>read_file</code></p>
-<h2><code>read_file</code>工具</h2>
+<h2 id="read-file工具"><code>read_file</code>工具</h2>
 <p>为了定义<code>read_file</code>工具，我们将使用Anthropic SDK建议的类型，但请记住：在底层，这都将作为字符串发送给模型。这都是“如果你想让我使用<code>read_file</code>就眨眼“。</p>
 <p>我们要添加的每个工具都需要以下内容：</p>
 <ul>
@@ -3353,7 +3353,7 @@ func (a *Agent) executeTool(id, name string, input json.RawMessage) anthropic.Co
 <p>让我们深呼吸，一起说出来。准备好了吗？开始：太棒了。你只是给它一个工具，它就…在认为有助于解决任务时使用它。记住：我们没有说任何关于“如果用户询问文件，就读取文件“的话。我们也没有说“如果某些东西看起来像文件名，就想办法读取它“。不，这些都没有。我们说“帮我解决这个文件中的问题“，Claude意识到它可以读取文件来回答，然后就去做了。</p>
 <p>当然，我们可以具体一点，真正推动它使用工具，但它基本上是自己完成的：</p>
 <p>非常准确。好的，现在我们知道如何让Claude使用工具，让我们添加更多工具。</p>
-<h2><code>list_files</code>工具</h2>
+<h2 id="list-files工具"><code>list_files</code>工具</h2>
 <p>如果你和我一样，当你登录到一台新计算机时，你做的第一件事就是通过运行<code>ls</code>来了解情况——列出文件。</p>
 <p>让我们给Claude同样的能力，一个列出文件的工具。这是<code>list_files</code>工具的完整实现：</p>
 <pre><code class="language-go">// main.go
@@ -3431,7 +3431,7 @@ func main() {
 <p>就…就像我们会做的一样，对吧？我的意思是，在这里，如果我问你我们在这个项目中使用什么版本的Go，你会怎么做？这是Claude为我做的：</p>
 <p>Claude查看目录，查看<code>go.mod</code>，然后给出答案。</p>
 <p>我们现在大约有190行代码。让这个数字深入人心。一旦你感受到了，让我们添加另一个工具。</p>
-<h2>让它<code>edit_file</code></h2>
+<h2 id="让它edit-file">让它<code>edit_file</code></h2>
 <p>我们要添加的最后一个工具是<code>edit_file</code>——一个让Claude编辑文件的工具。</p>
 <p>“天哪”，你现在在想，“这就是橡胶遇到路面的地方，这就是他从帽子里拉出兔子的地方。“好吧，让我们看看，好吗？</p>
 <p>首先，让我们为我们新的<code>edit_file</code>工具添加一个定义：</p>
@@ -3577,16 +3577,16 @@ Congratulations on building a code-editing agent!
 <p>这本质上就是代码编辑代理程序内部循环的全部内容。当然，将其集成到你的编辑器中，调整系统提示，在适当的时间给它适当的反馈，围绕它的漂亮UI，围绕工具的更好工具，对多个代理程序的支持等等——我们在Amp中构建了所有这些，但它不需要天才的时刻。所需要的只是实用的工程和苦工。</p>
 <p>这些模型现在非常强大。300行代码和三个工具，现在你可以与编辑你代码的外星智能对话。如果你认为“好吧，但我们没有真正…“——去试试吧！去看看你能用这个走多远。我打赌比你想象的要远得多。</p>
 <p>这就是为什么我们认为一切都在改变。</p>
-]]></description><author>DaviRain-Su</author><guid isPermaLink="false">QmZx8psFhFU9imDvGaMJTfMiiDoWohBEdVYwSvNhQqDHDW</guid><pubDate>Mon, 21 Jul 2025 10:16:15 +0000</pubDate></item><item><title>Auto Excerpt Test</title><link>https://Anonymous.github.io/kpgb/posts/auto-excerpt-test.html</link><description><![CDATA[<h1>Introduction to Auto Excerpts</h1>
+]]></description><author>DaviRain-Su</author><guid isPermaLink="false">QmZx8psFhFU9imDvGaMJTfMiiDoWohBEdVYwSvNhQqDHDW</guid><pubDate>Mon, 21 Jul 2025 10:16:15 +0000</pubDate></item><item><title>Auto Excerpt Test</title><link>https://Anonymous.github.io/kpgb/posts/auto-excerpt-test.html</link><description><![CDATA[<h1 id="introduction-to-auto-excerpts">Introduction to Auto Excerpts</h1>
 <p>This post demonstrates the new automatic excerpt generation feature in KPGB. The excerpt should be generated from the first paragraph of the content, stripping markdown formatting while preserving readability.</p>
-<h2>How It Works</h2>
+<h2 id="how-it-works">How It Works</h2>
 <p>The system now automatically generates excerpts when:</p>
 <ol>
 <li>No excerpt is provided in the frontmatter</li>
 <li>The content needs to be summarized for list views</li>
 <li>Clean, readable text is needed without HTML</li>
 </ol>
-<h3>Technical Details</h3>
+<h3 id="technical-details">Technical Details</h3>
 <p>The excerpt generator uses <strong>pulldown-cmark</strong> to parse markdown and extract plain text. It handles:</p>
 <ul>
 <li><strong>Bold</strong> and <em>italic</em> text</li>
@@ -3599,7 +3599,7 @@ fn generate_excerpt(markdown: &amp;str) -&gt; String {
     // Implementation details...
 }
 </code></pre>
-<h2>Benefits</h2>
+<h2 id="benefits">Benefits</h2>
 <p>The automatic excerpt generation provides several benefits:</p>
 <ul>
 <li>Consistent formatting across all posts</li>

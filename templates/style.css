@@ -539,3 +539,121 @@ footer p {
         padding-top: 2rem;
     }
 }
+
+/* Table of Contents Styles */
+.post-with-toc {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    position: relative;
+}
+
+.toc-container {
+    flex: 0 0 250px;
+    position: sticky;
+    top: 2rem;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+}
+
+.toc {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+}
+
+.toc-title {
+    font-size: 1.1rem;
+    margin: 0 0 1rem 0;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
+}
+
+.toc-list,
+.toc-sublist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-sublist {
+    margin-left: 1.2rem;
+    margin-top: 0.3rem;
+}
+
+.toc-item {
+    margin: 0.5rem 0;
+}
+
+.toc-link {
+    color: #555;
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: block;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.toc-link:hover {
+    background: #e3f2fd;
+    color: #1976d2;
+    padding-left: 0.8rem;
+}
+
+.toc-level-2 > .toc-link {
+    font-weight: 600;
+}
+
+.toc-level-3 > .toc-link {
+    font-size: 0.9rem;
+}
+
+.toc-level-4 > .toc-link,
+.toc-level-5 > .toc-link,
+.toc-level-6 > .toc-link {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+}
+
+/* Smooth scrolling for TOC links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Heading anchors */
+.post-content h1[id],
+.post-content h2[id],
+.post-content h3[id],
+.post-content h4[id],
+.post-content h5[id],
+.post-content h6[id] {
+    scroll-margin-top: 2rem;
+}
+
+/* Active TOC item highlighting */
+.toc-link.active {
+    background: #3498db;
+    color: white;
+    font-weight: 600;
+}
+
+/* Mobile TOC */
+@media (max-width: 1024px) {
+    .post-with-toc {
+        flex-direction: column;
+    }
+    
+    .toc-container {
+        position: static;
+        width: 100%;
+        max-height: none;
+        margin-bottom: 2rem;
+    }
+    
+    .toc {
+        background: #f0f4f8;
+    }
+}

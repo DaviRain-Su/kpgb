@@ -119,8 +119,16 @@
         
     </header>
 
-    <div class="post-content">
-        <p>OCaml 是一种经过严格评估的函数式语言，具有一些命令式功能。</p>
+    
+    <div class="post-with-toc">
+        <aside class="toc-container">
+            <nav class="toc" id="toc">
+    <h2 class="toc-title">Table of Contents</h2>
+    <ul class="toc-list"><li class="toc-item toc-level-2">
+                <a href="#进一步阅读" class="toc-link">进一步阅读</a></li></ul></nav>
+        </aside>
+        <div class="post-content">
+            <p>OCaml 是一种经过严格评估的函数式语言，具有一些命令式功能。</p>
 <p>它与标准 ML 及其方言一起属于 ML 语言家族。 F# 也深受 OCaml 的影响。</p>
 <p>就像标准 ML 一样，OCaml 具有可交互使用的解释器和编译器。解释器二进制文件通常称为 ocaml ，编译器称为 ocamlopt 。还有一个字节码编译器 ocamlc ，但使用它的理由很少。</p>
 <p>它还包括包管理器 opam 和构建系统 dune 。</p>
@@ -1018,7 +1026,7 @@ Printf.printf "counter.contents = %d\n" !counter;;
   这是一种简写，它等同于 { contents = 0; }。
 *)
 </code></pre>
-<h2>进一步阅读</h2>
+<h2 id="进一步阅读">进一步阅读</h2>
 <ul>
 <li>访问官方网站获取编译器并阅读文档：<a href="http://ocaml.org/">http://ocaml.org/</a></li>
 <li>OCaml 快速教程：<a href="https://ocaml.org/docs/up-and-running">https://ocaml.org/docs/up-and-running</a></li>
@@ -1028,7 +1036,9 @@ Printf.printf "counter.contents = %d\n" !counter;;
 <li>尝试 OCaml Pro 的交互式教程和基于 Web 的解释器：<a href="http://try.ocamlpro.com/">http://try.ocamlpro.com/</a></li>
 </ul>
 
+        </div>
     </div>
+    
 
     <footer class="post-footer">
         <div class="post-info">
@@ -1146,6 +1156,50 @@ Printf.printf "counter.contents = %d\n" !counter;;
     </div>
     
 </article>
+
+
+<script>
+// TOC active section highlighting
+(function() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    
+    if (tocLinks.length === 0 || headings.length === 0) return;
+    
+    function updateActiveSection() {
+        const scrollPosition = window.scrollY + 100; // Offset for better UX
+        
+        let activeHeading = null;
+        for (const heading of headings) {
+            if (heading.offsetTop <= scrollPosition) {
+                activeHeading = heading;
+            } else {
+                break;
+            }
+        }
+        
+        if (activeHeading) {
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + activeHeading.id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateActiveSection, 50);
+    });
+    
+    // Initial update
+    updateActiveSection();
+})();
+</script>
+
 
         </div>
     </main>

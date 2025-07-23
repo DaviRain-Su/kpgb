@@ -125,10 +125,18 @@
         
     </header>
 
-    <div class="post-content">
-        <h1>真正的IPFS存储测试</h1>
+    
+    <div class="post-with-toc">
+        <aside class="toc-container">
+            <nav class="toc" id="toc">
+    <h2 class="toc-title">Table of Contents</h2>
+    <ul class="toc-list"><li class="toc-item toc-level-2">
+                <a href="#ipfs的优势" class="toc-link">IPFS的优势</a></li></ul></nav>
+        </aside>
+        <div class="post-content">
+            <h1 id="真正的ipfs存储测试">真正的IPFS存储测试</h1>
 <p>这篇文章将被存储在IPFS网络上！</p>
-<h2>IPFS的优势</h2>
+<h2 id="ipfs的优势">IPFS的优势</h2>
 <ul>
 <li><strong>去中心化</strong>: 内容分布在整个网络</li>
 <li><strong>不可篡改</strong>: 内容通过哈希验证</li>
@@ -136,7 +144,9 @@
 </ul>
 <p>创建时间: 2025-01-20</p>
 
+        </div>
     </div>
+    
 
     <footer class="post-footer">
         <div class="post-info">
@@ -264,6 +274,50 @@
     </div>
     
 </article>
+
+
+<script>
+// TOC active section highlighting
+(function() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    
+    if (tocLinks.length === 0 || headings.length === 0) return;
+    
+    function updateActiveSection() {
+        const scrollPosition = window.scrollY + 100; // Offset for better UX
+        
+        let activeHeading = null;
+        for (const heading of headings) {
+            if (heading.offsetTop <= scrollPosition) {
+                activeHeading = heading;
+            } else {
+                break;
+            }
+        }
+        
+        if (activeHeading) {
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + activeHeading.id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateActiveSection, 50);
+    });
+    
+    // Initial update
+    updateActiveSection();
+})();
+</script>
+
 
         </div>
     </main>

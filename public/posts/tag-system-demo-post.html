@@ -139,10 +139,19 @@
         
     </header>
 
-    <div class="post-content">
-        <h1>Tag System Demo Post</h1>
+    
+    <div class="post-with-toc">
+        <aside class="toc-container">
+            <nav class="toc" id="toc">
+    <h2 class="toc-title">Table of Contents</h2>
+    <ul class="toc-list"><li class="toc-item toc-level-2">
+                <a href="#features-added" class="toc-link">Features Added</a></li><li class="toc-item toc-level-2">
+                <a href="#technical-implementation" class="toc-link">Technical Implementation</a></li></ul></nav>
+        </aside>
+        <div class="post-content">
+            <h1 id="tag-system-demo-post">Tag System Demo Post</h1>
 <p>This post demonstrates the new tag system implementation in KPGB.</p>
-<h2>Features Added</h2>
+<h2 id="features-added">Features Added</h2>
 <p>The tag system now includes:</p>
 <ol>
 <li><strong>Tag Browsing</strong>: Click on any tag to see all posts with that tag</li>
@@ -151,7 +160,7 @@
 <li><strong>Static Generation</strong>: Tag pages are generated for static sites</li>
 <li><strong>Clean URLs</strong>: Tag pages use clean URL structure</li>
 </ol>
-<h2>Technical Implementation</h2>
+<h2 id="technical-implementation">Technical Implementation</h2>
 <ul>
 <li>Database layer: Tag queries with post counts</li>
 <li>API endpoints: <code>/api/tags</code> and <code>/api/tags/:tag</code></li>
@@ -161,7 +170,9 @@
 </ul>
 <p>Try clicking on the tags below to explore posts by topic!</p>
 
+        </div>
     </div>
+    
 
     <footer class="post-footer">
         <div class="post-info">
@@ -305,6 +316,50 @@
     </div>
     
 </article>
+
+
+<script>
+// TOC active section highlighting
+(function() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    
+    if (tocLinks.length === 0 || headings.length === 0) return;
+    
+    function updateActiveSection() {
+        const scrollPosition = window.scrollY + 100; // Offset for better UX
+        
+        let activeHeading = null;
+        for (const heading of headings) {
+            if (heading.offsetTop <= scrollPosition) {
+                activeHeading = heading;
+            } else {
+                break;
+            }
+        }
+        
+        if (activeHeading) {
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + activeHeading.id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateActiveSection, 50);
+    });
+    
+    // Initial update
+    updateActiveSection();
+})();
+</script>
+
 
         </div>
     </main>

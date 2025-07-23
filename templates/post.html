@@ -23,9 +23,20 @@
         {% endif %}
     </header>
 
+    {% if has_toc %}
+    <div class="post-with-toc">
+        <aside class="toc-container">
+            {{ toc_html | safe }}
+        </aside>
+        <div class="post-content">
+            {{ content_html | safe }}
+        </div>
+    </div>
+    {% else %}
     <div class="post-content">
         {{ content_html | safe }}
     </div>
+    {% endif %}
 
     <footer class="post-footer">
         <div class="post-info">
@@ -95,4 +106,48 @@
     </div>
     {% endif %}
 </article>
+
+{% if has_toc %}
+<script>
+// TOC active section highlighting
+(function() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    
+    if (tocLinks.length === 0 || headings.length === 0) return;
+    
+    function updateActiveSection() {
+        const scrollPosition = window.scrollY + 100; // Offset for better UX
+        
+        let activeHeading = null;
+        for (const heading of headings) {
+            if (heading.offsetTop <= scrollPosition) {
+                activeHeading = heading;
+            } else {
+                break;
+            }
+        }
+        
+        if (activeHeading) {
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + activeHeading.id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateActiveSection, 50);
+    });
+    
+    // Initial update
+    updateActiveSection();
+})();
+</script>
+{% endif %}
 {% endblock content %}

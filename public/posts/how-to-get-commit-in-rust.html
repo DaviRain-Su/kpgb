@@ -119,8 +119,17 @@
         
     </header>
 
-    <div class="post-content">
-        <h2>Code example</h2>
+    
+    <div class="post-with-toc">
+        <aside class="toc-container">
+            <nav class="toc" id="toc">
+    <h2 class="toc-title">Table of Contents</h2>
+    <ul class="toc-list"><li class="toc-item toc-level-2">
+                <a href="#code-example" class="toc-link">Code example</a></li><li class="toc-item toc-level-2">
+                <a href="#代码解释" class="toc-link">代码解释</a></li></ul></nav>
+        </aside>
+        <div class="post-content">
+            <h2 id="code-example">Code example</h2>
 <pre><code class="language-rust">use std::{borrow::Cow, process::Command};
 
 fn main() {
@@ -152,7 +161,7 @@ fn output_git_short_hash() {
 	println!("cargo:rerun-if-changed=build.rs");
 }
 </code></pre>
-<h2>代码解释</h2>
+<h2 id="代码解释">代码解释</h2>
 <p>这段代码的作用是使用 Rust 的 <code>std::process::Command</code> 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 <code>build.rs</code> 文件来实现的。</p>
 <p>下面是这个代码的工作原理：</p>
 <ol>
@@ -179,7 +188,9 @@ fn output_git_short_hash() {
 </ul>
 <p>需要注意的是，<code>cargo:rerun-if-changed</code> 指令只能在 <code>build.rs</code> 文件中使用，而且必须放在一个单独的行中，不能和其他代码混在一起。这是因为指令实际上是一种注释，不是 Rust 代码，所以不能包含在函数、结构体或其他 Rust 语言结构中。</p>
 
+        </div>
     </div>
+    
 
     <footer class="post-footer">
         <div class="post-info">
@@ -297,6 +308,50 @@ fn output_git_short_hash() {
     </div>
     
 </article>
+
+
+<script>
+// TOC active section highlighting
+(function() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    
+    if (tocLinks.length === 0 || headings.length === 0) return;
+    
+    function updateActiveSection() {
+        const scrollPosition = window.scrollY + 100; // Offset for better UX
+        
+        let activeHeading = null;
+        for (const heading of headings) {
+            if (heading.offsetTop <= scrollPosition) {
+                activeHeading = heading;
+            } else {
+                break;
+            }
+        }
+        
+        if (activeHeading) {
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + activeHeading.id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateActiveSection, 50);
+    });
+    
+    // Initial update
+    updateActiveSection();
+})();
+</script>
+
 
         </div>
     </main>

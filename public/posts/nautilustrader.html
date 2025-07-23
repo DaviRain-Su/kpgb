@@ -143,16 +143,39 @@
         
     </header>
 
-    <div class="post-content">
-        <h1>NautilusTrader 完整快速入门指南</h1>
+    
+    <div class="post-with-toc">
+        <aside class="toc-container">
+            <nav class="toc" id="toc">
+    <h2 class="toc-title">Table of Contents</h2>
+    <ul class="toc-list"><li class="toc-item toc-level-2">
+                <a href="#前置要求" class="toc-link">前置要求</a></li><li class="toc-item toc-level-2">
+                <a href="#安装步骤" class="toc-link">安装步骤</a><ul class="toc-sublist"><li class="toc-item toc-level-3">
+                <a href="#1_-安装-nautilustrader" class="toc-link">1. 安装 NautilusTrader</a></li><li class="toc-item toc-level-3">
+                <a href="#2_-获取示例数据_重要__" class="toc-link">2. 获取示例数据（重要！）</a></li></ul></li><li class="toc-item toc-level-2">
+                <a href="#完整的回测示例" class="toc-link">完整的回测示例</a><ul class="toc-sublist"><li class="toc-item toc-level-3">
+                <a href="#1_-导入必要的模块" class="toc-link">1. 导入必要的模块</a></li><li class="toc-item toc-level-3">
+                <a href="#2_-设置数据目录" class="toc-link">2. 设置数据目录</a></li><li class="toc-item toc-level-3">
+                <a href="#3_-创建简单的-macd-策略" class="toc-link">3. 创建简单的 MACD 策略</a></li><li class="toc-item toc-level-3">
+                <a href="#4_-配置并运行回测" class="toc-link">4. 配置并运行回测</a></li><li class="toc-item toc-level-3">
+                <a href="#5_-分析回测结果" class="toc-link">5. 分析回测结果</a></li></ul></li><li class="toc-item toc-level-2">
+                <a href="#数据获取的其他方式" class="toc-link">数据获取的其他方式</a><ul class="toc-sublist"><li class="toc-item toc-level-3">
+                <a href="#1_-使用自己的数据" class="toc-link">1. 使用自己的数据</a></li><li class="toc-item toc-level-3">
+                <a href="#2_-从交易所获取实时数据" class="toc-link">2. 从交易所获取实时数据</a></li></ul></li><li class="toc-item toc-level-2">
+                <a href="#注意事项" class="toc-link">注意事项</a></li><li class="toc-item toc-level-2">
+                <a href="#下一步" class="toc-link">下一步</a></li><li class="toc-item toc-level-2">
+                <a href="#资源链接" class="toc-link">资源链接</a></li></ul></nav>
+        </aside>
+        <div class="post-content">
+            <h1 id="nautilustrader-完整快速入门指南">NautilusTrader 完整快速入门指南</h1>
 <p>NautilusTrader 是一个高性能的开源交易平台，本文将提供一个包含数据获取的完整入门指南。</p>
-<h2>前置要求</h2>
+<h2 id="前置要求">前置要求</h2>
 <ul>
 <li>Python 3.11 或更高版本</li>
 <li>稳定的网络连接（用于下载数据）</li>
 </ul>
-<h2>安装步骤</h2>
-<h3>1. 安装 NautilusTrader</h3>
+<h2 id="安装步骤">安装步骤</h2>
+<h3 id="1_-安装-nautilustrader">1. 安装 NautilusTrader</h3>
 <pre><code class="language-bash"># 创建虚拟环境（推荐）
 python -m venv nautilus_env
 source nautilus_env/bin/activate  # Linux/Mac
@@ -164,7 +187,7 @@ pip install -U nautilus_trader
 # 安装 JupyterLab（可选，用于交互式开发）
 pip install -U jupyterlab
 </code></pre>
-<h3>2. 获取示例数据（重要！）</h3>
+<h3 id="2_-获取示例数据_重要__">2. 获取示例数据（重要！）</h3>
 <p>官方提供了一个便捷的脚本来下载示例数据：</p>
 <pre><code class="language-python"># 在 Jupyter notebook 或 Python 脚本中运行
 import subprocess
@@ -189,8 +212,8 @@ subprocess.run([
 <li>将数据转换为 Parquet 格式</li>
 <li>创建数据目录结构</li>
 </ul>
-<h2>完整的回测示例</h2>
-<h3>1. 导入必要的模块</h3>
+<h2 id="完整的回测示例">完整的回测示例</h2>
+<h3 id="1_-导入必要的模块">1. 导入必要的模块</h3>
 <pre><code class="language-python">from decimal import Decimal
 from pathlib import Path
 
@@ -206,7 +229,7 @@ from nautilus_trader.model.objects import Price, Quantity
 from nautilus_trader.persistence.catalog.parquet import ParquetDataCatalog
 from nautilus_trader.trading.strategy import Strategy
 </code></pre>
-<h3>2. 设置数据目录</h3>
+<h3 id="2_-设置数据目录">2. 设置数据目录</h3>
 <pre><code class="language-python"># 设置数据目录路径
 from nautilus_trader.persistence.catalog import ParquetDataCatalog
 
@@ -222,7 +245,7 @@ start = catalog.min_timestamp("quote_tick", instrument_id="EUR/USD.SIM")
 end = catalog.max_timestamp("quote_tick", instrument_id="EUR/USD.SIM")
 print(f"数据时间范围: {start} 到 {end}")
 </code></pre>
-<h3>3. 创建简单的 MACD 策略</h3>
+<h3 id="3_-创建简单的-macd-策略">3. 创建简单的 MACD 策略</h3>
 <pre><code class="language-python">from nautilus_trader.indicators.macd import MovingAverageConvergenceDivergence
 from nautilus_trader.trading.strategy import Strategy
 
@@ -315,7 +338,7 @@ class MACDStrategy(Strategy):
         )
         self.submit_order(order)
 </code></pre>
-<h3>4. 配置并运行回测</h3>
+<h3 id="4_-配置并运行回测">4. 配置并运行回测</h3>
 <pre><code class="language-python"># 配置回测
 config = BacktestRunConfig(
     engine=BacktestEngineConfig(
@@ -358,7 +381,7 @@ config = BacktestRunConfig(
 node = BacktestNode(configs=[config])
 results = node.run()
 </code></pre>
-<h3>5. 分析回测结果</h3>
+<h3 id="5_-分析回测结果">5. 分析回测结果</h3>
 <pre><code class="language-python"># 获取引擎实例
 engine = node.engine
 
@@ -386,8 +409,8 @@ return_pct = (pnl / starting_balance) * 100
 print(f"盈亏: ${pnl:.2f}")
 print(f"收益率: {return_pct:.2f}%")
 </code></pre>
-<h2>数据获取的其他方式</h2>
-<h3>1. 使用自己的数据</h3>
+<h2 id="数据获取的其他方式">数据获取的其他方式</h2>
+<h3 id="1_-使用自己的数据">1. 使用自己的数据</h3>
 <p>如果你有自己的数据，可以将其转换为 NautilusTrader 格式：</p>
 <pre><code class="language-python"># 从 CSV 导入数据
 from nautilus_trader.persistence.loaders import CSVTickDataLoader
@@ -404,7 +427,7 @@ ticks = loader.load("path/to/your/data.csv")
 # 保存到 catalog
 catalog.write_data(ticks)
 </code></pre>
-<h3>2. 从交易所获取实时数据</h3>
+<h3 id="2_-从交易所获取实时数据">2. 从交易所获取实时数据</h3>
 <pre><code class="language-python"># 以 Binance 为例
 from nautilus_trader.adapters.binance.config import BinanceDataClientConfig
 from nautilus_trader.adapters.binance.factories import BinanceLiveDataClientFactory
@@ -423,14 +446,14 @@ data_client = BinanceLiveDataClientFactory.create(
     config=config,
 )
 </code></pre>
-<h2>注意事项</h2>
+<h2 id="注意事项">注意事项</h2>
 <ol>
 <li><strong>数据质量</strong>：回测结果的准确性依赖于数据质量</li>
 <li><strong>滑点和手续费</strong>：记得在回测配置中设置现实的滑点和手续费</li>
 <li><strong>过度拟合</strong>：避免过度优化策略参数</li>
 <li><strong>样本外测试</strong>：使用未参与优化的数据进行验证</li>
 </ol>
-<h2>下一步</h2>
+<h2 id="下一步">下一步</h2>
 <ol>
 <li>尝试修改 MACD 策略参数</li>
 <li>实现其他技术指标策略</li>
@@ -438,7 +461,7 @@ data_client = BinanceLiveDataClientFactory.create(
 <li>尝试多品种交易</li>
 <li>连接实盘交易</li>
 </ol>
-<h2>资源链接</h2>
+<h2 id="资源链接">资源链接</h2>
 <ul>
 <li><a href="https://nautilustrader.io/docs/">官方文档</a></li>
 <li><a href="https://github.com/nautechsystems/nautilus_trader">GitHub 仓库</a></li>
@@ -447,7 +470,9 @@ data_client = BinanceLiveDataClientFactory.create(
 </ul>
 <p>现在你已经掌握了 NautilusTrader 的完整入门流程，包括最重要的数据获取步骤！</p>
 
+        </div>
     </div>
+    
 
     <footer class="post-footer">
         <div class="post-info">
@@ -583,6 +608,50 @@ data_client = BinanceLiveDataClientFactory.create(
     </div>
     
 </article>
+
+
+<script>
+// TOC active section highlighting
+(function() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    
+    if (tocLinks.length === 0 || headings.length === 0) return;
+    
+    function updateActiveSection() {
+        const scrollPosition = window.scrollY + 100; // Offset for better UX
+        
+        let activeHeading = null;
+        for (const heading of headings) {
+            if (heading.offsetTop <= scrollPosition) {
+                activeHeading = heading;
+            } else {
+                break;
+            }
+        }
+        
+        if (activeHeading) {
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + activeHeading.id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateActiveSection, 50);
+    });
+    
+    // Initial update
+    updateActiveSection();
+})();
+</script>
+
 
         </div>
     </main>

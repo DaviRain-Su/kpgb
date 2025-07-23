@@ -129,9 +129,19 @@ pub async fn post(
     context.insert("site", &site_config);
     context.insert("page_title", &post.title);
     context.insert("post", post);
-    context.insert("content_html", &markdown_to_html(&post.content));
+
+    // Generate HTML content with heading IDs
+    let content_html = markdown_to_html(&post.content);
+    context.insert("content_html", &content_html);
     context.insert("storage_id", storage_id);
     context.insert("related_posts", &related_posts_data);
+
+    // Generate table of contents
+    let toc = crate::utils::generate_toc(&post.content);
+    let toc_html = crate::utils::toc::generate_toc_html(&toc);
+    context.insert("toc", &toc);
+    context.insert("toc_html", &toc_html);
+    context.insert("has_toc", &!toc.is_empty());
 
     if storage_id.starts_with("Qm") {
         context.insert(
@@ -462,7 +472,28 @@ fn markdown_to_html(markdown: &str) -> String {
     let mut html_output = String::new();
     html::push_html(&mut html_output, parser);
 
-    html_output
+    // Post-process HTML to add IDs to headings
+    add_heading_ids_to_html(&html_output)
+}
+
+/// Add IDs to headings in HTML for TOC navigation
+fn add_heading_ids_to_html(html: &str) -> String {
+    use regex::Regex;
+
+    let heading_re = Regex::new(r"<h([1-6])>(.*?)</h[1-6]>").unwrap();
+
+    heading_re
+        .replace_all(html, |caps: &regex::Captures| {
+            let level = &caps[1];
+            let content = &caps[2];
+
+            // Extract text content without HTML tags for ID generation
+            let text_only = Regex::new(r"<[^>]+>").unwrap().replace_all(content, "");
+            let id = crate::utils::toc::generate_heading_id(&text_only);
+
+            format!(r#"<h{} id="{}">{}</h{}>"#, level, id, content, level)
+        })
+        .to_string()
 }
 
 use chrono::Datelike;

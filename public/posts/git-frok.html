@@ -119,9 +119,21 @@
         
     </header>
 
-    <div class="post-content">
-        <p>Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 – 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的原理。在这篇博客中，我将向你介绍基础知识，疑难杂症，甚至给你留下一个很酷的小技巧，让你走在曲线的前面。</p>
-<h2>Git Upstream: 保持最新做出贡献</h2>
+    
+    <div class="post-with-toc">
+        <aside class="toc-container">
+            <nav class="toc" id="toc">
+    <h2 class="toc-title">Table of Contents</h2>
+    <ul class="toc-list"><li class="toc-item toc-level-2">
+                <a href="#git-upstream_-保持最新做出贡献" class="toc-link">Git Upstream: 保持最新做出贡献</a></li><li class="toc-item toc-level-2">
+                <a href="#publish-with-git-fork" class="toc-link">Publish with git fork</a></li><li class="toc-item toc-level-2">
+                <a href="#tip-of-the-day_-ahead_behind-number-in-the-promt" class="toc-link">Tip of the day: Ahead/Behind number in the promt</a></li><li class="toc-item toc-level-2">
+                <a href="#内部结构" class="toc-link">内部结构</a></li><li class="toc-item toc-level-2">
+                <a href="#getting-started-with-git-upstream" class="toc-link">Getting started with git upstream</a></li></ul></nav>
+        </aside>
+        <div class="post-content">
+            <p>Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 – 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的原理。在这篇博客中，我将向你介绍基础知识，疑难杂症，甚至给你留下一个很酷的小技巧，让你走在曲线的前面。</p>
+<h2 id="git-upstream_-保持最新做出贡献">Git Upstream: 保持最新做出贡献</h2>
 <p>让我先详细介绍一下与上游仓库交互的常见设置和最基本的工作流程。</p>
 <p>在一个标准的设置中，你通常有一个 origin 和一个 upstream remote - 后者是项目的守门人，或者你希望贡献的真实来源。</p>
 <p>首先，缺人你已经为上游仓库设置了一个 remote, 并希望也设置了一个 origin:</p>
@@ -156,7 +168,7 @@ git merge upstream/master
 git rebase upstream/master
 </code></pre>
 <p>如果你需要把几个提交压成一个，你可以在这时使用厉害的 rebase 互动。</p>
-<h2>Publish with git fork</h2>
+<h2 id="publish-with-git-fork">Publish with git fork</h2>
 <p>经过以上步骤后，通过简单的 push, 在远程 fork 中发布你的作品。</p>
 <pre><code class="language-bash">git push origin feature-x
 </code></pre>
@@ -165,7 +177,7 @@ git rebase upstream/master
 <pre><code class="language-bash">git push -f origin feature-x
 </code></pre>
 <p>我个人更倾向于尽量保持历史记录的干净，选择方案三，但不同的团队有不同的工作流程。注意：只有在使用你自己的 fork 时，你才能这样做，重写共享库和分支的历史是绝对不应该做的。重写共享库和分支的历史是你永远不应该改做的事情。</p>
-<h2>Tip of the day: Ahead/Behind number in the promt</h2>
+<h2 id="tip-of-the-day_-ahead_behind-number-in-the-promt">Tip of the day: Ahead/Behind number in the promt</h2>
 <p>fetch 之后，git status 会显示你比同步的远程分支提前或落后多少次提交。如果你能在你忠实的命令行提示符下看到这些信息，岂不是更好？我也是这么想的，所以我开始用我的 bash chopsticks 并制作了它。</p>
 <p>下面是你配置好后，它在你的提示符上的样子：</p>
 <pre><code class="language-bash">nick-macbook-air:~/dev/projects/stash[1|94]$
@@ -182,7 +194,7 @@ git rebase upstream/master
 <p>Sampl prompt:</p>
 <pre><code class="language-bash">export PS1="\h:\w[\$(ahead_behind)]$"
 </code></pre>
-<h2>内部结构</h2>
+<h2 id="内部结构">内部结构</h2>
 <p>对于那些喜欢细节和解释的人来说，这是如何工作的。</p>
 <p>我们得到当前 HEAD 的符号名称，及当前分支。</p>
 <pre><code class="language-bash">curr_branch=$(git rev-parse --abbrev-ref HEAD);
@@ -197,10 +209,12 @@ git rebase upstream/master
 <pre><code class="language-bash">git rev-list --left-right --count $curr_branch...$curr_remote/$curr_merge_branch | tr -s '\t' '|';
 </code></pre>
 <p>我们使用古老的 Unix tr 将 TAB 转换为分隔符 |.</p>
-<h2>Getting started with git upstream</h2>
+<h2 id="getting-started-with-git-upstream">Getting started with git upstream</h2>
 <p>这就是 git upstream 的基本演练，– 如何设置 git upstream, 创建新分支，收集修改，用 git fork 发布，还有一个贴心的提示，这就是你的远程分支领先 / 落后于你多少次提交。</p>
 
+        </div>
     </div>
+    
 
     <footer class="post-footer">
         <div class="post-info">
@@ -318,6 +332,50 @@ git rebase upstream/master
     </div>
     
 </article>
+
+
+<script>
+// TOC active section highlighting
+(function() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    
+    if (tocLinks.length === 0 || headings.length === 0) return;
+    
+    function updateActiveSection() {
+        const scrollPosition = window.scrollY + 100; // Offset for better UX
+        
+        let activeHeading = null;
+        for (const heading of headings) {
+            if (heading.offsetTop <= scrollPosition) {
+                activeHeading = heading;
+            } else {
+                break;
+            }
+        }
+        
+        if (activeHeading) {
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + activeHeading.id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateActiveSection, 50);
+    });
+    
+    // Initial update
+    updateActiveSection();
+})();
+</script>
+
 
         </div>
     </main>

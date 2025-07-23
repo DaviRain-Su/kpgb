@@ -131,17 +131,27 @@
         
     </header>
 
-    <div class="post-content">
-        <h1>Introduction to Auto Excerpts</h1>
+    
+    <div class="post-with-toc">
+        <aside class="toc-container">
+            <nav class="toc" id="toc">
+    <h2 class="toc-title">Table of Contents</h2>
+    <ul class="toc-list"><li class="toc-item toc-level-2">
+                <a href="#how-it-works" class="toc-link">How It Works</a><ul class="toc-sublist"><li class="toc-item toc-level-3">
+                <a href="#technical-details" class="toc-link">Technical Details</a></li></ul></li><li class="toc-item toc-level-2">
+                <a href="#benefits" class="toc-link">Benefits</a></li></ul></nav>
+        </aside>
+        <div class="post-content">
+            <h1 id="introduction-to-auto-excerpts">Introduction to Auto Excerpts</h1>
 <p>This post demonstrates the new automatic excerpt generation feature in KPGB. The excerpt should be generated from the first paragraph of the content, stripping markdown formatting while preserving readability.</p>
-<h2>How It Works</h2>
+<h2 id="how-it-works">How It Works</h2>
 <p>The system now automatically generates excerpts when:</p>
 <ol>
 <li>No excerpt is provided in the frontmatter</li>
 <li>The content needs to be summarized for list views</li>
 <li>Clean, readable text is needed without HTML</li>
 </ol>
-<h3>Technical Details</h3>
+<h3 id="technical-details">Technical Details</h3>
 <p>The excerpt generator uses <strong>pulldown-cmark</strong> to parse markdown and extract plain text. It handles:</p>
 <ul>
 <li><strong>Bold</strong> and <em>italic</em> text</li>
@@ -154,7 +164,7 @@ fn generate_excerpt(markdown: &amp;str) -&gt; String {
     // Implementation details...
 }
 </code></pre>
-<h2>Benefits</h2>
+<h2 id="benefits">Benefits</h2>
 <p>The automatic excerpt generation provides several benefits:</p>
 <ul>
 <li>Consistent formatting across all posts</li>
@@ -164,7 +174,9 @@ fn generate_excerpt(markdown: &amp;str) -&gt; String {
 </ul>
 <p>This feature enhances the overall user experience by providing clear, concise previews of each post without requiring authors to manually write excerpts.</p>
 
+        </div>
     </div>
+    
 
     <footer class="post-footer">
         <div class="post-info">
@@ -324,6 +336,50 @@ fn generate_excerpt(markdown: &amp;str) -&gt; String {
     </div>
     
 </article>
+
+
+<script>
+// TOC active section highlighting
+(function() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    
+    if (tocLinks.length === 0 || headings.length === 0) return;
+    
+    function updateActiveSection() {
+        const scrollPosition = window.scrollY + 100; // Offset for better UX
+        
+        let activeHeading = null;
+        for (const heading of headings) {
+            if (heading.offsetTop <= scrollPosition) {
+                activeHeading = heading;
+            } else {
+                break;
+            }
+        }
+        
+        if (activeHeading) {
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + activeHeading.id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateActiveSection, 50);
+    });
+    
+    // Initial update
+    updateActiveSection();
+})();
+</script>
+
 
         </div>
     </main>
