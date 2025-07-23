@@ -96,4 +96,16 @@ impl BlogManager {
     ) -> Result<Vec<(String, BlogPost)>> {
         self.database.get_posts_by_tag(tag, published_only).await
     }
+
+    pub async fn get_related_posts(
+        &self,
+        post_id: &str,
+        tags: &[String],
+        category: Option<&str>,
+        limit: usize,
+    ) -> Result<Vec<(String, BlogPost)>> {
+        self.database
+            .get_related_posts(post_id, tags, category, limit)
+            .await
+    }
 }

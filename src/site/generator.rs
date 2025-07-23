@@ -193,12 +193,39 @@ impl SiteGenerator {
     }
 
     async fn generate_post_page(&self, storage_id: &str, post: &BlogPost) -> Result<()> {
+        // Get related posts
+        let related_posts = self
+            .blog_manager
+            .get_related_posts(&post.id, &post.tags, post.category.as_deref(), 5)
+            .await?;
+
+        let related_posts_data: Vec<_> = related_posts
+            .iter()
+            .map(|(_, related_post)| {
+                let mut post_context = serde_json::to_value(related_post).unwrap();
+                let base_path = self.config.base_path.as_deref().unwrap_or("");
+                post_context["url"] = serde_json::Value::String(format!(
+                    "{}/posts/{}.html",
+                    base_path,
+                    sanitize_slug(&related_post.slug)
+                ));
+
+                // Add reading time
+                let reading_time =
+                    crate::utils::calculate_reading_time(&related_post.content, false);
+                post_context["reading_time"] = serde_json::Value::String(reading_time.to_string());
+
+                post_context
+            })
+            .collect();
+
         let mut context = Context::new();
         context.insert("site", &self.config);
         context.insert("page_title", &post.title);
         context.insert("post", post);
         context.insert("content_html", &markdown_to_html(&post.content));
         context.insert("storage_id", storage_id);
+        context.insert("related_posts", &related_posts_data);
 
         // Add reading time
         let reading_time = crate::utils::calculate_reading_time(&post.content, false);

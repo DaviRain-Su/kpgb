@@ -40,6 +40,38 @@
         </nav>
     </footer>
 
+    {% if related_posts %}
+    <!-- Related Posts -->
+    <section class="related-posts">
+        <h2>Related Posts</h2>
+        <div class="related-posts-grid">
+            {% for related in related_posts %}
+            <article class="related-post-card">
+                <h3><a href="{{ related.url }}">{{ related.title }}</a></h3>
+                <div class="post-meta">
+                    <span class="date">{{ related.created_at | date(format="%Y-%m-%d") }}</span>
+                    {% if related.reading_time %}
+                    <span class="reading-time">{{ related.reading_time }}</span>
+                    {% endif %}
+                </div>
+                {% if related.excerpt %}
+                    <p class="excerpt">{{ related.excerpt | truncate(length=150) }}</p>
+                {% else %}
+                    <p class="excerpt">{{ related.content | truncate(length=150) }}</p>
+                {% endif %}
+                {% if related.tags %}
+                <div class="tags-mini">
+                    {% for tag in related.tags | slice(end=3) %}
+                    <span class="tag-mini">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
     {% if site.giscus.enabled and site.giscus.repo_id != "" %}
     <!-- Giscus Comments -->
     <div class="comments">

@@ -100,6 +100,28 @@ pub async fn post(
 
     let (storage_id, post) = post_data;
 
+    // Get related posts
+    let related_posts = state
+        .blog_manager
+        .get_related_posts(&post.id, &post.tags, post.category.as_deref(), 5)
+        .await
+        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+
+    let related_posts_data: Vec<_> = related_posts
+        .iter()
+        .map(|(_, related_post)| {
+            let mut post_context = serde_json::to_value(related_post).unwrap();
+            post_context["url"] =
+                serde_json::Value::String(format!("/posts/{}", related_post.slug));
+
+            // Add reading time
+            let reading_time = crate::utils::calculate_reading_time(&related_post.content, false);
+            post_context["reading_time"] = serde_json::Value::String(reading_time.to_string());
+
+            post_context
+        })
+        .collect();
+
     let mut context = Context::new();
     // For web server, always use empty base_path
     let mut site_config = state.site_config.clone();
@@ -109,6 +131,7 @@ pub async fn post(
     context.insert("post", post);
     context.insert("content_html", &markdown_to_html(&post.content));
     context.insert("storage_id", storage_id);
+    context.insert("related_posts", &related_posts_data);
 
     if storage_id.starts_with("Qm") {
         context.insert(

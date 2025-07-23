@@ -426,4 +426,165 @@ impl Database {
 
         Ok(results)
     }
+
+    pub async fn get_related_posts(
+        &self,
+        post_id: &str,
+        tags: &[String],
+        category: Option<&str>,
+        limit: usize,
+    ) -> Result<Vec<(String, BlogPost)>> {
+        // Build query to find related posts based on:
+        // 1. Shared tags (weighted by number of shared tags)
+        // 2. Same category
+        // 3. Recent posts
+
+        // Simpler query that works with SQLite
+        let query = r#"
+            SELECT DISTINCT 
+                p.id,
+                p.title,
+                p.slug,
+                p.content,
+                p.excerpt,
+                p.author,
+                p.created_at,
+                p.updated_at,
+                p.published,
+                p.category,
+                p.storage_id,
+                p.content_hash,
+                (
+                    -- Count shared tags
+                    SELECT COUNT(DISTINCT t2.name)
+                    FROM tags t1
+                    JOIN post_tags pt1 ON t1.id = pt1.tag_id
+                    JOIN post_tags pt2 ON pt2.tag_id = t1.id
+                    JOIN tags t2 ON t2.id = pt2.tag_id
+                    WHERE pt1.post_id = ?1 AND pt2.post_id = p.id
+                ) * 2 +
+                -- Same category bonus
+                CASE WHEN p.category = ?2 AND p.category IS NOT NULL THEN 1 ELSE 0 END AS relevance_score
+            FROM posts p
+            WHERE p.id != ?1 AND p.published = 1
+            GROUP BY p.id
+            HAVING relevance_score > 0
+            ORDER BY relevance_score DESC, p.created_at DESC
+            LIMIT ?3
+        "#;
+
+        let rows = sqlx::query(query)
+            .bind(post_id)
+            .bind(category)
+            .bind(limit as i64)
+            .fetch_all(&self.pool)
+            .await?;
+
+        let mut results = Vec::new();
+        for row in rows {
+            let mut post = BlogPost {
+                id: row.get("id"),
+                title: row.get("title"),
+                slug: row.get("slug"),
+                content: row.get("content"),
+                excerpt: row.get("excerpt"),
+                author: row.get("author"),
+                created_at: row.get("created_at"),
+                updated_at: row.get("updated_at"),
+                published: row.get("published"),
+                tags: Vec::new(),
+                category: row.get("category"),
+                storage_id: Some(row.get("storage_id")),
+                content_hash: row.get("content_hash"),
+            };
+
+            let storage_id = post.storage_id.clone().unwrap_or_default();
+
+            // Load all tags for this post
+            let tags: Vec<String> = sqlx::query_scalar(
+                r#"
+                SELECT t.name
+                FROM tags t
+                JOIN post_tags pt ON t.id = pt.tag_id
+                WHERE pt.post_id = ?1
+                "#,
+            )
+            .bind(&post.id)
+            .fetch_all(&self.pool)
+            .await?;
+
+            post.tags = tags;
+            results.push((storage_id, post));
+        }
+
+        // If we don't have enough related posts, fill with recent posts
+        if results.len() < limit {
+            let additional_query = r#"
+                SELECT id, title, slug, content, excerpt, author,
+                       created_at, updated_at, published, category, storage_id, content_hash
+                FROM posts
+                WHERE id != ?1 AND published = 1
+                  AND id NOT IN (
+                      SELECT p2.id
+                      FROM posts p2
+                      WHERE p2.id != ?1 AND p2.published = 1
+                      AND (
+                          EXISTS (
+                              SELECT 1 FROM post_tags pt1
+                              JOIN post_tags pt2 ON pt1.tag_id = pt2.tag_id
+                              WHERE pt1.post_id = ?1 AND pt2.post_id = p2.id
+                          )
+                          OR (p2.category = ?2 AND p2.category IS NOT NULL)
+                      )
+                  )
+                ORDER BY created_at DESC
+                LIMIT ?3
+            "#;
+
+            let additional_rows = sqlx::query(additional_query)
+                .bind(post_id)
+                .bind(category)
+                .bind((limit - results.len()) as i64)
+                .fetch_all(&self.pool)
+                .await?;
+
+            for row in additional_rows {
+                let mut post = BlogPost {
+                    id: row.get("id"),
+                    title: row.get("title"),
+                    slug: row.get("slug"),
+                    content: row.get("content"),
+                    excerpt: row.get("excerpt"),
+                    author: row.get("author"),
+                    created_at: row.get("created_at"),
+                    updated_at: row.get("updated_at"),
+                    published: row.get("published"),
+                    tags: Vec::new(),
+                    category: row.get("category"),
+                    storage_id: Some(row.get("storage_id")),
+                    content_hash: row.get("content_hash"),
+                };
+
+                let storage_id = post.storage_id.clone().unwrap_or_default();
+
+                // Load tags
+                let tags: Vec<String> = sqlx::query_scalar(
+                    r#"
+                    SELECT t.name
+                    FROM tags t
+                    JOIN post_tags pt ON t.id = pt.tag_id
+                    WHERE pt.post_id = ?1
+                    "#,
+                )
+                .bind(&post.id)
+                .fetch_all(&self.pool)
+                .await?;
+
+                post.tags = tags;
+                results.push((storage_id, post));
+            }
+        }
+
+        Ok(results)
+    }
 }
