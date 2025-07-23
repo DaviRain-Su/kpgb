@@ -4,7 +4,8 @@
 #![allow(unused_variables)]
 #![allow(clippy::inherent_to_string)]
 #![allow(clippy::while_let_on_iterator)]
-
+#![allow(clippy::unnecessary_map_or)]
+#![allow(clippy::unnecessary_to_owned)]
 mod blog;
 mod database;
 mod docs;
