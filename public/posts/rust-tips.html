@@ -80,6 +80,16 @@
     </button>
 </div>
 
+
+<button class="zen-mode-btn" onclick="toggleZenMode()" title="Enter Zen Mode">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2L2 7L12 12L22 7L12 2Z"></path>
+        <path d="M2 17L12 22L22 17"></path>
+        <path d="M2 12L12 17L22 12"></path>
+    </svg>
+    <span class="zen-mode-text">Zen Mode</span>
+</button>
+
 <article class="post">
     <header>
         <h1>About Rust tips</h1>
@@ -544,6 +554,75 @@ assert_eq!(result, Some(33));
         }
         if (size >= MAX_SIZE) {
             document.querySelector('.font-size-btn[onclick*="increase"]').disabled = true;
+        }
+    }
+})();
+
+// Zen Mode
+(function() {
+    let isZenMode = false;
+    
+    window.toggleZenMode = function() {
+        isZenMode = !isZenMode;
+        const body = document.body;
+        const zenBtn = document.querySelector('.zen-mode-btn');
+        const zenText = document.querySelector('.zen-mode-text');
+        
+        if (isZenMode) {
+            body.classList.add('zen-mode');
+            zenText.textContent = 'Exit Zen';
+            zenBtn.setAttribute('title', 'Exit Zen Mode');
+            
+            // Hide elements for zen mode
+            document.querySelector('header')?.classList.add('zen-hidden');
+            document.querySelector('footer')?.classList.add('zen-hidden');
+            document.querySelector('.post-footer')?.classList.add('zen-hidden');
+            document.querySelector('.related-posts')?.classList.add('zen-hidden');
+            document.querySelector('.comments')?.classList.add('zen-hidden');
+            document.querySelector('.toc-container')?.classList.add('zen-hidden');
+            document.querySelector('.font-size-adjuster')?.classList.add('zen-fade');
+            
+            // Adjust reading progress bar
+            document.querySelector('.reading-progress')?.classList.add('zen-minimal');
+            
+            // Focus on content
+            document.querySelector('.post')?.classList.add('zen-focused');
+            
+            // Add ESC key listener
+            document.addEventListener('keydown', handleZenEscape);
+        } else {
+            exitZenMode();
+        }
+    };
+    
+    function exitZenMode() {
+        isZenMode = false;
+        const body = document.body;
+        const zenBtn = document.querySelector('.zen-mode-btn');
+        const zenText = document.querySelector('.zen-mode-text');
+        
+        body.classList.remove('zen-mode');
+        zenText.textContent = 'Zen Mode';
+        zenBtn.setAttribute('title', 'Enter Zen Mode');
+        
+        // Show elements
+        document.querySelector('header')?.classList.remove('zen-hidden');
+        document.querySelector('footer')?.classList.remove('zen-hidden');
+        document.querySelector('.post-footer')?.classList.remove('zen-hidden');
+        document.querySelector('.related-posts')?.classList.remove('zen-hidden');
+        document.querySelector('.comments')?.classList.remove('zen-hidden');
+        document.querySelector('.toc-container')?.classList.remove('zen-hidden');
+        document.querySelector('.font-size-adjuster')?.classList.remove('zen-fade');
+        document.querySelector('.reading-progress')?.classList.remove('zen-minimal');
+        document.querySelector('.post')?.classList.remove('zen-focused');
+        
+        // Remove ESC key listener
+        document.removeEventListener('keydown', handleZenEscape);
+    }
+    
+    function handleZenEscape(e) {
+        if (e.key === 'Escape' && isZenMode) {
+            exitZenMode();
         }
     }
 })();

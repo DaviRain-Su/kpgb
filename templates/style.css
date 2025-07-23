@@ -889,3 +889,126 @@ body:not(.scrolled) .reading-progress {
         color: #ddd;
     }
 }
+
+/* Zen Mode Button */
+.zen-mode-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.zen-mode-btn:hover {
+    background-color: #34495e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.zen-mode-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Zen Mode Styles */
+body.zen-mode {
+    background-color: #fdfdf8;
+}
+
+.zen-mode .zen-hidden {
+    display: none !important;
+}
+
+.zen-mode .zen-fade {
+    opacity: 0.2;
+    transition: opacity 0.5s ease;
+}
+
+.zen-mode .zen-fade:hover {
+    opacity: 1;
+}
+
+.zen-mode .zen-minimal {
+    height: 2px;
+}
+
+.zen-mode .zen-focused {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.zen-mode .post header {
+    margin-bottom: 3rem;
+}
+
+.zen-mode .post-content {
+    font-size: 1.2em;
+    line-height: 1.8;
+}
+
+.zen-mode .zen-mode-btn {
+    background-color: #e74c3c;
+}
+
+.zen-mode .zen-mode-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Dark mode support for Zen Mode */
+@media (prefers-color-scheme: dark) {
+    body.zen-mode {
+        background-color: #1a1a1a;
+    }
+    
+    .zen-mode-btn {
+        background-color: #3d3d3d;
+    }
+    
+    .zen-mode-btn:hover {
+        background-color: #4d4d4d;
+    }
+    
+    .zen-mode .zen-mode-btn {
+        background-color: #c0392b;
+    }
+    
+    .zen-mode .zen-mode-btn:hover {
+        background-color: #e74c3c;
+    }
+}
+
+/* Mobile adjustments for Zen Mode */
+@media (max-width: 768px) {
+    .zen-mode-btn {
+        top: 10px;
+        right: 10px;
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    
+    .zen-mode-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .zen-mode-text {
+        display: none;
+    }
+    
+    .zen-mode .zen-focused {
+        margin: 20px auto;
+    }
+}
