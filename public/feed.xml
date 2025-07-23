@@ -30,11 +30,35 @@
 </ul>
 <h2 id="使用方法">使用方法</h2>
 <p>创建新文章时，只需要使用本地图片路径：</p>
-<pre><code class="language-bash">cargo run -- new --content my-post.md
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-1">cargo run -- new --content my-post.md
 </code></pre>
+            </div>
 <p>编辑文章时也会自动处理新添加的图片：</p>
-<pre><code class="language-bash">cargo run -- edit &lt;post-id&gt; --content updated-post.md
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-2">cargo run -- edit &lt;post-id&gt; --content updated-post.md
 </code></pre>
+            </div>
 <p>这样就能让你的图片永久保存在IPFS上了！</p>
 ]]></description><author>DaviRain</author><guid isPermaLink="false">QmWjDyAFCDBUhcVJmviTF7V7ndWYFNPbVXzzdoiTgtpQ9e</guid><pubDate>Wed, 23 Jul 2025 02:55:25 +0000</pubDate></item><item><title>禅者的初心📒</title><link>https://Anonymous.github.io/kpgb/posts/chanzhe.html</link><description><![CDATA[<ol>
 <li>
@@ -108,7 +132,18 @@
 <p>Rust提供了一个函数可以获取类型的大小：<code>std::mem::size_of::&lt;T&gt;()</code>。</p>
 <h2 id="example">Example</h2>
 <p>这里提供了一个简单的例子，展示了如何使用原生指针。</p>
-<pre><code class="language-rust">let array: [i32; 5] = [1, 2, 3, 4, 5];
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-1">let array: [i32; 5] = [1, 2, 3, 4, 5];
 // size of array is 20，因为i32是4字节，所以数组大小是5*4=20，
 // 这里直接使用std::mem::size_of_val(&amp;array)也可以
 println!("size of array: {}", std::mem::size_of_val(&amp;array));
@@ -123,6 +158,7 @@ println!(
     std::mem::size_of::&lt;*const [i32; 5]&gt;()
 );
 </code></pre>
+            </div>
 <h2 id="总结">总结</h2>
 <p>原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使用原生指针时需要特别小心，因为可能会导致内存安全问题。</p>
 ]]></description><author>DaviRain</author><guid isPermaLink="false">QmZsCiYzbhe1TCA4WbCJbWPuRQG2VzPqBbvDbR5271Vpoo</guid><pubDate>Wed, 23 Jul 2025 00:49:46 +0000</pubDate></item><item><title>学习Ocaml的资源</title><link>https://Anonymous.github.io/kpgb/posts/learn-ocaml-sources.html</link><description><![CDATA[<ul>
@@ -144,7 +180,18 @@ println!(
 ]]></description><author>DaviRain</author><guid isPermaLink="false">QmYRi6EwwvwoTLUkTAfDoG5Q2Eit5hiX9mErKz2juGmKYY</guid><pubDate>Wed, 23 Jul 2025 00:49:45 +0000</pubDate></item><item><title>About Rust tips</title><link>https://Anonymous.github.io/kpgb/posts/rust-tips.html</link><description><![CDATA[<h2 id="在rust中如何为本crates中的类型带有可选的feature编写测试">在rust中如何为本crates中的类型带有可选的feature编写测试</h2>
 <p>在 Rust 中，如果你想为你的 <code>crate</code> 中的类型编写带有可选的 <code>feature</code> 的测试，你可以使用<code>cfg_attr</code>属性和<code>#[cfg(feature = "feature_name")]</code>属性来做到这一点。</p>
 <p>以下是一个例子：</p>
-<pre><code class="language-rust">// 在lib.rs或者main.rs中
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-1">// 在lib.rs或者main.rs中
 #[cfg(feature = "feature_name")]
 pub struct MyStruct {
     // ...
@@ -159,15 +206,39 @@ mod tests {
     }
 }
 </code></pre>
+            </div>
 <p>在这个例子中，<code>MyStruct</code>只有在<code>feature_name</code>被启用时才会被定义，同样，<code>test_my_struct</code>测试也只有在<code>feature_name</code>被启用时才会被运行。</p>
 <p>要运行这个测试，你需要使用以下命令，其中<code>my_crate</code>是你的 <code>crate</code> 的名字：</p>
-<pre><code class="language-bash">cargo test --features feature_name
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-2">cargo test --features feature_name
 </code></pre>
+            </div>
 <p>这个命令会启用<code>feature_name</code>特性并运行所有的测试，包括依赖于这个特性的测试。</p>
 <h2 id="将-vec_lt_result_-e_gt_-转换为-result_lt_vec_-e_gt_">将 Vec&lt;Result<T>, E&gt; 转换为 Result&lt;Vec<T>, E&gt;</h2>
 <p>要将 <code>Vec&lt;Result&lt;T, E&gt;&gt;</code> 转换为 <code>Result&lt;Vec, E&gt;</code>，可以使用 <code>Iterator trait</code> 中的 <code>try_fold ()</code> 方法。下面是一个示例实现：</p>
 <p>在这里，我们使用 <code>into_iter ()</code> 将 <code>Vec</code> 转换为迭代器。然后调用 <code>try_fold ()</code>，传入一个初始值 <code>Vec::new ()</code> 和一个闭包，该闭包接受两个参数：一个累加器（<code>acc</code>）和一个 <code>Result（res）</code>。</p>
-<pre><code class="language-rust">fn vec_result_to_result_vec&lt;T, E&gt;(v: Vec&lt;Result&lt;T, E&gt;&gt;) -&gt; Result&lt;Vec&lt;T&gt;, E&gt; {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-3" onclick="copyCode('code-3')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-3">fn vec_result_to_result_vec&lt;T, E&gt;(v: Vec&lt;Result&lt;T, E&gt;&gt;) -&gt; Result&lt;Vec&lt;T&gt;, E&gt; {
     v.into_iter().try_fold(Vec::new(), |mut acc, res| {
         match res {
             Ok(t) =&gt; {
@@ -179,31 +250,79 @@ mod tests {
     })
 }
 </code></pre>
+            </div>
 <p>闭包模式匹配 <code>Result</code> 变体，将 <code>Ok</code> 值推入 <code>acc</code> 向量并返回 <code>Ok (acc)</code>，如果 <code>Result</code> 是 <code>Err</code>，则返回 <code>Err (e)</code>。<code>try_fold ()</code> 方法将继续迭代迭代器中的剩余项，并将更新后的累加器值传递给每个后续调用闭包的调用。</p>
 <p>如果原始 <code>Vec</code> 中的任何 <code>Result</code> 是 <code>Err</code>，则 <code>try_fold ()</code> 将短路并返回遇到的第一个 <code>Err</code>。否则，它将返回带有解包的 <code>T</code> 值的 <code>Vec</code> 的 <code>Ok (acc)</code>。</p>
 <h2 id="rust十进制和16进制之间的互相转换">Rust十进制和16进制之间的互相转换</h2>
 <p>在 Rust 中，可以使用 <code>format!()</code> 宏将十进制数格式化为十六进制字符串。下面是一个简单的示例实现：</p>
-<pre><code class="language-rust">fn decimal_to_hex(decimal: u32) -&gt; String {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-4" onclick="copyCode('code-4')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-4">fn decimal_to_hex(decimal: u32) -&gt; String {
     format!("{:X}", decimal)
 }
 </code></pre>
+            </div>
 <p>这里使用了 <code>{}</code> 格式化字符串，它将无符号十进制数转换为大写十六进制字符串。例如，将数字 123456789 转换为十六进制字符串，可以这样调用函数：</p>
-<pre><code class="language-rust">let hex_string = decimal_to_hex(123456789);
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-5" onclick="copyCode('code-5')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-5">let hex_string = decimal_to_hex(123456789);
 println!("{}", hex_string); // 输出: "75BCD15"
 </code></pre>
+            </div>
 <p>注意，如果要处理更大的数字，可以使用 u64 或 u128 类型。如果需要将十六进制字符串转换回十进制数字，则可以使用 <code>u64::from_str_radix ()</code> 函数。</p>
 <h2 id="and-then-和-map在使用上有什么区别">and_then 和 map在使用上有什么区别</h2>
 <p>在 Rust 中，and_then 和 map 都是用于在对 Option 或 Result 进行转换时使用的方法，但它们的使用方式有所不同。</p>
 <p>map 方法将一个 Option或 Result&lt;T, E&gt; 映射到一个新的 Option或 Result&lt;U, E&gt;，其中函数闭包中的操作是应用于 Option 或 Result 中包含的值的。如果原始值是 None 或 Err，则映射函数将不会被执行，而是直接返回一个新的 None 或 Err。</p>
 <p>例如，下面是使用 map 方法将 Option中的值加倍的示例：</p>
 <p>and_then 方法在使用上与 map 类似，但是，它的返回值类型是 Option或 Result&lt;U, E&gt; 而不是 U。在 and_then 的闭包中，我们必须返回一个新的 Option 或 Result，而不是直接返回一个值。这意味着 and_then 可用于将一个 Option 或 Result 转换成另一个 Option 或 Result，同时也可以进行一些逻辑测试。</p>
-<pre><code class="language-rust">let some_number = Some(5);
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-6" onclick="copyCode('code-6')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-6">let some_number = Some(5);
 let doubled = some_number.map(|x| x * 2);
 assert_eq!(doubled, Some(10));
 </code></pre>
+            </div>
 <p>例如，下面是一个使用 and_then 方法将 Option中的值乘以 3 的示例，如果该值小于 10，则返回 None：</p>
 <p>在上面的示例中，我们在 and_then 的闭包中测试了 some_number 是否小于 10。如果是，则返回 None，否则返回 Some (x * 3)，其中 x 是原始 Option中的值。在第一个示例中，some_number 的值为 5，因此，闭包返回 None，导致整个表达式返回 None。在第二个示例中，some_number 的值为 11，因此，闭包返回 Some (33)，导致整个表达式返回 Some (33)。</p>
-<pre><code class="language-rust">let some_number = Some(5);
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-7" onclick="copyCode('code-7')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-7">let some_number = Some(5);
 let result = some_number.and_then(|x| {
     if x &lt; 10 {
         None
@@ -223,6 +342,7 @@ let result = some_number.and_then(|x| {
 });
 assert_eq!(result, Some(33));
 </code></pre>
+            </div>
 <p>因此，在使用时，map 用于简单的值转换，而 and_then 用于更复杂的操作和逻辑测试。</p>
 ]]></description><author>DaviRain</author><guid isPermaLink="false">QmeC1JrFWMsqZkixtS8SAmiZ52W6U2K9Pf8NNKnkLbWoX7</guid><pubDate>Wed, 23 Jul 2025 00:49:44 +0000</pubDate></item><item><title>Rust Resources Every Learner Should Know in 2023</title><link>https://Anonymous.github.io/kpgb/posts/rust-sources.html</link><description><![CDATA[<p>去年，我开始学习Rust，主要是为了应用于嵌入式系统。当时，我也在一篇名为“<a href="https://apollolabsblog.hashnode.dev/35-rust-learning-resources-every-beginner-should-know-in-2022">35个Rust学习资源，每个初学者在2022年都应该知道</a>”的帖子中分享了我所遇到的所有学习材料。自那时以来，我并没有停止学习 Rust，而是不断努力巩固自己的基础。因此，我一直在寻找新的学习资源。</p>
 <p>在本文中，我将通过添加更多的资源以及对之前未曾利用的一些付费资源的思考，扩展去年的帖子。提醒一下，当时，我将资源分为了6个主要类别：1）阅读材料，2）实践资源，3）YouTube 视频，4）Git 资源，5）速查表，以及6）问题论坛。今年我增加了3个更多的类别，它们是7）课程，8）播客，以及9）新闻通讯。在相关情况下，我还将为资源的级别添加注释，无论是初学者（👶）、中级（👨），还是高级（👴）级别。</p>
@@ -386,8 +506,20 @@ assert_eq!(result, Some(33));
 <p>具体如何使用，参见写一个 no_std 的库的第二种使用方式。</p>
 <p>也可参考，实例:<a href="https://serde.rs/no-std.html">serde no-std 的使用规范</a></p>
 <h2 id="验证一个库是否支持-no-std-的验证方式">验证一个库是否支持 no_std 的验证方式</h2>
-<pre><code class="language-bash">cargo check --target wasm32-unknown-unknown
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-1">cargo check --target wasm32-unknown-unknown
 </code></pre>
+            </div>
 <p>但是 wasm 环境不一定就是 no_std，或者别的编译目标也可以，也就是裸露的编译目标环境不带有任何系统的环境。</p>
 <p>参考文档: <a href="https://zhuanlan.zhihu.com/p/53064186">使用 Rust 编写操作系统（一）：独立式可执行程序</a></p>
 <p>具体的写一个 no_std 的库#
@@ -480,15 +612,38 @@ assert_eq!(result, Some(33));
 <ol>
 <li>持有生命周期说明符，限制其包含的结构体的生命周期。这对于将生命周期人为地附加到原始指针上可能很有用。</li>
 </ol>
-<pre><code class="language-rust">struct PointerWithLifetime&lt;'a, T&gt; {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-1">struct PointerWithLifetime&lt;'a, T&gt; {
     pointer: *const T,
     _marker: std::marker::PhantomData&lt;&amp;'a ()&gt;,
 }
 </code></pre>
+            </div>
 <ol start="2">
 <li>为了模拟持有类型T的值，当实际值由另一个系统持有（或管理）时。您可能会在与非传统存储模型或FFI交互时看到这种情况。</li>
 </ol>
-<pre><code class="language-rust">mod external {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-2">mod external {
     pub fn get(location: u64) -&gt; Vec&lt;u8&gt; { /* ... */ }
 }
 
@@ -503,6 +658,7 @@ impl&lt;T: From&lt;Vec&lt;u8&gt;&gt;&gt; Slot&lt;T&gt; {
     }
 }
 </code></pre>
+            </div>
 <h2 id="这里现在是空的___there-is-nothing-here-now___">这里现在是空的。（“There is nothing here now.”）</h2>
 <h3 id="null">Null</h3>
 <blockquote>
@@ -511,11 +667,23 @@ impl&lt;T: From&lt;Vec&lt;u8&gt;&gt;&gt; Slot&lt;T&gt; {
 <p>你被欺骗了，可能还被控制了。我懂的。“哦，Null 没有任何问题。”</p>
 <p>在安全的 Rust 中这是正确的。</p>
 <p>然而，有时需要拔掉创可贴，探究表面下正在发生的事情。</p>
-<pre><code class="language-rust">let n: *const i32 = std::ptr::null();
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-3" onclick="copyCode('code-3')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-3">let n: *const i32 = std::ptr::null();
 unsafe {
     println!("{}", *n); // Segmentation fault
 }
 </code></pre>
+            </div>
 <p>（提醒：原始指针只能在不安全的代码块中进行解引用。）</p>
 <p>Rust 的设计使您很少需要深入研究指针操作。您可能会在与 C 代码交互时或者在使用 Rust 重写 Quake III 时遇到原始指针（*const 和 *mut 类型）。</p>
 <h3 id="option__none">Option::None</h3>
@@ -541,7 +709,18 @@ unsafe {
 <p>空元组在 <code>Rust</code> 中具有类似的作用：不返回实际值的函数隐式返回空元组。但是，它的用途比这更加多样化。</p>
 <p>由于空元组是一个值（尽管是没有内容且大小为零的值），也是一种类型，
 因此有时将其用于参数化 Result 类型以表示一个不提供有意义反馈的易错函数可能会很有用。</p>
-<pre><code class="language-rust">impl Partner {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-4" onclick="copyCode('code-4')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-4">impl Partner {
     fn process_request(&amp;mut self, proposition: Proposition) -&gt; Result&lt;(), (u32, RejectionReason)&gt; {
         use std::time::{SystemTime, Duration};
         use chrono::prelude::*;
@@ -570,12 +749,24 @@ unsafe {
     }
 }
 </code></pre>
+            </div>
 <h2 id="我会让你一直等到时间的尽头_空手而归___i_m-going-to-leave-you_-waiting-here_-empty-handed_-until-the-end-of-time___">我会让你一直等到时间的尽头，空手而归。(“I’m going to leave you, waiting here, empty-handed, until the end of time.”)</h2>
 <h3 id="the-never-type">The never type</h3>
 <p>如何调用一个函数的返回类型，它不仅不返回值，而且根本永远不会返回？
 嗯，您可以尝试所有传统方法都无济于事 - 您将永远无法在那一点之后继续，因此需要一些精细的处理。</p>
 <p>这就是所谓的“never”类型。以下是几种遇到它的方式</p>
-<pre><code class="language-rust">let never_loop = loop {}; // loop never exits
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-5" onclick="copyCode('code-5')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-5">let never_loop = loop {}; // loop never exits
 let never_panic = panic!(); // panic terminates execution
 
 let value: u32 = match Some(1) {
@@ -583,9 +774,21 @@ let value: u32 = match Some(1) {
     None =&gt; return, // `return` is of type never
 };
 </code></pre>
+            </div>
 <p>虽然语法仍处于实验阶段，但“never”类型用感叹号 ! 表示。与此同时，您可以使用 Infallible 作为替代。</p>
 <p>当实现一个具有您永远不需要的关联类型的 trait 时，“never”类型可能会很有用。再次以 Result 为例：</p>
-<pre><code class="language-rust">trait FailureLogProvider {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-6" onclick="copyCode('code-6')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-6">trait FailureLogProvider {
     type Error;
     fn get_failure_logs(&amp;self) -&gt; Result&lt;Vec&lt;FailureLog&gt;, Self::Error&gt;;
 }
@@ -597,6 +800,7 @@ impl FailureLogProvider for Partner {
     }
 }
 </code></pre>
+            </div>
 <p>在示例中的函数实现始终成功，但是 trait 允许实现失败。为了表示这一点，关联的 Error 类型是“never”类型。</p>
 <p><a href="https://geeklaunch.io/blog/nothing-in-rust/">原文</a></p>
 ]]></description><author>DaviRain</author><guid isPermaLink="false">QmVmNEkVSZhb4W4jT13JN1qBe1jVD2NGPwbVthWCkbkCKo</guid><pubDate>Wed, 23 Jul 2025 00:49:41 +0000</pubDate></item><item><title>Learn Ocaml in Y Minutes</title><link>https://Anonymous.github.io/kpgb/posts/learn_ocaml_by_y_minutes.html</link><description><![CDATA[<p>OCaml 是一种经过严格评估的函数式语言，具有一些命令式功能。</p>
@@ -606,13 +810,36 @@ impl FailureLogProvider for Partner {
 <p>它是强静态类型的，但它不使用手动编写的类型注释，而是使用 <a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system">Hindley-Milner</a>
 算法推断表达式的类型。在大多数情况下，它使得类型注释变得不必要，但可能是初学者困惑的一个主要根源。</p>
 <p>当您处于顶层循环时，OCaml 将在您输入表达式后打印推断的类型</p>
-<pre><code class="language-ocaml"># let inc x = x + 1 ;;
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">ocaml</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-ocaml" id="code-1"># let inc x = x + 1 ;;
 val inc : int -&gt; int = &lt;fun&gt;
 # let a = 99 ;;
 val a : int = 99
 </code></pre>
+            </div>
 <p>对于源文件，您可以使用 ocamlc -i /path/to/file.ml 命令打印所有名称和类型签名</p>
-<pre><code class="language-bash">$ cat sigtest.ml
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-2">$ cat sigtest.ml
 let inc x = x + 1
 let add x y = x + y
 
@@ -623,8 +850,20 @@ val inc : int -&gt; int
 val add : int -&gt; int -&gt; int
 val a : int
 </code></pre>
+            </div>
 <p>请注意，多个参数的函数的类型签名以<a href="https://en.wikipedia.org/wiki/Currying">柯里化</a>形式编写。带有多个参数的函数可以表示为仅带有一个参数的函数的组合。上例中应用于参数 2 和 3 的 f(x,y) = x + y 函数相当于应用于 3 的 f0(y) = 2 + y 函数。因此有 int -&gt; int -&gt; int 签名。</p>
-<pre><code class="language-ocaml">(*** 注释 ***)
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">ocaml</span>
+                    <button class="copy-button" data-code-id="code-3" onclick="copyCode('code-3')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-ocaml" id="code-3">(*** 注释 ***)
 
 (*
   在OCaml中，注释是用 (* 和 *) 来包围的。OCaml支持嵌套注释，这意味着你可以在一个注释块中包含另一个注释块
@@ -1497,6 +1736,7 @@ Printf.printf "counter.contents = %d\n" !counter;;
   这是一种简写，它等同于 { contents = 0; }。
 *)
 </code></pre>
+            </div>
 <h2 id="进一步阅读">进一步阅读</h2>
 <ul>
 <li>访问官方网站获取编译器并阅读文档：<a href="http://ocaml.org/">http://ocaml.org/</a></li>
@@ -1682,7 +1922,18 @@ IBC为模块提供了拒绝数据包的设施，并将具体细节留给更高�
 <p>IBC协议为数据包提供了授权和排序语义：分别保证数据包已经在发送账本上提交（并根据执行的状态转换，如托管令牌），以及它们已经以特定的顺序提交了一次，并可以以相同的顺序交付一次。连接抽象与客户端抽象一起定义了IBC的授权语义。秩序语义由通道提供。</p>
 <h5 id="2_-definitions">2) Definitions</h5>
 <p>连接结束是对一个分类账上的连接结束的状态跟踪，定义如下。</p>
-<pre><code class="language-go">enum ConnectionState {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-1">enum ConnectionState {
     INIT,
     TRYOPEN,
     OPEN,
@@ -1697,6 +1948,7 @@ interface ConnectionEnd {
    version: string
 }
 </code></pre>
+            </div>
 <ul>
 <li>version 字段是一个不透明的字符串，可用于确定利用此连接的通道或数据包的编码或协议。</li>
 <li>state 字段描述了连接端的当前状态。</li>
@@ -1710,13 +1962,25 @@ interface ConnectionEnd {
 <p>开放式握手子协议允许每个分类账验证用于引用其他分类账上的连接的标识符，使每个分类账上的模块能够推理出其他分类账上的引用。</p>
 <p>开放握手由四个数据报组成。ConnOpenInit, ConnOpenTry, ConnOpenAck, 和ConnOpenConfirm.</p>
 <p>一个正确的协议执行，在两个分类账A和B之间，连接状态格式为（A，B），流程如下。</p>
-<pre><code class="language-markdown">|Datagram         | Prior state        |     Posterior state |
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">markdown</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-markdown" id="code-2">|Datagram         | Prior state        |     Posterior state |
 |-----------------|--------------------|---------------------|
 |  ConnOpenInit   |    (-, -)          |      (INIT, -)      |
 |  ConnOpenTry    |  (INIT, none)      |      (INIT, TRYOPEN)|
 |  ConnOpenAck    |  (INIT, TRYOPEN)   |      (OPEN, TRYOPEN)|
 |  ConnOpenConfirm|  (OPEN, TRYOPEN)   |      (OPEN, OPEN)   |
 </code></pre>
+            </div>
 <p>在实施子协议的两个分类账之间的开放握手结束时，以下属性成立。</p>
 <ul>
 <li>每个分类账都拥有发起者最初指定的对方的正确共识状态。</li>
@@ -1742,7 +2006,18 @@ interface ConnectionEnd {
 <p>无序信道是一个信道，数据包可以按任何顺序交付，这可能与它们的发送顺序不同。</p>
 <p>所有信道都提供精确的一次数据包交付，这意味着在信道一端发送的数据包最终将不多也不少地传递到另一端。
 通道端是一个数据结构，存储与一个参与的分类账上的通道一端相关的元数据，定义如下。</p>
-<pre><code class="language-go">interface ChannelEnd {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-3" onclick="copyCode('code-3')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-3">interface ChannelEnd {
 	state: ChannelState
 	ordering: ChannelOrder
 	counterpartyPortIdentifier: Identifier
@@ -1754,6 +2029,7 @@ interface ConnectionEnd {
 	version: string
 }
 </code></pre>
+            </div>
 <ul>
 <li>state 是通道末端的当前状态。</li>
 <li>ordering 字段表示通道是有序的还是无序的。这是一个枚举，而不是一个布尔值，以便将来能够方便地支持其他类型的排序。</li>
@@ -1766,13 +2042,25 @@ interface ConnectionEnd {
 <li>version 字符串存储一个不透明的通道版本，这是在握手过程中商定的。这可以确定模块级的配置，如通道使用的是哪种数据包编码。这个版本不被核心IBC协议所使用。
 通道末端有一个状态。</li>
 </ul>
-<pre><code class="language-go">enum ChannelState {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-4" onclick="copyCode('code-4')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-4">enum ChannelState {
 	INIT,
 	TRYOPEN,
 	OPEN,
 	CLOSED,
 }
 </code></pre>
+            </div>
 <ul>
 <li>处于INIT状态的信道端刚刚开始了开场握手。</li>
 <li>处于TRYOPEN状态的信道端已经确认了对手方账本上的握手步骤。</li>
@@ -1780,7 +2068,18 @@ interface ConnectionEnd {
 <li>处于CLOSED状态的信道端已经关闭，不能再用于发送或接收数据包。</li>
 <li>包，封装了不透明的数据，通过一个通道从一个模块传输到另一个模块，是一个特殊的接口，定义如下。</li>
 </ul>
-<pre><code class="language-go">interface Packet {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-5" onclick="copyCode('code-5')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-5">interface Packet {
 	sequence: uint64
 	timeoutHeight: uint64
 	timeoutTimestamp: uint64
@@ -1791,6 +2090,7 @@ interface ConnectionEnd {
 	data: bytes
 }
 </code></pre>
+            </div>
 <ul>
 <li>sequence与发送和接收的顺序相对应，序列号较早的数据包必须在序列号较晚的数据包之前发送和接收。</li>
 <li>超时高度（timeoutHeight）表示目的地账本上的共识高度，超过这个高度，数据包将不再被处理，而是被算作超时。</li>
@@ -1814,13 +2114,25 @@ interface ConnectionEnd {
 <h5 id="4_-channel-lifecycle-management">4) Channel lifecycle management</h5>
 <h6 id="a_-opening-handshake">a) Opening handshake</h6>
 <p>两个账本A和B之间的通道开放握手，其状态格式为（A，B），流程如下。</p>
-<pre><code class="language-markdown">| Datagram          | Prior state     | Posterior state |
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">markdown</span>
+                    <button class="copy-button" data-code-id="code-6" onclick="copyCode('code-6')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-markdown" id="code-6">| Datagram          | Prior state     | Posterior state |
 | ----------------- | ----------------| --------------- |
 | ChanOpenInit      | (-, -)          | (INIT, -)       |
 | ChanOpenTry       | (INIT, -)       | (INIT, TRYOPEN) |
 | ChanOpenAck       | (INIT, TRYOPEN) | (OPEN, TRYOPEN) |
 | ChanOpenConfirm   | (OPEN, TRYOPEN) | (OPEN, OPEN)    |
 </code></pre>
+            </div>
 <p>ChanOpenInit，在分类账A上执行，启动了从分类账A上的模块到分类账B上的模块的通道开放握手，提供了本地通道标识符、本地端口、远程端口和远程通道标识符的标识。分类账A在其状态中存储了一个通道端对象。</p>
 <p>在账本B上执行的ChanOpenTry，向账本B上的模块转发了通道握手尝试的通知，提供了一对通道标识符、一对端口标识符和所需的版本。账本B验证了账本A已按要求存储这些标识符的证明，查找拥有目标端口的模块，调用该模块以检查所要求的版本是否兼容，并在其状态中存储一个通道端对象。</p>
 <p>在分类账A上执行的ChanOpenAck，将对信道握手尝试的接受转达给分类账A上的模块，提供标识符，现在可以用来查询信道端。分类账A验证了分类账B已按要求存储信道元数据的证明，并将其信道端标记为OPEN。</p>
@@ -1830,11 +2142,23 @@ interface ConnectionEnd {
 <p>在握手过程中，通道的两端就与该通道相关的版本字节串达成协议。这个版本字节串的内容对IBC核心协议是不透明的。主机分类帐可以利用版本数据来表明支持的应用层协议，同意数据包编码格式，或协商其他与IBC之上的自定义逻辑相关的通道元数据。主机分类帐也可以安全地忽略版本数据或指定一个空字符串</p>
 <h6 id="c_-closing-handshake">c) Closing handshake</h6>
 <p>两个账本A和B之间的通道关闭握手，其状态格式为（A，B），流程如下。</p>
-<pre><code>| Datagram          | Prior state    | Posterior state |
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language"></span>
+                    <button class="copy-button" data-code-id="code-7" onclick="copyCode('code-7')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code id="code-7">| Datagram          | Prior state    | Posterior state |
 | ------------------| ---------------| --------------- |
 | ChanCloseInit     | (OPEN, OPEN)   | (CLOSED, OPEN)  |
 | ChanCloseConfirm  | (CLOSED, OPEN) | (CLOSED, CLOSED)|
 </code></pre>
+            </div>
 <p>ChanCloseInit，在分类账A上执行，关闭分类账A上的通道末端。</p>
 <p>ChanCloseInit，在分类账B上执行，只是验证通道在分类账A上被标记为关闭，并在分类账B上关闭结束。</p>
 <p>任何飞行中的数据包都可以在通道关闭后立即超时退出。</p>
@@ -1965,19 +2289,43 @@ interface ConnectionEnd {
 </ul>
 <h4 id="3_-packet-definition">3) Packet definition</h4>
 <p>只需要一个数据包类型，即FungibleTokenPacketData，它指定面额、金额、发送账户、接收账户，以及发送分类账是否为资产来源。</p>
-<pre><code class="language-go">interface FungibleTokenPacketData {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-8" onclick="copyCode('code-8')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-8">interface FungibleTokenPacketData {
 	denomination: string
 	amount: uint256
 	sender: string
 	receiver: string
 }
 </code></pre>
+            </div>
 <p>确认数据类型描述了传输是成功还是失败，以及失败的原因（如果有的话）。</p>
-<pre><code class="language-go">interface FungibleTokenPacketAcknowledgement {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-9" onclick="copyCode('code-9')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-9">interface FungibleTokenPacketAcknowledgement {
 	success: boolean
 	error: Maybe&lt;string&gt;
 }
 </code></pre>
+            </div>
 <h4 id="4_-packet-handling-semantics">4) Packet handling semantics</h4>
 <p>协议逻辑是对称的，因此源自任何一个分类账的面额都可以在另一个分类账上转换为凭证，然后稍后再赎回。</p>
 <ul>
@@ -2022,7 +2370,18 @@ interface ConnectionEnd {
 <p>[20] Ethan Buchman, Jae Kwon, Zarko Milosevic, “The latest gossip on bft consensus.” https://arxiv.org/pdf/1807.04938, Nov-2019.</p>
 <p>[21] Ethan Frey, “IBC protocol specification v0.3.1.”https://github.com/cosmos/ics/blob/master/archive/v0_3_1_IBC.pdf, Nov-2017.</p>
 ]]></description><author>DaviRain</author><guid isPermaLink="false">QmcBkbBncPWbDN4MUBYJGZf3wTwuZPVHhYiepsdSqx5xb4</guid><pubDate>Wed, 23 Jul 2025 00:49:38 +0000</pubDate></item><item><title>关于在rust的程序中如何访问到提交的git commit</title><link>https://Anonymous.github.io/kpgb/posts/how-to-get-commit-in-rust.html</link><description><![CDATA[<h2 id="code-example">Code example</h2>
-<pre><code class="language-rust">use std::{borrow::Cow, process::Command};
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-1">use std::{borrow::Cow, process::Command};
 
 fn main() {
 	// Make git hash available via GIT_HASH build-time env var:
@@ -2053,6 +2412,7 @@ fn output_git_short_hash() {
 	println!("cargo:rerun-if-changed=build.rs");
 }
 </code></pre>
+            </div>
 <h2 id="代码解释">代码解释</h2>
 <p>这段代码的作用是使用 Rust 的 <code>std::process::Command</code> 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 <code>build.rs</code> 文件来实现的。</p>
 <p>下面是这个代码的工作原理：</p>
@@ -2068,8 +2428,20 @@ fn output_git_short_hash() {
 <p>第四步使用了 <code>cargo:rerun-if-changed</code> 指令来告诉 Cargo 什么情况下需要重新运行构建脚本。
 这个指令是 Rust 的编译器 Cargo 提供的一个特殊注释，用于控制项目的构建和重新构建行为。</p>
 <p>具体来说，<code>cargo:rerun-if-changed</code> 指令的作用是告诉 Cargo 某些文件的改动会导致项目需要重新构建，这样 Cargo 就可以在这些文件发生变化时自动重新运行构建脚本。指令的语法如下：</p>
-<pre><code class="language-bash">cargo:rerun-if-changed=&lt;filename&gt;;
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-2">cargo:rerun-if-changed=&lt;filename&gt;;
 </code></pre>
+            </div>
 <p>其中 <code>filename</code> 表示需要监视的文件名或文件夹名，可以使用相对或绝对路径。</p>
 <p>在这个例子中，<code>cargo:rerun-if-changed</code> 指令告诉 Cargo 在以下情况下需要重新运行构建脚本：</p>
 <ul>
@@ -2289,77 +2661,257 @@ inster /table</p>
 <p>让我先详细介绍一下与上游仓库交互的常见设置和最基本的工作流程。</p>
 <p>在一个标准的设置中，你通常有一个 origin 和一个 upstream remote - 后者是项目的守门人，或者你希望贡献的真实来源。</p>
 <p>首先，缺人你已经为上游仓库设置了一个 remote, 并希望也设置了一个 origin:</p>
-<pre><code class="language-bash">$ git remote -v
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-1">$ git remote -v
 origin git@bitbucket.org:my-user/some-project.git (fetch)
 origin git@bitbucket.org:my-user/some-project.git (push)
 </code></pre>
+            </div>
 <p>如果你没有上游，你可以很容易地用远程命令添加它。</p>
-<pre><code class="language-bash">git remote add upstream git@bitbucket.org:some-gatekeeper-maintainer/some-project.git
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-2">git remote add upstream git@bitbucket.org:some-gatekeeper-maintainer/some-project.git
 </code></pre>
+            </div>
 <p>检查 remote 添加成功:</p>
-<pre><code class="language-bash">git remote -v
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-3" onclick="copyCode('code-3')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-3">git remote -v
 origin git@bitbucket.org:my-user/some-project.git (fetch)
 origin git@bitbucket.org:my-user/some-project.git (push)
 upstream git@bitbucket.org:some-gatekeeper-maintainer/some-project.git (fetch)
 upstream git@bitbucket.org:some-gatekeeper-maintainer/some-project.git (push)
 </code></pre>
+            </div>
 <p>现在你可以用 fetch 收集上游仓库的最新变化。每次想要获得更新时，都要重复这个动作。</p>
 <p>（如果项目的标签害没有合并到 master, 你还应该这样做：<code>git fetch upstream --tags</code>)</p>
-<pre><code class="language-bash">git fetch upstream
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-4" onclick="copyCode('code-4')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-4">git fetch upstream
 </code></pre>
+            </div>
 <p>一般来说，你要保持本地分支作为上游主分支的近似镜像，并在特性分支中执行任何工作，因为它们以后可能会成为 pull request .</p>
 <p>在这一点，使用 merge 还是 rebase 并不重要，因为结果通常是一样的。让我们使用 merge：</p>
-<pre><code class="language-bash">git checkout master
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-5" onclick="copyCode('code-5')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-5">git checkout master
 git merge upstream/master
 </code></pre>
+            </div>
 <p>当你想合上游的维护者分享一些工作时，你可以从 master 分支中创建一个特性分支，当你满意时，把它推送到你的远程仓库。</p>
 <p>你也可以用 rebase 来代替，然后合并以确保上游有一套干净的提交（最好是一个）来评估。</p>
-<pre><code class="language-bash">git checkout -b feature-x
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-6" onclick="copyCode('code-6')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-6">git checkout -b feature-x
 #some work and some commits happen
 #some time passes git fetch upstream
 git rebase upstream/master
 </code></pre>
+            </div>
 <p>如果你需要把几个提交压成一个，你可以在这时使用厉害的 rebase 互动。</p>
 <h2 id="publish-with-git-fork">Publish with git fork</h2>
 <p>经过以上步骤后，通过简单的 push, 在远程 fork 中发布你的作品。</p>
-<pre><code class="language-bash">git push origin feature-x
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-7" onclick="copyCode('code-7')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-7">git push origin feature-x
 </code></pre>
+            </div>
 <p>如果你在发布远程分支 feature-x 后，因为上游维护者的一些反馈而不得不更新它，就会出现一个小问题，你有几个选择：</p>
 <p>创建一个新的分支，包含你和上游的更新将上游的更新合并到你的本地分支，并记录一个合并提交，这将使上游版本库混乱在上游跟新的基础上重新建立本地分支，然后强制推动到远程分支</p>
-<pre><code class="language-bash">git push -f origin feature-x
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-8" onclick="copyCode('code-8')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-8">git push -f origin feature-x
 </code></pre>
+            </div>
 <p>我个人更倾向于尽量保持历史记录的干净，选择方案三，但不同的团队有不同的工作流程。注意：只有在使用你自己的 fork 时，你才能这样做，重写共享库和分支的历史是绝对不应该做的。重写共享库和分支的历史是你永远不应该改做的事情。</p>
 <h2 id="tip-of-the-day_-ahead_behind-number-in-the-promt">Tip of the day: Ahead/Behind number in the promt</h2>
 <p>fetch 之后，git status 会显示你比同步的远程分支提前或落后多少次提交。如果你能在你忠实的命令行提示符下看到这些信息，岂不是更好？我也是这么想的，所以我开始用我的 bash chopsticks 并制作了它。</p>
 <p>下面是你配置好后，它在你的提示符上的样子：</p>
-<pre><code class="language-bash">nick-macbook-air:~/dev/projects/stash[1|94]$
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-9" onclick="copyCode('code-9')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-9">nick-macbook-air:~/dev/projects/stash[1|94]$
 </code></pre>
+            </div>
 <p>这就是你需要添加到你的.bashrc 或等价物中的东西，只是一个函数：</p>
-<pre><code class="language-bash">function ahead_behind {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-10" onclick="copyCode('code-10')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-10">function ahead_behind {
   curr_branch=$(git rev-parse --abbrev-ref HEAD);
   curr_remote=$(git config branch.$curr_branch.remote);
   curr_merge_branch=$(git config branch.$curr_branch.merge | cut -d / -f 3);
   git rev-list --left-right --count $curr_branch...$curr_remote/$curr_merge_branch | tr -s '\t' '|';
 }
 </code></pre>
+            </div>
 <p>你可以用这个新函数 ahead_behind 来丰富你的 bash 提示，已达到想要的效果。我把着色的工作留给读者去做。</p>
 <p>Sampl prompt:</p>
-<pre><code class="language-bash">export PS1="\h:\w[\$(ahead_behind)]$"
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-11" onclick="copyCode('code-11')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-11">export PS1="\h:\w[\$(ahead_behind)]$"
 </code></pre>
+            </div>
 <h2 id="内部结构">内部结构</h2>
 <p>对于那些喜欢细节和解释的人来说，这是如何工作的。</p>
 <p>我们得到当前 HEAD 的符号名称，及当前分支。</p>
-<pre><code class="language-bash">curr_branch=$(git rev-parse --abbrev-ref HEAD);
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-12" onclick="copyCode('code-12')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-12">curr_branch=$(git rev-parse --abbrev-ref HEAD);
 </code></pre>
+            </div>
 <p>我们得到当前分支所指向的远程：</p>
-<pre><code class="language-bash">curr_remote=$(git config branch.$curr_branch.remote);
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-13" onclick="copyCode('code-13')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-13">curr_remote=$(git config branch.$curr_branch.remote);
 </code></pre>
+            </div>
 <p>我们得到了这个远程分支应该被合并到的分支上（通过一个廉价的 Unix 技巧来丢弃包括最后一个斜杠 [/] 在内的所有内容）。</p>
-<pre><code class="language-bash">curr_merge_branch=$(git config branch.$curr_branch.merge | cut -d / -f 3);
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-14" onclick="copyCode('code-14')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-14">curr_merge_branch=$(git config branch.$curr_branch.merge | cut -d / -f 3);
 </code></pre>
+            </div>
 <p>现在我们有了我们需要的东西来手机我们领先和落后的提交次数</p>
-<pre><code class="language-bash">git rev-list --left-right --count $curr_branch...$curr_remote/$curr_merge_branch | tr -s '\t' '|';
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-15" onclick="copyCode('code-15')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-15">git rev-list --left-right --count $curr_branch...$curr_remote/$curr_merge_branch | tr -s '\t' '|';
 </code></pre>
+            </div>
 <p>我们使用古老的 Unix tr 将 TAB 转换为分隔符 |.</p>
 <h2 id="getting-started-with-git-upstream">Getting started with git upstream</h2>
 <p>这就是 git upstream 的基本演练，– 如何设置 git upstream, 创建新分支，收集修改，用 git fork 发布，还有一个贴心的提示，这就是你的远程分支领先 / 落后于你多少次提交。</p>
@@ -2699,7 +3251,18 @@ that can be applied to quant</li>
 </ul>
 <h2 id="安装步骤">安装步骤</h2>
 <h3 id="1_-安装-nautilustrader">1. 安装 NautilusTrader</h3>
-<pre><code class="language-bash"># 创建虚拟环境（推荐）
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-1"># 创建虚拟环境（推荐）
 python -m venv nautilus_env
 source nautilus_env/bin/activate  # Linux/Mac
 # nautilus_env\Scripts\activate  # Windows
@@ -2710,9 +3273,21 @@ pip install -U nautilus_trader
 # 安装 JupyterLab（可选，用于交互式开发）
 pip install -U jupyterlab
 </code></pre>
+            </div>
 <h3 id="2_-获取示例数据_重要__">2. 获取示例数据（重要！）</h3>
 <p>官方提供了一个便捷的脚本来下载示例数据：</p>
-<pre><code class="language-python"># 在 Jupyter notebook 或 Python 脚本中运行
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-2"># 在 Jupyter notebook 或 Python 脚本中运行
 import subprocess
 import sys
 
@@ -2726,9 +3301,22 @@ subprocess.run([
     "import urllib.request; exec(urllib.request.urlopen('https://raw.githubusercontent.com/nautechsystems/nautilus_data/main/nautilus_data/hist_data_to_catalog.py').read())"
 ])
 </code></pre>
+            </div>
 <p>或者使用命令行：</p>
-<pre><code class="language-bash">curl https://raw.githubusercontent.com/nautechsystems/nautilus_data/main/nautilus_data/hist_data_to_catalog.py | python -
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-3" onclick="copyCode('code-3')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-3">curl https://raw.githubusercontent.com/nautechsystems/nautilus_data/main/nautilus_data/hist_data_to_catalog.py | python -
 </code></pre>
+            </div>
 <p>这个脚本会：</p>
 <ul>
 <li>下载 EUR/USD 的历史数据</li>
@@ -2737,7 +3325,18 @@ subprocess.run([
 </ul>
 <h2 id="完整的回测示例">完整的回测示例</h2>
 <h3 id="1_-导入必要的模块">1. 导入必要的模块</h3>
-<pre><code class="language-python">from decimal import Decimal
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-4" onclick="copyCode('code-4')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-4">from decimal import Decimal
 from pathlib import Path
 
 import pandas as pd
@@ -2752,8 +3351,20 @@ from nautilus_trader.model.objects import Price, Quantity
 from nautilus_trader.persistence.catalog.parquet import ParquetDataCatalog
 from nautilus_trader.trading.strategy import Strategy
 </code></pre>
+            </div>
 <h3 id="2_-设置数据目录">2. 设置数据目录</h3>
-<pre><code class="language-python"># 设置数据目录路径
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-5" onclick="copyCode('code-5')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-5"># 设置数据目录路径
 from nautilus_trader.persistence.catalog import ParquetDataCatalog
 
 # 从环境变量或默认路径创建数据目录
@@ -2768,8 +3379,20 @@ start = catalog.min_timestamp("quote_tick", instrument_id="EUR/USD.SIM")
 end = catalog.max_timestamp("quote_tick", instrument_id="EUR/USD.SIM")
 print(f"数据时间范围: {start} 到 {end}")
 </code></pre>
+            </div>
 <h3 id="3_-创建简单的-macd-策略">3. 创建简单的 MACD 策略</h3>
-<pre><code class="language-python">from nautilus_trader.indicators.macd import MovingAverageConvergenceDivergence
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-6" onclick="copyCode('code-6')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-6">from nautilus_trader.indicators.macd import MovingAverageConvergenceDivergence
 from nautilus_trader.trading.strategy import Strategy
 
 class MACDStrategy(Strategy):
@@ -2861,8 +3484,20 @@ class MACDStrategy(Strategy):
         )
         self.submit_order(order)
 </code></pre>
+            </div>
 <h3 id="4_-配置并运行回测">4. 配置并运行回测</h3>
-<pre><code class="language-python"># 配置回测
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-7" onclick="copyCode('code-7')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-7"># 配置回测
 config = BacktestRunConfig(
     engine=BacktestEngineConfig(
         strategies=[
@@ -2904,8 +3539,20 @@ config = BacktestRunConfig(
 node = BacktestNode(configs=[config])
 results = node.run()
 </code></pre>
+            </div>
 <h3 id="5_-分析回测结果">5. 分析回测结果</h3>
-<pre><code class="language-python"># 获取引擎实例
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-8" onclick="copyCode('code-8')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-8"># 获取引擎实例
 engine = node.engine
 
 # 生成报告
@@ -2932,10 +3579,22 @@ return_pct = (pnl / starting_balance) * 100
 print(f"盈亏: ${pnl:.2f}")
 print(f"收益率: {return_pct:.2f}%")
 </code></pre>
+            </div>
 <h2 id="数据获取的其他方式">数据获取的其他方式</h2>
 <h3 id="1_-使用自己的数据">1. 使用自己的数据</h3>
 <p>如果你有自己的数据，可以将其转换为 NautilusTrader 格式：</p>
-<pre><code class="language-python"># 从 CSV 导入数据
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-9" onclick="copyCode('code-9')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-9"># 从 CSV 导入数据
 from nautilus_trader.persistence.loaders import CSVTickDataLoader
 
 loader = CSVTickDataLoader(
@@ -2950,8 +3609,20 @@ ticks = loader.load("path/to/your/data.csv")
 # 保存到 catalog
 catalog.write_data(ticks)
 </code></pre>
+            </div>
 <h3 id="2_-从交易所获取实时数据">2. 从交易所获取实时数据</h3>
-<pre><code class="language-python"># 以 Binance 为例
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-10" onclick="copyCode('code-10')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-10"># 以 Binance 为例
 from nautilus_trader.adapters.binance.config import BinanceDataClientConfig
 from nautilus_trader.adapters.binance.factories import BinanceLiveDataClientFactory
 
@@ -2969,6 +3640,7 @@ data_client = BinanceLiveDataClientFactory.create(
     config=config,
 )
 </code></pre>
+            </div>
 <h2 id="注意事项">注意事项</h2>
 <ol>
 <li><strong>数据质量</strong>：回测结果的准确性依赖于数据质量</li>
@@ -3008,13 +3680,36 @@ data_client = BinanceLiveDataClientFactory.create(
 </ul>
 <p>准备好铅笔！</p>
 <p>让我们直接开始，用四个简单命令建立一个新的Go项目：</p>
-<pre><code class="language-bash">mkdir code-editing-agent
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-1">mkdir code-editing-agent
 cd code-editing-agent
 go mod init agent
 touch main.go
 </code></pre>
+            </div>
 <p>现在，让我们打开<code>main.go</code>，作为第一步，放入我们需要的基本框架：</p>
-<pre><code class="language-go">package main
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-2">package main
 
 import (
     "bufio"
@@ -3054,9 +3749,21 @@ type Agent struct {
     getUserMessage func() (string, bool)
 }
 </code></pre>
+            </div>
 <p>是的，这还不能编译。但我们这里有的是一个<code>Agent</code>，它可以访问<code>anthropic.Client</code>（默认情况下会寻找<code>ANTHROPIC_API_KEY</code>），并且可以通过从终端的stdin读取来获取用户消息。</p>
 <p>现在让我们添加缺失的<code>Run()</code>方法：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-3" onclick="copyCode('code-3')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-3">// main.go
 func (a *Agent) Run(ctx context.Context) error {
     conversation := []anthropic.MessageParam{}
     fmt.Println("与Claude聊天（使用'ctrl-c'退出）")
@@ -3098,16 +3805,29 @@ func (a *Agent) runInference(ctx context.Context, conversation []anthropic.Messa
     return message, err
 }
 </code></pre>
+            </div>
 <p>代码不多，对吧？90行，其中最重要的是<code>Run()</code>中的这个循环，让我们可以与Claude对话。但这已经是这个程序的心跳了。</p>
 <p>对于一个心跳来说，它非常直接：我们首先打印一个提示，要求用户输入内容，将其添加到对话中，发送给Claude，将Claude的响应添加到对话中，打印响应，然后循环继续。</p>
 <p>这就是你使用过的每一个AI聊天应用程序，只不过是在终端中。</p>
 <p>让我们运行它：</p>
-<pre><code class="language-bash">export ANTHROPIC_API_KEY="这是我最后一次告诉你要设置这个"
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-4" onclick="copyCode('code-4')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-4">export ANTHROPIC_API_KEY="这是我最后一次告诉你要设置这个"
 # 下载依赖
 go mod tidy
 # 运行
 go run main.go
 </code></pre>
+            </div>
 <p>然后你就可以和Claude聊天了，像这样：</p>
 <p>注意我们如何在多轮对话中保持同一个对话。它记住了我在第一条消息中的名字。<code>conversation</code>在每一轮中都会变长，我们每次都发送整个对话。服务器——Anthropic的服务器——是无状态的。它只能看到<code>conversation</code>切片中的内容。维护状态是我们的责任。</p>
 <p>好的，让我们继续，因为昵称很糟糕，而且这还不是一个代理程序。什么是代理程序？这是<a href="https://youtu.be/J1-W9O3n7j8?t=72">我的定义</a>：一个可以访问工具的LLM，让它具有修改上下文窗口之外内容的能力。</p>
@@ -3135,7 +3855,18 @@ go run main.go
 <li>一个实际执行工具的函数，使用模型发送给我们的输入并返回结果</li>
 </ul>
 <p>所以让我们将其添加到我们的代码中：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-5" onclick="copyCode('code-5')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-5">// main.go
 type ToolDefinition struct {
     Name string `json:"name"`
     Description string `json:"description"`
@@ -3143,8 +3874,20 @@ type ToolDefinition struct {
     Function func(input json.RawMessage) (string, error)
 }
 </code></pre>
+            </div>
 <p>现在我们给我们的<code>Agent</code>工具定义：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-6" onclick="copyCode('code-6')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-6">// main.go
 // `tools`在这里添加：
 type Agent struct {
     client *anthropic.Client
@@ -3173,8 +3916,20 @@ func main() {
     // [... 之前的代码 ...]
 }
 </code></pre>
+            </div>
 <p>并在<code>runInference</code>中将它们发送给模型：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-7" onclick="copyCode('code-7')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-7">// main.go
 func (a *Agent) runInference(ctx context.Context, conversation []anthropic.MessageParam) (*anthropic.Message, error) {
     anthropicTools := []anthropic.ToolUnionParam{}
     for _, tool := range a.tools {
@@ -3196,10 +3951,22 @@ func (a *Agent) runInference(ctx context.Context, conversation []anthropic.Messa
     return message, err
 }
 </code></pre>
+            </div>
 <p>这里有一些类型操作，我在Go泛型方面还不够熟练，所以我不会试图向你解释<code>anthropic.String</code>和<code>ToolUnionParam</code>。但是，真的，我发誓，这很简单：</p>
 <p>我们发送我们的工具定义，在服务器上，Anthropic然后将这些定义包装在<a href="https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview#tool-use-system-prompt">这个系统提示</a>中（内容不多），将其添加到我们的<code>conversation</code>中，然后如果模型想使用该工具，就会以特定方式回复。</p>
 <p>好的，工具定义正在发送，但我们还没有定义工具。让我们来做这件事并定义<code>read_file</code>：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-8" onclick="copyCode('code-8')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-8">// main.go
 var ReadFileDefinition = ToolDefinition{
     Name: "read_file",
     Description: "读取给定相对文件路径的内容。当你想看到文件内部的内容时使用这个。不要对目录名使用这个。",
@@ -3240,9 +4007,21 @@ func GenerateSchema[T any]() anthropic.ToolInputSchemaParam {
     }
 }
 </code></pre>
+            </div>
 <p>代码不多，对吧？这是一个单一函数<code>ReadFile</code>，以及模型将看到的两个描述：我们的<code>Description</code>描述工具本身（“读取给定相对文件路径的内容…”），以及这个工具唯一输入参数的描述（“工作目录中文件的相对路径…”）。</p>
 <p><code>ReadFileInputSchema</code>和<code>GenerateSchema</code>这些东西？我们需要这些，这样我们就可以为我们发送给模型的工具定义生成JSON模式。为此，我们使用<code>jsonschema</code>包，我们需要导入和下载：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-9" onclick="copyCode('code-9')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-9">// main.go
 package main
 
 import (
@@ -3257,21 +4036,57 @@ import (
     "github.com/invopop/jsonschema"
 )
 </code></pre>
+            </div>
 <p>然后运行以下命令：</p>
-<pre><code class="language-bash">go mod tidy
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-10" onclick="copyCode('code-10')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-10">go mod tidy
 </code></pre>
+            </div>
 <p>然后，在<code>main</code>函数中，我们需要确保使用定义：</p>
-<pre><code class="language-go">func main() {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-11" onclick="copyCode('code-11')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-11">func main() {
     // [... 之前的代码 ...]
     tools := []ToolDefinition{ReadFileDefinition}
     // [... 之前的代码 ...]
 }
 </code></pre>
+            </div>
 <p>是时候试试了！</p>
 <p>等等，什么？哈哈哈，它想使用工具！显然你的输出会略有不同，但Claude肯定听起来知道它可以读取文件，对吧？</p>
 <p>问题是我们没有监听！当Claude眨眼时，我们忽略了它。我们需要修复这个问题。</p>
 <p>在这里，让我展示如何通过用以下内容替换我们<code>Agent</code>的<code>Run</code>方法来做到这一点：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-12" onclick="copyCode('code-12')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-12">// main.go
 func (a *Agent) Run(ctx context.Context) error {
     conversation := []anthropic.MessageParam{}
     fmt.Println("与Claude聊天（使用'ctrl-c'退出）")
@@ -3342,12 +4157,25 @@ func (a *Agent) executeTool(id, name string, input json.RawMessage) anthropic.Co
     return anthropic.NewToolResultBlock(id, response, false)
 }
 </code></pre>
+            </div>
 <p>眯着眼看，你会发现90%是样板代码，10%是重要的：当我们从Claude那里得到一个<code>message</code>时，我们通过查找<code>content.Type == "tool_use"</code>来检查Claude是否要求我们执行工具，如果是，我们交给<code>executeTool</code>，在我们的本地注册表中按名称查找工具，解码输入，执行它，返回结果。如果是错误，我们翻转一个布尔值。就是这样。</p>
 <p>（是的，循环中有循环，但这不重要。）</p>
 <p>我们执行工具，将结果发送回Claude，然后再次请求Claude的响应。真的：就是这样。让我展示给你看。</p>
 <p>准备工作，运行这个：</p>
-<pre><code class="language-bash">echo 'what animal is the most disagreeable because it always says neigh?' &gt;&gt; secret-file.txt
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-13" onclick="copyCode('code-13')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-13">echo 'what animal is the most disagreeable because it always says neigh?' &gt;&gt; secret-file.txt
 </code></pre>
+            </div>
 <p>这在我们的目录中创建了一个<code>secret-file.txt</code>，包含一个神秘的谜语。</p>
 <p>在同一个目录中，让我们运行我们新的使用工具的代理程序，并要求它查看文件：</p>
 <p>让我们深呼吸，一起说出来。准备好了吗？开始：太棒了。你只是给它一个工具，它就…在认为有助于解决任务时使用它。记住：我们没有说任何关于“如果用户询问文件，就读取文件“的话。我们也没有说“如果某些东西看起来像文件名，就想办法读取它“。不，这些都没有。我们说“帮我解决这个文件中的问题“，Claude意识到它可以读取文件来回答，然后就去做了。</p>
@@ -3356,7 +4184,18 @@ func (a *Agent) executeTool(id, name string, input json.RawMessage) anthropic.Co
 <h2 id="list-files工具"><code>list_files</code>工具</h2>
 <p>如果你和我一样，当你登录到一台新计算机时，你做的第一件事就是通过运行<code>ls</code>来了解情况——列出文件。</p>
 <p>让我们给Claude同样的能力，一个列出文件的工具。这是<code>list_files</code>工具的完整实现：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-14" onclick="copyCode('code-14')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-14">// main.go
 var ListFilesDefinition = ToolDefinition{
     Name: "list_files",
     Description: "列出给定路径下的文件和目录。如果没有提供路径，列出当前目录中的文件。",
@@ -3413,17 +4252,30 @@ func ListFiles(input json.RawMessage) (string, error) {
     return string(result), nil
 }
 </code></pre>
+            </div>
 <p>这里没有什么花哨的：<code>list_files</code>返回当前文件夹中的文件和目录列表。如果这是一个严肃的努力，我们可以（并且可能应该）做一千种优化，但由于我只是想向你展示巫师帽里有什么，这就够了。</p>
 <p>需要注意的一点：我们返回字符串列表，并用尾随斜杠表示目录。这不是必需的，这只是我刚刚决定要做的事情。没有固定格式。只要Claude能理解就行，至于它能否理解，你需要通过实验来确定。你也可以在每个目录前面加上“directory: “或返回一个带有两个标题的Markdown文档：“directories“和“files”。有很多选择，你选择哪一个取决于Claude最能理解什么、需要多少token、生成和读取的速度如何等等。</p>
 <p>在这里，我们只想创建一个小的<code>list_files</code>工具，最简单的选择获胜。</p>
 <p>当然，我们也需要告诉Claude关于<code>list_files</code>：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-15" onclick="copyCode('code-15')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-15">// main.go
 func main() {
     // [... 之前的代码 ...]
     tools := []ToolDefinition{ReadFileDefinition, ListFilesDefinition}
     // [... 之前的代码 ...]
 }
 </code></pre>
+            </div>
 <p>就是这样。让我们问Claude它能在这个目录中看到什么。</p>
 <p>工作了！它可以读取目录。</p>
 <p>但这里有一个重点：Claude知道如何组合这些工具。我们只需要以一种激发它的方式提示它：</p>
@@ -3435,7 +4287,18 @@ func main() {
 <p>我们要添加的最后一个工具是<code>edit_file</code>——一个让Claude编辑文件的工具。</p>
 <p>“天哪”，你现在在想，“这就是橡胶遇到路面的地方，这就是他从帽子里拉出兔子的地方。“好吧，让我们看看，好吗？</p>
 <p>首先，让我们为我们新的<code>edit_file</code>工具添加一个定义：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-16" onclick="copyCode('code-16')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-16">// main.go
 var EditFileDefinition = ToolDefinition{
     Name: "edit_file",
     Description: `对文本文件进行编辑。
@@ -3455,9 +4318,21 @@ type EditFileInput struct {
 
 var EditFileInputSchema = GenerateSchema[EditFileInput]()
 </code></pre>
+            </div>
 <p>没错，我又知道你在想什么：“字符串替换来编辑文件？“Claude 3.7喜欢替换字符串（通过实验你会发现它们喜欢或不喜欢什么），所以我们将通过告诉Claude它可以通过用新文本替换现有文本来编辑文件来实现<code>edit_file</code>。</p>
 <p>现在这是Go中<code>EditFile</code>函数的实现：</p>
-<pre><code class="language-go">func EditFile(input json.RawMessage) (string, error) {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-17" onclick="copyCode('code-17')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-17">func EditFile(input json.RawMessage) (string, error) {
     editFileInput := EditFileInput{}
     err := json.Unmarshal(input, &amp;editFileInput)
     if err != nil {
@@ -3491,9 +4366,21 @@ var EditFileInputSchema = GenerateSchema[EditFileInput]()
     return "OK", nil
 }
 </code></pre>
+            </div>
 <p>它检查输入参数，读取文件（或者如果存在就创建它），用<code>NewStr</code>替换<code>OldStr</code>。然后它将内容写回磁盘并返回“OK“。</p>
 <p>仍然缺少的是<code>createNewFile</code>，这只是一个小的辅助函数，如果这不是Go的话会短70%：</p>
-<pre><code class="language-go">func createNewFile(filePath, content string) (string, error) {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-18" onclick="copyCode('code-18')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-18">func createNewFile(filePath, content string) (string, error) {
     dir := path.Dir(filePath)
     if dir != "." {
         err := os.MkdirAll(dir, 0755)
@@ -3510,19 +4397,43 @@ var EditFileInputSchema = GenerateSchema[EditFileInput]()
     return fmt.Sprintf("Successfully created file %s", filePath), nil
 }
 </code></pre>
+            </div>
 <p>最后一步：将其添加到我们发送给Claude的工具列表中。</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-19" onclick="copyCode('code-19')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-19">// main.go
 func main() {
     // [... 之前的代码 ...]
     tools := []ToolDefinition{ReadFileDefinition, ListFilesDefinition, EditFileDefinition}
     // [... 之前的代码 ...]
 }
 </code></pre>
+            </div>
 <p>然后…我们准备好了，但你准备好了吗？你准备好释放它了吗？</p>
 <p>我想是的，让我们这样做。让我们告诉Claude用JavaScript创建一个新的FizzBuzz函数。</p>
 <p>对吧？！这很令人印象深刻，不是吗？这是你可能想出的<code>edit_file</code>——通常是代理程序——最基本的实现。</p>
 <p>但是，它有效吗？是的，它有效：</p>
-<pre><code class="language-bash">$ node fizzbuzz.js
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-20" onclick="copyCode('code-20')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-20">$ node fizzbuzz.js
 Running FizzBuzz:
 1
 2
@@ -3542,11 +4453,23 @@ FizzBuzz
 16
 [...]
 </code></pre>
+            </div>
 <p>太棒了。但是嘿，让它实际编辑一个文件而不只是创建一个。</p>
 <p>当我要求“请编辑fizzbuzz.js，使其只打印到15“时，Claude的做法如下：</p>
 <p>它读取文件，编辑文件以更改运行时长，然后还编辑文件以更新顶部的注释。</p>
 <p>它仍然有效：</p>
-<pre><code class="language-bash">$ node fizzbuzz.js
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-21" onclick="copyCode('code-21')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-21">$ node fizzbuzz.js
 Running FizzBuzz:
 1
 2
@@ -3564,13 +4487,26 @@ Fizz
 14
 FizzBuzz
 </code></pre>
+            </div>
 <p>好的，让我们再做一个，让它做以下事情：</p>
 <p>创建一个congrats.js脚本，rot13解码以下字符串’Pbatenghyngvbaf ba ohvyqvat n pbqr-rqvgvat ntrag!’并打印它</p>
 <p>也许是一个很高的要求。让我们看看：</p>
 <p>它有效吗？让我们试试：</p>
-<pre><code class="language-bash">$ node congrats.js
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-22" onclick="copyCode('code-22')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-22">$ node congrats.js
 Congratulations on building a code-editing agent!
 </code></pre>
+            </div>
 <p>它有效！</p>
 <p>这不是很神奇吗？</p>
 <p>如果你和我在过去几个月中交谈过的所有工程师一样，在阅读这篇文章时，你很可能一直在等待兔子从帽子里被拉出来，等待我说“好吧，实际上这比这难得多得多。“但它不是。</p>
@@ -3594,11 +4530,23 @@ Congratulations on building a code-editing agent!
 <li>Code blocks (which are excluded from excerpts)</li>
 <li>Links and other formatting</li>
 </ul>
-<pre><code class="language-rust">// This code block won't appear in the excerpt
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-1">// This code block won't appear in the excerpt
 fn generate_excerpt(markdown: &amp;str) -&gt; String {
     // Implementation details...
 }
 </code></pre>
+            </div>
 <h2 id="benefits">Benefits</h2>
 <p>The automatic excerpt generation provides several benefits:</p>
 <ul>

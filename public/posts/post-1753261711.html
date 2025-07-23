@@ -66,6 +66,11 @@
     <main>
         <div class="container">
             
+
+<div class="reading-progress" id="reading-progress">
+    <div class="progress-bar" id="progress-bar"></div>
+</div>
+
 <article class="post">
     <header>
         <h1>静态网站生成器完成</h1>
@@ -80,36 +85,61 @@
         
     </header>
 
-    <div class="post-content">
-        <h1>静态网站生成器完成！</h1>
+    
+    <div class="post-with-toc">
+        <aside class="toc-container">
+            <nav class="toc" id="toc">
+    <h2 class="toc-title">Table of Contents</h2>
+    <ul class="toc-list"><li class="toc-item toc-level-2">
+                <a href="#新增功能" class="toc-link">新增功能</a><ul class="toc-sublist"><li class="toc-item toc-level-3">
+                <a href="#1_-模板引擎" class="toc-link">1. 模板引擎</a></li><li class="toc-item toc-level-3">
+                <a href="#2_-静态网站生成" class="toc-link">2. 静态网站生成</a></li><li class="toc-item toc-level-3">
+                <a href="#3_-rss订阅" class="toc-link">3. RSS订阅</a></li><li class="toc-item toc-level-3">
+                <a href="#4_-站点配置" class="toc-link">4. 站点配置</a></li></ul></li><li class="toc-item toc-level-2">
+                <a href="#使用方法" class="toc-link">使用方法</a></li><li class="toc-item toc-level-2">
+                <a href="#技术栈" class="toc-link">技术栈</a></li></ul></nav>
+        </aside>
+        <div class="post-content">
+            <h1 id="静态网站生成器完成_">静态网站生成器完成！</h1>
 <p>今天我们成功实现了KPGB的静态网站生成功能。</p>
-<h2>新增功能</h2>
-<h3>1. 模板引擎</h3>
+<h2 id="新增功能">新增功能</h2>
+<h3 id="1_-模板引擎">1. 模板引擎</h3>
 <ul>
 <li>使用Tera作为模板引擎</li>
 <li>支持继承和包含</li>
 <li>灵活的模板系统</li>
 </ul>
-<h3>2. 静态网站生成</h3>
+<h3 id="2_-静态网站生成">2. 静态网站生成</h3>
 <ul>
 <li>自动生成HTML文件</li>
 <li>响应式设计</li>
 <li>美观的CSS样式</li>
 </ul>
-<h3>3. RSS订阅</h3>
+<h3 id="3_-rss订阅">3. RSS订阅</h3>
 <ul>
 <li>标准RSS 2.0格式</li>
 <li>自动更新</li>
 <li>包含完整文章内容</li>
 </ul>
-<h3>4. 站点配置</h3>
+<h3 id="4_-站点配置">4. 站点配置</h3>
 <ul>
 <li><code>site.toml</code>配置文件</li>
 <li>自定义标题、描述、作者</li>
 <li>IPFS网关配置</li>
 </ul>
-<h2>使用方法</h2>
-<pre><code class="language-bash"># 初始化配置
+<h2 id="使用方法">使用方法</h2>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-1"># 初始化配置
 cargo run -- init
 
 # 生成网站
@@ -118,7 +148,8 @@ cargo run -- generate
 # 启动服务器
 ./serve.sh
 </code></pre>
-<h2>技术栈</h2>
+            </div>
+<h2 id="技术栈">技术栈</h2>
 <ul>
 <li><strong>Rust</strong> - 主程序</li>
 <li><strong>Tera</strong> - 模板引擎</li>
@@ -127,7 +158,9 @@ cargo run -- generate
 </ul>
 <p>现在你的博客可以被任何人通过浏览器访问了！</p>
 
+        </div>
     </div>
+    
 
     <footer class="post-footer">
         <div class="post-info">
@@ -256,6 +289,102 @@ cargo run -- generate
     
 </article>
 
+
+<script>
+// TOC active section highlighting
+(function() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('.post-content h1[id], .post-content h2[id], .post-content h3[id], .post-content h4[id], .post-content h5[id], .post-content h6[id]');
+    
+    if (tocLinks.length === 0 || headings.length === 0) return;
+    
+    function updateActiveSection() {
+        const scrollPosition = window.scrollY + 100; // Offset for better UX
+        
+        let activeHeading = null;
+        for (const heading of headings) {
+            if (heading.offsetTop <= scrollPosition) {
+                activeHeading = heading;
+            } else {
+                break;
+            }
+        }
+        
+        if (activeHeading) {
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + activeHeading.id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateActiveSection, 50);
+    });
+    
+    // Initial update
+    updateActiveSection();
+})();
+</script>
+
+
+<script>
+// Reading Progress Bar
+(function() {
+    const progressBar = document.getElementById('progress-bar');
+    const article = document.querySelector('.post');
+    
+    if (!progressBar || !article) return;
+    
+    function updateProgressBar() {
+        const articleTop = article.offsetTop;
+        const articleHeight = article.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Add/remove scrolled class
+        if (scrollTop > 50) {
+            document.body.classList.add('scrolled');
+        } else {
+            document.body.classList.remove('scrolled');
+        }
+        
+        // Calculate the scrollable area (article height minus viewport height)
+        const scrollableArea = articleHeight + articleTop - windowHeight;
+        
+        // Calculate current scroll position relative to the article
+        const currentPosition = scrollTop - articleTop + windowHeight;
+        
+        // Calculate progress percentage
+        let progress = (currentPosition / scrollableArea) * 100;
+        
+        // Clamp progress between 0 and 100
+        progress = Math.max(0, Math.min(100, progress));
+        
+        // Update progress bar width
+        progressBar.style.width = progress + '%';
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateProgressBar, 10);
+    });
+    
+    // Update on resize
+    window.addEventListener('resize', updateProgressBar);
+    
+    // Initial update
+    updateProgressBar();
+})();
+</script>
+
         </div>
     </main>
 
@@ -265,5 +394,60 @@ cargo run -- generate
             <p>A decentralized blog powered by IPFS</p>
         </div>
     </footer>
+    
+    <script>
+    // Copy code function
+    function copyCode(codeId) {
+        const codeElement = document.getElementById(codeId);
+        if (!codeElement) return;
+        
+        const textToCopy = codeElement.textContent;
+        
+        // Use modern clipboard API if available
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showCopySuccess(codeId);
+            }).catch(err => {
+                fallbackCopy(textToCopy, codeId);
+            });
+        } else {
+            fallbackCopy(textToCopy, codeId);
+        }
+    }
+    
+    function fallbackCopy(text, codeId) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+            document.execCommand('copy');
+            showCopySuccess(codeId);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        } finally {
+            document.body.removeChild(textArea);
+        }
+    }
+    
+    function showCopySuccess(codeId) {
+        const button = document.querySelector(`button[data-code-id="${codeId}"]`);
+        if (!button) return;
+        
+        const copyText = button.querySelector('.copy-text');
+        const originalText = copyText.textContent;
+        
+        copyText.textContent = 'Copied!';
+        button.classList.add('copy-success');
+        
+        setTimeout(() => {
+            copyText.textContent = originalText;
+            button.classList.remove('copy-success');
+        }, 2000);
+    }
+    </script>
 </body>
 </html>

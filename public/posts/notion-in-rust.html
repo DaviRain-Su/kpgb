@@ -51,6 +51,35 @@
     <main>
         <div class="container">
             
+
+<div class="reading-progress" id="reading-progress">
+    <div class="progress-bar" id="progress-bar"></div>
+</div>
+
+
+<div class="font-size-adjuster">
+    <button class="font-size-btn" onclick="changeFontSize('decrease')" title="Decrease font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+    </button>
+    <span class="font-size-value" id="font-size-value">100%</span>
+    <button class="font-size-btn" onclick="changeFontSize('increase')" title="Increase font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="11" y1="8" x2="11" y2="14"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+    </button>
+    <button class="font-size-btn" onclick="changeFontSize('reset')" title="Reset font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+        </svg>
+    </button>
+</div>
+
 <article class="post">
     <header>
         <h1>Nothing in Rust</h1>
@@ -126,15 +155,38 @@
 <ol>
 <li>持有生命周期说明符，限制其包含的结构体的生命周期。这对于将生命周期人为地附加到原始指针上可能很有用。</li>
 </ol>
-<pre><code class="language-rust">struct PointerWithLifetime&lt;'a, T&gt; {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-1">struct PointerWithLifetime&lt;'a, T&gt; {
     pointer: *const T,
     _marker: std::marker::PhantomData&lt;&amp;'a ()&gt;,
 }
 </code></pre>
+            </div>
 <ol start="2">
 <li>为了模拟持有类型T的值，当实际值由另一个系统持有（或管理）时。您可能会在与非传统存储模型或FFI交互时看到这种情况。</li>
 </ol>
-<pre><code class="language-rust">mod external {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-2">mod external {
     pub fn get(location: u64) -&gt; Vec&lt;u8&gt; { /* ... */ }
 }
 
@@ -149,6 +201,7 @@ impl&lt;T: From&lt;Vec&lt;u8&gt;&gt;&gt; Slot&lt;T&gt; {
     }
 }
 </code></pre>
+            </div>
 <h2 id="这里现在是空的___there-is-nothing-here-now___">这里现在是空的。（“There is nothing here now.”）</h2>
 <h3 id="null">Null</h3>
 <blockquote>
@@ -157,11 +210,23 @@ impl&lt;T: From&lt;Vec&lt;u8&gt;&gt;&gt; Slot&lt;T&gt; {
 <p>你被欺骗了，可能还被控制了。我懂的。“哦，Null 没有任何问题。”</p>
 <p>在安全的 Rust 中这是正确的。</p>
 <p>然而，有时需要拔掉创可贴，探究表面下正在发生的事情。</p>
-<pre><code class="language-rust">let n: *const i32 = std::ptr::null();
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-3" onclick="copyCode('code-3')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-3">let n: *const i32 = std::ptr::null();
 unsafe {
     println!("{}", *n); // Segmentation fault
 }
 </code></pre>
+            </div>
 <p>（提醒：原始指针只能在不安全的代码块中进行解引用。）</p>
 <p>Rust 的设计使您很少需要深入研究指针操作。您可能会在与 C 代码交互时或者在使用 Rust 重写 Quake III 时遇到原始指针（*const 和 *mut 类型）。</p>
 <h3 id="option__none">Option::None</h3>
@@ -187,7 +252,18 @@ unsafe {
 <p>空元组在 <code>Rust</code> 中具有类似的作用：不返回实际值的函数隐式返回空元组。但是，它的用途比这更加多样化。</p>
 <p>由于空元组是一个值（尽管是没有内容且大小为零的值），也是一种类型，
 因此有时将其用于参数化 Result 类型以表示一个不提供有意义反馈的易错函数可能会很有用。</p>
-<pre><code class="language-rust">impl Partner {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-4" onclick="copyCode('code-4')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-4">impl Partner {
     fn process_request(&amp;mut self, proposition: Proposition) -&gt; Result&lt;(), (u32, RejectionReason)&gt; {
         use std::time::{SystemTime, Duration};
         use chrono::prelude::*;
@@ -216,12 +292,24 @@ unsafe {
     }
 }
 </code></pre>
+            </div>
 <h2 id="我会让你一直等到时间的尽头_空手而归___i_m-going-to-leave-you_-waiting-here_-empty-handed_-until-the-end-of-time___">我会让你一直等到时间的尽头，空手而归。(“I’m going to leave you, waiting here, empty-handed, until the end of time.”)</h2>
 <h3 id="the-never-type">The never type</h3>
 <p>如何调用一个函数的返回类型，它不仅不返回值，而且根本永远不会返回？
 嗯，您可以尝试所有传统方法都无济于事 - 您将永远无法在那一点之后继续，因此需要一些精细的处理。</p>
 <p>这就是所谓的“never”类型。以下是几种遇到它的方式</p>
-<pre><code class="language-rust">let never_loop = loop {}; // loop never exits
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-5" onclick="copyCode('code-5')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-5">let never_loop = loop {}; // loop never exits
 let never_panic = panic!(); // panic terminates execution
 
 let value: u32 = match Some(1) {
@@ -229,9 +317,21 @@ let value: u32 = match Some(1) {
     None =&gt; return, // `return` is of type never
 };
 </code></pre>
+            </div>
 <p>虽然语法仍处于实验阶段，但“never”类型用感叹号 ! 表示。与此同时，您可以使用 Infallible 作为替代。</p>
 <p>当实现一个具有您永远不需要的关联类型的 trait 时，“never”类型可能会很有用。再次以 Result 为例：</p>
-<pre><code class="language-rust">trait FailureLogProvider {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">rust</span>
+                    <button class="copy-button" data-code-id="code-6" onclick="copyCode('code-6')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-rust" id="code-6">trait FailureLogProvider {
     type Error;
     fn get_failure_logs(&amp;self) -&gt; Result&lt;Vec&lt;FailureLog&gt;, Self::Error&gt;;
 }
@@ -243,6 +343,7 @@ impl FailureLogProvider for Partner {
     }
 }
 </code></pre>
+            </div>
 <p>在示例中的函数实现始终成功，但是 trait 允许实现失败。为了表示这一点，关联的 Error 类型是“never”类型。</p>
 <p><a href="https://geeklaunch.io/blog/nothing-in-rust/">原文</a></p>
 
@@ -411,6 +512,114 @@ impl FailureLogProvider for Partner {
 </script>
 
 
+<script>
+// Reading Progress Bar
+(function() {
+    const progressBar = document.getElementById('progress-bar');
+    const article = document.querySelector('.post');
+    
+    if (!progressBar || !article) return;
+    
+    function updateProgressBar() {
+        const articleTop = article.offsetTop;
+        const articleHeight = article.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Add/remove scrolled class
+        if (scrollTop > 50) {
+            document.body.classList.add('scrolled');
+        } else {
+            document.body.classList.remove('scrolled');
+        }
+        
+        // Calculate the scrollable area (article height minus viewport height)
+        const scrollableArea = articleHeight + articleTop - windowHeight;
+        
+        // Calculate current scroll position relative to the article
+        const currentPosition = scrollTop - articleTop + windowHeight;
+        
+        // Calculate progress percentage
+        let progress = (currentPosition / scrollableArea) * 100;
+        
+        // Clamp progress between 0 and 100
+        progress = Math.max(0, Math.min(100, progress));
+        
+        // Update progress bar width
+        progressBar.style.width = progress + '%';
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateProgressBar, 10);
+    });
+    
+    // Update on resize
+    window.addEventListener('resize', updateProgressBar);
+    
+    // Initial update
+    updateProgressBar();
+})();
+
+// Font Size Adjuster
+(function() {
+    const MIN_SIZE = 80;
+    const MAX_SIZE = 150;
+    const STEP = 10;
+    const DEFAULT_SIZE = 100;
+    
+    // Get saved font size from localStorage
+    let currentSize = parseInt(localStorage.getItem('postFontSize')) || DEFAULT_SIZE;
+    
+    // Apply saved font size on load
+    applyFontSize(currentSize);
+    
+    window.changeFontSize = function(action) {
+        switch(action) {
+            case 'increase':
+                currentSize = Math.min(currentSize + STEP, MAX_SIZE);
+                break;
+            case 'decrease':
+                currentSize = Math.max(currentSize - STEP, MIN_SIZE);
+                break;
+            case 'reset':
+                currentSize = DEFAULT_SIZE;
+                break;
+        }
+        
+        applyFontSize(currentSize);
+        localStorage.setItem('postFontSize', currentSize);
+    };
+    
+    function applyFontSize(size) {
+        const postContent = document.querySelector('.post-content');
+        const sizeValue = document.getElementById('font-size-value');
+        
+        if (postContent) {
+            postContent.style.fontSize = size + '%';
+        }
+        
+        if (sizeValue) {
+            sizeValue.textContent = size + '%';
+        }
+        
+        // Update button states
+        document.querySelectorAll('.font-size-btn').forEach(btn => {
+            btn.disabled = false;
+        });
+        
+        if (size <= MIN_SIZE) {
+            document.querySelector('.font-size-btn[onclick*="decrease"]').disabled = true;
+        }
+        if (size >= MAX_SIZE) {
+            document.querySelector('.font-size-btn[onclick*="increase"]').disabled = true;
+        }
+    }
+})();
+</script>
+
         </div>
     </main>
 
@@ -420,5 +629,60 @@ impl FailureLogProvider for Partner {
             <p>A decentralized blog powered by IPFS</p>
         </div>
     </footer>
+    
+    <script>
+    // Copy code function
+    function copyCode(codeId) {
+        const codeElement = document.getElementById(codeId);
+        if (!codeElement) return;
+        
+        const textToCopy = codeElement.textContent;
+        
+        // Use modern clipboard API if available
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showCopySuccess(codeId);
+            }).catch(err => {
+                fallbackCopy(textToCopy, codeId);
+            });
+        } else {
+            fallbackCopy(textToCopy, codeId);
+        }
+    }
+    
+    function fallbackCopy(text, codeId) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+            document.execCommand('copy');
+            showCopySuccess(codeId);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        } finally {
+            document.body.removeChild(textArea);
+        }
+    }
+    
+    function showCopySuccess(codeId) {
+        const button = document.querySelector(`button[data-code-id="${codeId}"]`);
+        if (!button) return;
+        
+        const copyText = button.querySelector('.copy-text');
+        const originalText = copyText.textContent;
+        
+        copyText.textContent = 'Copied!';
+        button.classList.add('copy-success');
+        
+        setTimeout(() => {
+            copyText.textContent = originalText;
+            button.classList.remove('copy-success');
+        }, 2000);
+    }
+    </script>
 </body>
 </html>

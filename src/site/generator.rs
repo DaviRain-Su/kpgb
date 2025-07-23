@@ -532,7 +532,10 @@ fn markdown_to_html(markdown: &str) -> String {
     html::push_html(&mut html_output, parser);
 
     // Post-process HTML to add IDs to headings
-    add_heading_ids_to_html(&html_output)
+    let html_with_ids = add_heading_ids_to_html(&html_output);
+
+    // Post-process HTML to add copy buttons to code blocks
+    add_copy_buttons_to_code_blocks(&html_with_ids)
 }
 
 /// Add IDs to headings in HTML for TOC navigation
@@ -553,6 +556,50 @@ fn add_heading_ids_to_html(html: &str) -> String {
             format!(r#"<h{} id="{}">{}</h{}>"#, level, id, content, level)
         })
         .to_string()
+}
+
+/// Add copy buttons to code blocks
+fn add_copy_buttons_to_code_blocks(html: &str) -> String {
+    use regex::Regex;
+
+    // Match <pre><code> blocks
+    let code_block_re = Regex::new(r"<pre><code([^>]*)>([\s\S]*?)</code></pre>").unwrap();
+
+    let mut block_id = 0;
+    code_block_re.replace_all(html, |caps: &regex::Captures| {
+        block_id += 1;
+        let attrs = &caps[1];
+        let code_content = &caps[2];
+
+        // Extract language class if present
+        let lang_re = Regex::new(r#"class="language-([^"]+)""#).unwrap();
+        let language = lang_re.captures(attrs)
+            .and_then(|c| c.get(1))
+            .map(|m| m.as_str())
+            .unwrap_or("");
+
+        format!(
+            r#"<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">{}</span>
+                    <button class="copy-button" data-code-id="code-{}" onclick="copyCode('code-{}')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code{} id="code-{}">{}</code></pre>
+            </div>"#,
+            language,
+            block_id,
+            block_id,
+            attrs,
+            block_id,
+            code_content
+        )
+    }).to_string()
 }
 
 /// Sanitize slug to only contain ASCII characters for file names

@@ -51,6 +51,35 @@
     <main>
         <div class="container">
             
+
+<div class="reading-progress" id="reading-progress">
+    <div class="progress-bar" id="progress-bar"></div>
+</div>
+
+
+<div class="font-size-adjuster">
+    <button class="font-size-btn" onclick="changeFontSize('decrease')" title="Decrease font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+    </button>
+    <span class="font-size-value" id="font-size-value">100%</span>
+    <button class="font-size-btn" onclick="changeFontSize('increase')" title="Increase font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="11" y1="8" x2="11" y2="14"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+    </button>
+    <button class="font-size-btn" onclick="changeFontSize('reset')" title="Reset font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+        </svg>
+    </button>
+</div>
+
 <article class="post">
     <header>
         <h1>NautilusTrader 完整快速入门指南</h1>
@@ -114,7 +143,18 @@
 </ul>
 <h2 id="安装步骤">安装步骤</h2>
 <h3 id="1_-安装-nautilustrader">1. 安装 NautilusTrader</h3>
-<pre><code class="language-bash"># 创建虚拟环境（推荐）
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-1"># 创建虚拟环境（推荐）
 python -m venv nautilus_env
 source nautilus_env/bin/activate  # Linux/Mac
 # nautilus_env\Scripts\activate  # Windows
@@ -125,9 +165,21 @@ pip install -U nautilus_trader
 # 安装 JupyterLab（可选，用于交互式开发）
 pip install -U jupyterlab
 </code></pre>
+            </div>
 <h3 id="2_-获取示例数据_重要__">2. 获取示例数据（重要！）</h3>
 <p>官方提供了一个便捷的脚本来下载示例数据：</p>
-<pre><code class="language-python"># 在 Jupyter notebook 或 Python 脚本中运行
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-2"># 在 Jupyter notebook 或 Python 脚本中运行
 import subprocess
 import sys
 
@@ -141,9 +193,22 @@ subprocess.run([
     "import urllib.request; exec(urllib.request.urlopen('https://raw.githubusercontent.com/nautechsystems/nautilus_data/main/nautilus_data/hist_data_to_catalog.py').read())"
 ])
 </code></pre>
+            </div>
 <p>或者使用命令行：</p>
-<pre><code class="language-bash">curl https://raw.githubusercontent.com/nautechsystems/nautilus_data/main/nautilus_data/hist_data_to_catalog.py | python -
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-3" onclick="copyCode('code-3')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-3">curl https://raw.githubusercontent.com/nautechsystems/nautilus_data/main/nautilus_data/hist_data_to_catalog.py | python -
 </code></pre>
+            </div>
 <p>这个脚本会：</p>
 <ul>
 <li>下载 EUR/USD 的历史数据</li>
@@ -152,7 +217,18 @@ subprocess.run([
 </ul>
 <h2 id="完整的回测示例">完整的回测示例</h2>
 <h3 id="1_-导入必要的模块">1. 导入必要的模块</h3>
-<pre><code class="language-python">from decimal import Decimal
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-4" onclick="copyCode('code-4')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-4">from decimal import Decimal
 from pathlib import Path
 
 import pandas as pd
@@ -167,8 +243,20 @@ from nautilus_trader.model.objects import Price, Quantity
 from nautilus_trader.persistence.catalog.parquet import ParquetDataCatalog
 from nautilus_trader.trading.strategy import Strategy
 </code></pre>
+            </div>
 <h3 id="2_-设置数据目录">2. 设置数据目录</h3>
-<pre><code class="language-python"># 设置数据目录路径
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-5" onclick="copyCode('code-5')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-5"># 设置数据目录路径
 from nautilus_trader.persistence.catalog import ParquetDataCatalog
 
 # 从环境变量或默认路径创建数据目录
@@ -183,8 +271,20 @@ start = catalog.min_timestamp("quote_tick", instrument_id="EUR/USD.SIM")
 end = catalog.max_timestamp("quote_tick", instrument_id="EUR/USD.SIM")
 print(f"数据时间范围: {start} 到 {end}")
 </code></pre>
+            </div>
 <h3 id="3_-创建简单的-macd-策略">3. 创建简单的 MACD 策略</h3>
-<pre><code class="language-python">from nautilus_trader.indicators.macd import MovingAverageConvergenceDivergence
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-6" onclick="copyCode('code-6')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-6">from nautilus_trader.indicators.macd import MovingAverageConvergenceDivergence
 from nautilus_trader.trading.strategy import Strategy
 
 class MACDStrategy(Strategy):
@@ -276,8 +376,20 @@ class MACDStrategy(Strategy):
         )
         self.submit_order(order)
 </code></pre>
+            </div>
 <h3 id="4_-配置并运行回测">4. 配置并运行回测</h3>
-<pre><code class="language-python"># 配置回测
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-7" onclick="copyCode('code-7')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-7"># 配置回测
 config = BacktestRunConfig(
     engine=BacktestEngineConfig(
         strategies=[
@@ -319,8 +431,20 @@ config = BacktestRunConfig(
 node = BacktestNode(configs=[config])
 results = node.run()
 </code></pre>
+            </div>
 <h3 id="5_-分析回测结果">5. 分析回测结果</h3>
-<pre><code class="language-python"># 获取引擎实例
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-8" onclick="copyCode('code-8')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-8"># 获取引擎实例
 engine = node.engine
 
 # 生成报告
@@ -347,10 +471,22 @@ return_pct = (pnl / starting_balance) * 100
 print(f"盈亏: ${pnl:.2f}")
 print(f"收益率: {return_pct:.2f}%")
 </code></pre>
+            </div>
 <h2 id="数据获取的其他方式">数据获取的其他方式</h2>
 <h3 id="1_-使用自己的数据">1. 使用自己的数据</h3>
 <p>如果你有自己的数据，可以将其转换为 NautilusTrader 格式：</p>
-<pre><code class="language-python"># 从 CSV 导入数据
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-9" onclick="copyCode('code-9')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-9"># 从 CSV 导入数据
 from nautilus_trader.persistence.loaders import CSVTickDataLoader
 
 loader = CSVTickDataLoader(
@@ -365,8 +501,20 @@ ticks = loader.load("path/to/your/data.csv")
 # 保存到 catalog
 catalog.write_data(ticks)
 </code></pre>
+            </div>
 <h3 id="2_-从交易所获取实时数据">2. 从交易所获取实时数据</h3>
-<pre><code class="language-python"># 以 Binance 为例
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">python</span>
+                    <button class="copy-button" data-code-id="code-10" onclick="copyCode('code-10')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-python" id="code-10"># 以 Binance 为例
 from nautilus_trader.adapters.binance.config import BinanceDataClientConfig
 from nautilus_trader.adapters.binance.factories import BinanceLiveDataClientFactory
 
@@ -384,6 +532,7 @@ data_client = BinanceLiveDataClientFactory.create(
     config=config,
 )
 </code></pre>
+            </div>
 <h2 id="注意事项">注意事项</h2>
 <ol>
 <li><strong>数据质量</strong>：回测结果的准确性依赖于数据质量</li>
@@ -591,6 +740,114 @@ data_client = BinanceLiveDataClientFactory.create(
 </script>
 
 
+<script>
+// Reading Progress Bar
+(function() {
+    const progressBar = document.getElementById('progress-bar');
+    const article = document.querySelector('.post');
+    
+    if (!progressBar || !article) return;
+    
+    function updateProgressBar() {
+        const articleTop = article.offsetTop;
+        const articleHeight = article.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Add/remove scrolled class
+        if (scrollTop > 50) {
+            document.body.classList.add('scrolled');
+        } else {
+            document.body.classList.remove('scrolled');
+        }
+        
+        // Calculate the scrollable area (article height minus viewport height)
+        const scrollableArea = articleHeight + articleTop - windowHeight;
+        
+        // Calculate current scroll position relative to the article
+        const currentPosition = scrollTop - articleTop + windowHeight;
+        
+        // Calculate progress percentage
+        let progress = (currentPosition / scrollableArea) * 100;
+        
+        // Clamp progress between 0 and 100
+        progress = Math.max(0, Math.min(100, progress));
+        
+        // Update progress bar width
+        progressBar.style.width = progress + '%';
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateProgressBar, 10);
+    });
+    
+    // Update on resize
+    window.addEventListener('resize', updateProgressBar);
+    
+    // Initial update
+    updateProgressBar();
+})();
+
+// Font Size Adjuster
+(function() {
+    const MIN_SIZE = 80;
+    const MAX_SIZE = 150;
+    const STEP = 10;
+    const DEFAULT_SIZE = 100;
+    
+    // Get saved font size from localStorage
+    let currentSize = parseInt(localStorage.getItem('postFontSize')) || DEFAULT_SIZE;
+    
+    // Apply saved font size on load
+    applyFontSize(currentSize);
+    
+    window.changeFontSize = function(action) {
+        switch(action) {
+            case 'increase':
+                currentSize = Math.min(currentSize + STEP, MAX_SIZE);
+                break;
+            case 'decrease':
+                currentSize = Math.max(currentSize - STEP, MIN_SIZE);
+                break;
+            case 'reset':
+                currentSize = DEFAULT_SIZE;
+                break;
+        }
+        
+        applyFontSize(currentSize);
+        localStorage.setItem('postFontSize', currentSize);
+    };
+    
+    function applyFontSize(size) {
+        const postContent = document.querySelector('.post-content');
+        const sizeValue = document.getElementById('font-size-value');
+        
+        if (postContent) {
+            postContent.style.fontSize = size + '%';
+        }
+        
+        if (sizeValue) {
+            sizeValue.textContent = size + '%';
+        }
+        
+        // Update button states
+        document.querySelectorAll('.font-size-btn').forEach(btn => {
+            btn.disabled = false;
+        });
+        
+        if (size <= MIN_SIZE) {
+            document.querySelector('.font-size-btn[onclick*="decrease"]').disabled = true;
+        }
+        if (size >= MAX_SIZE) {
+            document.querySelector('.font-size-btn[onclick*="increase"]').disabled = true;
+        }
+    }
+})();
+</script>
+
         </div>
     </main>
 
@@ -600,5 +857,60 @@ data_client = BinanceLiveDataClientFactory.create(
             <p>A decentralized blog powered by IPFS</p>
         </div>
     </footer>
+    
+    <script>
+    // Copy code function
+    function copyCode(codeId) {
+        const codeElement = document.getElementById(codeId);
+        if (!codeElement) return;
+        
+        const textToCopy = codeElement.textContent;
+        
+        // Use modern clipboard API if available
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showCopySuccess(codeId);
+            }).catch(err => {
+                fallbackCopy(textToCopy, codeId);
+            });
+        } else {
+            fallbackCopy(textToCopy, codeId);
+        }
+    }
+    
+    function fallbackCopy(text, codeId) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+            document.execCommand('copy');
+            showCopySuccess(codeId);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        } finally {
+            document.body.removeChild(textArea);
+        }
+    }
+    
+    function showCopySuccess(codeId) {
+        const button = document.querySelector(`button[data-code-id="${codeId}"]`);
+        if (!button) return;
+        
+        const copyText = button.querySelector('.copy-text');
+        const originalText = copyText.textContent;
+        
+        copyText.textContent = 'Copied!';
+        button.classList.add('copy-success');
+        
+        setTimeout(() => {
+            copyText.textContent = originalText;
+            button.classList.remove('copy-success');
+        }, 2000);
+    }
+    </script>
 </body>
 </html>

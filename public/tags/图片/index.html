@@ -87,5 +87,60 @@
             <p>A decentralized blog powered by IPFS</p>
         </div>
     </footer>
+    
+    <script>
+    // Copy code function
+    function copyCode(codeId) {
+        const codeElement = document.getElementById(codeId);
+        if (!codeElement) return;
+        
+        const textToCopy = codeElement.textContent;
+        
+        // Use modern clipboard API if available
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showCopySuccess(codeId);
+            }).catch(err => {
+                fallbackCopy(textToCopy, codeId);
+            });
+        } else {
+            fallbackCopy(textToCopy, codeId);
+        }
+    }
+    
+    function fallbackCopy(text, codeId) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+            document.execCommand('copy');
+            showCopySuccess(codeId);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        } finally {
+            document.body.removeChild(textArea);
+        }
+    }
+    
+    function showCopySuccess(codeId) {
+        const button = document.querySelector(`button[data-code-id="${codeId}"]`);
+        if (!button) return;
+        
+        const copyText = button.querySelector('.copy-text');
+        const originalText = copyText.textContent;
+        
+        copyText.textContent = 'Copied!';
+        button.classList.add('copy-success');
+        
+        setTimeout(() => {
+            copyText.textContent = originalText;
+            button.classList.remove('copy-success');
+        }, 2000);
+    }
+    </script>
 </body>
 </html>

@@ -51,6 +51,35 @@
     <main>
         <div class="container">
             
+
+<div class="reading-progress" id="reading-progress">
+    <div class="progress-bar" id="progress-bar"></div>
+</div>
+
+
+<div class="font-size-adjuster">
+    <button class="font-size-btn" onclick="changeFontSize('decrease')" title="Decrease font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+    </button>
+    <span class="font-size-value" id="font-size-value">100%</span>
+    <button class="font-size-btn" onclick="changeFontSize('increase')" title="Increase font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="11" y1="8" x2="11" y2="14"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+    </button>
+    <button class="font-size-btn" onclick="changeFontSize('reset')" title="Reset font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+        </svg>
+    </button>
+</div>
+
 <article class="post">
     <header>
         <h1>翻译-区块链间通信协议:概述</h1>
@@ -337,7 +366,18 @@ IBC为模块提供了拒绝数据包的设施，并将具体细节留给更高�
 <p>IBC协议为数据包提供了授权和排序语义：分别保证数据包已经在发送账本上提交（并根据执行的状态转换，如托管令牌），以及它们已经以特定的顺序提交了一次，并可以以相同的顺序交付一次。连接抽象与客户端抽象一起定义了IBC的授权语义。秩序语义由通道提供。</p>
 <h5 id="2_-definitions">2) Definitions</h5>
 <p>连接结束是对一个分类账上的连接结束的状态跟踪，定义如下。</p>
-<pre><code class="language-go">enum ConnectionState {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-1">enum ConnectionState {
     INIT,
     TRYOPEN,
     OPEN,
@@ -352,6 +392,7 @@ interface ConnectionEnd {
    version: string
 }
 </code></pre>
+            </div>
 <ul>
 <li>version 字段是一个不透明的字符串，可用于确定利用此连接的通道或数据包的编码或协议。</li>
 <li>state 字段描述了连接端的当前状态。</li>
@@ -365,13 +406,25 @@ interface ConnectionEnd {
 <p>开放式握手子协议允许每个分类账验证用于引用其他分类账上的连接的标识符，使每个分类账上的模块能够推理出其他分类账上的引用。</p>
 <p>开放握手由四个数据报组成。ConnOpenInit, ConnOpenTry, ConnOpenAck, 和ConnOpenConfirm.</p>
 <p>一个正确的协议执行，在两个分类账A和B之间，连接状态格式为（A，B），流程如下。</p>
-<pre><code class="language-markdown">|Datagram         | Prior state        |     Posterior state |
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">markdown</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-markdown" id="code-2">|Datagram         | Prior state        |     Posterior state |
 |-----------------|--------------------|---------------------|
 |  ConnOpenInit   |    (-, -)          |      (INIT, -)      |
 |  ConnOpenTry    |  (INIT, none)      |      (INIT, TRYOPEN)|
 |  ConnOpenAck    |  (INIT, TRYOPEN)   |      (OPEN, TRYOPEN)|
 |  ConnOpenConfirm|  (OPEN, TRYOPEN)   |      (OPEN, OPEN)   |
 </code></pre>
+            </div>
 <p>在实施子协议的两个分类账之间的开放握手结束时，以下属性成立。</p>
 <ul>
 <li>每个分类账都拥有发起者最初指定的对方的正确共识状态。</li>
@@ -397,7 +450,18 @@ interface ConnectionEnd {
 <p>无序信道是一个信道，数据包可以按任何顺序交付，这可能与它们的发送顺序不同。</p>
 <p>所有信道都提供精确的一次数据包交付，这意味着在信道一端发送的数据包最终将不多也不少地传递到另一端。
 通道端是一个数据结构，存储与一个参与的分类账上的通道一端相关的元数据，定义如下。</p>
-<pre><code class="language-go">interface ChannelEnd {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-3" onclick="copyCode('code-3')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-3">interface ChannelEnd {
 	state: ChannelState
 	ordering: ChannelOrder
 	counterpartyPortIdentifier: Identifier
@@ -409,6 +473,7 @@ interface ConnectionEnd {
 	version: string
 }
 </code></pre>
+            </div>
 <ul>
 <li>state 是通道末端的当前状态。</li>
 <li>ordering 字段表示通道是有序的还是无序的。这是一个枚举，而不是一个布尔值，以便将来能够方便地支持其他类型的排序。</li>
@@ -421,13 +486,25 @@ interface ConnectionEnd {
 <li>version 字符串存储一个不透明的通道版本，这是在握手过程中商定的。这可以确定模块级的配置，如通道使用的是哪种数据包编码。这个版本不被核心IBC协议所使用。
 通道末端有一个状态。</li>
 </ul>
-<pre><code class="language-go">enum ChannelState {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-4" onclick="copyCode('code-4')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-4">enum ChannelState {
 	INIT,
 	TRYOPEN,
 	OPEN,
 	CLOSED,
 }
 </code></pre>
+            </div>
 <ul>
 <li>处于INIT状态的信道端刚刚开始了开场握手。</li>
 <li>处于TRYOPEN状态的信道端已经确认了对手方账本上的握手步骤。</li>
@@ -435,7 +512,18 @@ interface ConnectionEnd {
 <li>处于CLOSED状态的信道端已经关闭，不能再用于发送或接收数据包。</li>
 <li>包，封装了不透明的数据，通过一个通道从一个模块传输到另一个模块，是一个特殊的接口，定义如下。</li>
 </ul>
-<pre><code class="language-go">interface Packet {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-5" onclick="copyCode('code-5')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-5">interface Packet {
 	sequence: uint64
 	timeoutHeight: uint64
 	timeoutTimestamp: uint64
@@ -446,6 +534,7 @@ interface ConnectionEnd {
 	data: bytes
 }
 </code></pre>
+            </div>
 <ul>
 <li>sequence与发送和接收的顺序相对应，序列号较早的数据包必须在序列号较晚的数据包之前发送和接收。</li>
 <li>超时高度（timeoutHeight）表示目的地账本上的共识高度，超过这个高度，数据包将不再被处理，而是被算作超时。</li>
@@ -469,13 +558,25 @@ interface ConnectionEnd {
 <h5 id="4_-channel-lifecycle-management">4) Channel lifecycle management</h5>
 <h6 id="a_-opening-handshake">a) Opening handshake</h6>
 <p>两个账本A和B之间的通道开放握手，其状态格式为（A，B），流程如下。</p>
-<pre><code class="language-markdown">| Datagram          | Prior state     | Posterior state |
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">markdown</span>
+                    <button class="copy-button" data-code-id="code-6" onclick="copyCode('code-6')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-markdown" id="code-6">| Datagram          | Prior state     | Posterior state |
 | ----------------- | ----------------| --------------- |
 | ChanOpenInit      | (-, -)          | (INIT, -)       |
 | ChanOpenTry       | (INIT, -)       | (INIT, TRYOPEN) |
 | ChanOpenAck       | (INIT, TRYOPEN) | (OPEN, TRYOPEN) |
 | ChanOpenConfirm   | (OPEN, TRYOPEN) | (OPEN, OPEN)    |
 </code></pre>
+            </div>
 <p>ChanOpenInit，在分类账A上执行，启动了从分类账A上的模块到分类账B上的模块的通道开放握手，提供了本地通道标识符、本地端口、远程端口和远程通道标识符的标识。分类账A在其状态中存储了一个通道端对象。</p>
 <p>在账本B上执行的ChanOpenTry，向账本B上的模块转发了通道握手尝试的通知，提供了一对通道标识符、一对端口标识符和所需的版本。账本B验证了账本A已按要求存储这些标识符的证明，查找拥有目标端口的模块，调用该模块以检查所要求的版本是否兼容，并在其状态中存储一个通道端对象。</p>
 <p>在分类账A上执行的ChanOpenAck，将对信道握手尝试的接受转达给分类账A上的模块，提供标识符，现在可以用来查询信道端。分类账A验证了分类账B已按要求存储信道元数据的证明，并将其信道端标记为OPEN。</p>
@@ -485,11 +586,23 @@ interface ConnectionEnd {
 <p>在握手过程中，通道的两端就与该通道相关的版本字节串达成协议。这个版本字节串的内容对IBC核心协议是不透明的。主机分类帐可以利用版本数据来表明支持的应用层协议，同意数据包编码格式，或协商其他与IBC之上的自定义逻辑相关的通道元数据。主机分类帐也可以安全地忽略版本数据或指定一个空字符串</p>
 <h6 id="c_-closing-handshake">c) Closing handshake</h6>
 <p>两个账本A和B之间的通道关闭握手，其状态格式为（A，B），流程如下。</p>
-<pre><code>| Datagram          | Prior state    | Posterior state |
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language"></span>
+                    <button class="copy-button" data-code-id="code-7" onclick="copyCode('code-7')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code id="code-7">| Datagram          | Prior state    | Posterior state |
 | ------------------| ---------------| --------------- |
 | ChanCloseInit     | (OPEN, OPEN)   | (CLOSED, OPEN)  |
 | ChanCloseConfirm  | (CLOSED, OPEN) | (CLOSED, CLOSED)|
 </code></pre>
+            </div>
 <p>ChanCloseInit，在分类账A上执行，关闭分类账A上的通道末端。</p>
 <p>ChanCloseInit，在分类账B上执行，只是验证通道在分类账A上被标记为关闭，并在分类账B上关闭结束。</p>
 <p>任何飞行中的数据包都可以在通道关闭后立即超时退出。</p>
@@ -620,19 +733,43 @@ interface ConnectionEnd {
 </ul>
 <h4 id="3_-packet-definition">3) Packet definition</h4>
 <p>只需要一个数据包类型，即FungibleTokenPacketData，它指定面额、金额、发送账户、接收账户，以及发送分类账是否为资产来源。</p>
-<pre><code class="language-go">interface FungibleTokenPacketData {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-8" onclick="copyCode('code-8')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-8">interface FungibleTokenPacketData {
 	denomination: string
 	amount: uint256
 	sender: string
 	receiver: string
 }
 </code></pre>
+            </div>
 <p>确认数据类型描述了传输是成功还是失败，以及失败的原因（如果有的话）。</p>
-<pre><code class="language-go">interface FungibleTokenPacketAcknowledgement {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-9" onclick="copyCode('code-9')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-9">interface FungibleTokenPacketAcknowledgement {
 	success: boolean
 	error: Maybe&lt;string&gt;
 }
 </code></pre>
+            </div>
 <h4 id="4_-packet-handling-semantics">4) Packet handling semantics</h4>
 <p>协议逻辑是对称的，因此源自任何一个分类账的面额都可以在另一个分类账上转换为凭证，然后稍后再赎回。</p>
 <ul>
@@ -842,6 +979,114 @@ interface ConnectionEnd {
 </script>
 
 
+<script>
+// Reading Progress Bar
+(function() {
+    const progressBar = document.getElementById('progress-bar');
+    const article = document.querySelector('.post');
+    
+    if (!progressBar || !article) return;
+    
+    function updateProgressBar() {
+        const articleTop = article.offsetTop;
+        const articleHeight = article.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Add/remove scrolled class
+        if (scrollTop > 50) {
+            document.body.classList.add('scrolled');
+        } else {
+            document.body.classList.remove('scrolled');
+        }
+        
+        // Calculate the scrollable area (article height minus viewport height)
+        const scrollableArea = articleHeight + articleTop - windowHeight;
+        
+        // Calculate current scroll position relative to the article
+        const currentPosition = scrollTop - articleTop + windowHeight;
+        
+        // Calculate progress percentage
+        let progress = (currentPosition / scrollableArea) * 100;
+        
+        // Clamp progress between 0 and 100
+        progress = Math.max(0, Math.min(100, progress));
+        
+        // Update progress bar width
+        progressBar.style.width = progress + '%';
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateProgressBar, 10);
+    });
+    
+    // Update on resize
+    window.addEventListener('resize', updateProgressBar);
+    
+    // Initial update
+    updateProgressBar();
+})();
+
+// Font Size Adjuster
+(function() {
+    const MIN_SIZE = 80;
+    const MAX_SIZE = 150;
+    const STEP = 10;
+    const DEFAULT_SIZE = 100;
+    
+    // Get saved font size from localStorage
+    let currentSize = parseInt(localStorage.getItem('postFontSize')) || DEFAULT_SIZE;
+    
+    // Apply saved font size on load
+    applyFontSize(currentSize);
+    
+    window.changeFontSize = function(action) {
+        switch(action) {
+            case 'increase':
+                currentSize = Math.min(currentSize + STEP, MAX_SIZE);
+                break;
+            case 'decrease':
+                currentSize = Math.max(currentSize - STEP, MIN_SIZE);
+                break;
+            case 'reset':
+                currentSize = DEFAULT_SIZE;
+                break;
+        }
+        
+        applyFontSize(currentSize);
+        localStorage.setItem('postFontSize', currentSize);
+    };
+    
+    function applyFontSize(size) {
+        const postContent = document.querySelector('.post-content');
+        const sizeValue = document.getElementById('font-size-value');
+        
+        if (postContent) {
+            postContent.style.fontSize = size + '%';
+        }
+        
+        if (sizeValue) {
+            sizeValue.textContent = size + '%';
+        }
+        
+        // Update button states
+        document.querySelectorAll('.font-size-btn').forEach(btn => {
+            btn.disabled = false;
+        });
+        
+        if (size <= MIN_SIZE) {
+            document.querySelector('.font-size-btn[onclick*="decrease"]').disabled = true;
+        }
+        if (size >= MAX_SIZE) {
+            document.querySelector('.font-size-btn[onclick*="increase"]').disabled = true;
+        }
+    }
+})();
+</script>
+
         </div>
     </main>
 
@@ -851,5 +1096,60 @@ interface ConnectionEnd {
             <p>A decentralized blog powered by IPFS</p>
         </div>
     </footer>
+    
+    <script>
+    // Copy code function
+    function copyCode(codeId) {
+        const codeElement = document.getElementById(codeId);
+        if (!codeElement) return;
+        
+        const textToCopy = codeElement.textContent;
+        
+        // Use modern clipboard API if available
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showCopySuccess(codeId);
+            }).catch(err => {
+                fallbackCopy(textToCopy, codeId);
+            });
+        } else {
+            fallbackCopy(textToCopy, codeId);
+        }
+    }
+    
+    function fallbackCopy(text, codeId) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+            document.execCommand('copy');
+            showCopySuccess(codeId);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        } finally {
+            document.body.removeChild(textArea);
+        }
+    }
+    
+    function showCopySuccess(codeId) {
+        const button = document.querySelector(`button[data-code-id="${codeId}"]`);
+        if (!button) return;
+        
+        const copyText = button.querySelector('.copy-text');
+        const originalText = copyText.textContent;
+        
+        copyText.textContent = 'Copied!';
+        button.classList.add('copy-success');
+        
+        setTimeout(() => {
+            copyText.textContent = originalText;
+            button.classList.remove('copy-success');
+        }, 2000);
+    }
+    </script>
 </body>
 </html>

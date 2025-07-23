@@ -51,6 +51,35 @@
     <main>
         <div class="container">
             
+
+<div class="reading-progress" id="reading-progress">
+    <div class="progress-bar" id="progress-bar"></div>
+</div>
+
+
+<div class="font-size-adjuster">
+    <button class="font-size-btn" onclick="changeFontSize('decrease')" title="Decrease font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+    </button>
+    <span class="font-size-value" id="font-size-value">100%</span>
+    <button class="font-size-btn" onclick="changeFontSize('increase')" title="Increase font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="11" y1="8" x2="11" y2="14"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+    </button>
+    <button class="font-size-btn" onclick="changeFontSize('reset')" title="Reset font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+        </svg>
+    </button>
+</div>
+
 <article class="post">
     <header>
         <h1>Learn Ocaml in Y Minutes</h1>
@@ -83,13 +112,36 @@
 <p>它是强静态类型的，但它不使用手动编写的类型注释，而是使用 <a href="https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system">Hindley-Milner</a>
 算法推断表达式的类型。在大多数情况下，它使得类型注释变得不必要，但可能是初学者困惑的一个主要根源。</p>
 <p>当您处于顶层循环时，OCaml 将在您输入表达式后打印推断的类型</p>
-<pre><code class="language-ocaml"># let inc x = x + 1 ;;
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">ocaml</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-ocaml" id="code-1"># let inc x = x + 1 ;;
 val inc : int -&gt; int = &lt;fun&gt;
 # let a = 99 ;;
 val a : int = 99
 </code></pre>
+            </div>
 <p>对于源文件，您可以使用 ocamlc -i /path/to/file.ml 命令打印所有名称和类型签名</p>
-<pre><code class="language-bash">$ cat sigtest.ml
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-2">$ cat sigtest.ml
 let inc x = x + 1
 let add x y = x + y
 
@@ -100,8 +152,20 @@ val inc : int -&gt; int
 val add : int -&gt; int -&gt; int
 val a : int
 </code></pre>
+            </div>
 <p>请注意，多个参数的函数的类型签名以<a href="https://en.wikipedia.org/wiki/Currying">柯里化</a>形式编写。带有多个参数的函数可以表示为仅带有一个参数的函数的组合。上例中应用于参数 2 和 3 的 f(x,y) = x + y 函数相当于应用于 3 的 f0(y) = 2 + y 函数。因此有 int -&gt; int -&gt; int 签名。</p>
-<pre><code class="language-ocaml">(*** 注释 ***)
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">ocaml</span>
+                    <button class="copy-button" data-code-id="code-3" onclick="copyCode('code-3')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-ocaml" id="code-3">(*** 注释 ***)
 
 (*
   在OCaml中，注释是用 (* 和 *) 来包围的。OCaml支持嵌套注释，这意味着你可以在一个注释块中包含另一个注释块
@@ -974,6 +1038,7 @@ Printf.printf "counter.contents = %d\n" !counter;;
   这是一种简写，它等同于 { contents = 0; }。
 *)
 </code></pre>
+            </div>
 <h2 id="进一步阅读">进一步阅读</h2>
 <ul>
 <li>访问官方网站获取编译器并阅读文档：<a href="http://ocaml.org/">http://ocaml.org/</a></li>
@@ -1149,6 +1214,114 @@ Printf.printf "counter.contents = %d\n" !counter;;
 </script>
 
 
+<script>
+// Reading Progress Bar
+(function() {
+    const progressBar = document.getElementById('progress-bar');
+    const article = document.querySelector('.post');
+    
+    if (!progressBar || !article) return;
+    
+    function updateProgressBar() {
+        const articleTop = article.offsetTop;
+        const articleHeight = article.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Add/remove scrolled class
+        if (scrollTop > 50) {
+            document.body.classList.add('scrolled');
+        } else {
+            document.body.classList.remove('scrolled');
+        }
+        
+        // Calculate the scrollable area (article height minus viewport height)
+        const scrollableArea = articleHeight + articleTop - windowHeight;
+        
+        // Calculate current scroll position relative to the article
+        const currentPosition = scrollTop - articleTop + windowHeight;
+        
+        // Calculate progress percentage
+        let progress = (currentPosition / scrollableArea) * 100;
+        
+        // Clamp progress between 0 and 100
+        progress = Math.max(0, Math.min(100, progress));
+        
+        // Update progress bar width
+        progressBar.style.width = progress + '%';
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateProgressBar, 10);
+    });
+    
+    // Update on resize
+    window.addEventListener('resize', updateProgressBar);
+    
+    // Initial update
+    updateProgressBar();
+})();
+
+// Font Size Adjuster
+(function() {
+    const MIN_SIZE = 80;
+    const MAX_SIZE = 150;
+    const STEP = 10;
+    const DEFAULT_SIZE = 100;
+    
+    // Get saved font size from localStorage
+    let currentSize = parseInt(localStorage.getItem('postFontSize')) || DEFAULT_SIZE;
+    
+    // Apply saved font size on load
+    applyFontSize(currentSize);
+    
+    window.changeFontSize = function(action) {
+        switch(action) {
+            case 'increase':
+                currentSize = Math.min(currentSize + STEP, MAX_SIZE);
+                break;
+            case 'decrease':
+                currentSize = Math.max(currentSize - STEP, MIN_SIZE);
+                break;
+            case 'reset':
+                currentSize = DEFAULT_SIZE;
+                break;
+        }
+        
+        applyFontSize(currentSize);
+        localStorage.setItem('postFontSize', currentSize);
+    };
+    
+    function applyFontSize(size) {
+        const postContent = document.querySelector('.post-content');
+        const sizeValue = document.getElementById('font-size-value');
+        
+        if (postContent) {
+            postContent.style.fontSize = size + '%';
+        }
+        
+        if (sizeValue) {
+            sizeValue.textContent = size + '%';
+        }
+        
+        // Update button states
+        document.querySelectorAll('.font-size-btn').forEach(btn => {
+            btn.disabled = false;
+        });
+        
+        if (size <= MIN_SIZE) {
+            document.querySelector('.font-size-btn[onclick*="decrease"]').disabled = true;
+        }
+        if (size >= MAX_SIZE) {
+            document.querySelector('.font-size-btn[onclick*="increase"]').disabled = true;
+        }
+    }
+})();
+</script>
+
         </div>
     </main>
 
@@ -1158,5 +1331,60 @@ Printf.printf "counter.contents = %d\n" !counter;;
             <p>A decentralized blog powered by IPFS</p>
         </div>
     </footer>
+    
+    <script>
+    // Copy code function
+    function copyCode(codeId) {
+        const codeElement = document.getElementById(codeId);
+        if (!codeElement) return;
+        
+        const textToCopy = codeElement.textContent;
+        
+        // Use modern clipboard API if available
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showCopySuccess(codeId);
+            }).catch(err => {
+                fallbackCopy(textToCopy, codeId);
+            });
+        } else {
+            fallbackCopy(textToCopy, codeId);
+        }
+    }
+    
+    function fallbackCopy(text, codeId) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+            document.execCommand('copy');
+            showCopySuccess(codeId);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        } finally {
+            document.body.removeChild(textArea);
+        }
+    }
+    
+    function showCopySuccess(codeId) {
+        const button = document.querySelector(`button[data-code-id="${codeId}"]`);
+        if (!button) return;
+        
+        const copyText = button.querySelector('.copy-text');
+        const originalText = copyText.textContent;
+        
+        copyText.textContent = 'Copied!';
+        button.classList.add('copy-success');
+        
+        setTimeout(() => {
+            copyText.textContent = originalText;
+            button.classList.remove('copy-success');
+        }, 2000);
+    }
+    </script>
 </body>
 </html>

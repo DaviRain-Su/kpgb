@@ -51,6 +51,35 @@
     <main>
         <div class="container">
             
+
+<div class="reading-progress" id="reading-progress">
+    <div class="progress-bar" id="progress-bar"></div>
+</div>
+
+
+<div class="font-size-adjuster">
+    <button class="font-size-btn" onclick="changeFontSize('decrease')" title="Decrease font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+    </button>
+    <span class="font-size-value" id="font-size-value">100%</span>
+    <button class="font-size-btn" onclick="changeFontSize('increase')" title="Increase font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="11" y1="8" x2="11" y2="14"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+    </button>
+    <button class="font-size-btn" onclick="changeFontSize('reset')" title="Reset font size">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+        </svg>
+    </button>
+</div>
+
 <article class="post">
     <header>
         <h1>How to build an agent</h1>
@@ -104,13 +133,36 @@
 </ul>
 <p>准备好铅笔！</p>
 <p>让我们直接开始，用四个简单命令建立一个新的Go项目：</p>
-<pre><code class="language-bash">mkdir code-editing-agent
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-1">mkdir code-editing-agent
 cd code-editing-agent
 go mod init agent
 touch main.go
 </code></pre>
+            </div>
 <p>现在，让我们打开<code>main.go</code>，作为第一步，放入我们需要的基本框架：</p>
-<pre><code class="language-go">package main
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-2">package main
 
 import (
     "bufio"
@@ -150,9 +202,21 @@ type Agent struct {
     getUserMessage func() (string, bool)
 }
 </code></pre>
+            </div>
 <p>是的，这还不能编译。但我们这里有的是一个<code>Agent</code>，它可以访问<code>anthropic.Client</code>（默认情况下会寻找<code>ANTHROPIC_API_KEY</code>），并且可以通过从终端的stdin读取来获取用户消息。</p>
 <p>现在让我们添加缺失的<code>Run()</code>方法：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-3" onclick="copyCode('code-3')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-3">// main.go
 func (a *Agent) Run(ctx context.Context) error {
     conversation := []anthropic.MessageParam{}
     fmt.Println("与Claude聊天（使用'ctrl-c'退出）")
@@ -194,16 +258,29 @@ func (a *Agent) runInference(ctx context.Context, conversation []anthropic.Messa
     return message, err
 }
 </code></pre>
+            </div>
 <p>代码不多，对吧？90行，其中最重要的是<code>Run()</code>中的这个循环，让我们可以与Claude对话。但这已经是这个程序的心跳了。</p>
 <p>对于一个心跳来说，它非常直接：我们首先打印一个提示，要求用户输入内容，将其添加到对话中，发送给Claude，将Claude的响应添加到对话中，打印响应，然后循环继续。</p>
 <p>这就是你使用过的每一个AI聊天应用程序，只不过是在终端中。</p>
 <p>让我们运行它：</p>
-<pre><code class="language-bash">export ANTHROPIC_API_KEY="这是我最后一次告诉你要设置这个"
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-4" onclick="copyCode('code-4')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-4">export ANTHROPIC_API_KEY="这是我最后一次告诉你要设置这个"
 # 下载依赖
 go mod tidy
 # 运行
 go run main.go
 </code></pre>
+            </div>
 <p>然后你就可以和Claude聊天了，像这样：</p>
 <p>注意我们如何在多轮对话中保持同一个对话。它记住了我在第一条消息中的名字。<code>conversation</code>在每一轮中都会变长，我们每次都发送整个对话。服务器——Anthropic的服务器——是无状态的。它只能看到<code>conversation</code>切片中的内容。维护状态是我们的责任。</p>
 <p>好的，让我们继续，因为昵称很糟糕，而且这还不是一个代理程序。什么是代理程序？这是<a href="https://youtu.be/J1-W9O3n7j8?t=72">我的定义</a>：一个可以访问工具的LLM，让它具有修改上下文窗口之外内容的能力。</p>
@@ -231,7 +308,18 @@ go run main.go
 <li>一个实际执行工具的函数，使用模型发送给我们的输入并返回结果</li>
 </ul>
 <p>所以让我们将其添加到我们的代码中：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-5" onclick="copyCode('code-5')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-5">// main.go
 type ToolDefinition struct {
     Name string `json:"name"`
     Description string `json:"description"`
@@ -239,8 +327,20 @@ type ToolDefinition struct {
     Function func(input json.RawMessage) (string, error)
 }
 </code></pre>
+            </div>
 <p>现在我们给我们的<code>Agent</code>工具定义：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-6" onclick="copyCode('code-6')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-6">// main.go
 // `tools`在这里添加：
 type Agent struct {
     client *anthropic.Client
@@ -269,8 +369,20 @@ func main() {
     // [... 之前的代码 ...]
 }
 </code></pre>
+            </div>
 <p>并在<code>runInference</code>中将它们发送给模型：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-7" onclick="copyCode('code-7')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-7">// main.go
 func (a *Agent) runInference(ctx context.Context, conversation []anthropic.MessageParam) (*anthropic.Message, error) {
     anthropicTools := []anthropic.ToolUnionParam{}
     for _, tool := range a.tools {
@@ -292,10 +404,22 @@ func (a *Agent) runInference(ctx context.Context, conversation []anthropic.Messa
     return message, err
 }
 </code></pre>
+            </div>
 <p>这里有一些类型操作，我在Go泛型方面还不够熟练，所以我不会试图向你解释<code>anthropic.String</code>和<code>ToolUnionParam</code>。但是，真的，我发誓，这很简单：</p>
 <p>我们发送我们的工具定义，在服务器上，Anthropic然后将这些定义包装在<a href="https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview#tool-use-system-prompt">这个系统提示</a>中（内容不多），将其添加到我们的<code>conversation</code>中，然后如果模型想使用该工具，就会以特定方式回复。</p>
 <p>好的，工具定义正在发送，但我们还没有定义工具。让我们来做这件事并定义<code>read_file</code>：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-8" onclick="copyCode('code-8')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-8">// main.go
 var ReadFileDefinition = ToolDefinition{
     Name: "read_file",
     Description: "读取给定相对文件路径的内容。当你想看到文件内部的内容时使用这个。不要对目录名使用这个。",
@@ -336,9 +460,21 @@ func GenerateSchema[T any]() anthropic.ToolInputSchemaParam {
     }
 }
 </code></pre>
+            </div>
 <p>代码不多，对吧？这是一个单一函数<code>ReadFile</code>，以及模型将看到的两个描述：我们的<code>Description</code>描述工具本身（“读取给定相对文件路径的内容…”），以及这个工具唯一输入参数的描述（“工作目录中文件的相对路径…”）。</p>
 <p><code>ReadFileInputSchema</code>和<code>GenerateSchema</code>这些东西？我们需要这些，这样我们就可以为我们发送给模型的工具定义生成JSON模式。为此，我们使用<code>jsonschema</code>包，我们需要导入和下载：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-9" onclick="copyCode('code-9')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-9">// main.go
 package main
 
 import (
@@ -353,21 +489,57 @@ import (
     "github.com/invopop/jsonschema"
 )
 </code></pre>
+            </div>
 <p>然后运行以下命令：</p>
-<pre><code class="language-bash">go mod tidy
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-10" onclick="copyCode('code-10')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-10">go mod tidy
 </code></pre>
+            </div>
 <p>然后，在<code>main</code>函数中，我们需要确保使用定义：</p>
-<pre><code class="language-go">func main() {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-11" onclick="copyCode('code-11')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-11">func main() {
     // [... 之前的代码 ...]
     tools := []ToolDefinition{ReadFileDefinition}
     // [... 之前的代码 ...]
 }
 </code></pre>
+            </div>
 <p>是时候试试了！</p>
 <p>等等，什么？哈哈哈，它想使用工具！显然你的输出会略有不同，但Claude肯定听起来知道它可以读取文件，对吧？</p>
 <p>问题是我们没有监听！当Claude眨眼时，我们忽略了它。我们需要修复这个问题。</p>
 <p>在这里，让我展示如何通过用以下内容替换我们<code>Agent</code>的<code>Run</code>方法来做到这一点：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-12" onclick="copyCode('code-12')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-12">// main.go
 func (a *Agent) Run(ctx context.Context) error {
     conversation := []anthropic.MessageParam{}
     fmt.Println("与Claude聊天（使用'ctrl-c'退出）")
@@ -438,12 +610,25 @@ func (a *Agent) executeTool(id, name string, input json.RawMessage) anthropic.Co
     return anthropic.NewToolResultBlock(id, response, false)
 }
 </code></pre>
+            </div>
 <p>眯着眼看，你会发现90%是样板代码，10%是重要的：当我们从Claude那里得到一个<code>message</code>时，我们通过查找<code>content.Type == "tool_use"</code>来检查Claude是否要求我们执行工具，如果是，我们交给<code>executeTool</code>，在我们的本地注册表中按名称查找工具，解码输入，执行它，返回结果。如果是错误，我们翻转一个布尔值。就是这样。</p>
 <p>（是的，循环中有循环，但这不重要。）</p>
 <p>我们执行工具，将结果发送回Claude，然后再次请求Claude的响应。真的：就是这样。让我展示给你看。</p>
 <p>准备工作，运行这个：</p>
-<pre><code class="language-bash">echo 'what animal is the most disagreeable because it always says neigh?' &gt;&gt; secret-file.txt
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-13" onclick="copyCode('code-13')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-13">echo 'what animal is the most disagreeable because it always says neigh?' &gt;&gt; secret-file.txt
 </code></pre>
+            </div>
 <p>这在我们的目录中创建了一个<code>secret-file.txt</code>，包含一个神秘的谜语。</p>
 <p>在同一个目录中，让我们运行我们新的使用工具的代理程序，并要求它查看文件：</p>
 <p>让我们深呼吸，一起说出来。准备好了吗？开始：太棒了。你只是给它一个工具，它就…在认为有助于解决任务时使用它。记住：我们没有说任何关于“如果用户询问文件，就读取文件“的话。我们也没有说“如果某些东西看起来像文件名，就想办法读取它“。不，这些都没有。我们说“帮我解决这个文件中的问题“，Claude意识到它可以读取文件来回答，然后就去做了。</p>
@@ -452,7 +637,18 @@ func (a *Agent) executeTool(id, name string, input json.RawMessage) anthropic.Co
 <h2 id="list-files工具"><code>list_files</code>工具</h2>
 <p>如果你和我一样，当你登录到一台新计算机时，你做的第一件事就是通过运行<code>ls</code>来了解情况——列出文件。</p>
 <p>让我们给Claude同样的能力，一个列出文件的工具。这是<code>list_files</code>工具的完整实现：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-14" onclick="copyCode('code-14')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-14">// main.go
 var ListFilesDefinition = ToolDefinition{
     Name: "list_files",
     Description: "列出给定路径下的文件和目录。如果没有提供路径，列出当前目录中的文件。",
@@ -509,17 +705,30 @@ func ListFiles(input json.RawMessage) (string, error) {
     return string(result), nil
 }
 </code></pre>
+            </div>
 <p>这里没有什么花哨的：<code>list_files</code>返回当前文件夹中的文件和目录列表。如果这是一个严肃的努力，我们可以（并且可能应该）做一千种优化，但由于我只是想向你展示巫师帽里有什么，这就够了。</p>
 <p>需要注意的一点：我们返回字符串列表，并用尾随斜杠表示目录。这不是必需的，这只是我刚刚决定要做的事情。没有固定格式。只要Claude能理解就行，至于它能否理解，你需要通过实验来确定。你也可以在每个目录前面加上“directory: “或返回一个带有两个标题的Markdown文档：“directories“和“files”。有很多选择，你选择哪一个取决于Claude最能理解什么、需要多少token、生成和读取的速度如何等等。</p>
 <p>在这里，我们只想创建一个小的<code>list_files</code>工具，最简单的选择获胜。</p>
 <p>当然，我们也需要告诉Claude关于<code>list_files</code>：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-15" onclick="copyCode('code-15')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-15">// main.go
 func main() {
     // [... 之前的代码 ...]
     tools := []ToolDefinition{ReadFileDefinition, ListFilesDefinition}
     // [... 之前的代码 ...]
 }
 </code></pre>
+            </div>
 <p>就是这样。让我们问Claude它能在这个目录中看到什么。</p>
 <p>工作了！它可以读取目录。</p>
 <p>但这里有一个重点：Claude知道如何组合这些工具。我们只需要以一种激发它的方式提示它：</p>
@@ -531,7 +740,18 @@ func main() {
 <p>我们要添加的最后一个工具是<code>edit_file</code>——一个让Claude编辑文件的工具。</p>
 <p>“天哪”，你现在在想，“这就是橡胶遇到路面的地方，这就是他从帽子里拉出兔子的地方。“好吧，让我们看看，好吗？</p>
 <p>首先，让我们为我们新的<code>edit_file</code>工具添加一个定义：</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-16" onclick="copyCode('code-16')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-16">// main.go
 var EditFileDefinition = ToolDefinition{
     Name: "edit_file",
     Description: `对文本文件进行编辑。
@@ -551,9 +771,21 @@ type EditFileInput struct {
 
 var EditFileInputSchema = GenerateSchema[EditFileInput]()
 </code></pre>
+            </div>
 <p>没错，我又知道你在想什么：“字符串替换来编辑文件？“Claude 3.7喜欢替换字符串（通过实验你会发现它们喜欢或不喜欢什么），所以我们将通过告诉Claude它可以通过用新文本替换现有文本来编辑文件来实现<code>edit_file</code>。</p>
 <p>现在这是Go中<code>EditFile</code>函数的实现：</p>
-<pre><code class="language-go">func EditFile(input json.RawMessage) (string, error) {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-17" onclick="copyCode('code-17')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-17">func EditFile(input json.RawMessage) (string, error) {
     editFileInput := EditFileInput{}
     err := json.Unmarshal(input, &amp;editFileInput)
     if err != nil {
@@ -587,9 +819,21 @@ var EditFileInputSchema = GenerateSchema[EditFileInput]()
     return "OK", nil
 }
 </code></pre>
+            </div>
 <p>它检查输入参数，读取文件（或者如果存在就创建它），用<code>NewStr</code>替换<code>OldStr</code>。然后它将内容写回磁盘并返回“OK“。</p>
 <p>仍然缺少的是<code>createNewFile</code>，这只是一个小的辅助函数，如果这不是Go的话会短70%：</p>
-<pre><code class="language-go">func createNewFile(filePath, content string) (string, error) {
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-18" onclick="copyCode('code-18')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-18">func createNewFile(filePath, content string) (string, error) {
     dir := path.Dir(filePath)
     if dir != "." {
         err := os.MkdirAll(dir, 0755)
@@ -606,19 +850,43 @@ var EditFileInputSchema = GenerateSchema[EditFileInput]()
     return fmt.Sprintf("Successfully created file %s", filePath), nil
 }
 </code></pre>
+            </div>
 <p>最后一步：将其添加到我们发送给Claude的工具列表中。</p>
-<pre><code class="language-go">// main.go
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-19" onclick="copyCode('code-19')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-go" id="code-19">// main.go
 func main() {
     // [... 之前的代码 ...]
     tools := []ToolDefinition{ReadFileDefinition, ListFilesDefinition, EditFileDefinition}
     // [... 之前的代码 ...]
 }
 </code></pre>
+            </div>
 <p>然后…我们准备好了，但你准备好了吗？你准备好释放它了吗？</p>
 <p>我想是的，让我们这样做。让我们告诉Claude用JavaScript创建一个新的FizzBuzz函数。</p>
 <p>对吧？！这很令人印象深刻，不是吗？这是你可能想出的<code>edit_file</code>——通常是代理程序——最基本的实现。</p>
 <p>但是，它有效吗？是的，它有效：</p>
-<pre><code class="language-bash">$ node fizzbuzz.js
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-20" onclick="copyCode('code-20')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-20">$ node fizzbuzz.js
 Running FizzBuzz:
 1
 2
@@ -638,11 +906,23 @@ FizzBuzz
 16
 [...]
 </code></pre>
+            </div>
 <p>太棒了。但是嘿，让它实际编辑一个文件而不只是创建一个。</p>
 <p>当我要求“请编辑fizzbuzz.js，使其只打印到15“时，Claude的做法如下：</p>
 <p>它读取文件，编辑文件以更改运行时长，然后还编辑文件以更新顶部的注释。</p>
 <p>它仍然有效：</p>
-<pre><code class="language-bash">$ node fizzbuzz.js
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-21" onclick="copyCode('code-21')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-21">$ node fizzbuzz.js
 Running FizzBuzz:
 1
 2
@@ -660,13 +940,26 @@ Fizz
 14
 FizzBuzz
 </code></pre>
+            </div>
 <p>好的，让我们再做一个，让它做以下事情：</p>
 <p>创建一个congrats.js脚本，rot13解码以下字符串’Pbatenghyngvbaf ba ohvyqvat n pbqr-rqvgvat ntrag!’并打印它</p>
 <p>也许是一个很高的要求。让我们看看：</p>
 <p>它有效吗？让我们试试：</p>
-<pre><code class="language-bash">$ node congrats.js
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-22" onclick="copyCode('code-22')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre><code class="language-bash" id="code-22">$ node congrats.js
 Congratulations on building a code-editing agent!
 </code></pre>
+            </div>
 <p>它有效！</p>
 <p>这不是很神奇吗？</p>
 <p>如果你和我在过去几个月中交谈过的所有工程师一样，在阅读这篇文章时，你很可能一直在等待兔子从帽子里被拉出来，等待我说“好吧，实际上这比这难得多得多。“但它不是。</p>
@@ -867,6 +1160,114 @@ Congratulations on building a code-editing agent!
 </script>
 
 
+<script>
+// Reading Progress Bar
+(function() {
+    const progressBar = document.getElementById('progress-bar');
+    const article = document.querySelector('.post');
+    
+    if (!progressBar || !article) return;
+    
+    function updateProgressBar() {
+        const articleTop = article.offsetTop;
+        const articleHeight = article.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Add/remove scrolled class
+        if (scrollTop > 50) {
+            document.body.classList.add('scrolled');
+        } else {
+            document.body.classList.remove('scrolled');
+        }
+        
+        // Calculate the scrollable area (article height minus viewport height)
+        const scrollableArea = articleHeight + articleTop - windowHeight;
+        
+        // Calculate current scroll position relative to the article
+        const currentPosition = scrollTop - articleTop + windowHeight;
+        
+        // Calculate progress percentage
+        let progress = (currentPosition / scrollableArea) * 100;
+        
+        // Clamp progress between 0 and 100
+        progress = Math.max(0, Math.min(100, progress));
+        
+        // Update progress bar width
+        progressBar.style.width = progress + '%';
+    }
+    
+    // Update on scroll
+    let scrollTimer;
+    window.addEventListener('scroll', () => {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(updateProgressBar, 10);
+    });
+    
+    // Update on resize
+    window.addEventListener('resize', updateProgressBar);
+    
+    // Initial update
+    updateProgressBar();
+})();
+
+// Font Size Adjuster
+(function() {
+    const MIN_SIZE = 80;
+    const MAX_SIZE = 150;
+    const STEP = 10;
+    const DEFAULT_SIZE = 100;
+    
+    // Get saved font size from localStorage
+    let currentSize = parseInt(localStorage.getItem('postFontSize')) || DEFAULT_SIZE;
+    
+    // Apply saved font size on load
+    applyFontSize(currentSize);
+    
+    window.changeFontSize = function(action) {
+        switch(action) {
+            case 'increase':
+                currentSize = Math.min(currentSize + STEP, MAX_SIZE);
+                break;
+            case 'decrease':
+                currentSize = Math.max(currentSize - STEP, MIN_SIZE);
+                break;
+            case 'reset':
+                currentSize = DEFAULT_SIZE;
+                break;
+        }
+        
+        applyFontSize(currentSize);
+        localStorage.setItem('postFontSize', currentSize);
+    };
+    
+    function applyFontSize(size) {
+        const postContent = document.querySelector('.post-content');
+        const sizeValue = document.getElementById('font-size-value');
+        
+        if (postContent) {
+            postContent.style.fontSize = size + '%';
+        }
+        
+        if (sizeValue) {
+            sizeValue.textContent = size + '%';
+        }
+        
+        // Update button states
+        document.querySelectorAll('.font-size-btn').forEach(btn => {
+            btn.disabled = false;
+        });
+        
+        if (size <= MIN_SIZE) {
+            document.querySelector('.font-size-btn[onclick*="decrease"]').disabled = true;
+        }
+        if (size >= MAX_SIZE) {
+            document.querySelector('.font-size-btn[onclick*="increase"]').disabled = true;
+        }
+    }
+})();
+</script>
+
         </div>
     </main>
 
@@ -876,5 +1277,60 @@ Congratulations on building a code-editing agent!
             <p>A decentralized blog powered by IPFS</p>
         </div>
     </footer>
+    
+    <script>
+    // Copy code function
+    function copyCode(codeId) {
+        const codeElement = document.getElementById(codeId);
+        if (!codeElement) return;
+        
+        const textToCopy = codeElement.textContent;
+        
+        // Use modern clipboard API if available
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showCopySuccess(codeId);
+            }).catch(err => {
+                fallbackCopy(textToCopy, codeId);
+            });
+        } else {
+            fallbackCopy(textToCopy, codeId);
+        }
+    }
+    
+    function fallbackCopy(text, codeId) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+            document.execCommand('copy');
+            showCopySuccess(codeId);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        } finally {
+            document.body.removeChild(textArea);
+        }
+    }
+    
+    function showCopySuccess(codeId) {
+        const button = document.querySelector(`button[data-code-id="${codeId}"]`);
+        if (!button) return;
+        
+        const copyText = button.querySelector('.copy-text');
+        const originalText = copyText.textContent;
+        
+        copyText.textContent = 'Copied!';
+        button.classList.add('copy-success');
+        
+        setTimeout(() => {
+            copyText.textContent = originalText;
+            button.classList.remove('copy-success');
+        }, 2000);
+    }
+    </script>
 </body>
 </html>
