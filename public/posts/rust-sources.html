@@ -263,6 +263,42 @@
             
             <p><strong>Content Hash:</strong> <code>f59ae034fe137c96ca1387f1612dc853061d565b662629b72cb35d83bf15454c</code></p>
         </div>
+        
+        
+        <nav class="post-navigation">
+            <div class="post-nav-container">
+                
+                <a href="&#x2F;kpgb&#x2F;posts&#x2F;rust-no-std.html" class="post-nav-link post-nav-prev">
+                    <div class="post-nav-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M5 12L12 19M5 12L12 5"/>
+                        </svg>
+                    </div>
+                    <div class="post-nav-content">
+                        <span class="post-nav-label">Previous Post</span>
+                        <span class="post-nav-title">Rust no-std</span>
+                        <span class="post-nav-date">2025-07-23</span>
+                    </div>
+                </a>
+                
+                
+                
+                <a href="&#x2F;kpgb&#x2F;posts&#x2F;rust-tips.html" class="post-nav-link post-nav-next">
+                    <div class="post-nav-content">
+                        <span class="post-nav-label">Next Post</span>
+                        <span class="post-nav-title">About Rust tips</span>
+                        <span class="post-nav-date">2025-07-23</span>
+                    </div>
+                    <div class="post-nav-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19"/>
+                        </svg>
+                    </div>
+                </a>
+                
+            </div>
+        </nav>
+        
         <nav class="post-nav">
             <a href="/archive.html">← Back to Archive</a>
         </nav>
@@ -765,6 +801,274 @@
     document.addEventListener('mouseup', function() {
         isDragging = false;
         lightboxImage.style.cursor = currentScale > 1 ? 'grab' : '';
+    });
+})();
+
+// Footnote Hover Display
+(function() {
+    // Create tooltip element
+    const tooltip = document.createElement('div');
+    tooltip.className = 'footnote-tooltip';
+    document.body.appendChild(tooltip);
+    
+    let currentFootnoteRef = null;
+    let tooltipTimeout = null;
+    
+    // Find all footnote references
+    const footnoteRefs = document.querySelectorAll('sup.footnote-ref a');
+    
+    footnoteRefs.forEach(ref => {
+        // Prevent default click behavior
+        ref.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                smoothScrollTo(targetElement);
+            }
+        });
+        
+        // Mouse enter - show tooltip
+        ref.addEventListener('mouseenter', function(e) {
+            currentFootnoteRef = this;
+            const footnoteId = this.getAttribute('href').substring(1);
+            const footnoteElement = document.getElementById(footnoteId);
+            
+            if (footnoteElement) {
+                // Get footnote content
+                const content = footnoteElement.innerHTML
+                    .replace(/<a[^>]*class="footnote-backref"[^>]*>.*?<\/a>/g, '') // Remove backref link
+                    .trim();
+                
+                // Set tooltip content
+                tooltip.innerHTML = content;
+                tooltip.classList.add('active');
+                
+                // Position tooltip
+                positionTooltip(this);
+                
+                // Clear any existing timeout
+                if (tooltipTimeout) {
+                    clearTimeout(tooltipTimeout);
+                }
+            }
+        });
+        
+        // Mouse leave - hide tooltip with delay
+        ref.addEventListener('mouseleave', function(e) {
+            tooltipTimeout = setTimeout(() => {
+                if (!tooltip.matches(':hover')) {
+                    hideTooltip();
+                }
+            }, 300);
+        });
+    });
+    
+    // Keep tooltip visible when hovering over it
+    tooltip.addEventListener('mouseenter', function() {
+        if (tooltipTimeout) {
+            clearTimeout(tooltipTimeout);
+        }
+    });
+    
+    tooltip.addEventListener('mouseleave', function() {
+        hideTooltip();
+    });
+    
+    function positionTooltip(element) {
+        const rect = element.getBoundingClientRect();
+        const tooltipRect = tooltip.getBoundingClientRect();
+        
+        // Calculate position
+        let top = rect.bottom + window.scrollY + 10;
+        let left = rect.left + window.scrollX - (tooltipRect.width / 2) + (rect.width / 2);
+        
+        // Ensure tooltip stays within viewport
+        const padding = 10;
+        if (left < padding) {
+            left = padding;
+        } else if (left + tooltipRect.width > window.innerWidth - padding) {
+            left = window.innerWidth - tooltipRect.width - padding;
+        }
+        
+        // If tooltip would go below viewport, show above
+        if (top + tooltipRect.height > window.innerHeight + window.scrollY - padding) {
+            top = rect.top + window.scrollY - tooltipRect.height - 10;
+        }
+        
+        tooltip.style.top = top + 'px';
+        tooltip.style.left = left + 'px';
+    }
+    
+    function hideTooltip() {
+        tooltip.classList.remove('active');
+        currentFootnoteRef = null;
+    }
+    
+    // Smooth scroll function
+    function smoothScrollTo(element) {
+        const targetPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        const duration = 500;
+        let start = null;
+        
+        function animation(currentTime) {
+            if (start === null) start = currentTime;
+            const timeElapsed = currentTime - start;
+            const progress = Math.min(timeElapsed / duration, 1);
+            const ease = easeInOutCubic(progress);
+            
+            window.scrollTo(0, startPosition + distance * ease);
+            
+            if (timeElapsed < duration) {
+                requestAnimationFrame(animation);
+            } else {
+                // Highlight the footnote
+                element.classList.add('highlight');
+                setTimeout(() => {
+                    element.classList.remove('highlight');
+                }, 2000);
+            }
+        }
+        
+        requestAnimationFrame(animation);
+    }
+    
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (currentFootnoteRef && tooltip.classList.contains('active')) {
+            positionTooltip(currentFootnoteRef);
+        }
+    });
+})();
+
+// Smooth Scrolling and Anchor Positioning
+(function() {
+    // Add smooth scrolling to all internal links
+    const internalLinks = document.querySelectorAll('a[href^="#"]');
+    
+    internalLinks.forEach(link => {
+        // Skip footnote references as they have their own handler
+        if (link.closest('sup.footnote-ref')) return;
+        
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                smoothScrollToElement(targetElement);
+            }
+        });
+    });
+    
+    // Smooth scroll function with offset for fixed header
+    function smoothScrollToElement(element, offset = 80) {
+        const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - offset;
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        const duration = 600;
+        let start = null;
+        
+        function animation(currentTime) {
+            if (start === null) start = currentTime;
+            const timeElapsed = currentTime - start;
+            const progress = Math.min(timeElapsed / duration, 1);
+            const ease = easeInOutCubic(progress);
+            
+            window.scrollTo(0, startPosition + distance * ease);
+            
+            if (timeElapsed < duration) {
+                requestAnimationFrame(animation);
+            } else {
+                // Update URL hash without triggering scroll
+                if (element.id) {
+                    history.pushState(null, null, '#' + element.id);
+                }
+                
+                // Add highlight effect
+                element.classList.add('anchor-highlight');
+                setTimeout(() => {
+                    element.classList.remove('anchor-highlight');
+                }, 2000);
+            }
+        }
+        
+        requestAnimationFrame(animation);
+    }
+    
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+    
+    // Handle initial page load with hash
+    if (window.location.hash) {
+        // Wait for page to fully load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const targetId = window.location.hash.substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    smoothScrollToElement(targetElement);
+                }
+            }, 100);
+        });
+    }
+    
+    // Add scroll-to-top button
+    const scrollTopBtn = document.createElement('button');
+    scrollTopBtn.className = 'scroll-to-top';
+    scrollTopBtn.innerHTML = `
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5"></path>
+            <path d="M5 12L12 5L19 12"></path>
+        </svg>
+    `;
+    scrollTopBtn.setAttribute('aria-label', 'Scroll to top');
+    document.body.appendChild(scrollTopBtn);
+    
+    // Show/hide scroll-to-top button
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 500) {
+            if (scrollTop < lastScrollTop) {
+                // Scrolling up
+                scrollTopBtn.classList.add('visible');
+            } else {
+                // Scrolling down
+                scrollTopBtn.classList.remove('visible');
+            }
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+    
+    // Scroll to top on click
+    scrollTopBtn.addEventListener('click', function() {
+        smoothScrollToElement(document.body, 0);
+    });
+    
+    // Improve TOC link behavior
+    const tocLinks = document.querySelectorAll('.toc-link');
+    tocLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                smoothScrollToElement(targetElement);
+            }
+        });
     });
 })();
 </script>

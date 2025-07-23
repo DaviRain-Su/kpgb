@@ -86,9 +86,23 @@ impl SiteGenerator {
         // Generate index page
         self.generate_index(&posts).await?;
 
-        // Generate individual post pages
-        for (storage_id, post) in &posts {
-            self.generate_post_page(storage_id, post).await?;
+        // Generate individual post pages with navigation
+        for (index, (storage_id, post)) in posts.iter().enumerate() {
+            // Find previous and next posts
+            let prev_post = if index < posts.len() - 1 {
+                Some(&posts[index + 1])
+            } else {
+                None
+            };
+
+            let next_post = if index > 0 {
+                Some(&posts[index - 1])
+            } else {
+                None
+            };
+
+            self.generate_post_page(storage_id, post, prev_post, next_post)
+                .await?;
         }
 
         // Generate archive page
@@ -205,7 +219,13 @@ impl SiteGenerator {
         Ok(())
     }
 
-    async fn generate_post_page(&self, storage_id: &str, post: &BlogPost) -> Result<()> {
+    async fn generate_post_page(
+        &self,
+        storage_id: &str,
+        post: &BlogPost,
+        prev_post: Option<&(String, BlogPost)>,
+        next_post: Option<&(String, BlogPost)>,
+    ) -> Result<()> {
         // Get related posts
         let related_posts = self
             .blog_manager
@@ -261,6 +281,59 @@ impl SiteGenerator {
                 "ipfs_link",
                 &format!("{}{}", self.config.ipfs_gateway, storage_id),
             );
+        }
+
+        // Add previous/next navigation
+        if let Some((prev_id, prev)) = prev_post {
+            let mut prev_context = serde_json::Map::new();
+            prev_context.insert(
+                "title".to_string(),
+                serde_json::Value::String(prev.title.clone()),
+            );
+            prev_context.insert(
+                "slug".to_string(),
+                serde_json::Value::String(prev.slug.clone()),
+            );
+            let base_path = self.config.base_path.as_deref().unwrap_or("");
+            prev_context.insert(
+                "url".to_string(),
+                serde_json::Value::String(format!(
+                    "{}/posts/{}.html",
+                    base_path,
+                    sanitize_slug(&prev.slug)
+                )),
+            );
+            prev_context.insert(
+                "created_at".to_string(),
+                serde_json::to_value(&prev.created_at)?,
+            );
+            context.insert("prev_post", &prev_context);
+        }
+
+        if let Some((next_id, next)) = next_post {
+            let mut next_context = serde_json::Map::new();
+            next_context.insert(
+                "title".to_string(),
+                serde_json::Value::String(next.title.clone()),
+            );
+            next_context.insert(
+                "slug".to_string(),
+                serde_json::Value::String(next.slug.clone()),
+            );
+            let base_path = self.config.base_path.as_deref().unwrap_or("");
+            next_context.insert(
+                "url".to_string(),
+                serde_json::Value::String(format!(
+                    "{}/posts/{}.html",
+                    base_path,
+                    sanitize_slug(&next.slug)
+                )),
+            );
+            next_context.insert(
+                "created_at".to_string(),
+                serde_json::to_value(&next.created_at)?,
+            );
+            context.insert("next_post", &next_context);
         }
 
         let rendered = self.tera.render("post.html", &context)?;

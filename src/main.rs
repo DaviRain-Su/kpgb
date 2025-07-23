@@ -7,6 +7,7 @@
 #![allow(clippy::unnecessary_map_or)]
 #![allow(clippy::unnecessary_to_owned)]
 #![allow(clippy::if_same_then_else)]
+#![allow(clippy::needless_borrows_for_generic_args)]
 
 mod blog;
 mod database;

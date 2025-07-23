@@ -1,15 +1,32 @@
-<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog</title>  <meta name="title" content="关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog"> <meta name="description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html"> <meta property="og:title" content="关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog"> <meta property="og:description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:37+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:38+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html"> <meta property="twitter:title" content="关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog"> <meta property="twitter:description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>静态网站生成器完成 - Anonymous IPFS Blog</title> <meta name="title" content="静态网站生成器完成 - Anonymous IPFS Blog"> <meta name="description" content="A decentralized blog powered by IPFS"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="Developer"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese"> <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/静态网站生成器完成.html"> <meta property="og:title" content="静态网站生成器完成 - Anonymous IPFS Blog"> <meta property="og:description" content="A decentralized blog powered by IPFS"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-21T00:14:28+0000"> <meta property="article:modified_time" content="2025-07-21T00:14:37+0000"> <meta property="article:author" content="Developer"> <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/静态网站生成器完成.html"> <meta property="twitter:title" content="静态网站生成器完成 - Anonymous IPFS Blog"> <meta property="twitter:description" content="A decentralized blog powered by IPFS"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg"> <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/静态网站生成器完成.html"> <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest"> <link rel="stylesheet" href="&#x2F;kpgb/css/style.css"> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" /> <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml"> <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        "headline": "关于在rust的程序中如何访问到提交的git commit",
-        "description": "这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结果赋值给 output 变量。 如果 Git 命令成功执行，函数将从 中获取 Git 哈希值，并将其保存在 变量中。 是 Rust 中的一个字符串类型，用于在运行时决定使用 还是 来表示字符串。 如果 Git 命令未成功执行，函数将输出一个警告信息，并将 设置为 &amp;quot;unknown&amp;quot;。 最后，函数将 环境变量设置为 变量的值，并使用 指令告诉 Cargo 什么情况下需要重新运行构建脚本。 在本例中，当 ..&#x2F;.git&#x2F;HEAD、..&#x2F;.git&#x2F;refs 或...",
+        "headline": "静态网站生成器完成",
+        "description": "# 静态网站生成器完成！
+
+今天我们成功实现了KPGB的静态网站生成功能。
+
+## 新增功能
+
+### 1. 模板引擎
+- 使用Tera作为模板引擎
+- 支持继承和包含
+- 灵活的模板系统
+
+### 2. 静态网站生成
+- 自动生成HTML文件
+- 响应式设计
+- 美观的CSS样式
+
+### 3. RSS订阅
+- 标准…",
         "author": {
             "@type": "Person",
-            "name": "DaviRain"
+            "name": "Developer"
         },
-        "datePublished": "2025-07-23T00:49:37+0000",
-        "dateModified": "2025-07-23T00:49:38+0000",
+        "datePublished": "2025-07-21T00:14:28+0000",
+        "dateModified": "2025-07-21T00:14:37+0000",
         "publisher": {
             "@type": "Organization",
             "name": "Anonymous IPFS Blog",
@@ -20,12 +37,10 @@
         },
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html"
+            "@id": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/静态网站生成器完成.html"
         },
-        "wordCount": "223",
+        "wordCount": "80",
         "keywords": "",
-        
-        "articleSection": "Tech",
         
         "inLanguage": "zh-CN"
     }
@@ -92,15 +107,13 @@
 
 <article class="post">
     <header>
-        <h1>关于在rust的程序中如何访问到提交的git commit</h1>
+        <h1>静态网站生成器完成</h1>
         <div class="post-meta">
-            <span class="author">By DaviRain</span>
-            <span class="date">2025-07-23 00:49</span>
+            <span class="author">By Developer</span>
+            <span class="date">2025-07-21 00:14</span>
             
-            <span class="reading-time">⏱️ 4 min read</span>
+            <span class="reading-time">⏱️ 2 min read</span>
             
-            
-            <span class="category">Tech</span>
             
         </div>
         
@@ -112,14 +125,46 @@
             <nav class="toc" id="toc">
     <h2 class="toc-title">Table of Contents</h2>
     <ul class="toc-list"><li class="toc-item toc-level-2">
-                <a href="#code-example" class="toc-link">Code example</a></li><li class="toc-item toc-level-2">
-                <a href="#代码解释" class="toc-link">代码解释</a></li></ul></nav>
+                <a href="#新增功能" class="toc-link">新增功能</a><ul class="toc-sublist"><li class="toc-item toc-level-3">
+                <a href="#1_-模板引擎" class="toc-link">1. 模板引擎</a></li><li class="toc-item toc-level-3">
+                <a href="#2_-静态网站生成" class="toc-link">2. 静态网站生成</a></li><li class="toc-item toc-level-3">
+                <a href="#3_-rss订阅" class="toc-link">3. RSS订阅</a></li><li class="toc-item toc-level-3">
+                <a href="#4_-站点配置" class="toc-link">4. 站点配置</a></li></ul></li><li class="toc-item toc-level-2">
+                <a href="#使用方法" class="toc-link">使用方法</a></li><li class="toc-item toc-level-2">
+                <a href="#技术栈" class="toc-link">技术栈</a></li></ul></nav>
         </aside>
         <div class="post-content">
-            <h2 id="code-example">Code example</h2>
+            <h1 id="静态网站生成器完成！">静态网站生成器完成！</h1>
+<p>今天我们成功实现了KPGB的静态网站生成功能。</p>
+<h2 id="新增功能">新增功能</h2>
+<h3 id="1_-模板引擎">1. 模板引擎</h3>
+<ul>
+<li>使用Tera作为模板引擎</li>
+<li>支持继承和包含</li>
+<li>灵活的模板系统</li>
+</ul>
+<h3 id="2_-静态网站生成">2. 静态网站生成</h3>
+<ul>
+<li>自动生成HTML文件</li>
+<li>响应式设计</li>
+<li>美观的CSS样式</li>
+</ul>
+<h3 id="3_-rss订阅">3. RSS订阅</h3>
+<ul>
+<li>标准RSS 2.0格式</li>
+<li>自动更新</li>
+<li>包含完整文章内容</li>
+</ul>
+<h3 id="4_-站点配置">4. 站点配置</h3>
+<ul>
+<li><code>site.toml</code>配置文件</li>
+<li>自定义标题、描述、作者</li>
+<li>IPFS网关配置</li>
+</ul>
+<h2 id="使用方法">使用方法</h2>
 <div class="code-block-wrapper">
                 <div class="code-header">
-                    <span class="code-language">rust</span>
+                    <span class="code-language">bash</span>
                     <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
                         <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -128,76 +173,24 @@
                         <span class="copy-text">Copy</span>
                     </button>
                 </div>
-                <pre class="line-numbers"><code class="language-rust" id="code-1">use std::{borrow::Cow, process::Command};
+                <pre class="line-numbers"><code class="language-bash" id="code-1"># 初始化配置
+cargo run -- init
 
-fn main() {
-	// Make git hash available via GIT_HASH build-time env var:
-	output_git_short_hash();
-}
+# 生成网站
+cargo run -- generate
 
-fn output_git_short_hash() {
-	let output = Command::new("git").args(["rev-parse", "HEAD"]).output();
-
-	let git_hash = match output {
-		Ok(o) if o.status.success() =&gt; {
-			let sha = String::from_utf8_lossy(&amp;o.stdout).trim().to_owned();
-			Cow::from(sha)
-		},
-		Ok(o) =&gt; {
-			println!("cargo:warning=Git command failed with status: {}", o.status);
-			Cow::from("unknown")
-		},
-		Err(err) =&gt; {
-			println!("cargo:warning=Failed to execute git command: {}", err);
-			Cow::from("unknown")
-		},
-	};
-
-	println!("cargo:rustc-env=GIT_HASH={}", git_hash);
-	println!("cargo:rerun-if-changed=../.git/HEAD");
-	println!("cargo:rerun-if-changed=../.git/refs");
-	println!("cargo:rerun-if-changed=build.rs");
-}
+# 启动服务器
+./serve.sh
 </code></pre>
             </div>
-<h2 id="代码解释">代码解释</h2>
-<p>这段代码的作用是使用 Rust 的 <code>std::process::Command</code> 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 <code>build.rs</code> 文件来实现的。</p>
-<p>下面是这个代码的工作原理：</p>
-<ol>
-<li>在 <code>build.rs</code> 文件中，定义了一个函数 <code>output_git_short_hash()</code>，它使用 Rust 的 <code>std::process::Command</code> 模块来执行 Git 命令，并将执行结果赋值给 output 变量。</li>
-<li>如果 Git 命令成功执行，函数将从 <code>output.stdout</code> 中获取 Git 哈希值，并将其保存在 <code>git_hash</code> 变量中。<code>Cow</code> 是 Rust 中的一个字符串类型，用于在运行时决定使用 <code>String</code> 还是 <code>&amp;str</code> 来表示字符串。</li>
-<li>如果 Git 命令未成功执行，函数将输出一个警告信息，并将 <code>git_hash</code> 设置为 “unknown”。</li>
-<li>最后，函数将 <code>GIT_HASH</code> 环境变量设置为 <code>git_hash</code> 变量的值，并使用 <code>cargo:rerun-if-changed</code> 指令告诉 Cargo 什么情况下需要重新运行构建脚本。
-在本例中，当 ../.git/HEAD、../.git/refs 或 build.rs 文件发生变化时，Cargo 将重新运行构建脚本。</li>
-<li>在 <code>main.rs</code> 或其他 Rust 文件中，你可以使用 <code>std::env::var("GIT_HASH")</code> 来访问 GIT_HASH 环境变量，并获取 Git 哈希值。</li>
-</ol>
-<p>总之，这段代码可以在 Rust 项目中通过执行 Git 命令获取 Git 哈希值，并将其设置为环境变量，从而方便其他 Rust 文件访问该值。</p>
-<p>第四步使用了 <code>cargo:rerun-if-changed</code> 指令来告诉 Cargo 什么情况下需要重新运行构建脚本。
-这个指令是 Rust 的编译器 Cargo 提供的一个特殊注释，用于控制项目的构建和重新构建行为。</p>
-<p>具体来说，<code>cargo:rerun-if-changed</code> 指令的作用是告诉 Cargo 某些文件的改动会导致项目需要重新构建，这样 Cargo 就可以在这些文件发生变化时自动重新运行构建脚本。指令的语法如下：</p>
-<div class="code-block-wrapper">
-                <div class="code-header">
-                    <span class="code-language">bash</span>
-                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
-                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                        </svg>
-                        <span class="copy-text">Copy</span>
-                    </button>
-                </div>
-                <pre class="line-numbers"><code class="language-bash" id="code-2">cargo:rerun-if-changed=&lt;filename&gt;;
-</code></pre>
-            </div>
-<p>其中 <code>filename</code> 表示需要监视的文件名或文件夹名，可以使用相对或绝对路径。</p>
-<p>在这个例子中，<code>cargo:rerun-if-changed</code> 指令告诉 Cargo 在以下情况下需要重新运行构建脚本：</p>
+<h2 id="技术栈">技术栈</h2>
 <ul>
-<li>当 <code>../.git/HEAD</code> 文件发生变化时。</li>
-<li>当 <code>../.git/refs</code> 文件夹下的任何文件发生变化时。</li>
-<li>当 <code>build.rs</code> 文件发生变化时。</li>
-<li>这些文件的变化通常意味着 Git 代码库发生了变化，因此需要重新获取 Git 哈希值并重新编译项目。</li>
+<li><strong>Rust</strong> - 主程序</li>
+<li><strong>Tera</strong> - 模板引擎</li>
+<li><strong>pulldown-cmark</strong> - Markdown解析</li>
+<li><strong>RSS</strong> - 订阅源生成</li>
 </ul>
-<p>需要注意的是，<code>cargo:rerun-if-changed</code> 指令只能在 <code>build.rs</code> 文件中使用，而且必须放在一个单独的行中，不能和其他代码混在一起。这是因为指令实际上是一种注释，不是 Rust 代码，所以不能包含在函数、结构体或其他 Rust 语言结构中。</p>
+<p>现在你的博客可以被任何人通过浏览器访问了！</p>
 
         </div>
     </div>
@@ -205,18 +198,18 @@ fn output_git_short_hash() {
 
     <footer class="post-footer">
         <div class="post-info">
-            <p><strong>Storage ID:</strong> <code>QmTn26MfhM3QpqdHsnnomqYdbmQvpyF2wa2KQU7KwggzY1</code></p>
+            <p><strong>Storage ID:</strong> <code>QmcBX5fvT3v6KjjKUmD2DK7NX81G4EKito1rNNEFs2papD</code></p>
             
-            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;QmTn26MfhM3QpqdHsnnomqYdbmQvpyF2wa2KQU7KwggzY1" target="_blank">View on IPFS</a></p>
+            <p><strong>IPFS Link:</strong> <a href="https:&#x2F;&#x2F;ipfs.io&#x2F;ipfs&#x2F;QmcBX5fvT3v6KjjKUmD2DK7NX81G4EKito1rNNEFs2papD" target="_blank">View on IPFS</a></p>
             
-            <p><strong>Content Hash:</strong> <code>8460cf42360837e08310335e221d94f1386d131c109813946e8956ae45baa273</code></p>
+            <p><strong>Content Hash:</strong> <code>0566913433ac017ec12b723a779337fb3d7a780bd93dac56f187ae0eb4da489c</code></p>
         </div>
         
         
         <nav class="post-navigation">
             <div class="post-nav-container">
                 
-                <a href="&#x2F;kpgb&#x2F;posts&#x2F;hldca.html" class="post-nav-link post-nav-prev">
+                <a href="&#x2F;kpgb&#x2F;posts&#x2F;real-ipfs-storage-test.html" class="post-nav-link post-nav-prev">
                     <div class="post-nav-arrow">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M19 12H5M5 12L12 19M5 12L12 5"/>
@@ -224,18 +217,18 @@ fn output_git_short_hash() {
                     </div>
                     <div class="post-nav-content">
                         <span class="post-nav-label">Previous Post</span>
-                        <span class="post-nav-title">History of Lossless Data Compression Algorithms</span>
-                        <span class="post-nav-date">2025-07-23</span>
+                        <span class="post-nav-title">Real IPFS Storage Test</span>
+                        <span class="post-nav-date">2025-07-20</span>
                     </div>
                 </a>
                 
                 
                 
-                <a href="&#x2F;kpgb&#x2F;posts&#x2F;ibc.html" class="post-nav-link post-nav-next">
+                <a href="&#x2F;kpgb&#x2F;posts&#x2F;tag-system-demo-post.html" class="post-nav-link post-nav-next">
                     <div class="post-nav-content">
                         <span class="post-nav-label">Next Post</span>
-                        <span class="post-nav-title">翻译-区块链间通信协议:概述</span>
-                        <span class="post-nav-date">2025-07-23</span>
+                        <span class="post-nav-title">Tag System Demo Post</span>
+                        <span class="post-nav-date">2025-07-21</span>
                     </div>
                     <div class="post-nav-arrow">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -257,6 +250,78 @@ fn output_git_short_hash() {
     <section class="related-posts">
         <h2>Related Posts</h2>
         <div class="related-posts-grid">
+            
+            <article class="related-post-card">
+                <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;post-1753265043.html">脚注悬浮显示功能演示</a></h3>
+                <div class="post-meta">
+                    <span class="date">2025-07-23</span>
+                    
+                    <span class="reading-time">3 min read</span>
+                    
+                </div>
+                
+                    <p class="excerpt">展示KPGB博客系统的脚注悬浮显示功能</p>
+                
+                
+                <div class="tags-mini">
+                    
+                    <span class="tag-mini">功能演示</span>
+                    
+                    <span class="tag-mini">footnotes</span>
+                    
+                    <span class="tag-mini">脚注</span>
+                    
+                </div>
+                
+            </article>
+            
+            <article class="related-post-card">
+                <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;post-1753263832.html">测试图片灯箱效果</a></h3>
+                <div class="post-meta">
+                    <span class="date">2025-07-23</span>
+                    
+                    <span class="reading-time">2 min read</span>
+                    
+                </div>
+                
+                    <p class="excerpt">展示KPGB博客系统的图片灯箱效果</p>
+                
+                
+                <div class="tags-mini">
+                    
+                    <span class="tag-mini">图片</span>
+                    
+                    <span class="tag-mini">lightbox</span>
+                    
+                    <span class="tag-mini">功能演示</span>
+                    
+                </div>
+                
+            </article>
+            
+            <article class="related-post-card">
+                <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;ipfs.html">IPFS图片自动上传测试</a></h3>
+                <div class="post-meta">
+                    <span class="date">2025-07-23</span>
+                    
+                    <span class="reading-time">2 min read</span>
+                    
+                </div>
+                
+                    <p class="excerpt">这是一个测试IPFS图片自动上传功能的文章。 当你在文章中使用本地图片时，KPGB会自动： 检测文章中的本地图片路径 将图片上传到IPFS 将本地路径替换为IPFS链接 保持图片的alt文本不变 下面是一个测试图片（需要你在相同目录下放置一个 test.png 文件）： 测试图片 也支持相对路径： …</p>
+                
+                
+                <div class="tags-mini">
+                    
+                    <span class="tag-mini">测试</span>
+                    
+                    <span class="tag-mini">IPFS</span>
+                    
+                    <span class="tag-mini">图片</span>
+                    
+                </div>
+                
+            </article>
             
             <article class="related-post-card">
                 <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;chanzhe.html">禅者的初心📒</a></h3>
@@ -282,48 +347,6 @@ fn output_git_short_hash() {
                 </div>
                 
                     <p class="excerpt">大多数人最后跑不赢比特币这句话我都不知道讲了多少次了(实际上最后很多人还亏钱)。 如果你指望我通过推荐你买小山寨跑赢比特币，那还是别关注我了，我没有办法给出我认为合理的建议。 现在说也许还早，但是大家可以记住这一条，年底筛选投资标的的时候， 2019-2021这轮牛市表现一般的老币，全部不作为目标，…</p>
-                
-                
-            </article>
-            
-            <article class="related-post-card">
-                <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;rust-raw-pointer.html">About Rust Raw Pointer</a></h3>
-                <div class="post-meta">
-                    <span class="date">2025-07-23</span>
-                    
-                    <span class="reading-time">2 min read</span>
-                    
-                </div>
-                
-                    <p class="excerpt">在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。 原生指针有两种类型： 和 ，分别是不可变和可变的原生指针。 Rust提供了一个函数可以获取类型的大小： 。 这里提供了一个简单的例子，展示了如何使用原生指针。 原生指针是一种裸指针，不受Rust的安全性检查限制，可以…</p>
-                
-                
-            </article>
-            
-            <article class="related-post-card">
-                <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;learn-ocaml-sources.html">学习Ocaml的资源</a></h3>
-                <div class="post-meta">
-                    <span class="date">2025-07-23</span>
-                    
-                    <span class="reading-time">1 min read</span>
-                    
-                </div>
-                
-                    <p class="excerpt">Introduction to Objective Ocaml Objective Caml 简介。 OCaml from the Very Beginning 一本非常温和的教科书，推荐用于本课程。本书的 PDF 和 HTML 格式都是免费的。 A guided tour [ of OCaml ]…</p>
-                
-                
-            </article>
-            
-            <article class="related-post-card">
-                <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;rust-tips.html">About Rust tips</a></h3>
-                <div class="post-meta">
-                    <span class="date">2025-07-23</span>
-                    
-                    <span class="reading-time">7 min read</span>
-                    
-                </div>
-                
-                    <p class="excerpt">在 Rust 中，如果你想为你的 中的类型编写带有可选的 的测试，你可以使用 属性和 属性来做到这一点。 以下是一个例子： 在这个例子中， 只有在 被启用时才会被定义，同样， 测试也只有在 被启用时才会被运行。 要运行这个测试，你需要使用以下命令，其中 是你的 的名字： 这个命令会启用 特性并运行所…</p>
                 
                 
             </article>
