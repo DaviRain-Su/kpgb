@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog</title>  <meta name="title" content="关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog"> <meta name="description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html"> <meta property="og:title" content="关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog"> <meta property="og:description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:37+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:38+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html"> <meta property="twitter:title" content="关于在rust的程序中如何访问到提交的git commit - Anonymous IPFS Blog"> <meta property="twitter:description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>关于在rust的程序中如何访问到提交的git commit - DaviRain&#x27;s Blog</title>  <meta name="title" content="关于在rust的程序中如何访问到提交的git commit - DaviRain&#x27;s Blog"> <meta name="description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta name="keywords" content="IPFS, blog, decentralized, DaviRain-Su"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html"> <meta property="og:title" content="关于在rust的程序中如何访问到提交的git commit - DaviRain&#x27;s Blog"> <meta property="og:description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta property="og:image" content="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="DaviRain&#x27;s Blog"> <meta property="article:published_time" content="2025-07-23T00:49:37+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:38+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html"> <meta property="twitter:title" content="关于在rust的程序中如何访问到提交的git commit - DaviRain&#x27;s Blog"> <meta property="twitter:description" content="这段代码的作用是使用 Rust 的 模块来执行 Git 命令，从而获得当前代码库的 Git 哈希值，并将其设置为 GIT_HASH 环境变量。这个代码是通过在 Rust 项目根目录下创建 文件来实现的。 下面是这个代码的工作原理： 在 文件中，定义了一个函数 ，它使用 Rust 的 模块来执行 Git 命令，并将执行结…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="DaviRain&#x27;s Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -12,15 +12,15 @@
         "dateModified": "2025-07-23T00:49:38+0000",
         "publisher": {
             "@type": "Organization",
-            "name": "Anonymous IPFS Blog",
+            "name": "DaviRain&#x27;s Blog",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/logo.svg"
+                "url": "https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/images/logo.svg"
             }
         },
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html"
+            "@id": "https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/posts/how-to-get-commit-in-rust.html"
         },
         "wordCount": "223",
         "keywords": "",
@@ -36,7 +36,7 @@
     <header>
         <nav>
             <div class="container">
-                <h1><a href="&#x2F;kpgb/">Anonymous IPFS Blog</a></h1>
+                <h1><a href="&#x2F;kpgb/">DaviRain&#x27;s Blog</a></h1>
                 <ul>
                     <li><a href="&#x2F;kpgb/">Home</a></li>
                     <li><a href="&#x2F;kpgb/archive">Archive</a></li>
@@ -1026,8 +1026,8 @@ fn output_git_short_hash() {
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Anonymous. Powered by IPFS & KPGB.</p>
-            <p>A decentralized blog powered by IPFS</p>
+            <p>&copy; 2025 DaviRain-Su. Powered by IPFS & KPGB.</p>
+            <p>探索技术、分享思考 - A decentralized blog powered by IPFS</p>
         </div>
     </footer>
     

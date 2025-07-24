@@ -8,6 +8,6 @@ Crawl-delay: 1
 Disallow: /drafts/
 Disallow: /admin/
 
-Sitemap: https://Anonymous.github.io/kpgb/sitemap.xml
+Sitemap: https://DaviRain-Su.github.io/kpgb/sitemap.xml
 
-Host: https://Anonymous.github.io/kpgb
+Host: https://DaviRain-Su.github.io/kpgb

@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Git Fork and Upstreams ：如何去做一个很酷的技巧 - Anonymous IPFS Blog</title>  <meta name="title" content="Git Fork and Upstreams ：如何去做一个很酷的技巧 - Anonymous IPFS Blog"> <meta name="description" content="Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 -- 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的…"> <meta name="keywords" content="IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/git-frok.html"> <meta property="og:title" content="Git Fork and Upstreams ：如何去做一个很酷的技巧 - Anonymous IPFS Blog"> <meta property="og:description" content="Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 -- 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-23T00:49:35+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:35+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/git-frok.html"> <meta property="twitter:title" content="Git Fork and Upstreams ：如何去做一个很酷的技巧 - Anonymous IPFS Blog"> <meta property="twitter:description" content="Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 -- 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/git-frok.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Git Fork and Upstreams ：如何去做一个很酷的技巧 - DaviRain&#x27;s Blog</title>  <meta name="title" content="Git Fork and Upstreams ：如何去做一个很酷的技巧 - DaviRain&#x27;s Blog"> <meta name="description" content="Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 -- 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的…"> <meta name="keywords" content="IPFS, blog, decentralized, DaviRain-Su"> <meta name="author" content="DaviRain"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/posts/git-frok.html"> <meta property="og:title" content="Git Fork and Upstreams ：如何去做一个很酷的技巧 - DaviRain&#x27;s Blog"> <meta property="og:description" content="Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 -- 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的…"> <meta property="og:image" content="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="DaviRain&#x27;s Blog"> <meta property="article:published_time" content="2025-07-23T00:49:35+0000"> <meta property="article:modified_time" content="2025-07-23T00:49:35+0000"> <meta property="article:author" content="DaviRain">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/posts/git-frok.html"> <meta property="twitter:title" content="Git Fork and Upstreams ：如何去做一个很酷的技巧 - DaviRain&#x27;s Blog"> <meta property="twitter:description" content="Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 -- 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/posts/git-frok.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="DaviRain&#x27;s Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -12,15 +12,15 @@
         "dateModified": "2025-07-23T00:49:35+0000",
         "publisher": {
             "@type": "Organization",
-            "name": "Anonymous IPFS Blog",
+            "name": "DaviRain&#x27;s Blog",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/logo.svg"
+                "url": "https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/images/logo.svg"
             }
         },
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/git-frok.html"
+            "@id": "https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/posts/git-frok.html"
         },
         "wordCount": "299",
         "keywords": "",
@@ -36,7 +36,7 @@
     <header>
         <nav>
             <div class="container">
-                <h1><a href="&#x2F;kpgb/">Anonymous IPFS Blog</a></h1>
+                <h1><a href="&#x2F;kpgb/">DaviRain&#x27;s Blog</a></h1>
                 <ul>
                     <li><a href="&#x2F;kpgb/">Home</a></li>
                     <li><a href="&#x2F;kpgb/archive">Archive</a></li>
@@ -1206,8 +1206,8 @@ git rebase upstream/master
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Anonymous. Powered by IPFS & KPGB.</p>
-            <p>A decentralized blog powered by IPFS</p>
+            <p>&copy; 2025 DaviRain-Su. Powered by IPFS & KPGB.</p>
+            <p>探索技术、分享思考 - A decentralized blog powered by IPFS</p>
         </div>
     </footer>
     

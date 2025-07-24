@@ -1,6 +1,6 @@
 {
   "background_color": "#ffffff",
-  "description": "A decentralized blog powered by IPFS",
+  "description": "探索技术、分享思考 - A decentralized blog powered by IPFS",
   "display": "standalone",
   "icons": [
     {
@@ -24,8 +24,8 @@
       "type": "image/png"
     }
   ],
-  "name": "Anonymous IPFS Blog",
-  "short_name": "Anonymous IPFS Blog",
+  "name": "DaviRain's Blog",
+  "short_name": "DaviRain's Blog",
   "start_url": "/",
   "theme_color": "#3498db"
 }

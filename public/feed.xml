@@ -1,184 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><rss version="2.0"><channel><title>Anonymous IPFS Blog</title><link>https://Anonymous.github.io/kpgb</link><description>A decentralized blog powered by IPFS</description><item><title>脚注悬浮显示功能演示</title><link>https://Anonymous.github.io/kpgb/posts/post-1753265043.html</link><description><![CDATA[<h1 id="脚注悬浮显示功能">脚注悬浮显示功能</h1>
-<p>KPGB博客系统现在支持脚注悬浮显示功能！将鼠标悬停在脚注引用上即可查看脚注内容，无需滚动到页面底部。</p>
-<h2 id="什么是脚注？">什么是脚注？</h2>
-<p>脚注<sup class="footnote-reference"><a href="#1">1</a></sup>是一种文献引用方式，通常用于补充说明正文内容，或提供参考资料来源。在学术写作<sup class="footnote-reference"><a href="#2">2</a></sup>中，脚注是非常重要的组成部分。</p>
-<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
-<p>脚注（Footnote）是对文本的补充说明，通常位于页面底部。在网页中，脚注一般放在文章末尾。</p>
-</div>
-<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
-<p>学术写作要求严谨的引用格式，脚注是其中一种常见的引用方式，另外还有尾注（Endnote）和文内引用（In-text Citation）等。</p>
-</div>
-<h2 id="功能特性">功能特性</h2>
-<p>这个脚注系统具有以下特性<sup class="footnote-reference"><a href="#features">3</a></sup>：</p>
-<ul>
-<li>🖱️ <strong>悬浮显示</strong> - 鼠标悬停即可查看脚注内容</li>
-<li>🎯 <strong>平滑滚动</strong> - 点击脚注跳转时有平滑滚动效果</li>
-<li>✨ <strong>高亮显示</strong> - 跳转到的脚注会短暂高亮</li>
-<li>📱 <strong>响应式设计</strong> - 在移动设备上也能完美工作</li>
-<li>🎨 <strong>美观样式</strong> - 精心设计的视觉效果</li>
-</ul>
-<div class="footnote-definition" id="features"><sup class="footnote-definition-label">3</sup>
-<p>这些功能都是使用纯JavaScript实现的，无需额外的库依赖，确保了加载速度和兼容性。</p>
-</div>
-<h2 id="技术实现">技术实现</h2>
-<p>脚注功能基于Markdown的标准脚注语法<sup class="footnote-reference"><a href="#markdown">4</a></sup>，通过pulldown-cmark解析器<sup class="footnote-reference"><a href="#parser">5</a></sup>转换为HTML，然后使用JavaScript增强交互体验。</p>
-<div class="footnote-definition" id="markdown"><sup class="footnote-definition-label">4</sup>
-<p>Markdown脚注语法非常简单：使用<code>[^标识符]</code>创建脚注引用，然后在文档任意位置使用<code>[^标识符]: 脚注内容</code>定义脚注。</p>
-</div>
-<div class="footnote-definition" id="parser"><sup class="footnote-definition-label">5</sup>
-<p>pulldown-cmark是一个高性能的CommonMark解析器，用Rust编写，支持扩展语法包括脚注、表格、删除线等。项目地址：https://github.com/raphlinus/pulldown-cmark</p>
-</div>
-<h2 id="使用示例">使用示例</h2>
-<h3 id="基础用法">基础用法</h3>
-<p>在正文中添加脚注引用很简单<sup class="footnote-reference"><a href="#simple">6</a></sup>，只需要使用方括号和插入符号即可。</p>
-<div class="footnote-definition" id="simple"><sup class="footnote-definition-label">6</sup>
-<p>就像这样！这是一个简单的脚注示例。</p>
-</div>
-<h3 id="复杂内容">复杂内容</h3>
-<p>脚注中可以包含复杂的内容<sup class="footnote-reference"><a href="#complex">7</a></sup>，让我们看看效果如何。</p>
-<div class="footnote-definition" id="complex"><sup class="footnote-definition-label">7</sup>
-<p>脚注可以包含：</p>
-<ul>
-<li>列表项目</li>
-<li><strong>粗体文本</strong>和<em>斜体文本</em></li>
-<li><code>代码片段</code></li>
-<li><a href="https://example.com">链接</a></li>
-<li>甚至可以包含多个段落</li>
-</ul>
-<p>这是第二个段落，展示了脚注可以包含丰富的格式化内容。</p>
-</div>
-<h3 id="代码示例">代码示例</h3>
-<p>在技术文档中，脚注经常用于解释代码<sup class="footnote-reference"><a href="#code">8</a></sup>：</p>
-<div class="code-block-wrapper">
-                <div class="code-header">
-                    <span class="code-language">rust</span>
-                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
-                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                        </svg>
-                        <span class="copy-text">Copy</span>
-                    </button>
-                </div>
-                <pre class="line-numbers"><code class="language-rust" id="code-1">fn main() {
-    println!("Hello, footnotes!");
-}
-</code></pre>
-            </div>
-<div class="footnote-definition" id="code"><sup class="footnote-definition-label">8</sup>
-<p>这段Rust代码展示了最简单的Hello World程序。<code>println!</code>是Rust的宏，用于输出文本到控制台。</p>
-</div>
-<h2 id="总结">总结</h2>
-<p>脚注悬浮显示功能大大提升了阅读体验<sup class="footnote-reference"><a href="#conclusion">9</a></sup>，读者不再需要频繁上下滚动页面，就能快速查看补充信息。</p>
-<div class="footnote-definition" id="conclusion"><sup class="footnote-definition-label">9</sup>
-<p>根据用户体验研究，减少页面跳转和滚动可以显著提高阅读效率和用户满意度。这个功能正是基于这样的理念设计的。</p>
-</div>
-<hr />
-<p>现在试试将鼠标悬停在上面的任何脚注数字上，体验这个优雅的功能吧！</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmdgptYDf5Bo48w1mBsY6EFEyuu1tALJNUeHhdRaRM6D9p</guid><pubDate>Wed, 23 Jul 2025 10:04:03 +0000</pubDate></item><item><title>测试图片灯箱效果</title><link>https://Anonymous.github.io/kpgb/posts/post-1753263832.html</link><description><![CDATA[<h1 id="图片灯箱效果演示">图片灯箱效果演示</h1>
-<p>KPGB博客系统现在支持图片灯箱效果！点击任何图片即可查看大图。</p>
-<h2 id="功能特性">功能特性</h2>
-<ul>
-<li>🖱️ <strong>点击放大</strong> - 点击图片即可打开灯箱查看大图</li>
-<li>🔍 <strong>缩放控制</strong> - 支持放大、缩小和重置缩放</li>
-<li>⌨️ <strong>键盘快捷键</strong> - ESC关闭，+/-缩放，0重置</li>
-<li>🎯 <strong>鼠标滚轮</strong> - 使用鼠标滚轮快速缩放</li>
-<li>👆 <strong>拖拽移动</strong> - 放大后可拖拽查看图片不同部分</li>
-<li>📱 <strong>响应式设计</strong> - 在移动设备上也能完美工作</li>
-</ul>
-<h2 id="示例图片">示例图片</h2>
-<p>下面是一些示例图片，点击它们试试看：</p>
-<p><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&amp;h=600&amp;fit=crop" alt="美丽的风景" /></p>
-<p>这是一张山景照片，展示了壮丽的自然风光。</p>
-<p><img src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?w=800&amp;h=600&amp;fit=crop" alt="现代建筑" /></p>
-<p>现代建筑设计，展示了城市的发展与创新。</p>
-<p><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&amp;h=600&amp;fit=crop" alt="科技设备" /></p>
-<p>科技产品摄影，展现了现代技术的魅力。</p>
-<h2 id="使用说明">使用说明</h2>
-<ol>
-<li><strong>打开灯箱</strong> - 点击任意图片</li>
-<li><strong>关闭灯箱</strong> - 点击关闭按钮、背景或按ESC键</li>
-<li><strong>缩放操作</strong>：
-<ul>
-<li>使用工具栏按钮</li>
-<li>键盘快捷键：+放大，-缩小，0重置</li>
-<li>鼠标滚轮上下滚动</li>
-</ul>
-</li>
-<li><strong>拖拽查看</strong> - 放大后按住鼠标拖动图片</li>
-</ol>
-<h2 id="技术实现">技术实现</h2>
-<p>图片灯箱使用纯JavaScript实现，无需额外依赖：</p>
-<ul>
-<li>动态创建灯箱DOM结构</li>
-<li>事件监听和处理</li>
-<li>CSS3动画效果</li>
-<li>响应式布局支持</li>
-</ul>
-<p>现在，您的博客图片查看体验将更加出色！</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmQAdgVSLMH19dVwi4dLhdkmT5SEgWVcUbM5SbU9XbTigv</guid><pubDate>Wed, 23 Jul 2025 09:43:52 +0000</pubDate></item><item><title>IPFS图片自动上传测试</title><link>https://Anonymous.github.io/kpgb/posts/ipfs.html</link><description><![CDATA[<h1 id="ipfs-图片自动上传功能">IPFS 图片自动上传功能</h1>
-<p>这是一个测试IPFS图片自动上传功能的文章。</p>
-<h2 id="功能说明">功能说明</h2>
-<p>当你在文章中使用本地图片时，KPGB会自动：</p>
-<ol>
-<li>检测文章中的本地图片路径</li>
-<li>将图片上传到IPFS</li>
-<li>将本地路径替换为IPFS链接</li>
-<li>保持图片的alt文本不变</li>
-</ol>
-<h2 id="测试图片">测试图片</h2>
-<p>下面是一个测试图片（需要你在相同目录下放置一个 test.png 文件）：</p>
-<p><img src="ipfs://QmZqPPqHV7NGe9PEEbK5XR7yL5YLVG4MCuV9azNEmq8Luq" alt="测试图片" /></p>
-<p>也支持相对路径：</p>
-<p><img src="./images/another.jpg" alt="另一个测试" /></p>
-<h2 id="已经是url的图片不会被处理">已经是URL的图片不会被处理</h2>
-<p>这些图片会保持原样：</p>
-<ul>
-<li>HTTP图片：<img src="https://example.com/image.png" alt="HTTP图片" /></li>
-<li>IPFS图片：<img src="/ipfs/QmXxxxx" alt="IPFS图片" /></li>
-</ul>
-<h2 id="支持的图片格式">支持的图片格式</h2>
-<p>KPGB支持以下图片格式的自动上传：</p>
-<ul>
-<li>PNG (.png)</li>
-<li>JPEG (.jpg, .jpeg)</li>
-<li>GIF (.gif)</li>
-<li>WebP (.webp)</li>
-<li>SVG (.svg)</li>
-</ul>
-<h2 id="使用方法">使用方法</h2>
-<p>创建新文章时，只需要使用本地图片路径：</p>
-<div class="code-block-wrapper">
-                <div class="code-header">
-                    <span class="code-language">bash</span>
-                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
-                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                        </svg>
-                        <span class="copy-text">Copy</span>
-                    </button>
-                </div>
-                <pre class="line-numbers"><code class="language-bash" id="code-1">cargo run -- new --content my-post.md
-</code></pre>
-            </div>
-<p>编辑文章时也会自动处理新添加的图片：</p>
-<div class="code-block-wrapper">
-                <div class="code-header">
-                    <span class="code-language">bash</span>
-                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
-                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                        </svg>
-                        <span class="copy-text">Copy</span>
-                    </button>
-                </div>
-                <pre class="line-numbers"><code class="language-bash" id="code-2">cargo run -- edit &lt;post-id&gt; --content updated-post.md
-</code></pre>
-            </div>
-<p>这样就能让你的图片永久保存在IPFS上了！</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmWjDyAFCDBUhcVJmviTF7V7ndWYFNPbVXzzdoiTgtpQ9e</guid><pubDate>Wed, 23 Jul 2025 02:55:25 +0000</pubDate></item><item><title>禅者的初心📒</title><link>https://Anonymous.github.io/kpgb/posts/chanzhe.html</link><description><![CDATA[<ol>
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0"><channel><title>DaviRain&apos;s Blog</title><link>https://DaviRain-Su.github.io/kpgb</link><description>探索技术、分享思考 - A decentralized blog powered by IPFS</description><item><title>禅者的初心📒</title><link>https://DaviRain-Su.github.io/kpgb/posts/chanzhe.html</link><description><![CDATA[<ol>
 <li>
 <p>是智慧在追寻智慧。</p>
 </li>
@@ -204,7 +24,7 @@
 <p>永远做一个初学者。</p>
 </li>
 </ol>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmPEiHRYWUL85YYWPKVXCscJNL1Ka1u9hEv3BUFZLiXw1i</guid><pubDate>Wed, 23 Jul 2025 00:49:49 +0000</pubDate></item><item><title>TingHu语录📒</title><link>https://Anonymous.github.io/kpgb/posts/T.html</link><description><![CDATA[<ol>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmPEiHRYWUL85YYWPKVXCscJNL1Ka1u9hEv3BUFZLiXw1i</guid><pubDate>Wed, 23 Jul 2025 00:49:49 +0000</pubDate></item><item><title>TingHu语录📒</title><link>https://DaviRain-Su.github.io/kpgb/posts/T.html</link><description><![CDATA[<ol>
 <li>
 <p>大多数人最后跑不赢比特币这句话我都不知道讲了多少次了(实际上最后很多人还亏钱)。
 如果你指望我通过推荐你买小山寨跑赢比特币，那还是别关注我了，我没有办法给出我认为合理的建议。</p>
@@ -244,7 +64,7 @@
 目前亏损严重的，不用担心翻不了身，只要现在一门心思赚稳定的钱，只要你能安心总结，
 放下执念，认清现实，相信下个周期趋势依旧会来，你就能翻身！趋势来前尽量不要投资，因为事实证明，大牛都赚不到，底部震荡，
 反弹你也很难赚到钱。所以赚到钱再来底部或者底部抬头时一把梭，人来疯时卖。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmYBGJGdy6aGmX6D5VvXhFFdsVdbkKzgsyVo3LnxGtUcut</guid><pubDate>Wed, 23 Jul 2025 00:49:48 +0000</pubDate></item><item><title>About Rust Raw Pointer</title><link>https://Anonymous.github.io/kpgb/posts/rust-raw-pointer.html</link><description><![CDATA[<h2 id="introduction">Introduction</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmYBGJGdy6aGmX6D5VvXhFFdsVdbkKzgsyVo3LnxGtUcut</guid><pubDate>Wed, 23 Jul 2025 00:49:48 +0000</pubDate></item><item><title>About Rust Raw Pointer</title><link>https://DaviRain-Su.github.io/kpgb/posts/rust-raw-pointer.html</link><description><![CDATA[<h2 id="introduction">Introduction</h2>
 <p>在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。
 原生指针有两种类型：<code>*const T</code>和<code>*mut T</code>，分别是不可变和可变的原生指针。</p>
 <p>Rust提供了一个函数可以获取类型的大小：<code>std::mem::size_of::&lt;T&gt;()</code>。</p>
@@ -279,7 +99,7 @@ println!(
             </div>
 <h2 id="总结">总结</h2>
 <p>原生指针是一种裸指针，不受Rust的安全性检查限制，可以直接操作内存。但是使用原生指针时需要特别小心，因为可能会导致内存安全问题。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmZsCiYzbhe1TCA4WbCJbWPuRQG2VzPqBbvDbR5271Vpoo</guid><pubDate>Wed, 23 Jul 2025 00:49:46 +0000</pubDate></item><item><title>学习Ocaml的资源</title><link>https://Anonymous.github.io/kpgb/posts/learn-ocaml-sources.html</link><description><![CDATA[<ul>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmZsCiYzbhe1TCA4WbCJbWPuRQG2VzPqBbvDbR5271Vpoo</guid><pubDate>Wed, 23 Jul 2025 00:49:46 +0000</pubDate></item><item><title>学习Ocaml的资源</title><link>https://DaviRain-Su.github.io/kpgb/posts/learn-ocaml-sources.html</link><description><![CDATA[<ul>
 <li><a href="http://courses.cms.caltech.edu/cs134/cs134b/book.pdf">Introduction to Objective Ocaml</a> Objective Caml 简介。</li>
 <li><a href="https://ocaml-book.com/">OCaml from the Very Beginning</a> 一本非常温和的教科书，推荐用于本课程。本书的 PDF 和 HTML 格式都是免费的。</li>
 <li><a href="https://dev.realworldocaml.org/guided-tour.html">A guided tour [of OCaml]</a>
@@ -295,7 +115,7 @@ println!(
 <li>康奈尔大学在线互动教材《OCaml 编程：正确+高效+美丽》：<a href="https://cs3110.github.io/textbook/cover.html">https://cs3110.github.io/textbook/cover.html</a></li>
 <li>尝试 OCaml Pro 的交互式教程和基于 Web 的解释器：<a href="http://try.ocamlpro.com/">http://try.ocamlpro.com/</a></li>
 </ul>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmYRi6EwwvwoTLUkTAfDoG5Q2Eit5hiX9mErKz2juGmKYY</guid><pubDate>Wed, 23 Jul 2025 00:49:45 +0000</pubDate></item><item><title>About Rust tips</title><link>https://Anonymous.github.io/kpgb/posts/rust-tips.html</link><description><![CDATA[<h2 id="在rust中如何为本crates中的类型带有可选的feature编写测试">在rust中如何为本crates中的类型带有可选的feature编写测试</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmYRi6EwwvwoTLUkTAfDoG5Q2Eit5hiX9mErKz2juGmKYY</guid><pubDate>Wed, 23 Jul 2025 00:49:45 +0000</pubDate></item><item><title>About Rust tips</title><link>https://DaviRain-Su.github.io/kpgb/posts/rust-tips.html</link><description><![CDATA[<h2 id="在rust中如何为本crates中的类型带有可选的feature编写测试">在rust中如何为本crates中的类型带有可选的feature编写测试</h2>
 <p>在 Rust 中，如果你想为你的 <code>crate</code> 中的类型编写带有可选的 <code>feature</code> 的测试，你可以使用<code>cfg_attr</code>属性和<code>#[cfg(feature = "feature_name")]</code>属性来做到这一点。</p>
 <p>以下是一个例子：</p>
 <div class="code-block-wrapper">
@@ -462,7 +282,7 @@ assert_eq!(result, Some(33));
 </code></pre>
             </div>
 <p>因此，在使用时，map 用于简单的值转换，而 and_then 用于更复杂的操作和逻辑测试。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmeC1JrFWMsqZkixtS8SAmiZ52W6U2K9Pf8NNKnkLbWoX7</guid><pubDate>Wed, 23 Jul 2025 00:49:44 +0000</pubDate></item><item><title>Rust Resources Every Learner Should Know in 2023</title><link>https://Anonymous.github.io/kpgb/posts/rust-sources.html</link><description><![CDATA[<p>去年，我开始学习Rust，主要是为了应用于嵌入式系统。当时，我也在一篇名为“<a href="https://apollolabsblog.hashnode.dev/35-rust-learning-resources-every-beginner-should-know-in-2022">35个Rust学习资源，每个初学者在2022年都应该知道</a>”的帖子中分享了我所遇到的所有学习材料。自那时以来，我并没有停止学习 Rust，而是不断努力巩固自己的基础。因此，我一直在寻找新的学习资源。</p>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmeC1JrFWMsqZkixtS8SAmiZ52W6U2K9Pf8NNKnkLbWoX7</guid><pubDate>Wed, 23 Jul 2025 00:49:44 +0000</pubDate></item><item><title>Rust Resources Every Learner Should Know in 2023</title><link>https://DaviRain-Su.github.io/kpgb/posts/rust-sources.html</link><description><![CDATA[<p>去年，我开始学习Rust，主要是为了应用于嵌入式系统。当时，我也在一篇名为“<a href="https://apollolabsblog.hashnode.dev/35-rust-learning-resources-every-beginner-should-know-in-2022">35个Rust学习资源，每个初学者在2022年都应该知道</a>”的帖子中分享了我所遇到的所有学习材料。自那时以来，我并没有停止学习 Rust，而是不断努力巩固自己的基础。因此，我一直在寻找新的学习资源。</p>
 <p>在本文中，我将通过添加更多的资源以及对之前未曾利用的一些付费资源的思考，扩展去年的帖子。提醒一下，当时，我将资源分为了6个主要类别：1）阅读材料，2）实践资源，3）YouTube 视频，4）Git 资源，5）速查表，以及6）问题论坛。今年我增加了3个更多的类别，它们是7）课程，8）播客，以及9）新闻通讯。在相关情况下，我还将为资源的级别添加注释，无论是初学者（👶）、中级（👨），还是高级（👴）级别。</p>
 <p>我想再次强调，我的学习之旅始于 Rust 官方的语言资源“the book”，然后我主要通过完成令人惊叹的 Rustlings 练习来练习。我在本文中提到的所有其他资源都是我在学习过程中遇到的，以澄清我在“the book”中阅读的概念或当我在某个 Rustlings 练习中遇到困难并希望进行更多探索时使用的。最后，当我被问及是否会因为手头的资源而学习 Rust 时，如果有的话，基于手头的资源，我可能会首先从下面提到的快速摘要资源开始，然后再着手“the book”。如果我要选择付费资源，那么“Beginning Rust”将是我选择的书籍。</p>
 <h2 id="1）阅读材料-📚">1）阅读材料 📚</h2>
@@ -583,7 +403,7 @@ assert_eq!(result, Some(33));
 </ul>
 <h2 id="结论">结论</h2>
 <p>学习 Rust 不是一件容易的事情，因此利用尽可能多的资源来确认已掌握的知识变得必要。在我的学习过程中，我遇到了许多我觉得有用的资源，并在这篇文章中进行了总结。希望学习者能够找到它有用。你的经历如何？你最喜欢的 Rust 学习资源是什么？在评论中分享你的想法。👇</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmZoYqVCYw5PEfJkMjQd65nKC9N38gAg9aErAs1dE3v5xv</guid><pubDate>Wed, 23 Jul 2025 00:49:43 +0000</pubDate></item><item><title>Rust no-std</title><link>https://Anonymous.github.io/kpgb/posts/rust-no-std.html</link><description><![CDATA[<p>改写 std 的库为支持 no_std 的库及写出一个支持 std 和 no_std 库的经验谈 <a href="https://github.com/DaviRain-Su/rust-no-std-source">github repo</a>。</p>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmZoYqVCYw5PEfJkMjQd65nKC9N38gAg9aErAs1dE3v5xv</guid><pubDate>Wed, 23 Jul 2025 00:49:43 +0000</pubDate></item><item><title>Rust no-std</title><link>https://DaviRain-Su.github.io/kpgb/posts/rust-no-std.html</link><description><![CDATA[<p>改写 std 的库为支持 no_std 的库及写出一个支持 std 和 no_std 库的经验谈 <a href="https://github.com/DaviRain-Su/rust-no-std-source">github repo</a>。</p>
 <h2 id="简介">简介</h2>
 <p>首先介绍 std 和 no_std 的区别，然后介绍使用 no_std 库的方式，由于支持 no_std 的特性有两种不同的方式，因此使用 no_std 库也有两种方式。其次，验证一个库是否支持 no_std 特性的验证方式，如何改写一个 std 的库为同时支持 std 和 no_std 的特性方法。具体的如何写一个支持 std 和 no_std 的库。一些在 std 和 no_std 下都可以使用的 primitive 的仓库和相关的资源和文章。</p>
 <h2 id="目录">目录</h2>
@@ -689,7 +509,7 @@ assert_eq!(result, Some(33));
 </ul>
 <h2 id="结论">结论</h2>
 <p>参照 <code>serder</code> 的使用以及一些论坛的讨论，推荐使用<code>#![cfg_attr(not(feature = "std"), no_std ))]</code>来同时支持 <code>std</code> 和 <code>no_std</code>。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmPL5UgmuZMs3jH7RgkApzwh5F65ydW437qDv8rt9X72w4</guid><pubDate>Wed, 23 Jul 2025 00:49:42 +0000</pubDate></item><item><title>Nothing in Rust</title><link>https://Anonymous.github.io/kpgb/posts/notion-in-rust.html</link><description><![CDATA[<h2 id="outline">Outline</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmPL5UgmuZMs3jH7RgkApzwh5F65ydW437qDv8rt9X72w4</guid><pubDate>Wed, 23 Jul 2025 00:49:42 +0000</pubDate></item><item><title>Nothing in Rust</title><link>https://DaviRain-Su.github.io/kpgb/posts/notion-in-rust.html</link><description><![CDATA[<h2 id="outline">Outline</h2>
 <ul>
 <li>我假装这里有东西，但实际上没有。
 <ul>
@@ -921,7 +741,7 @@ impl FailureLogProvider for Partner {
             </div>
 <p>在示例中的函数实现始终成功，但是 trait 允许实现失败。为了表示这一点，关联的 Error 类型是“never”类型。</p>
 <p><a href="https://geeklaunch.io/blog/nothing-in-rust/">原文</a></p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmVmNEkVSZhb4W4jT13JN1qBe1jVD2NGPwbVthWCkbkCKo</guid><pubDate>Wed, 23 Jul 2025 00:49:41 +0000</pubDate></item><item><title>Learn Ocaml in Y Minutes</title><link>https://Anonymous.github.io/kpgb/posts/learn_ocaml_by_y_minutes.html</link><description><![CDATA[<p>OCaml 是一种经过严格评估的函数式语言，具有一些命令式功能。</p>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmVmNEkVSZhb4W4jT13JN1qBe1jVD2NGPwbVthWCkbkCKo</guid><pubDate>Wed, 23 Jul 2025 00:49:41 +0000</pubDate></item><item><title>Learn Ocaml in Y Minutes</title><link>https://DaviRain-Su.github.io/kpgb/posts/learn_ocaml_by_y_minutes.html</link><description><![CDATA[<p>OCaml 是一种经过严格评估的函数式语言，具有一些命令式功能。</p>
 <p>它与标准 ML 及其方言一起属于 ML 语言家族。 F# 也深受 OCaml 的影响。</p>
 <p>就像标准 ML 一样，OCaml 具有可交互使用的解释器和编译器。解释器二进制文件通常称为 ocaml ，编译器称为 ocamlopt 。还有一个字节码编译器 ocamlc ，但使用它的理由很少。</p>
 <p>它还包括包管理器 opam 和构建系统 dune 。</p>
@@ -1864,7 +1684,7 @@ Printf.printf "counter.contents = %d\n" !counter;;
 <li>康奈尔大学在线互动教材《OCaml 编程：正确+高效+美丽》：<a href="https://cs3110.github.io/textbook/cover.html">https://cs3110.github.io/textbook/cover.html</a></li>
 <li>尝试 OCaml Pro 的交互式教程和基于 Web 的解释器：<a href="http://try.ocamlpro.com/">http://try.ocamlpro.com/</a></li>
 </ul>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmehMPqbtR2iUdrLNiNdJjqQCYa59vXFnK5SQq6GtZPB6R</guid><pubDate>Wed, 23 Jul 2025 00:49:39 +0000</pubDate></item><item><title>翻译-区块链间通信协议:概述</title><link>https://Anonymous.github.io/kpgb/posts/ibc.html</link><description><![CDATA[<h2 id="abstract">Abstract</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmehMPqbtR2iUdrLNiNdJjqQCYa59vXFnK5SQq6GtZPB6R</guid><pubDate>Wed, 23 Jul 2025 00:49:39 +0000</pubDate></item><item><title>翻译-区块链间通信协议:概述</title><link>https://DaviRain-Su.github.io/kpgb/posts/ibc.html</link><description><![CDATA[<h2 id="abstract">Abstract</h2>
 <p>区块链间通信协议（IBC）是一个端到端的、面向连接的、有状态的协议，用于在独立的分布式账本上的模块之间进行可靠、有序和认证的通信。IBC是为异质账本之间的互操作而设计的，这些账本排列在一个未知的动态拓扑结构中，以不同的共识算法和状态机运行。该协议通过指定足够的数据结构、抽象和通信协议的语义来实现这一点，一旦被参与的账本实施，它们就可以安全地进行通信。IBC与有效载荷无关，并提供了一个跨账本的异步通信基元，可作为各种应用的组成模块。</p>
 <p>Index Terms—ibc; interblockchain; dlt</p>
 <h2 id="i_-introduction">I. Introduction</h2>
@@ -2487,7 +2307,7 @@ interface ConnectionEnd {
 <p>[19] Jae Kwon, Ethan Buchman, “Cosmos: A network of distributed ledgers.” https://cosmos.network/cosmos-whitepaper.pdf, Sep-2016.</p>
 <p>[20] Ethan Buchman, Jae Kwon, Zarko Milosevic, “The latest gossip on bft consensus.” https://arxiv.org/pdf/1807.04938, Nov-2019.</p>
 <p>[21] Ethan Frey, “IBC protocol specification v0.3.1.”https://github.com/cosmos/ics/blob/master/archive/v0_3_1_IBC.pdf, Nov-2017.</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmcBkbBncPWbDN4MUBYJGZf3wTwuZPVHhYiepsdSqx5xb4</guid><pubDate>Wed, 23 Jul 2025 00:49:38 +0000</pubDate></item><item><title>关于在rust的程序中如何访问到提交的git commit</title><link>https://Anonymous.github.io/kpgb/posts/how-to-get-commit-in-rust.html</link><description><![CDATA[<h2 id="code-example">Code example</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmcBkbBncPWbDN4MUBYJGZf3wTwuZPVHhYiepsdSqx5xb4</guid><pubDate>Wed, 23 Jul 2025 00:49:38 +0000</pubDate></item><item><title>关于在rust的程序中如何访问到提交的git commit</title><link>https://DaviRain-Su.github.io/kpgb/posts/how-to-get-commit-in-rust.html</link><description><![CDATA[<h2 id="code-example">Code example</h2>
 <div class="code-block-wrapper">
                 <div class="code-header">
                     <span class="code-language">rust</span>
@@ -2569,7 +2389,7 @@ fn output_git_short_hash() {
 <li>这些文件的变化通常意味着 Git 代码库发生了变化，因此需要重新获取 Git 哈希值并重新编译项目。</li>
 </ul>
 <p>需要注意的是，<code>cargo:rerun-if-changed</code> 指令只能在 <code>build.rs</code> 文件中使用，而且必须放在一个单独的行中，不能和其他代码混在一起。这是因为指令实际上是一种注释，不是 Rust 代码，所以不能包含在函数、结构体或其他 Rust 语言结构中。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmTn26MfhM3QpqdHsnnomqYdbmQvpyF2wa2KQU7KwggzY1</guid><pubDate>Wed, 23 Jul 2025 00:49:37 +0000</pubDate></item><item><title>History of Lossless Data Compression Algorithms</title><link>https://Anonymous.github.io/kpgb/posts/hldca.html</link><description><![CDATA[<h2 id="1-introduction">1 Introduction</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmTn26MfhM3QpqdHsnnomqYdbmQvpyF2wa2KQU7KwggzY1</guid><pubDate>Wed, 23 Jul 2025 00:49:37 +0000</pubDate></item><item><title>History of Lossless Data Compression Algorithms</title><link>https://DaviRain-Su.github.io/kpgb/posts/hldca.html</link><description><![CDATA[<h2 id="1-introduction">1 Introduction</h2>
 <p>有两种主要的压缩算法类型：有损和无损。有损压缩算法通常涉及减小文件的大小，通过删除需要大量数据以保持完整保真度的细节。在有损压缩中，由于删除了关键数据，不可能恢复原始文件。有损压缩最常用于存储图像和音频数据，并且虽然可以通过数据删除实现非常高的压缩比，但本文不涵盖此类压缩算法。无损数据压缩是将文件大小减小，以便解压缩功能可以完全恢复原始文件并且不会丢失数据。无损数据压缩在计算机领域中被广泛应用，从在个人电脑上节省空间，到通过网络发送数据，通过安全 shell 进行通信或查看 PNG 或 GIF 图像。</p>
 <p>无损压缩算法的基本原理是，任何非随机文件都包含可以使用统计建模技术进行压缩的重复信息，该技术确定字符或短语出现的概率。然后可以使用这些统计模型来为特定字符或短语生成代码，根据它们出现的概率分配最短的代码给最常见的数据。这些技术包括熵编码、行程编码和使用字典的压缩。使用这些技术和其他技术，一个8位字符或这样的字符串可以用只有几个比特来表示，从而删除大量冗余数据。</p>
 <h2 id="2-history">2 History</h2>
@@ -2774,7 +2594,7 @@ inster /table</p>
 <li>Seward, J., “bzip2 and libbzip2”, bzip2 Manual, March 2000.</li>
 <li>Mahoney, M., “Adaptive Weighting of Context Models for Lossless Data Compression”, Unknown, 2002.</li>
 </ol>
-]]></description><author>DaviRain</author><guid isPermaLink="false">Qma8Nh3zVoSZmeGQS8eurB9GSGBE5HCoBBEGyVFqgNrdVX</guid><pubDate>Wed, 23 Jul 2025 00:49:36 +0000</pubDate></item><item><title>Git Fork and Upstreams ：如何去做一个很酷的技巧</title><link>https://Anonymous.github.io/kpgb/posts/git-frok.html</link><description><![CDATA[<p>Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 – 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的原理。在这篇博客中，我将向你介绍基础知识，疑难杂症，甚至给你留下一个很酷的小技巧，让你走在曲线的前面。</p>
+]]></description><author>DaviRain</author><guid isPermaLink="false">Qma8Nh3zVoSZmeGQS8eurB9GSGBE5HCoBBEGyVFqgNrdVX</guid><pubDate>Wed, 23 Jul 2025 00:49:36 +0000</pubDate></item><item><title>Git Fork and Upstreams ：如何去做一个很酷的技巧</title><link>https://DaviRain-Su.github.io/kpgb/posts/git-frok.html</link><description><![CDATA[<p>Fork 项目来进行自己的修改，可以让你轻松地整合自己的贡献，但是如果你没有将这些修改发回上游 - 也就是发回父亲仓库 – 你就有可能失去对他们的跟踪，这可能会导致你的版本库中出现不同的线路。为了确保所有贡献者都从同有个地方获取信息，你需要了解一些关于 git forking 与 git upstream 如何交互的原理。在这篇博客中，我将向你介绍基础知识，疑难杂症，甚至给你留下一个很酷的小技巧，让你走在曲线的前面。</p>
 <h2 id="git-upstream_-保持最新做出贡献">Git Upstream: 保持最新做出贡献</h2>
 <p>让我先详细介绍一下与上游仓库交互的常见设置和最基本的工作流程。</p>
 <p>在一个标准的设置中，你通常有一个 origin 和一个 upstream remote - 后者是项目的守门人，或者你希望贡献的真实来源。</p>
@@ -3033,7 +2853,7 @@ git rebase upstream/master
 <p>我们使用古老的 Unix tr 将 TAB 转换为分隔符 |.</p>
 <h2 id="getting-started-with-git-upstream">Getting started with git upstream</h2>
 <p>这就是 git upstream 的基本演练，– 如何设置 git upstream, 创建新分支，收集修改，用 git fork 发布，还有一个贴心的提示，这就是你的远程分支领先 / 落后于你多少次提交。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmemS7hUjRit3oQWKU5qv4FWkKnxjremuwdvev4TdRQJuR</guid><pubDate>Wed, 23 Jul 2025 00:49:35 +0000</pubDate></item><item><title>Crypto-currency in bitcoin</title><link>https://Anonymous.github.io/kpgb/posts/crypto-currency-in-bitcoin.html</link><description><![CDATA[<h2 id="哈希">哈希</h2>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmemS7hUjRit3oQWKU5qv4FWkKnxjremuwdvev4TdRQJuR</guid><pubDate>Wed, 23 Jul 2025 00:49:35 +0000</pubDate></item><item><title>Crypto-currency in bitcoin</title><link>https://DaviRain-Su.github.io/kpgb/posts/crypto-currency-in-bitcoin.html</link><description><![CDATA[<h2 id="哈希">哈希</h2>
 <p>大家应该都比较熟悉哈希函数的工作原理，密码学中用到的哈希函数被称为crypto-graphic hash function.</p>
 <p>它有两个重要的性质：一个叫做collision resistance. 这个地方的collision是指哈希碰撞。
 如果有两个输入 x, y且 x ≠ y , hash函数是H(v), 但是H(x) = H(y).这就叫做哈希碰撞。
@@ -3099,7 +2919,7 @@ git rebase upstream/master
 <p>比如说我要转10个比特币给你。然后我这个交易发布到区块链上，别人怎么知道这个交易确定是我发起的呢？会不会是有人冒名顶替。偷偷把我帐上的钱转走呢？这就需要我在发布这个交易的时候要用我自己的私钥对这个交易进行签名，那其他人收到这个交易之后呢，在用我的公钥去验证这个签名的正确行。签名用的是私钥。验证签名用的是这个人的公钥。</p>
 <p>仍然都是同一个人。既然每一个人都是独立的产生账户。本地独立的生成公私钥对。不需要任何人相等，那万一两个人生成的公私钥对相同。怎么办？比如说有人想偷取比特币，一种方法是不停的产生公私钥。然后对比一下我产生的公钥。跟区块链上某个已有的公钥是不是相同。如果是一样的话，就可以用私钥把这个帐上钱给偷走。这种攻击方法从理论上说好像是可以的。但是实际当中是不可行的。比如说你是256位的hash值的话。产生相同的公私钥的可能性是微乎其微的。比如你有一台超级计算机每天产生大量的公私钥对。出现来两个人的公私钥对相同的情况概率也是可以忽略不计的。这个概率比地球爆炸的概率还要小。到目前为止还没有发现那个人用这种方法。能够攻击成功的先例。这里要强调一点，我们这里假设。产生公私钥的时候有一个好的随机源。这叫做a good source of randomness.生成公私钥的过程显然是随机的。如果选取的随机源不好的话，那么前面的分析就不存在了。就会出现两个人的公私钥对生成的是一样的。比特币中用的签名算法不光是，生成公私钥的时候要有好的随机源。之后每一次签名的时候也要有好的随机源。只要有一次签名用的随机源不好的话，就有可能泄露私钥。然后就全完了。这一点大家要一定注意。</p>
 <p>我们讲了两个功能一个是hash，一个签名。 这两个功能是可以结合起来使用的。比特币系统中一般是先对一个消息求一个hash，然后在对这个hash值签名。</p>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmRrEEKddR5rwxj6TvG4DuYeuLA9V15kt3A53qp4NPhpFG</guid><pubDate>Wed, 23 Jul 2025 00:49:34 +0000</pubDate></item><item><title>星荣英语01</title><link>https://Anonymous.github.io/kpgb/posts/learning01.html</link><description><![CDATA[<ul>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmRrEEKddR5rwxj6TvG4DuYeuLA9V15kt3A53qp4NPhpFG</guid><pubDate>Wed, 23 Jul 2025 00:49:34 +0000</pubDate></item><item><title>星荣英语01</title><link>https://DaviRain-Su.github.io/kpgb/posts/learning01.html</link><description><![CDATA[<ul>
 <li>I like the food.</li>
 <li>I don’t like the food.</li>
 <li>I like to do it.</li>
@@ -3140,7 +2960,7 @@ git rebase upstream/master
 <li>i have to eat the food.</li>
 <li>I don’t have to eat the food.</li>
 </ul>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmU243MrDk9VUwMcNSW7QPfPQRDTeJSdj6SYGcW5mEh7kY</guid><pubDate>Wed, 23 Jul 2025 00:49:32 +0000</pubDate></item><item><title>Machine Learning And Algorithmic Trading(Textbook)</title><link>https://Anonymous.github.io/kpgb/posts/machine_learning_and_algo_trading.html</link><description><![CDATA[<h1 id="机器学习和算法交易_教材_">机器学习和算法交易(教材)</h1>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmU243MrDk9VUwMcNSW7QPfPQRDTeJSdj6SYGcW5mEh7kY</guid><pubDate>Wed, 23 Jul 2025 00:49:32 +0000</pubDate></item><item><title>Machine Learning And Algorithmic Trading(Textbook)</title><link>https://DaviRain-Su.github.io/kpgb/posts/machine_learning_and_algo_trading.html</link><description><![CDATA[<h1 id="机器学习和算法交易_教材_">机器学习和算法交易(教材)</h1>
 <p>红色标记的内容是可选的,因为这些内容主要是对之前黑色文本部分的补充和扩展。这取决于你想学习的难度和速度!</p>
 <p>你应该先完成第一本教材,然后再决定是先学习机器学习部分还是衍生品部分,当然你也可以同时学习这两部分。
 这两个领域有一些交叉点,我个人更偏爱前者(机器学习),不过它们实际上是相互独立的,学习其中一个并不需要另一个领域的知识。</p>
@@ -3360,7 +3180,7 @@ that can be applied to quant</li>
 <li>后续推荐的教材优先级逐渐降低</li>
 <li>读者可以根据需求选择性阅读后面的教材</li>
 </ul>
-]]></description><author>DaviRain</author><guid isPermaLink="false">QmRGEMP96GjEp7C1C8PofbXemf4ht9YPRwLXtYS88dXdmi</guid><pubDate>Wed, 23 Jul 2025 00:49:31 +0000</pubDate></item><item><title>NautilusTrader 完整快速入门指南</title><link>https://Anonymous.github.io/kpgb/posts/nautilustrader.html</link><description><![CDATA[<h1 id="nautilustrader-完整快速入门指南">NautilusTrader 完整快速入门指南</h1>
+]]></description><author>DaviRain</author><guid isPermaLink="false">QmRGEMP96GjEp7C1C8PofbXemf4ht9YPRwLXtYS88dXdmi</guid><pubDate>Wed, 23 Jul 2025 00:49:31 +0000</pubDate></item><item><title>NautilusTrader 完整快速入门指南</title><link>https://DaviRain-Su.github.io/kpgb/posts/nautilustrader.html</link><description><![CDATA[<h1 id="nautilustrader-完整快速入门指南">NautilusTrader 完整快速入门指南</h1>
 <p>NautilusTrader 是一个高性能的开源交易平台，本文将提供一个包含数据获取的完整入门指南。</p>
 <h2 id="前置要求">前置要求</h2>
 <ul>
@@ -3782,4 +3602,853 @@ data_client = BinanceLiveDataClientFactory.create(
 <li><a href="https://discord.gg/AUWEAMZk">社区论坛</a></li>
 </ul>
 <p>现在你已经掌握了 NautilusTrader 的完整入门流程，包括最重要的数据获取步骤！</p>
-]]></description><author>Developer</author><guid isPermaLink="false">b08fe97d1bb5febcc841d7a9a7368b8ab464022089ed03893dbba133154ee448</guid><pubDate>Mon, 21 Jul 2025 13:31:00 +0000</pubDate></item></channel></rss>
+]]></description><author>Developer</author><guid isPermaLink="false">b08fe97d1bb5febcc841d7a9a7368b8ab464022089ed03893dbba133154ee448</guid><pubDate>Mon, 21 Jul 2025 13:31:00 +0000</pubDate></item><item><title>How to build an agent</title><link>https://DaviRain-Su.github.io/kpgb/posts/how-to-build-an-agent.html</link><description><![CDATA[<h1 id="如何构建一个代理程序">如何构建一个代理程序</h1>
+<h2 id="或者：皇帝的新衣">或者：皇帝的新衣</h2>
+<p><strong>Thorsten Ball，2025年4月15日</strong></p>
+<p>构建一个功能完整的代码编辑代理程序其实并不难。</p>
+<p>看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。</p>
+<p>但其实没有。它就是一个LLM、一个循环，以及足够的token。这就是我们在<a href="/podcast">播客</a>中从一开始就在说的。其余的，那些让Amp如此令人上瘾和印象深刻的东西？都是苦工。</p>
+<p>但是构建一个小巧而又令人印象深刻的代理程序甚至不需要那些。你可以用不到400行代码完成，其中大部分还是样板代码。</p>
+<p>我现在就要向你展示如何做到这一点。我们将一起编写一些代码，从零行代码开始，到“哇，这是…游戏改变者“。</p>
+<p>我强烈建议你跟着做。不，真的。你可能会觉得只是读一遍就够了，不用真的敲代码，但这不到400行代码。我需要你感受一下代码量有多少，我希望你在自己的终端、自己的文件夹里亲眼看到这一切。</p>
+<p>我们需要的东西：</p>
+<ul>
+<li><a href="https://go.dev/">Go</a></li>
+<li><a href="https://console.anthropic.com/settings/keys">Anthropic API密钥</a>，设置为环境变量<code>ANTHROPIC_API_KEY</code></li>
+</ul>
+<p>准备好铅笔！</p>
+<p>让我们直接开始，用四个简单命令建立一个新的Go项目：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-1" onclick="copyCode('code-1')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-bash" id="code-1">mkdir code-editing-agent
+cd code-editing-agent
+go mod init agent
+touch main.go
+</code></pre>
+            </div>
+<p>现在，让我们打开<code>main.go</code>，作为第一步，放入我们需要的基本框架：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-2" onclick="copyCode('code-2')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-2">package main
+
+import (
+    "bufio"
+    "context"
+    "fmt"
+    "os"
+    "github.com/anthropics/anthropic-sdk-go"
+)
+
+func main() {
+    client := anthropic.NewClient()
+    scanner := bufio.NewScanner(os.Stdin)
+
+    getUserMessage := func() (string, bool) {
+        if !scanner.Scan() {
+            return "", false
+        }
+        return scanner.Text(), true
+    }
+
+    agent := NewAgent(&amp;client, getUserMessage)
+    err := agent.Run(context.TODO())
+    if err != nil {
+        fmt.Printf("Error: %s\n", err.Error())
+    }
+}
+
+func NewAgent(client *anthropic.Client, getUserMessage func() (string, bool)) *Agent {
+    return &amp;Agent{
+        client: client,
+        getUserMessage: getUserMessage,
+    }
+}
+
+type Agent struct {
+    client *anthropic.Client
+    getUserMessage func() (string, bool)
+}
+</code></pre>
+            </div>
+<p>是的，这还不能编译。但我们这里有的是一个<code>Agent</code>，它可以访问<code>anthropic.Client</code>（默认情况下会寻找<code>ANTHROPIC_API_KEY</code>），并且可以通过从终端的stdin读取来获取用户消息。</p>
+<p>现在让我们添加缺失的<code>Run()</code>方法：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-3" onclick="copyCode('code-3')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-3">// main.go
+func (a *Agent) Run(ctx context.Context) error {
+    conversation := []anthropic.MessageParam{}
+    fmt.Println("与Claude聊天（使用'ctrl-c'退出）")
+
+    for {
+        fmt.Print("\u001b[94m你\u001b[0m: ")
+        userInput, ok := a.getUserMessage()
+        if !ok {
+            break
+        }
+
+        userMessage := anthropic.NewUserMessage(anthropic.NewTextBlock(userInput))
+        conversation = append(conversation, userMessage)
+
+        message, err := a.runInference(ctx, conversation)
+        if err != nil {
+            return err
+        }
+
+        conversation = append(conversation, message.ToParam())
+
+        for _, content := range message.Content {
+            switch content.Type {
+            case "text":
+                fmt.Printf("\u001b[93mClaude\u001b[0m: %s\n", content.Text)
+            }
+        }
+    }
+
+    return nil
+}
+
+func (a *Agent) runInference(ctx context.Context, conversation []anthropic.MessageParam) (*anthropic.Message, error) {
+    message, err := a.client.Messages.New(ctx, anthropic.MessageNewParams{
+        Model: anthropic.ModelClaude3_7SonnetLatest,
+        MaxTokens: int64(1024),
+        Messages: conversation,
+    })
+    return message, err
+}
+</code></pre>
+            </div>
+<p>代码不多，对吧？90行，其中最重要的是<code>Run()</code>中的这个循环，让我们可以与Claude对话。但这已经是这个程序的心跳了。</p>
+<p>对于一个心跳来说，它非常直接：我们首先打印一个提示，要求用户输入内容，将其添加到对话中，发送给Claude，将Claude的响应添加到对话中，打印响应，然后循环继续。</p>
+<p>这就是你使用过的每一个AI聊天应用程序，只不过是在终端中。</p>
+<p>让我们运行它：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-4" onclick="copyCode('code-4')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-bash" id="code-4">export ANTHROPIC_API_KEY="这是我最后一次告诉你要设置这个"
+# 下载依赖
+go mod tidy
+# 运行
+go run main.go
+</code></pre>
+            </div>
+<p>然后你就可以和Claude聊天了，像这样：</p>
+<p>注意我们如何在多轮对话中保持同一个对话。它记住了我在第一条消息中的名字。<code>conversation</code>在每一轮中都会变长，我们每次都发送整个对话。服务器——Anthropic的服务器——是无状态的。它只能看到<code>conversation</code>切片中的内容。维护状态是我们的责任。</p>
+<p>好的，让我们继续，因为昵称很糟糕，而且这还不是一个代理程序。什么是代理程序？这是<a href="https://youtu.be/J1-W9O3n7j8?t=72">我的定义</a>：一个可以访问工具的LLM，让它具有修改上下文窗口之外内容的能力。</p>
+<h2 id="第一个工具">第一个工具</h2>
+<p>具有工具访问权限的LLM？什么是工具？基本思想是这样的：你向模型发送一个提示，说如果它想使用“工具“，应该以某种特定方式回复。然后你，作为消息的接收者，通过执行工具来“使用工具“并回复结果。就是这样。我们将看到的其他一切都只是在此基础上的抽象。</p>
+<p>想象你正在和朋友交谈，你告诉他们：“在接下来的对话中，如果你想让我举起手臂，就眨眼睛”。说出来很奇怪，但这是一个容易理解的概念。</p>
+<p>我们已经可以在不改变任何代码的情况下尝试它了。</p>
+<p>我们告诉Claude，当它想了解天气时，用<code>get_weather</code>眨眼。下一步是举起我们的手臂并回复“工具的结果“：</p>
+<p>这在第一次尝试时就运行得很好，不是吗？</p>
+<p>这些模型经过训练和微调来使用“工具“，它们非常渴望这样做。到2025年，它们基本上“知道“自己不是无所不知的，可以使用工具来获取更多信息。（当然这并不是实际发生的情况，但现在这是一个足够好的解释。）</p>
+<p>总结一下，工具和工具使用只有两个要素：</p>
+<ol>
+<li>你告诉模型有哪些工具可用</li>
+<li>当模型想要执行工具时，它告诉你，你执行工具并发送响应</li>
+</ol>
+<p>为了使(1)更容易，大型模型提供商构建了内置API来发送工具定义。</p>
+<p>好的，现在让我们构建我们的第一个工具：<code>read_file</code></p>
+<h2 id="read-file工具"><code>read_file</code>工具</h2>
+<p>为了定义<code>read_file</code>工具，我们将使用Anthropic SDK建议的类型，但请记住：在底层，这都将作为字符串发送给模型。这都是“如果你想让我使用<code>read_file</code>就眨眼“。</p>
+<p>我们要添加的每个工具都需要以下内容：</p>
+<ul>
+<li>一个名称</li>
+<li>一个描述，告诉模型工具的作用、何时使用、何时不使用、返回什么等等</li>
+<li>一个输入模式，作为JSON模式描述，说明这个工具期望什么输入以及以什么形式</li>
+<li>一个实际执行工具的函数，使用模型发送给我们的输入并返回结果</li>
+</ul>
+<p>所以让我们将其添加到我们的代码中：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-5" onclick="copyCode('code-5')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-5">// main.go
+type ToolDefinition struct {
+    Name string `json:"name"`
+    Description string `json:"description"`
+    InputSchema anthropic.ToolInputSchemaParam `json:"input_schema"`
+    Function func(input json.RawMessage) (string, error)
+}
+</code></pre>
+            </div>
+<p>现在我们给我们的<code>Agent</code>工具定义：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-6" onclick="copyCode('code-6')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-6">// main.go
+// `tools`在这里添加：
+type Agent struct {
+    client *anthropic.Client
+    getUserMessage func() (string, bool)
+    tools []ToolDefinition
+}
+
+// 在这里：
+func NewAgent(
+    client *anthropic.Client,
+    getUserMessage func() (string, bool),
+    tools []ToolDefinition,
+) *Agent {
+    return &amp;Agent{
+        client: client,
+        getUserMessage: getUserMessage,
+        tools: tools,
+    }
+}
+
+// 在这里：
+func main() {
+    // [... 之前的代码 ...]
+    tools := []ToolDefinition{}
+    agent := NewAgent(&amp;client, getUserMessage, tools)
+    // [... 之前的代码 ...]
+}
+</code></pre>
+            </div>
+<p>并在<code>runInference</code>中将它们发送给模型：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-7" onclick="copyCode('code-7')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-7">// main.go
+func (a *Agent) runInference(ctx context.Context, conversation []anthropic.MessageParam) (*anthropic.Message, error) {
+    anthropicTools := []anthropic.ToolUnionParam{}
+    for _, tool := range a.tools {
+        anthropicTools = append(anthropicTools, anthropic.ToolUnionParam{
+            OfTool: &amp;anthropic.ToolParam{
+                Name: tool.Name,
+                Description: anthropic.String(tool.Description),
+                InputSchema: tool.InputSchema,
+            },
+        })
+    }
+
+    message, err := a.client.Messages.New(ctx, anthropic.MessageNewParams{
+        Model: anthropic.ModelClaude3_7SonnetLatest,
+        MaxTokens: int64(1024),
+        Messages: conversation,
+        Tools: anthropicTools,
+    })
+    return message, err
+}
+</code></pre>
+            </div>
+<p>这里有一些类型操作，我在Go泛型方面还不够熟练，所以我不会试图向你解释<code>anthropic.String</code>和<code>ToolUnionParam</code>。但是，真的，我发誓，这很简单：</p>
+<p>我们发送我们的工具定义，在服务器上，Anthropic然后将这些定义包装在<a href="https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview#tool-use-system-prompt">这个系统提示</a>中（内容不多），将其添加到我们的<code>conversation</code>中，然后如果模型想使用该工具，就会以特定方式回复。</p>
+<p>好的，工具定义正在发送，但我们还没有定义工具。让我们来做这件事并定义<code>read_file</code>：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-8" onclick="copyCode('code-8')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-8">// main.go
+var ReadFileDefinition = ToolDefinition{
+    Name: "read_file",
+    Description: "读取给定相对文件路径的内容。当你想看到文件内部的内容时使用这个。不要对目录名使用这个。",
+    InputSchema: ReadFileInputSchema,
+    Function: ReadFile,
+}
+
+type ReadFileInput struct {
+    Path string `json:"path" jsonschema_description:"工作目录中文件的相对路径。"`
+}
+
+var ReadFileInputSchema = GenerateSchema[ReadFileInput]()
+
+func ReadFile(input json.RawMessage) (string, error) {
+    readFileInput := ReadFileInput{}
+    err := json.Unmarshal(input, &amp;readFileInput)
+    if err != nil {
+        panic(err)
+    }
+
+    content, err := os.ReadFile(readFileInput.Path)
+    if err != nil {
+        return "", err
+    }
+
+    return string(content), nil
+}
+
+func GenerateSchema[T any]() anthropic.ToolInputSchemaParam {
+    reflector := jsonschema.Reflector{
+        AllowAdditionalProperties: false,
+        DoNotReference: true,
+    }
+    var v T
+    schema := reflector.Reflect(v)
+    return anthropic.ToolInputSchemaParam{
+        Properties: schema.Properties,
+    }
+}
+</code></pre>
+            </div>
+<p>代码不多，对吧？这是一个单一函数<code>ReadFile</code>，以及模型将看到的两个描述：我们的<code>Description</code>描述工具本身（“读取给定相对文件路径的内容…”），以及这个工具唯一输入参数的描述（“工作目录中文件的相对路径…”）。</p>
+<p><code>ReadFileInputSchema</code>和<code>GenerateSchema</code>这些东西？我们需要这些，这样我们就可以为我们发送给模型的工具定义生成JSON模式。为此，我们使用<code>jsonschema</code>包，我们需要导入和下载：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-9" onclick="copyCode('code-9')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-9">// main.go
+package main
+
+import (
+    "bufio"
+    "context"
+    // 添加这个：
+    "encoding/json"
+    "fmt"
+    "os"
+    "github.com/anthropics/anthropic-sdk-go"
+    // 添加这个：
+    "github.com/invopop/jsonschema"
+)
+</code></pre>
+            </div>
+<p>然后运行以下命令：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-10" onclick="copyCode('code-10')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-bash" id="code-10">go mod tidy
+</code></pre>
+            </div>
+<p>然后，在<code>main</code>函数中，我们需要确保使用定义：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-11" onclick="copyCode('code-11')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-11">func main() {
+    // [... 之前的代码 ...]
+    tools := []ToolDefinition{ReadFileDefinition}
+    // [... 之前的代码 ...]
+}
+</code></pre>
+            </div>
+<p>是时候试试了！</p>
+<p>等等，什么？哈哈哈，它想使用工具！显然你的输出会略有不同，但Claude肯定听起来知道它可以读取文件，对吧？</p>
+<p>问题是我们没有监听！当Claude眨眼时，我们忽略了它。我们需要修复这个问题。</p>
+<p>在这里，让我展示如何通过用以下内容替换我们<code>Agent</code>的<code>Run</code>方法来做到这一点：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-12" onclick="copyCode('code-12')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-12">// main.go
+func (a *Agent) Run(ctx context.Context) error {
+    conversation := []anthropic.MessageParam{}
+    fmt.Println("与Claude聊天（使用'ctrl-c'退出）")
+    readUserInput := true
+
+    for {
+        if readUserInput {
+            fmt.Print("\u001b[94m你\u001b[0m: ")
+            userInput, ok := a.getUserMessage()
+            if !ok {
+                break
+            }
+            userMessage := anthropic.NewUserMessage(anthropic.NewTextBlock(userInput))
+            conversation = append(conversation, userMessage)
+        }
+
+        message, err := a.runInference(ctx, conversation)
+        if err != nil {
+            return err
+        }
+
+        conversation = append(conversation, message.ToParam())
+
+        toolResults := []anthropic.ContentBlockParamUnion{}
+        for _, content := range message.Content {
+            switch content.Type {
+            case "text":
+                fmt.Printf("\u001b[93mClaude\u001b[0m: %s\n", content.Text)
+            case "tool_use":
+                result := a.executeTool(content.ID, content.Name, content.Input)
+                toolResults = append(toolResults, result)
+            }
+        }
+
+        if len(toolResults) == 0 {
+            readUserInput = true
+            continue
+        }
+
+        readUserInput = false
+        conversation = append(conversation, anthropic.NewUserMessage(toolResults...))
+    }
+
+    return nil
+}
+
+func (a *Agent) executeTool(id, name string, input json.RawMessage) anthropic.ContentBlockParamUnion {
+    var toolDef ToolDefinition
+    var found bool
+    for _, tool := range a.tools {
+        if tool.Name == name {
+            toolDef = tool
+            found = true
+            break
+        }
+    }
+
+    if !found {
+        return anthropic.NewToolResultBlock(id, "tool not found", true)
+    }
+
+    fmt.Printf("\u001b[92mtool\u001b[0m: %s(%s)\n", name, input)
+    response, err := toolDef.Function(input)
+    if err != nil {
+        return anthropic.NewToolResultBlock(id, err.Error(), true)
+    }
+
+    return anthropic.NewToolResultBlock(id, response, false)
+}
+</code></pre>
+            </div>
+<p>眯着眼看，你会发现90%是样板代码，10%是重要的：当我们从Claude那里得到一个<code>message</code>时，我们通过查找<code>content.Type == "tool_use"</code>来检查Claude是否要求我们执行工具，如果是，我们交给<code>executeTool</code>，在我们的本地注册表中按名称查找工具，解码输入，执行它，返回结果。如果是错误，我们翻转一个布尔值。就是这样。</p>
+<p>（是的，循环中有循环，但这不重要。）</p>
+<p>我们执行工具，将结果发送回Claude，然后再次请求Claude的响应。真的：就是这样。让我展示给你看。</p>
+<p>准备工作，运行这个：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-13" onclick="copyCode('code-13')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-bash" id="code-13">echo 'what animal is the most disagreeable because it always says neigh?' &gt;&gt; secret-file.txt
+</code></pre>
+            </div>
+<p>这在我们的目录中创建了一个<code>secret-file.txt</code>，包含一个神秘的谜语。</p>
+<p>在同一个目录中，让我们运行我们新的使用工具的代理程序，并要求它查看文件：</p>
+<p>让我们深呼吸，一起说出来。准备好了吗？开始：太棒了。你只是给它一个工具，它就…在认为有助于解决任务时使用它。记住：我们没有说任何关于“如果用户询问文件，就读取文件“的话。我们也没有说“如果某些东西看起来像文件名，就想办法读取它“。不，这些都没有。我们说“帮我解决这个文件中的问题“，Claude意识到它可以读取文件来回答，然后就去做了。</p>
+<p>当然，我们可以具体一点，真正推动它使用工具，但它基本上是自己完成的：</p>
+<p>非常准确。好的，现在我们知道如何让Claude使用工具，让我们添加更多工具。</p>
+<h2 id="list-files工具"><code>list_files</code>工具</h2>
+<p>如果你和我一样，当你登录到一台新计算机时，你做的第一件事就是通过运行<code>ls</code>来了解情况——列出文件。</p>
+<p>让我们给Claude同样的能力，一个列出文件的工具。这是<code>list_files</code>工具的完整实现：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-14" onclick="copyCode('code-14')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-14">// main.go
+var ListFilesDefinition = ToolDefinition{
+    Name: "list_files",
+    Description: "列出给定路径下的文件和目录。如果没有提供路径，列出当前目录中的文件。",
+    InputSchema: ListFilesInputSchema,
+    Function: ListFiles,
+}
+
+type ListFilesInput struct {
+    Path string `json:"path,omitempty" jsonschema_description:"可选的相对路径，用于列出文件。如果不提供，默认为当前目录。"`
+}
+
+var ListFilesInputSchema = GenerateSchema[ListFilesInput]()
+
+func ListFiles(input json.RawMessage) (string, error) {
+    listFilesInput := ListFilesInput{}
+    err := json.Unmarshal(input, &amp;listFilesInput)
+    if err != nil {
+        panic(err)
+    }
+
+    dir := "."
+    if listFilesInput.Path != "" {
+        dir = listFilesInput.Path
+    }
+
+    var files []string
+    err = filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+        if err != nil {
+            return err
+        }
+        relPath, err := filepath.Rel(dir, path)
+        if err != nil {
+            return err
+        }
+        if relPath != "." {
+            if info.IsDir() {
+                files = append(files, relPath+"/")
+            } else {
+                files = append(files, relPath)
+            }
+        }
+        return nil
+    })
+
+    if err != nil {
+        return "", err
+    }
+
+    result, err := json.Marshal(files)
+    if err != nil {
+        return "", err
+    }
+
+    return string(result), nil
+}
+</code></pre>
+            </div>
+<p>这里没有什么花哨的：<code>list_files</code>返回当前文件夹中的文件和目录列表。如果这是一个严肃的努力，我们可以（并且可能应该）做一千种优化，但由于我只是想向你展示巫师帽里有什么，这就够了。</p>
+<p>需要注意的一点：我们返回字符串列表，并用尾随斜杠表示目录。这不是必需的，这只是我刚刚决定要做的事情。没有固定格式。只要Claude能理解就行，至于它能否理解，你需要通过实验来确定。你也可以在每个目录前面加上“directory: “或返回一个带有两个标题的Markdown文档：“directories“和“files”。有很多选择，你选择哪一个取决于Claude最能理解什么、需要多少token、生成和读取的速度如何等等。</p>
+<p>在这里，我们只想创建一个小的<code>list_files</code>工具，最简单的选择获胜。</p>
+<p>当然，我们也需要告诉Claude关于<code>list_files</code>：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-15" onclick="copyCode('code-15')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-15">// main.go
+func main() {
+    // [... 之前的代码 ...]
+    tools := []ToolDefinition{ReadFileDefinition, ListFilesDefinition}
+    // [... 之前的代码 ...]
+}
+</code></pre>
+            </div>
+<p>就是这样。让我们问Claude它能在这个目录中看到什么。</p>
+<p>工作了！它可以读取目录。</p>
+<p>但这里有一个重点：Claude知道如何组合这些工具。我们只需要以一种激发它的方式提示它：</p>
+<p>首先它使用了<code>list_files</code>，然后它用我询问的Go相关文件两次调用了<code>read_file</code>。</p>
+<p>就…就像我们会做的一样，对吧？我的意思是，在这里，如果我问你我们在这个项目中使用什么版本的Go，你会怎么做？这是Claude为我做的：</p>
+<p>Claude查看目录，查看<code>go.mod</code>，然后给出答案。</p>
+<p>我们现在大约有190行代码。让这个数字深入人心。一旦你感受到了，让我们添加另一个工具。</p>
+<h2 id="让它edit-file">让它<code>edit_file</code></h2>
+<p>我们要添加的最后一个工具是<code>edit_file</code>——一个让Claude编辑文件的工具。</p>
+<p>“天哪”，你现在在想，“这就是橡胶遇到路面的地方，这就是他从帽子里拉出兔子的地方。“好吧，让我们看看，好吗？</p>
+<p>首先，让我们为我们新的<code>edit_file</code>工具添加一个定义：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-16" onclick="copyCode('code-16')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-16">// main.go
+var EditFileDefinition = ToolDefinition{
+    Name: "edit_file",
+    Description: `对文本文件进行编辑。
+
+在给定文件中将'old_str'替换为'new_str'。'old_str'和'new_str'必须彼此不同。
+如果用path指定的文件不存在，将创建它。
+`,
+    InputSchema: EditFileInputSchema,
+    Function: EditFile,
+}
+
+type EditFileInput struct {
+    Path string `json:"path" jsonschema_description:"文件的路径"`
+    OldStr string `json:"old_str" jsonschema_description:"要搜索的文本 - 必须完全匹配且只有一个完全匹配"`
+    NewStr string `json:"new_str" jsonschema_description:"用来替换old_str的文本"`
+}
+
+var EditFileInputSchema = GenerateSchema[EditFileInput]()
+</code></pre>
+            </div>
+<p>没错，我又知道你在想什么：“字符串替换来编辑文件？“Claude 3.7喜欢替换字符串（通过实验你会发现它们喜欢或不喜欢什么），所以我们将通过告诉Claude它可以通过用新文本替换现有文本来编辑文件来实现<code>edit_file</code>。</p>
+<p>现在这是Go中<code>EditFile</code>函数的实现：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-17" onclick="copyCode('code-17')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-17">func EditFile(input json.RawMessage) (string, error) {
+    editFileInput := EditFileInput{}
+    err := json.Unmarshal(input, &amp;editFileInput)
+    if err != nil {
+        return "", err
+    }
+
+    if editFileInput.Path == "" || editFileInput.OldStr == editFileInput.NewStr {
+        return "", fmt.Errorf("invalid input parameters")
+    }
+
+    content, err := os.ReadFile(editFileInput.Path)
+    if err != nil {
+        if os.IsNotExist(err) &amp;&amp; editFileInput.OldStr == "" {
+            return createNewFile(editFileInput.Path, editFileInput.NewStr)
+        }
+        return "", err
+    }
+
+    oldContent := string(content)
+    newContent := strings.Replace(oldContent, editFileInput.OldStr, editFileInput.NewStr, -1)
+
+    if oldContent == newContent &amp;&amp; editFileInput.OldStr != "" {
+        return "", fmt.Errorf("old_str not found in file")
+    }
+
+    err = os.WriteFile(editFileInput.Path, []byte(newContent), 0644)
+    if err != nil {
+        return "", err
+    }
+
+    return "OK", nil
+}
+</code></pre>
+            </div>
+<p>它检查输入参数，读取文件（或者如果存在就创建它），用<code>NewStr</code>替换<code>OldStr</code>。然后它将内容写回磁盘并返回“OK“。</p>
+<p>仍然缺少的是<code>createNewFile</code>，这只是一个小的辅助函数，如果这不是Go的话会短70%：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-18" onclick="copyCode('code-18')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-18">func createNewFile(filePath, content string) (string, error) {
+    dir := path.Dir(filePath)
+    if dir != "." {
+        err := os.MkdirAll(dir, 0755)
+        if err != nil {
+            return "", fmt.Errorf("failed to create directory: %w", err)
+        }
+    }
+
+    err := os.WriteFile(filePath, []byte(content), 0644)
+    if err != nil {
+        return "", fmt.Errorf("failed to create file: %w", err)
+    }
+
+    return fmt.Sprintf("Successfully created file %s", filePath), nil
+}
+</code></pre>
+            </div>
+<p>最后一步：将其添加到我们发送给Claude的工具列表中。</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">go</span>
+                    <button class="copy-button" data-code-id="code-19" onclick="copyCode('code-19')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-go" id="code-19">// main.go
+func main() {
+    // [... 之前的代码 ...]
+    tools := []ToolDefinition{ReadFileDefinition, ListFilesDefinition, EditFileDefinition}
+    // [... 之前的代码 ...]
+}
+</code></pre>
+            </div>
+<p>然后…我们准备好了，但你准备好了吗？你准备好释放它了吗？</p>
+<p>我想是的，让我们这样做。让我们告诉Claude用JavaScript创建一个新的FizzBuzz函数。</p>
+<p>对吧？！这很令人印象深刻，不是吗？这是你可能想出的<code>edit_file</code>——通常是代理程序——最基本的实现。</p>
+<p>但是，它有效吗？是的，它有效：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-20" onclick="copyCode('code-20')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-bash" id="code-20">$ node fizzbuzz.js
+Running FizzBuzz:
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+16
+[...]
+</code></pre>
+            </div>
+<p>太棒了。但是嘿，让它实际编辑一个文件而不只是创建一个。</p>
+<p>当我要求“请编辑fizzbuzz.js，使其只打印到15“时，Claude的做法如下：</p>
+<p>它读取文件，编辑文件以更改运行时长，然后还编辑文件以更新顶部的注释。</p>
+<p>它仍然有效：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-21" onclick="copyCode('code-21')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-bash" id="code-21">$ node fizzbuzz.js
+Running FizzBuzz:
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+</code></pre>
+            </div>
+<p>好的，让我们再做一个，让它做以下事情：</p>
+<p>创建一个congrats.js脚本，rot13解码以下字符串’Pbatenghyngvbaf ba ohvyqvat n pbqr-rqvgvat ntrag!’并打印它</p>
+<p>也许是一个很高的要求。让我们看看：</p>
+<p>它有效吗？让我们试试：</p>
+<div class="code-block-wrapper">
+                <div class="code-header">
+                    <span class="code-language">bash</span>
+                    <button class="copy-button" data-code-id="code-22" onclick="copyCode('code-22')">
+                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                    </button>
+                </div>
+                <pre class="line-numbers"><code class="language-bash" id="code-22">$ node congrats.js
+Congratulations on building a code-editing agent!
+</code></pre>
+            </div>
+<p>它有效！</p>
+<p>这不是很神奇吗？</p>
+<p>如果你和我在过去几个月中交谈过的所有工程师一样，在阅读这篇文章时，你很可能一直在等待兔子从帽子里被拉出来，等待我说“好吧，实际上这比这难得多得多。“但它不是。</p>
+<p>这本质上就是代码编辑代理程序内部循环的全部内容。当然，将其集成到你的编辑器中，调整系统提示，在适当的时间给它适当的反馈，围绕它的漂亮UI，围绕工具的更好工具，对多个代理程序的支持等等——我们在Amp中构建了所有这些，但它不需要天才的时刻。所需要的只是实用的工程和苦工。</p>
+<p>这些模型现在非常强大。300行代码和三个工具，现在你可以与编辑你代码的外星智能对话。如果你认为“好吧，但我们没有真正…“——去试试吧！去看看你能用这个走多远。我打赌比你想象的要远得多。</p>
+<p>这就是为什么我们认为一切都在改变。</p>
+]]></description><author>DaviRain-Su</author><guid isPermaLink="false">QmZx8psFhFU9imDvGaMJTfMiiDoWohBEdVYwSvNhQqDHDW</guid><pubDate>Mon, 21 Jul 2025 10:16:15 +0000</pubDate></item></channel></rss>

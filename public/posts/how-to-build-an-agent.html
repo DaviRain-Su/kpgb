@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>How to build an agent - Anonymous IPFS Blog</title>  <meta name="title" content="How to build an agent - Anonymous IPFS Blog"> <meta name="description" content="Thorsten Ball，2025年4月15日 构建一个功能完整的代码编辑代理程序其实并不难。 看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。 但其实没有。它就是一个LLM、一个循环，以及足够的token。这就是我们在 播客 中从一开始就在说的。其余…"> <meta name="keywords" content="agent, go, IPFS, blog, decentralized, Anonymous"> <meta name="author" content="DaviRain-Su"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-build-an-agent.html"> <meta property="og:title" content="How to build an agent - Anonymous IPFS Blog"> <meta property="og:description" content="Thorsten Ball，2025年4月15日 构建一个功能完整的代码编辑代理程序其实并不难。 看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。 但其实没有。它就是一个LLM、一个循环，以及足够的token。这就是我们在 播客 中从一开始就在说的。其余…"> <meta property="og:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="Anonymous IPFS Blog"> <meta property="article:published_time" content="2025-07-21T10:16:15+0000"> <meta property="article:modified_time" content="2025-07-21T10:16:35+0000"> <meta property="article:author" content="DaviRain-Su"> <meta property="article:tag" content="agent"> <meta property="article:tag" content="go">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-build-an-agent.html"> <meta property="twitter:title" content="How to build an agent - Anonymous IPFS Blog"> <meta property="twitter:description" content="Thorsten Ball，2025年4月15日 构建一个功能完整的代码编辑代理程序其实并不难。 看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。 但其实没有。它就是一个LLM、一个循环，以及足够的token。这就是我们在 播客 中从一开始就在说的。其余…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-build-an-agent.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="Anonymous IPFS Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
+<!DOCTYPE html> <html lang="zh-CN"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>How to build an agent - DaviRain&#x27;s Blog</title>  <meta name="title" content="How to build an agent - DaviRain&#x27;s Blog"> <meta name="description" content="Thorsten Ball，2025年4月15日 构建一个功能完整的代码编辑代理程序其实并不难。 看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。 但其实没有。它就是一个LLM、一个循环，以及足够的token。这就是我们在 播客 中从一开始就在说的。其余…"> <meta name="keywords" content="agent, go, IPFS, blog, decentralized, DaviRain-Su"> <meta name="author" content="DaviRain-Su"> <meta name="robots" content="index, follow"> <meta name="language" content="Chinese">  <meta property="og:type" content="article"> <meta property="og:url" content="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/posts/how-to-build-an-agent.html"> <meta property="og:title" content="How to build an agent - DaviRain&#x27;s Blog"> <meta property="og:description" content="Thorsten Ball，2025年4月15日 构建一个功能完整的代码编辑代理程序其实并不难。 看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。 但其实没有。它就是一个LLM、一个循环，以及足够的token。这就是我们在 播客 中从一开始就在说的。其余…"> <meta property="og:image" content="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/images/og-default.svg"> <meta property="og:site_name" content="DaviRain&#x27;s Blog"> <meta property="article:published_time" content="2025-07-21T10:16:15+0000"> <meta property="article:modified_time" content="2025-07-21T10:16:35+0000"> <meta property="article:author" content="DaviRain-Su"> <meta property="article:tag" content="agent"> <meta property="article:tag" content="go">  <meta property="twitter:card" content="summary_large_image"> <meta property="twitter:url" content="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/posts/how-to-build-an-agent.html"> <meta property="twitter:title" content="How to build an agent - DaviRain&#x27;s Blog"> <meta property="twitter:description" content="Thorsten Ball，2025年4月15日 构建一个功能完整的代码编辑代理程序其实并不难。 看起来应该很难。当你看到一个代理程序在编辑文件、运行命令、从错误中脱身、尝试不同策略时——似乎背后一定有什么秘密。 但其实没有。它就是一个LLM、一个循环，以及足够的token。这就是我们在 播客 中从一开始就在说的。其余…"> <meta property="twitter:image" content="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/images/twitter-card.svg">  <link rel="canonical" href="https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/posts/how-to-build-an-agent.html">  <link rel="icon" type="image/svg+xml" href="&#x2F;kpgb/favicon.svg"> <link rel="alternate icon" href="&#x2F;kpgb/favicon.ico"> <link rel="manifest" href="&#x2F;kpgb/site.webmanifest">  <link rel="stylesheet" href="&#x2F;kpgb/css/style.css">  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" /> <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />  <link rel="alternate" type="application/rss+xml" title="DaviRain&#x27;s Blog RSS Feed" href="&#x2F;kpgb/feed.xml">  <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -12,15 +12,15 @@
         "dateModified": "2025-07-21T10:16:35+0000",
         "publisher": {
             "@type": "Organization",
-            "name": "Anonymous IPFS Blog",
+            "name": "DaviRain&#x27;s Blog",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/images/logo.svg"
+                "url": "https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/images/logo.svg"
             }
         },
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:&#x2F;&#x2F;Anonymous.github.io&#x2F;kpgb/posts/how-to-build-an-agent.html"
+            "@id": "https:&#x2F;&#x2F;DaviRain-Su.github.io&#x2F;kpgb/posts/how-to-build-an-agent.html"
         },
         "wordCount": "1276",
         "keywords": "agent, go",
@@ -36,7 +36,7 @@
     <header>
         <nav>
             <div class="container">
-                <h1><a href="&#x2F;kpgb/">Anonymous IPFS Blog</a></h1>
+                <h1><a href="&#x2F;kpgb/">DaviRain&#x27;s Blog</a></h1>
                 <ul>
                     <li><a href="&#x2F;kpgb/">Home</a></li>
                     <li><a href="&#x2F;kpgb/archive">Archive</a></li>
@@ -1036,78 +1036,6 @@ Congratulations on building a code-editing agent!
         <div class="related-posts-grid">
             
             <article class="related-post-card">
-                <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;post-1753265043.html">脚注悬浮显示功能演示</a></h3>
-                <div class="post-meta">
-                    <span class="date">2025-07-23</span>
-                    
-                    <span class="reading-time">3 min read</span>
-                    
-                </div>
-                
-                    <p class="excerpt">展示KPGB博客系统的脚注悬浮显示功能</p>
-                
-                
-                <div class="tags-mini">
-                    
-                    <span class="tag-mini">功能演示</span>
-                    
-                    <span class="tag-mini">footnotes</span>
-                    
-                    <span class="tag-mini">脚注</span>
-                    
-                </div>
-                
-            </article>
-            
-            <article class="related-post-card">
-                <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;post-1753263832.html">测试图片灯箱效果</a></h3>
-                <div class="post-meta">
-                    <span class="date">2025-07-23</span>
-                    
-                    <span class="reading-time">2 min read</span>
-                    
-                </div>
-                
-                    <p class="excerpt">展示KPGB博客系统的图片灯箱效果</p>
-                
-                
-                <div class="tags-mini">
-                    
-                    <span class="tag-mini">图片</span>
-                    
-                    <span class="tag-mini">lightbox</span>
-                    
-                    <span class="tag-mini">功能演示</span>
-                    
-                </div>
-                
-            </article>
-            
-            <article class="related-post-card">
-                <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;ipfs.html">IPFS图片自动上传测试</a></h3>
-                <div class="post-meta">
-                    <span class="date">2025-07-23</span>
-                    
-                    <span class="reading-time">2 min read</span>
-                    
-                </div>
-                
-                    <p class="excerpt">这是一个测试IPFS图片自动上传功能的文章。 当你在文章中使用本地图片时，KPGB会自动： 检测文章中的本地图片路径 将图片上传到IPFS 将本地路径替换为IPFS链接 保持图片的alt文本不变 下面是一个测试图片（需要你在相同目录下放置一个 test.png 文件）： 测试图片 也支持相对路径： …</p>
-                
-                
-                <div class="tags-mini">
-                    
-                    <span class="tag-mini">测试</span>
-                    
-                    <span class="tag-mini">IPFS</span>
-                    
-                    <span class="tag-mini">图片</span>
-                    
-                </div>
-                
-            </article>
-            
-            <article class="related-post-card">
                 <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;chanzhe.html">禅者的初心📒</a></h3>
                 <div class="post-meta">
                     <span class="date">2025-07-23</span>
@@ -1131,6 +1059,48 @@ Congratulations on building a code-editing agent!
                 </div>
                 
                     <p class="excerpt">大多数人最后跑不赢比特币这句话我都不知道讲了多少次了(实际上最后很多人还亏钱)。 如果你指望我通过推荐你买小山寨跑赢比特币，那还是别关注我了，我没有办法给出我认为合理的建议。 现在说也许还早，但是大家可以记住这一条，年底筛选投资标的的时候， 2019-2021这轮牛市表现一般的老币，全部不作为目标，…</p>
+                
+                
+            </article>
+            
+            <article class="related-post-card">
+                <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;rust-raw-pointer.html">About Rust Raw Pointer</a></h3>
+                <div class="post-meta">
+                    <span class="date">2025-07-23</span>
+                    
+                    <span class="reading-time">2 min read</span>
+                    
+                </div>
+                
+                    <p class="excerpt">在Rust中可以使用原生指针，原生指针是一种裸指针，不受Rust的安全性检查限制。 原生指针有两种类型： 和 ，分别是不可变和可变的原生指针。 Rust提供了一个函数可以获取类型的大小： 。 这里提供了一个简单的例子，展示了如何使用原生指针。 原生指针是一种裸指针，不受Rust的安全性检查限制，可以…</p>
+                
+                
+            </article>
+            
+            <article class="related-post-card">
+                <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;learn-ocaml-sources.html">学习Ocaml的资源</a></h3>
+                <div class="post-meta">
+                    <span class="date">2025-07-23</span>
+                    
+                    <span class="reading-time">1 min read</span>
+                    
+                </div>
+                
+                    <p class="excerpt">Introduction to Objective Ocaml Objective Caml 简介。 OCaml from the Very Beginning 一本非常温和的教科书，推荐用于本课程。本书的 PDF 和 HTML 格式都是免费的。 A guided tour [ of OCaml ]…</p>
+                
+                
+            </article>
+            
+            <article class="related-post-card">
+                <h3><a href="&#x2F;kpgb&#x2F;posts&#x2F;rust-tips.html">About Rust tips</a></h3>
+                <div class="post-meta">
+                    <span class="date">2025-07-23</span>
+                    
+                    <span class="reading-time">7 min read</span>
+                    
+                </div>
+                
+                    <p class="excerpt">在 Rust 中，如果你想为你的 中的类型编写带有可选的 的测试，你可以使用 属性和 属性来做到这一点。 以下是一个例子： 在这个例子中， 只有在 被启用时才会被定义，同样， 测试也只有在 被启用时才会被运行。 要运行这个测试，你需要使用以下命令，其中 是你的 的名字： 这个命令会启用 特性并运行所…</p>
                 
                 
             </article>
@@ -1833,8 +1803,8 @@ Congratulations on building a code-editing agent!
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Anonymous. Powered by IPFS & KPGB.</p>
-            <p>A decentralized blog powered by IPFS</p>
+            <p>&copy; 2025 DaviRain-Su. Powered by IPFS & KPGB.</p>
+            <p>探索技术、分享思考 - A decentralized blog powered by IPFS</p>
         </div>
     </footer>
     
