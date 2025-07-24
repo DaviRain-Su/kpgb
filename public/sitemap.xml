@@ -147,63 +147,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://Anonymous.github.io/kpgb/posts/auto-excerpt-test.html</loc>
-    <lastmod>2025-07-21T08:45:39Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://Anonymous.github.io/kpgb/posts/pagination-test-post-3.html</loc>
-    <lastmod>2025-07-21T07:49:21Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://Anonymous.github.io/kpgb/posts/pagination-test-post-2.html</loc>
-    <lastmod>2025-07-21T07:49:20Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://Anonymous.github.io/kpgb/posts/pagination-test-post-1.html</loc>
-    <lastmod>2025-07-21T07:49:19Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://Anonymous.github.io/kpgb/posts/tag-system-demo-post.html</loc>
-    <lastmod>2025-07-21T07:05:42Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://Anonymous.github.io/kpgb/posts/post-1753324255.html</loc>
-    <lastmod>2025-07-21T00:14:37Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://Anonymous.github.io/kpgb/posts/real-ipfs-storage-test.html</loc>
-    <lastmod>2025-07-20T23:54:45Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://Anonymous.github.io/kpgb/tags/test/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://Anonymous.github.io/kpgb/tags/pagination/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://Anonymous.github.io/kpgb/tags/features/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://Anonymous.github.io/kpgb/tags/nautilus-trader/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -234,11 +177,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://Anonymous.github.io/kpgb/tags/blog/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://Anonymous.github.io/kpgb/tags/footnotes/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -249,22 +187,12 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://Anonymous.github.io/kpgb/tags/ipfs/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://Anonymous.github.io/kpgb/tags/lightbox/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://Anonymous.github.io/kpgb/tags/python/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://Anonymous.github.io/kpgb/tags/rust/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -295,6 +223,46 @@
   </url>
   <url>
     <loc>https://Anonymous.github.io/kpgb/tags/脚注/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://Anonymous.github.io/kpgb/tags/blog/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://Anonymous.github.io/kpgb/tags/features/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://Anonymous.github.io/kpgb/tags/ipfs/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://Anonymous.github.io/kpgb/tags/pagination/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://Anonymous.github.io/kpgb/tags/rust/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://Anonymous.github.io/kpgb/tags/test/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://Anonymous.github.io/kpgb/tags/导航/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://Anonymous.github.io/kpgb/tags/阅读体验/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
