@@ -3,7 +3,9 @@ use async_trait::async_trait;
 use std::collections::HashMap;
 
 use super::{Storage, StorageMetadata, StorageResult};
-use crate::constants::{DEFAULT_IPFS_API_URL, ERROR_IPFS_IMMUTABLE, METADATA_CONTENT_TYPE, CONTENT_TYPE_OCTET_STREAM};
+use crate::constants::{
+    CONTENT_TYPE_OCTET_STREAM, DEFAULT_IPFS_API_URL, ERROR_IPFS_IMMUTABLE, METADATA_CONTENT_TYPE,
+};
 use sha2::{Digest, Sha256};
 
 pub struct IpfsStorage {
@@ -13,10 +15,8 @@ pub struct IpfsStorage {
 
 impl IpfsStorage {
     pub fn new(api_url: &str) -> Result<Self> {
-        let client = reqwest::Client::builder()
-            .no_proxy()
-            .build()?;
-        
+        let client = reqwest::Client::builder().no_proxy().build()?;
+
         Ok(Self {
             api_url: api_url.to_string(),
             client,
@@ -30,11 +30,11 @@ impl IpfsStorage {
     }
 
     async fn ipfs_add(&self, content: Vec<u8>) -> Result<String> {
-
         let form =
             reqwest::multipart::Form::new().part("file", reqwest::multipart::Part::bytes(content));
 
-        let response = self.client
+        let response = self
+            .client
             .post(format!("{}/api/v0/add", self.api_url))
             .multipart(form)
             .send()
@@ -53,8 +53,8 @@ impl IpfsStorage {
     }
 
     async fn ipfs_cat(&self, cid: &str) -> Result<Vec<u8>> {
-
-        let response = self.client
+        let response = self
+            .client
             .post(format!("{}/api/v0/cat?arg={}", self.api_url, cid))
             .send()
             .await?;
@@ -67,8 +67,8 @@ impl IpfsStorage {
     }
 
     async fn ipfs_pin(&self, cid: &str) -> Result<()> {
-
-        let response = self.client
+        let response = self
+            .client
             .post(format!("{}/api/v0/pin/add?arg={}", self.api_url, cid))
             .send()
             .await?;
@@ -120,7 +120,8 @@ impl Storage for IpfsStorage {
     }
 
     async fn exists(&self, id: &str) -> Result<bool> {
-        let response = self.client
+        let response = self
+            .client
             .post(format!("{}/api/v0/object/stat?arg={}", self.api_url, id))
             .send()
             .await?;
@@ -134,7 +135,8 @@ impl Storage for IpfsStorage {
 
     async fn list(&self, _prefix: Option<&str>) -> Result<Vec<StorageMetadata>> {
         // List pinned content
-        let response = self.client
+        let response = self
+            .client
             .post(format!("{}/api/v0/pin/ls", self.api_url))
             .send()
             .await?;

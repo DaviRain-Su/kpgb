@@ -7,8 +7,8 @@ use serde::Deserialize;
 use std::sync::Arc;
 use tera::Context;
 
-use crate::web::AppState;
 use crate::web::handlers_helpers::{markdown_to_html, render_template};
+use crate::web::AppState;
 
 #[derive(Deserialize)]
 pub struct SearchQuery {
@@ -419,7 +419,6 @@ pub async fn docs(State(state): State<Arc<AppState>>) -> Result<Html<String>, St
     let rendered = render_template("docs.html", &context)?;
     Ok(Html(rendered))
 }
-
 
 use chrono::Datelike;
 use rss::{ChannelBuilder, ItemBuilder};

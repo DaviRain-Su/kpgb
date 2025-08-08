@@ -1,5 +1,5 @@
+use crate::web::api_helpers::{handle_result, posts_to_summaries};
 use crate::web::AppState;
-use crate::web::api_helpers::{posts_to_summaries, handle_result};
 use axum::{
     extract::{Path, Query, State},
     http::StatusCode,
@@ -26,7 +26,10 @@ pub async fn list_tags(
 ) -> Result<Json<ApiResponse<Vec<TagInfo>>>, StatusCode> {
     let result = state.blog_manager.get_all_tags().await.map(|tags| {
         tags.into_iter()
-            .map(|(name, count)| TagInfo { name, post_count: count })
+            .map(|(name, count)| TagInfo {
+                name,
+                post_count: count,
+            })
             .collect()
     });
     Ok(handle_result(result))
@@ -36,7 +39,10 @@ pub async fn get_posts_by_tag(
     State(state): State<Arc<AppState>>,
     Path(tag): Path<String>,
 ) -> Result<Json<ApiResponse<Vec<PostSummary>>>, StatusCode> {
-    let result = state.blog_manager.get_posts_by_tag(&tag, true).await
+    let result = state
+        .blog_manager
+        .get_posts_by_tag(&tag, true)
+        .await
         .map(posts_to_summaries);
     Ok(handle_result(result))
 }
@@ -49,7 +55,8 @@ pub async fn list_posts_with_tag_filter(
         state.blog_manager.get_posts_by_tag(&tag, true).await
     } else {
         state.blog_manager.list_posts(true).await
-    }.map(posts_to_summaries);
-    
+    }
+    .map(posts_to_summaries);
+
     Ok(handle_result(result))
 }

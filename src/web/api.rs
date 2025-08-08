@@ -1,5 +1,5 @@
+use crate::web::api_helpers::{handle_result, posts_to_summaries};
 use crate::web::AppState;
-use crate::web::api_helpers::{posts_to_summaries, handle_result};
 use axum::{
     extract::{Path, State},
     http::StatusCode,
@@ -35,7 +35,10 @@ pub struct SearchRequest {
 pub async fn list_posts(
     State(state): State<Arc<AppState>>,
 ) -> Result<Json<ApiResponse<Vec<PostSummary>>>, StatusCode> {
-    let result = state.blog_manager.list_posts(true).await
+    let result = state
+        .blog_manager
+        .list_posts(true)
+        .await
         .map(posts_to_summaries);
     Ok(handle_result(result))
 }
@@ -56,7 +59,10 @@ pub async fn search_posts(
     State(state): State<Arc<AppState>>,
     Json(req): Json<SearchRequest>,
 ) -> Result<Json<ApiResponse<Vec<PostSummary>>>, StatusCode> {
-    let result = state.blog_manager.search_posts(&req.query).await
+    let result = state
+        .blog_manager
+        .search_posts(&req.query)
+        .await
         .map(posts_to_summaries);
     Ok(handle_result(result))
 }

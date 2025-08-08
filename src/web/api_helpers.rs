@@ -38,9 +38,7 @@ pub fn error_response<T>(error: impl ToString) -> Json<ApiResponse<T>> {
     })
 }
 
-pub fn handle_result<T, E: ToString>(
-    result: Result<T, E>,
-) -> Json<ApiResponse<T>> {
+pub fn handle_result<T, E: ToString>(result: Result<T, E>) -> Json<ApiResponse<T>> {
     match result {
         Ok(data) => success_response(data),
         Err(e) => error_response(e),

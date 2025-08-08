@@ -33,7 +33,7 @@ impl Database {
         .bind(post_id)
         .fetch_all(&self.pool)
         .await?;
-        
+
         Ok(tags)
     }
 
