@@ -21,6 +21,22 @@ impl Database {
         Ok(Self { pool })
     }
 
+    async fn load_tags_for_post(&self, post_id: &str) -> Result<Vec<String>> {
+        let tags: Vec<String> = sqlx::query_scalar(
+            r#"
+            SELECT t.name
+            FROM tags t
+            JOIN post_tags pt ON t.id = pt.tag_id
+            WHERE pt.post_id = ?1
+            "#,
+        )
+        .bind(post_id)
+        .fetch_all(&self.pool)
+        .await?;
+        
+        Ok(tags)
+    }
+
     pub async fn insert_post(&self, post: &BlogPost, storage_id: &str) -> Result<()> {
         let mut tx = self.pool.begin().await?;
 
@@ -104,19 +120,7 @@ impl Database {
             };
 
             // Load tags
-            let tags: Vec<String> = sqlx::query_scalar(
-                r#"
-                SELECT t.name
-                FROM tags t
-                JOIN post_tags pt ON t.id = pt.tag_id
-                WHERE pt.post_id = ?1
-                "#,
-            )
-            .bind(&post.id)
-            .fetch_all(&self.pool)
-            .await?;
-
-            post.tags = tags;
+            post.tags = self.load_tags_for_post(&post.id).await?;
             Ok(Some(post))
         } else {
             Ok(None)
@@ -258,19 +262,7 @@ impl Database {
             let storage_id = post.storage_id.clone().unwrap_or_default();
 
             // Load tags
-            let tags: Vec<String> = sqlx::query_scalar(
-                r#"
-                SELECT t.name
-                FROM tags t
-                JOIN post_tags pt ON t.id = pt.tag_id
-                WHERE pt.post_id = ?1
-                "#,
-            )
-            .bind(&post.id)
-            .fetch_all(&self.pool)
-            .await?;
-
-            post.tags = tags;
+            post.tags = self.load_tags_for_post(&post.id).await?;
             results.push((storage_id, post));
         }
 
@@ -314,19 +306,7 @@ impl Database {
             let storage_id = post.storage_id.clone().unwrap_or_default();
 
             // Load tags
-            let tags: Vec<String> = sqlx::query_scalar(
-                r#"
-                SELECT t.name
-                FROM tags t
-                JOIN post_tags pt ON t.id = pt.tag_id
-                WHERE pt.post_id = ?1
-                "#,
-            )
-            .bind(&post.id)
-            .fetch_all(&self.pool)
-            .await?;
-
-            post.tags = tags;
+            post.tags = self.load_tags_for_post(&post.id).await?;
             results.push((storage_id, post));
         }
 
@@ -568,19 +548,7 @@ impl Database {
                 let storage_id = post.storage_id.clone().unwrap_or_default();
 
                 // Load tags
-                let tags: Vec<String> = sqlx::query_scalar(
-                    r#"
-                    SELECT t.name
-                    FROM tags t
-                    JOIN post_tags pt ON t.id = pt.tag_id
-                    WHERE pt.post_id = ?1
-                    "#,
-                )
-                .bind(&post.id)
-                .fetch_all(&self.pool)
-                .await?;
-
-                post.tags = tags;
+                post.tags = self.load_tags_for_post(&post.id).await?;
                 results.push((storage_id, post));
             }
         }

@@ -3,32 +3,38 @@ use async_trait::async_trait;
 use std::collections::HashMap;
 
 use super::{Storage, StorageMetadata, StorageResult};
+use crate::constants::{DEFAULT_IPFS_API_URL, ERROR_IPFS_IMMUTABLE, METADATA_CONTENT_TYPE, CONTENT_TYPE_OCTET_STREAM};
 use sha2::{Digest, Sha256};
 
 pub struct IpfsStorage {
     api_url: String,
+    client: reqwest::Client,
 }
 
 impl IpfsStorage {
     pub fn new(api_url: &str) -> Result<Self> {
+        let client = reqwest::Client::builder()
+            .no_proxy()
+            .build()?;
+        
         Ok(Self {
             api_url: api_url.to_string(),
+            client,
         })
     }
 
     pub fn from_env() -> Result<Self> {
         let api_url =
-            std::env::var("IPFS_API_URL").unwrap_or_else(|_| "http://localhost:5001".to_string());
+            std::env::var("IPFS_API_URL").unwrap_or_else(|_| DEFAULT_IPFS_API_URL.to_string());
         Self::new(&api_url)
     }
 
     async fn ipfs_add(&self, content: Vec<u8>) -> Result<String> {
-        let client = reqwest::Client::builder().no_proxy().build()?;
 
         let form =
             reqwest::multipart::Form::new().part("file", reqwest::multipart::Part::bytes(content));
 
-        let response = client
+        let response = self.client
             .post(format!("{}/api/v0/add", self.api_url))
             .multipart(form)
             .send()
@@ -47,9 +53,8 @@ impl IpfsStorage {
     }
 
     async fn ipfs_cat(&self, cid: &str) -> Result<Vec<u8>> {
-        let client = reqwest::Client::builder().no_proxy().build()?;
 
-        let response = client
+        let response = self.client
             .post(format!("{}/api/v0/cat?arg={}", self.api_url, cid))
             .send()
             .await?;
@@ -62,9 +67,8 @@ impl IpfsStorage {
     }
 
     async fn ipfs_pin(&self, cid: &str) -> Result<()> {
-        let client = reqwest::Client::builder().no_proxy().build()?;
 
-        let response = client
+        let response = self.client
             .post(format!("{}/api/v0/pin/add?arg={}", self.api_url, cid))
             .send()
             .await?;
@@ -103,8 +107,8 @@ impl Storage for IpfsStorage {
                 size: content.len(),
                 created_at: chrono::Utc::now(),
                 content_type: metadata
-                    .get("content_type")
-                    .unwrap_or(&"application/octet-stream".to_string())
+                    .get(METADATA_CONTENT_TYPE)
+                    .unwrap_or(&CONTENT_TYPE_OCTET_STREAM.to_string())
                     .clone(),
                 extra: metadata,
             },
@@ -116,9 +120,7 @@ impl Storage for IpfsStorage {
     }
 
     async fn exists(&self, id: &str) -> Result<bool> {
-        let client = reqwest::Client::builder().no_proxy().build()?;
-
-        let response = client
+        let response = self.client
             .post(format!("{}/api/v0/object/stat?arg={}", self.api_url, id))
             .send()
             .await?;
@@ -127,16 +129,12 @@ impl Storage for IpfsStorage {
     }
 
     async fn delete(&self, _id: &str) -> Result<()> {
-        Err(anyhow::anyhow!(
-            "IPFS content is immutable and cannot be deleted"
-        ))
+        Err(anyhow::anyhow!(ERROR_IPFS_IMMUTABLE))
     }
 
     async fn list(&self, _prefix: Option<&str>) -> Result<Vec<StorageMetadata>> {
         // List pinned content
-        let client = reqwest::Client::builder().no_proxy().build()?;
-
-        let response = client
+        let response = self.client
             .post(format!("{}/api/v0/pin/ls", self.api_url))
             .send()
             .await?;

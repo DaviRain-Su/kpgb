@@ -3,12 +3,12 @@ use axum::{
     http::StatusCode,
     response::{Html, IntoResponse, Redirect},
 };
-use pulldown_cmark::{html, Options, Parser};
 use serde::Deserialize;
 use std::sync::Arc;
 use tera::Context;
 
 use crate::web::AppState;
+use crate::web::handlers_helpers::{markdown_to_html, render_template};
 
 #[derive(Deserialize)]
 pub struct SearchQuery {
@@ -420,137 +420,6 @@ pub async fn docs(State(state): State<Arc<AppState>>) -> Result<Html<String>, St
     Ok(Html(rendered))
 }
 
-fn render_template(name: &str, context: &Context) -> Result<String, StatusCode> {
-    let mut tera = tera::Tera::default();
-    tera.add_raw_templates(vec![
-        ("base.html", include_str!("../../templates/base.html")),
-        ("index.html", include_str!("../../templates/index.html")),
-        ("post.html", include_str!("../../templates/post.html")),
-        ("archive.html", include_str!("../../templates/archive.html")),
-        ("search.html", include_str!("../../templates/search.html")),
-        ("tags.html", include_str!("../../templates/tags.html")),
-        (
-            "tag_posts.html",
-            include_str!("../../templates/tag_posts.html"),
-        ),
-        ("docs.html", include_str!("../../templates/docs.html")),
-    ])
-    .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
-
-    // Add custom filters
-    tera.register_filter(
-        "url_safe_tag",
-        |value: &tera::Value, _: &std::collections::HashMap<String, tera::Value>| match value
-            .as_str()
-        {
-            Some(tag) => Ok(tera::Value::String(sanitize_tag_for_url(tag))),
-            None => Err(tera::Error::msg("url_safe_tag filter expects a string")),
-        },
-    );
-
-    tera.register_filter("highlight_search", crate::site::filters::highlight_search);
-    tera.register_filter("escape", crate::site::filters::escape_html);
-
-    tera.render(name, context)
-        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)
-}
-
-fn sanitize_tag_for_url(tag: &str) -> String {
-    // For tags, we'll use a simple approach: convert to lowercase and replace spaces with hyphens
-    // Chinese characters and other non-ASCII will be preserved
-    tag.to_lowercase().replace(' ', "-")
-}
-
-fn markdown_to_html(markdown: &str) -> String {
-    let mut options = Options::empty();
-    options.insert(Options::ENABLE_STRIKETHROUGH);
-    options.insert(Options::ENABLE_TABLES);
-    options.insert(Options::ENABLE_FOOTNOTES);
-    options.insert(Options::ENABLE_SMART_PUNCTUATION);
-
-    let parser = Parser::new_ext(markdown, options);
-    let mut html_output = String::new();
-    html::push_html(&mut html_output, parser);
-
-    // Post-process HTML to add IDs to headings
-    let html_with_ids = add_heading_ids_to_html(&html_output);
-
-    // Post-process HTML to add copy buttons to code blocks
-    add_copy_buttons_to_code_blocks(&html_with_ids)
-}
-
-/// Add IDs to headings in HTML for TOC navigation
-fn add_heading_ids_to_html(html: &str) -> String {
-    use regex::Regex;
-
-    let heading_re = Regex::new(r"<h([1-6])>(.*?)</h[1-6]>").unwrap();
-
-    heading_re
-        .replace_all(html, |caps: &regex::Captures| {
-            let level = &caps[1];
-            let content = &caps[2];
-
-            // Extract text content without HTML tags for ID generation
-            let text_only = Regex::new(r"<[^>]+>").unwrap().replace_all(content, "");
-            let id = crate::utils::toc::generate_heading_id(&text_only);
-
-            format!(r#"<h{} id="{}">{}</h{}>"#, level, id, content, level)
-        })
-        .to_string()
-}
-
-/// Add copy buttons to code blocks
-fn add_copy_buttons_to_code_blocks(html: &str) -> String {
-    use regex::Regex;
-
-    // Match <pre><code> blocks
-    let code_block_re = Regex::new(r"<pre><code([^>]*)>([\s\S]*?)</code></pre>").unwrap();
-
-    let mut block_id = 0;
-    code_block_re.replace_all(html, |caps: &regex::Captures| {
-        block_id += 1;
-        let attrs = &caps[1];
-        let code_content = &caps[2];
-
-        // Extract language class if present
-        let lang_re = Regex::new(r#"class="language-([^"]+)""#).unwrap();
-        let language = lang_re.captures(attrs)
-            .and_then(|c| c.get(1))
-            .map(|m| m.as_str())
-            .unwrap_or("");
-
-        // Ensure language class is properly set for Prism.js
-        let code_attrs = if !language.is_empty() {
-            attrs.to_string()
-        } else if attrs.contains("class=") {
-            attrs.to_string()
-        } else {
-            r#" class="language-plaintext""#.to_string()
-        };
-
-        format!(
-            r#"<div class="code-block-wrapper">
-                <div class="code-header">
-                    <span class="code-language">{}</span>
-                    <button class="copy-button" data-code-id="code-{}" onclick="copyCode('code-{}')">
-                        <svg class="copy-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                        </svg>
-                        <span class="copy-text">Copy</span>
-                    </button>
-                </div>
-                <pre class="line-numbers"><code{} id="code-{}">{}</code></pre>
-            </div>"#,
-            language,
-            block_id,
-            block_id,
-            code_attrs,
-            block_id,
-            code_content
-        )
-    }).to_string()
-}
 
 use chrono::Datelike;
 use rss::{ChannelBuilder, ItemBuilder};

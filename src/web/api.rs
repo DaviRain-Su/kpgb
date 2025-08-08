@@ -1,4 +1,5 @@
 use crate::web::AppState;
+use crate::web::api_helpers::{posts_to_summaries, handle_result};
 use axum::{
     extract::{Path, State},
     http::StatusCode,
@@ -34,89 +35,28 @@ pub struct SearchRequest {
 pub async fn list_posts(
     State(state): State<Arc<AppState>>,
 ) -> Result<Json<ApiResponse<Vec<PostSummary>>>, StatusCode> {
-    match state.blog_manager.list_posts(true).await {
-        Ok(posts) => {
-            let summaries: Vec<PostSummary> = posts
-                .into_iter()
-                .map(|(storage_id, post)| PostSummary {
-                    id: post.id,
-                    storage_id,
-                    title: post.title,
-                    author: post.author,
-                    created_at: post.created_at.to_rfc3339(),
-                    published: post.published,
-                    tags: post.tags,
-                    excerpt: post.excerpt,
-                })
-                .collect();
-
-            Ok(Json(ApiResponse {
-                success: true,
-                data: Some(summaries),
-                error: None,
-            }))
-        }
-        Err(e) => Ok(Json(ApiResponse {
-            success: false,
-            data: None,
-            error: Some(e.to_string()),
-        })),
-    }
+    let result = state.blog_manager.list_posts(true).await
+        .map(posts_to_summaries);
+    Ok(handle_result(result))
 }
 
 pub async fn get_post(
     State(state): State<Arc<AppState>>,
     Path(id): Path<String>,
 ) -> Result<Json<ApiResponse<serde_json::Value>>, StatusCode> {
-    match state.blog_manager.get_post(&id).await {
-        Ok(post) => {
-            let mut post_json = serde_json::to_value(&post).unwrap();
-            post_json["storage_id"] = serde_json::Value::String(id);
-
-            Ok(Json(ApiResponse {
-                success: true,
-                data: Some(post_json),
-                error: None,
-            }))
-        }
-        Err(e) => Ok(Json(ApiResponse {
-            success: false,
-            data: None,
-            error: Some(e.to_string()),
-        })),
-    }
+    let result = state.blog_manager.get_post(&id).await.map(|post| {
+        let mut post_json = serde_json::to_value(&post).unwrap();
+        post_json["storage_id"] = serde_json::Value::String(id);
+        post_json
+    });
+    Ok(handle_result(result))
 }
 
 pub async fn search_posts(
     State(state): State<Arc<AppState>>,
     Json(req): Json<SearchRequest>,
 ) -> Result<Json<ApiResponse<Vec<PostSummary>>>, StatusCode> {
-    match state.blog_manager.search_posts(&req.query).await {
-        Ok(results) => {
-            let summaries: Vec<PostSummary> = results
-                .into_iter()
-                .map(|(storage_id, post)| PostSummary {
-                    id: post.id,
-                    storage_id,
-                    title: post.title,
-                    author: post.author,
-                    created_at: post.created_at.to_rfc3339(),
-                    published: post.published,
-                    tags: post.tags,
-                    excerpt: post.excerpt,
-                })
-                .collect();
-
-            Ok(Json(ApiResponse {
-                success: true,
-                data: Some(summaries),
-                error: None,
-            }))
-        }
-        Err(e) => Ok(Json(ApiResponse {
-            success: false,
-            data: None,
-            error: Some(e.to_string()),
-        })),
-    }
+    let result = state.blog_manager.search_posts(&req.query).await
+        .map(posts_to_summaries);
+    Ok(handle_result(result))
 }

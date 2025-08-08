@@ -10,6 +10,7 @@
 #![allow(clippy::needless_borrows_for_generic_args)]
 
 mod blog;
+mod constants;
 mod database;
 mod docs;
 mod frontmatter;
